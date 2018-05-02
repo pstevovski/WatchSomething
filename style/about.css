@@ -1,0 +1,40 @@
+@import "http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css";
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-family: 'Poppins', Arial, Helvetica, sans-serif;
+    text-align: center;
+    background-color: #222;
+}
+h1{
+    color:#1DE9B6;
+}
+p{  
+    color: #eee;
+    width: 75%;
+    margin: 0 auto;
+}
+.link > *{
+    margin: 0 10px;
+}
+i{
+    font-size: 35px;
+    transition: 0.3s;
+    cursor: pointer;
+    color: #eee;
+}
+i:hover{
+    color: #1DE9B6;
+}
+.back{
+    position: absolute;
+    left: 15px;
+    bottom: 10px;
+}
+@media (max-width: 450px){
+    p{
+        width: 90%;
+    }
+}

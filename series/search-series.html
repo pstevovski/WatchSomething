@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Series | Search</title>
+	<link rel="stylesheet" type="text/css" href="../style/main.css">
+</head>
+<body>
+<!-- Navigation Bar -->
+	<nav>
+		<!-- The Logo -->
+		<div class="logo">
+			<a href="../index.html"><h1>PMDB</h1></a>
+		</div>
+		<!-- The Menu -->
+		<div class="menu">
+			<ul>
+				<li><a href="../index.html">Home</a></li>
+				<li>Movies<span><i class="ion-chevron-down arrow"></i></span>
+					<ul>
+						<li><a href="../movies/search-movies.html">Search movies</a></li>
+						<li><a href="../movies/top-rated.html">Top rated</a></li>
+						<li><a href="../movies/popular-movies.html">Popular movies</a></li>
+					</ul>
+				</li>
+				<li>Series<span><i class="ion-chevron-down"></i></span>
+					<ul>
+						<li><a href="search-series.html">Search series</a></li>
+						<li><a href="series-popular.html">Popular series</a></li>
+						<li><a href="series-toprated.html">Top rated</a></li>
+						<li><a href="series-latest.html">On air</a></li>
+					</ul>
+				</li>
+				<li><a href="../about.html">About</a></li>
+			</ul>
+		</div>
+		<!-- The burger menu for small screens -->
+		<div class="burger">
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+		<!-- Slide menu for small screens -->
+		<div class="slide">
+			<ul>
+				<li><a href="../index.html">Home</a></li>
+				<li id="smallScreenMovies">Movies<span><i class="ion-chevron-down"></i></span>
+					<ul id="moviesDropdown">
+						<li><a href="../movies/search-movies.html">Search movies</a></li>
+						<li><a href="../movies/top-rated.html">Top rated</a></li>
+						<li><a href="../movies/popular-movies.html">Popular movies</a></li>
+					</ul>
+				</li>
+				<li id="smallScreenSeries">Series<span><i class="ion-chevron-down"></i></span>
+					<ul id="seriesDropdown">
+						<li><a href="search-series.html">Search series</a></li>
+						<li><a href="series-popular.html">Popular series</a></li>
+						<li><a href="series-toprated.html">Top rated</a></li>
+						<li><a href="series-latest.html">On air</a></li>
+					</ul>
+				</li>
+				<li><a href="../about.html">About</a></li>
+			</ul>
+		</div>
+	</nav>
+<!-- Spinner -->
+<div class="spinner"></div>
+<!-- Container -->
+	<div class="container">
+		<h1>Search for Series</h1>
+
+		<form id="form">
+			<input type="text" id="searchText" placeholder="Search for series">
+		</form>
+	</div>
+<!-- Showcase - area where tv shows will be listed -->
+	<div class="showcase">
+		<div id="movies" class="moviesRows"></div>
+
+		<!-- Buttons for Pages -->
+		<div class="pages">
+			<div id="prev"><</div>
+			<div id="next">></div>
+		</div>
+	</div>
+<!-- Script links -->
+<script src="../scripts/search-series.js"></script>
+<!-- Axios link -->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!-- Jquery CDN -->
+<script
+src="https://code.jquery.com/jquery-3.3.1.min.js"
+integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+crossorigin="anonymous"></script>
+</body>
+</html>

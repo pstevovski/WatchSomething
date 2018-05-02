@@ -1,0 +1,421 @@
+/* The Main.css file hold the main CSS (body, links, menus, logo, cards, containers) for all the pages.
+That includes (index.html,popular-movies.html,search-movies.html,top-rated.html,search-series.html,series-latest.html, series-popular & series-toprated.html). It also holds the CSS for the menu, burger menu, slide menu for the movie-page.html and shows-page.html. */
+
+/* Import Ionicons. */
+@import "http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css";
+/* Target the whole document. */
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+/* Global parameters. */
+body{
+	color: #eee;
+	background-color: #2979FF;
+	font-family: 'Roboto', Arial, Helvetica, sans-serif;
+}
+a{
+	text-decoration: none;
+	color: #eee;
+}
+ul{
+	list-style: none;
+}
+/* Button for small screens. */
+.burger{
+	display: none;
+}
+/* Menu for small screens. */
+.slide{
+	display: none
+}
+.menu span, .slide span{
+	margin-left: 5px;
+}
+/* Spinner */
+.spinner:before{
+	content: '';
+	box-sizing: border-box;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	height: 40px;
+	width: 40px;
+	border-radius: 50%;
+	margin-top: -20px;
+	border: 3px solid #eee;
+	border-top: 3px solid #1DE9B6;
+	border-bottom: 3px solid #1DE9B6;
+	animation: spinner 0.5s ease infinite;
+}
+@keyframes spinner{
+	to{
+		transform:rotate(360deg);
+	}
+}
+/* Global parameters end. */
+
+/* Navigation bar - START. */
+nav{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background-color: #C62828;
+	color: #eee;
+}
+nav a{
+	color: #eee;
+}
+.logo{
+	font-family: "Berkshire Swash Regular";
+	font-size: 22px;
+	margin-left: 30px;
+}
+.menu{
+	font-weight: bold;
+	font-family: "Poppins";
+}
+.menu ul{
+	display: flex;
+	margin-right: 50px;
+	z-index: 2;
+}
+.menu ul li{
+	padding: 15px 22px;
+	cursor: pointer;
+	position: relative;
+	transition: all 0.3s;
+	margin: 0 10px;
+}
+.menu ul li:hover{
+	background-color: #CFD8DC;
+	color: #EF5350;
+}
+.menu ul li a{
+	padding: 5px;
+}
+.menu ul li a:nth-child(1):hover{
+	color: #EF5350;
+}
+.menu ul li span{
+	display: inline-block;
+	opacity: 0;
+}
+.menu ul li:hover span{
+	animation: upNdown 0.4s ease-in-out forwards;
+}
+.menu ul li ul{
+	display: none;
+}
+.menu ul li:hover ul{
+	display: block;
+	position: absolute;
+	top: 54px;
+	left: 0;
+	background-color: #eee;
+	width: 184px;
+	box-shadow: 0 3px 5px rgba(0,0,0,0.4);
+	animation: dropdown 0.5s ease-out forwards;
+}
+.menu ul li ul li{
+	display: block;
+	width: 100%;
+	margin: 0;
+	padding: 10px;
+	transition: all 0.3s;
+}
+.menu ul li ul li:hover{
+	background-color:#1DE9B6;
+	padding-left: 5px;
+}
+.menu ul li ul li a{
+	display: block;
+	color: #C62828;
+	padding: 5px;
+	transition: all 0.3s;
+}
+.menu ul li ul li:hover a{
+	color:#EF5350;
+}
+@keyframes dropdown{
+	0%{
+		opacity: 0;
+		transform:rotateY(100deg);
+	}
+	100%{
+		opacity: 1;
+		transform:rotateY(0deg);
+	}
+}
+/* Navigation bar - END. */
+
+/* Page Title */
+.container h1{
+	font-family: "Poppins", Arial, Helvetica, sans-serif;
+	text-align: center;
+	margin: 25px 0;
+	font-size: 45px;
+}
+/* Movies/Tvshows output - START. */
+.showcase{
+	position: relative;
+	display: flex;
+	justify-content: center;
+}
+#movies{
+	display: grid;
+	grid-template-columns: repeat(4,1fr);
+	grid-gap: 25px;
+	text-align: center;
+}
+.card{
+	height: 550px;
+	background-color: #eee;
+	color: #333;
+	width: 300px;
+	position: relative;
+	transition: 0.35s;
+}
+.card:hover{
+	background-color: #C62828;
+	color: #eee;
+	box-shadow: 0 0px 35px rgba(198, 40, 40, 0.7);
+}
+.card:hover a{
+	color: goldenrod;
+}
+.card a{
+	display: block;
+	width: 100%;
+	color: #C62828;
+	font-weight: bold;
+	padding: 6px;
+	transition: 0.2s;
+	font-weight: bold;
+	position: absolute;
+	bottom: 0;
+}
+.card a:hover{
+	background-color: #f4f4f4f4;
+	color: #C62828;
+}
+/* Buttons for pages */
+.pages{
+	display:none;
+	position: absolute;
+	bottom: -3%;
+	left: 50%;
+	transform:translateX(-50%);
+}
+.pages > *{
+	padding: 5px 15px;
+	background-color: #eee;
+	color: #0277bd;
+	font-family: "Poppins";
+	font-weight: bold;
+	font-size: 25px;
+	margin: 0 10px 10px 10px;
+	border-radius: 3px;
+	transition: 0.2s ease-out;
+	cursor: pointer;
+}
+.pages > *:hover{
+	background-color:#008DB4;
+	color: #eee;
+}
+/* Movies/Tvshows output - END. */
+
+/* Form - search-movies/search-series page. */
+#form{
+	display: flex;
+	justify-content: center;
+	margin-bottom: 20px;
+}
+#form input{
+	padding: 5px;
+	border-radius: 3px;
+	border: none;
+	background-color: #eee;
+	color: #0277bd;
+	width: 250px;
+	font-family: "Poppins";
+}
+#form input:focus{
+	outline: none !important;
+}
+
+/* 				Media Queries 			*/
+
+/* Max-width 1300 px. */
+@media(max-width: 1300px){
+	#movies{
+		grid-template-columns: repeat(3,1fr);
+	}
+}
+/* Max-width 970 px. */
+@media (max-width: 970px){
+	#movies{
+		grid-template-columns: repeat(2,1fr);
+	}
+}
+/* Max-width 684 px. */
+@media (max-width: 684px){
+	.menu{
+		display: none;
+	}
+	.burger{
+		height: 30px;
+		width: 28px;
+		display: block;
+		margin-right: 15px;
+		position: relative;
+		overflow: hidden;
+	}
+	.burger span{
+		width: 100%;
+		height: 5px;
+		border-radius: 2px;
+		background-color: #0277bd;
+		display: block;
+		position: absolute;
+		transition: all 0.5s;
+	}
+	.burger span:nth-child(1){
+		top: 0px;
+	}
+	.burger span:nth-child(2){
+		top: 11px;
+	}
+	.burger span:nth-child(3){
+		top: 22px;
+	}
+	.burger.active span:nth-child(1){
+		top: 15px;
+		transform:rotate(45deg);
+	}
+	.burger.active span:nth-child(2){
+		left: -30px;
+		opacity: 0;
+	}
+	.burger.active span:nth-child(3){
+		top:15px;
+		transform:rotate(-45deg);
+	}
+	.slide{
+		display: block;
+		position: absolute;
+		top: 40px;
+		color: #0277bd;
+		width: 100%;
+		background-color: #eee;
+		transition: all 0.35s;
+		font-weight: bold;
+		z-index: 2;
+		transform: translateX(-700px);
+	}
+	.slide.slideIn{
+		transform: translateX(0px);
+	}
+	.slide a{
+		color:#0277bd;
+		display: block;
+	}
+	.slide a:hover{
+		color: #EF5350;
+	}
+	.slide ul li{
+		padding: 15px;
+		font-size: 20px;
+		text-align: center;
+		transition: all 0.2s;
+		cursor: pointer;
+		display: block;
+		position: relative;
+	}
+	.slide ul li span{
+		position: absolute;
+		left: 95px;
+		opacity: 0;
+		font-size: 20px;
+	}
+	.slide ul li:hover span{
+		animation: upNdown 0.4s ease-in-out forwards;
+	}
+	.slide ul li:hover{
+		color: #EF5350;
+	}
+	.slide ul li #moviesDropdown{
+		display: none;
+	}
+	.slide ul li #moviesDropdown.drop{
+		display: block;
+		animation: smallDrop 1s forwards;
+	}
+	.slide ul li #seriesDropdown{
+		display: none;
+	}
+	.slide ul li #seriesDropdown.drop{
+		display: block;
+		animation: smallDrop 1s forwards;
+	}
+	.slide ul li ul li{
+		font-size: 16px;
+		display: block;
+		padding: 10px;
+		margin: 0;
+		width: 100%;
+		text-align: left;
+	}
+	.slide ul li ul li:hover{
+		background-color: #CFD8DC;
+		color: #0277bd;
+	}
+	.slide ul li ul li a{
+		color: #EF5350;
+	}
+}
+/* Max-width 650 px. */
+@media(max-width: 650px){
+	#movies{
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+	.card{
+		margin: 25px 10px;
+	}
+}
+/* Max-width 320 px. */
+@media (max-width: 320px){
+	.card{
+		width: 280px;
+		transition: all 0.35s;
+	}
+	.card img{
+		width: 280px;
+		transition: all 0.35s;
+	}
+}
+/* Animation for dropdown menu on small screens. */
+@keyframes smallDrop{
+	0%{
+		opacity: 0;
+		transform:translateX(-100px);
+	}
+	100%{
+		opacity: 1;
+		transform:translateX(0px)
+	}
+}
+/* Animation for span element in the menu (both large & small screens). */
+@keyframes upNdown{
+	0%{
+		opacity: 0;
+		transform:scale(0);
+	}
+	100%{
+		opacity: 1;
+		transform: scale(1);
+	}
+}

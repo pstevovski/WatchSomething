@@ -1,0 +1,183 @@
+/* The movie-page.css file hold the CSS for both the movies-page.html && shows-page.html.  */
+
+body{
+	width: 100%;
+	background-color: #2979FF;
+}
+/* Movie/tv show page container (both poster and info sections). */
+.moviePage{
+	display: flex;
+	flex-wrap: wrap;
+}
+/* Movie/tv show poster - START. */
+.poster{
+	padding: 20px;
+}
+.poster img{
+	box-shadow: 0 3px 10px rgba(0,0,0,0.8);
+}
+/* Movie/tv show poster - END. */
+
+/* Movie/tv show info - START. */
+.info{
+	flex-direction: column;
+	font-size:18px;
+	padding: 20px;
+	font-family: "Poppins";
+}
+.info h2{
+	font-size: 35px;
+	color: goldenrod;
+}
+.plot{
+	padding: 20px;
+	font-family: "Poppins", sans-serif;
+	flex-shrink: 16px;
+}
+.buttons{
+	margin-top: 25px;
+}
+.buttons > *{
+	margin: 0 5px;
+}
+.buttons a{
+	font-family: "Poppins";
+	font-size: 16px;
+	font-weight: bold;
+	padding: 5px;
+	background-color: #eee;
+	border-radius: 5px;
+	color: #00B8D4;
+	text-align: center;
+	transition: 0.3s;
+}
+.buttons a:hover{
+	background-color: #00B8D4;
+	color: #eee;
+	box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+}
+/* Movie/tv show info - END. */
+
+/* Movie/tv show trailer - START. */
+#trailer{
+	position: absolute;
+	top: 0%;
+	left:50%;
+	transform: translate(-50%,0%);
+	width: 100%;
+	display: none;
+	justify-content: center;
+	margin: 15px 0;
+	z-index: 999;
+}
+.overlay{
+	display:none;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 100vh;
+	background: rgba(0,0,0,0.7);
+}
+#close{
+	display: inline;
+	font-size: 25px;
+	font-weight: bold;
+	cursor: pointer;
+	font-family: "Poppins";
+	transition: 0.3s;
+}
+#close:hover {
+	color: #EF5350;
+}
+#trailer iframe{
+	border-radius: 5px;
+}
+/* Movie/tv show trailer - END. */
+
+/* Movie/tv show recommended - START. */
+#recommended{
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+#recommended > *{
+	margin: 15px 15px;
+}
+#rec_title{
+	padding: 20px;
+}
+.recommended_card{
+	text-align: center;
+	width: 200px;
+	background-color: #eee;
+	color: #333;
+	border-radius: 3px;
+	transition: 0.35s;
+}
+.recommended_card:hover{
+	background-color: #00B8D4;
+	color: #eee;
+	box-shadow: 0 5px 5px rgba(0,0,0,0.4);
+}
+.recommended_card:hover a{
+	color: #eee;
+}
+.recommended_card img{
+	border-radius: 3px;
+}
+.recommended_card a{
+	margin: 0;
+	display: block;
+	width: 100%;
+	transition: 0.3s;
+	padding: 5px;
+	color:  #0277bd;
+	font-weight: bold;
+	border-bottom-right-radius: 3px;
+	border-bottom-left-radius: 3px;
+}
+.recommended_card a:hover{
+	background-color: #eee;
+	color: #008DB4;
+}
+/* Movie/tvshow recommended - END. */
+
+/* 		Media Queries		 */
+
+/* Max-width 854 px. */
+@media(max-width: 854px){
+	.moviePage{
+		justify-content: flex-start;
+	}
+	.moviePage .poster{
+		margin: 0 auto;
+	}
+}
+/* Max-width 450 px. */
+@media (max-width: 450px){
+	#trailer iframe {
+		width: 100%;
+	}
+}
+/* Max-width 430 px. */
+@media (max-width: 430px){
+	.buttons{
+		display: flex;
+		flex-direction: column;
+		align-items: center
+	}
+	.buttons > *{
+		margin: 5px 0;
+		width: 65%;
+	}
+}
+/* Max-width 360 px. */
+@media (max-width: 360px){
+	.poster{
+		width: 100%;
+		padding-bottom: 0;
+	}
+	.poster img{
+		width: 100%;
+	}
+}

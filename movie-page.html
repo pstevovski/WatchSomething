@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>PMDB | Search Movies</title>
+	<link rel="stylesheet" type="text/css" href="style/main.css">
+	<link rel="stylesheet" type="text/css" href="style/movie-page.css">
+</head>
+<body>
+<!-- Navigation Bar -->
+	<nav>
+		<!-- The Logo -->
+		<div class="logo">
+			<a href="index.html"><h1>PMDB</h1></a>
+		</div>
+		<!-- The Menu -->
+		<div class="menu">
+			<ul>
+				<li><a href="index.html">Home</a></li>
+				<li>Movies<span><i class="ion-chevron-down arrow"></i></span>
+					<ul>
+						<li><a href="movies/search-movies.html">Search movies</a></li>
+						<li><a href="movies/top-rated.html">Top rated</a></li>
+						<li><a href="movies/popular-movies.html">Popular movies</a></li>
+					</ul>
+				</li>
+				<li>Series<span><i class="ion-chevron-down"></i></span>
+					<ul>
+						<li><a href="series/search-series.html">Search series</a></li>
+						<li><a href="series/series-popular.html">Popular series</a></li>
+						<li><a href="series/series-toprated.html">Top rated</a></li>
+						<li><a href="series/series-latest.html">On air</a></li>
+					</ul>
+				</li>
+				<li><a href="about.html">About</a></li>
+			</ul>
+		</div>
+		<!-- The burger menu for small screens -->
+		<div class="burger">
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+		<!-- Slide menu for small screens -->
+		<div class="slide">
+			<ul>
+				<li><a href="index.html">Home</a></li>
+				<li id="smallScreenMovies">Movies<span><i class="ion-chevron-down"></i></span>
+					<ul id="moviesDropdown">
+						<li><a href="movies/search-movies.html">Search movies</a></li>
+						<li><a href="movies/top-rated.html">Top rated</a></li>
+						<li><a href="movies/popular-movies.html">Popular movies</a></li>
+					</ul>
+				</li>
+				<li id="smallScreenSeries">Series<span><i class="ion-chevron-down"></i></span>
+					<ul id="seriesDropdown">
+						<li><a href="series/search-series.html">Search series</a></li>
+						<li><a href="series/series-popular.html">Popular series</a></li>
+						<li><a href="series/series-toprated.html">Top rated</a></li>
+						<li><a href="series/series-latest.html">On air</a></li>
+					</ul>
+				</li>
+				<li><a href="about.html">About</a></li>
+			</ul>
+		</div>
+	</nav>
+<!-- Container that will showcase the info, links, trailer, recommended list -->
+<div class="container">
+	<div id="movie"></div>
+	<div id="trailer"></div>
+	<h2 id="rec_title">Recommended: </h2>
+	<div id="recommended"></div>
+	<div id="overlay" class="overlay"></div>
+</div>
+<!-- Script links -->
+<script src="scripts/movie-page.js"></script>
+<!-- Axios link -->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!-- Jquery CDN -->
+<script
+src="https://code.jquery.com/jquery-3.3.1.min.js"
+integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+crossorigin="anonymous"></script>
+<script>
+	getMovie();
+</script>
+</body>
+</html>
