@@ -1,0 +1,250 @@
+@import "http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css";
+
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: #00E676;
+    color: #333;
+    font-family: "Montserrat", Arial, Helvetica, sans-serif;
+}
+a{
+    text-decoration: none;
+    color: #eee;
+}
+/* First section */
+.first{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 600px;
+}
+.first h1{
+    font-size: 75px;
+    font-weight: bold;
+}
+.first p{
+    font-style: italic;
+    font-weight: 600;
+}
+.first .link{
+    margin: 25px 0;
+}
+.button{
+    padding: 10px 35px;
+    border: 2px solid #333;
+    transition: 0.25s ease-out;
+    font-weight: 500;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+}
+.button:hover{
+    color:#00E676;
+}
+.button::before{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: #333;
+    width: 100%;
+    height: 0%;
+    z-index: -1;
+    transition: 0.15s ease-out;
+}
+.button:hover:before{
+    height: 100%;
+}
+.pointer{
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    font-size: 40px;
+    animation: point 0.75s ease-out infinite;
+    transform: translateX(-50%);
+}
+@keyframes point{
+    0%{
+        transform:translateY(-20px)
+    }
+    100%{
+        transform: translateY(0px)
+    }
+}
+/* Second section - Movies */
+.second{
+    box-shadow: 0 -3px 5px rgba(0,0,0,0.25);
+    margin-top: 35px;
+    background: url("../images/joker.jpg") center center no-repeat;
+    background-size: cover;
+    min-height: 640px;
+}
+.overlay{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+    min-height: 640px;
+    background-color: rgba(0,0,0,0.75);
+}
+.overlay .link > *{
+    margin: 35px 0;
+}
+.movies_button{
+    padding: 10px 35px;
+    border: 2px solid #eee;
+    transition: 0.25s ease-out;
+    font-weight: 500;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+    z-index: 2;;
+    color: #00E676;
+} 
+.movies_button:hover{
+    color: #333;
+    border-color: #00E676;
+}
+.movies_button::before{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: #00E676;
+    width: 100%;
+    height: 0%;
+    z-index: -1;
+    transition: 0.35s ease-out;
+}
+.movies_button:hover::before{
+    height: 100%;
+}
+.overlay p{
+    color: #eee;
+    width: 550px;
+    font-weight: 500;
+    text-align: center;
+}
+/* Third section - Tv Shows */
+.third{
+    background: url("../images/walker.jpg") center center no-repeat;
+    background-size: cover;
+    min-height: 640px;
+}
+.shows_button{
+    display: inline-block;
+    width: 170px;
+    padding: 10px 35px;
+    border: 2px solid #eee;
+    transition: 0.25s ease-out;
+    font-weight: 500;
+    border-radius: 2px;
+    position: relative;
+    z-index: 1;
+    color: #00E676;
+    overflow: hidden;
+}
+.shows_button:hover{
+    color: #333;
+    border-color: #00E676;
+}
+.shows_button::before{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    transform:translateY(-50px);
+    height:100%;
+    background-color: #00E676;
+    z-index: -1;
+    transition: 0.35s ease-out;
+}
+.shows_button:hover:before{
+    transform: translateY(0px);
+}
+/* Footer */
+footer{
+    background-color: #121010;
+    min-height: 80px;
+    display: grid;
+    grid-template-columns: 170px 1fr 1fr;
+    grid-template-areas: "logo text links";
+}
+.logo{
+    grid-area: logo;
+    padding: 0;
+}
+footer .logo, .text, .links{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.text{
+    grid-area: text;
+    color: #eee;
+}
+.text a{
+    color: rgba(255,255,255,0.3);
+    transition: 0.2s;
+}
+.text a:hover{
+    color: #00E676;
+}
+.links{
+    grid-area: links;
+}
+.links a{
+    margin: 0 5px;
+    transition: 0.15s ease-in-out;
+    font-weight: 600;
+}
+.links a:hover{
+    color: #00E676;
+}
+
+/* Media Queries */
+@media (max-width:890px){
+    footer{
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+        "logo"
+        "links"
+        "text";
+    }
+    footer >*{
+        margin: 15px 0;
+        text-align: center;
+    }
+}
+@media (max-width: 580px){
+    .first h1{
+        font-size:40px;
+    }
+    .first p{
+        font-size: 14px;
+    }
+    .overlay p{
+        margin: 0 auto;
+        width: auto;
+        text-align: center;
+    }
+    .pointer{
+        left: 47%;
+        bottom: 10px;
+    }
+}
+@media (max-width: 400px){
+    .second{
+        background: url("../images/joker.jpg") right right no-repeat;
+    }
+    .third{
+        background: url("../images/walker.jpg") left center no-repeat;
+    }
+}
