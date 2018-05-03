@@ -1,87 +1,60 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Home | Latest Movies</title>
-	<link rel="stylesheet" type="text/css" href="style/main.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>WhatToWatch</title>
+    <link rel="stylesheet" href="style/home.css">
 </head>
 <body>
-<!-- Navigation Bar -->
-	<nav>
-		<!-- The Menu -->
-		<div class="menu">
-			<ul>
-				<li><a href="index.html">Home</a></li>
-				<li>Movies<span><i class="ion-chevron-down arrow"></i></span>
-					<ul>
-						<li><a href="movies/search-movies.html">Search movies</a></li>
-						<li><a href="movies/top-rated.html">Top rated</a></li>
-						<li><a href="movies/popular-movies.html">Popular movies</a></li>
-					</ul>
-				</li>
-				<li>Series<span><i class="ion-chevron-down"></i></span>
-					<ul>
-						<li><a href="series/search-series.html">Search series</a></li>
-						<li><a href="series/series-popular.html">Popular series</a></li>
-						<li><a href="series/series-toprated.html">Top rated</a></li>
-						<li><a href="series/series-latest.html">On air</a></li>
-					</ul>
-				</li>
-				<li><a href="about.html">About</a></li>
-			</ul>
-		</div>
-		<!-- The burger menu for small screens -->
-		<div class="burger">
-			<span></span>
-			<span></span>
-			<span></span>
-		</div>
-		<!-- Slide menu for small screens -->
-		<div class="slide">
-			<ul>
-				<li><a href="index.html">Home</a></li>
-				<li id="smallScreenMovies">Movies<span><i class="ion-chevron-down"></i></span>
-					<ul id="moviesDropdown">
-						<li><a href="movies/search-movies.html">Search movies</a></li>
-						<li><a href="movies/top-rated.html">Top rated</a></li>
-						<li><a href="movies/popular-movies.html">Popular movies</a></li>
-					</ul>
-				</li>
-				<li id="smallScreenSeries">Series<span><i class="ion-chevron-down"></i></span>
-					<ul id="seriesDropdown">
-						<li><a href="series/search-series.html">Search series</a></li>
-						<li><a href="series/series-popular.html">Popular series</a></li>
-						<li><a href="series/series-upcoming.html">Top rated</a></li>
-						<li><a href="series/series-latest.html">On air</a></li>
-					</ul>
-				</li>
-				<li><a href="about.html">About</a></li>
-			</ul>
-		</div>
-	</nav>
-<!-- Container -->
-	<div class="container">
-		<h1>Latest Movies</h1>
-	</div>
-<!-- Showcase -->
-	<div class="showcase">
-		<div id="movies" class="moviesRows"></div>
-
-		<!-- Buttons for Pages -->
-		<div class="pages">
-			<div id="prev"><</div>
-			<div id="next">></div>
-		</div>
-	</div>
-<!-- Script links -->
-<script src="scripts/main.js"></script>
-<!-- Axios link -->
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<!-- Jquery CDN -->
-<script
-src="https://code.jquery.com/jquery-3.3.1.min.js"
-integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-crossorigin="anonymous"></script>
+<!-- First section -->
+    <section class="first">
+        <h1>WhatToWatch</h1>
+        <p>Search for movies and tv shows !</p>
+        <div class="link">
+            <a href="about.html" class="button">Learn More</a>
+        </div>
+        <!-- Pointer -->
+        <div class="pointer">
+            <span><i class="ion-chevron-down"></i></span>
+        </div>
+    </section>
+    <!-- Second Section -->
+    <section class="second">
+        <div class="overlay">
+            <div class="link">
+                <a href="movies/search-movies.html" class="movies_button">Search for Movies</a>
+                <p>Search for latest, popular or top rated movies. Or you can search by title, who am I to tell you?</p>
+            </div>
+        </div>
+    </section>
+    <!-- Third section - Tv shows -->
+    <section class="third">
+        <div class="overlay">
+            <div class="link">
+                <a href="series/search-series.html" class="shows_button">Search for Tv Shows</a>
+                <p>Search by title ! Or if you disobey my order,then you can also search by popular,top rated and OnAir tv shows.
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer>
+        <!-- Logo -->
+        <div class="logo">
+            <a href="home.html"><img src="images/Logo.svg" alt="" width="170px"></a>
+        </div>
+        <!-- Text -->
+        <div class="text">
+            <p>This project uses API from <a href="https://www.themoviedb.com">themoviedb.com</a></p>
+        </div>
+        <!-- Links -->
+        <div class="links">
+            <a href="home.html">HOME</a>
+            <a href="movies/search-movies.html">MOVIES</a>
+            <a href="series/search-series.html">SERIES</a>
+            <a href="about.html">ABOUT</a>
+        </div>
+    </footer>
 </body>
 </html>
