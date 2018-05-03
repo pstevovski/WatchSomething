@@ -55,7 +55,7 @@ window.onload = function getMovies(){
 function movieSelected(id){
 	sessionStorage.setItem("movieId", id);
 	//Stores the ID onto the location, and opens the page's location listed below.
-	location.replace("movie-page.html");
+	location.replace("../movie-page.html");
 	return false;
 }
 //Creates a variable for the page number to make it dynamic.
