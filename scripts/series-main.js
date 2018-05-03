@@ -1,3 +1,5 @@
+//SCRIPT FILE FOR ONAIR SERIES (series-latest.html).
+
 //Burger menu.
 const burger = document.querySelector(".burger");
 const slide = document.querySelector(".slide");
@@ -18,9 +20,20 @@ smallSeries.addEventListener("click", ()=>{
 	const seriesDropdown = document.getElementById("seriesDropdown");
 	seriesDropdown.classList.toggle("drop");
 });
+//Spinner
+const spinner = document.querySelector(".spinner");
+spinner.style.display = "none";
+const container = document.querySelector(".showcase");
+container.style.display = "none"
 //When window is loaded, it runs the function getSeries(), which lists the on air tv shows by
 //grabing the API from themoviedb.com.
 window.onload = function getSeries(){
+	spinner.style.display = "block";
+	setTimeout(() => {
+		spinner.style.display = "none";
+		container.style.display = "flex";
+	}, 1000);
+	//Get the API.
 	axios.get("https://api.themoviedb.org/3/tv/on_the_air?api_key=fa155f635119344d33fcb84fb807649b&language=en-US&page=1")
 		.then((response)=>{
 			//Fetches the data - > results from the API.
