@@ -80,7 +80,7 @@ a{
     margin-top: 35px;
     background: url("../images/joker.jpg") center center no-repeat;
     background-size: cover;
-    min-height: 640px;
+    min-height: 640px; 
 }
 .overlay{
     display: flex;
@@ -203,6 +203,35 @@ footer .logo, .text, .links{
     margin: 0 5px;
     transition: 0.15s ease-in-out;
     font-weight: 600;
+    position: relative;
+}
+.links a::before{
+    position: absolute;
+    content: "";
+    bottom: -5px;
+    left: 50%;
+    opacity: 0;
+    width: 0%;
+    border: 1px solid #eee;
+    transition: 0.3s ease-out;
+}
+.links a:hover:before{
+    opacity: 1;
+    width: 50%;
+}
+.links a::after{
+    position: absolute;
+    content: "";
+    bottom: -5px;
+    right: 50%;
+    opacity: 0;
+    width: 0%;
+    border: 1px solid #eee;
+    transition: 0.3s ease-out;
+}
+.links a:hover:after{
+    opacity: 1;
+    width: 50%;
 }
 .links a:hover{
     color: #00E676;

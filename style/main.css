@@ -92,16 +92,17 @@ nav a{
 }
 .menu ul li a{
 	padding: 5px;
+	position: relative;
 }
 .menu ul li a:nth-child(1):hover{
 	color: #00E676;
 }
 .menu ul li span{
 	display: inline-block;
-	opacity: 0;
+	opacity: 1;
 }
 .menu ul li:hover span{
-	animation: upNdown 0.4s ease-in-out forwards;
+	animation: upNdown 0.6s ease-in-out forwards infinite;
 }
 .menu ul li ul{
 	display: none;
@@ -138,7 +139,7 @@ nav a{
 }
 @keyframes dropdown{
 	0%{
-		opacity: 0;
+		opacity: 1;
 		transform:translateY(25px);
 	}
 	100%{
@@ -407,11 +408,9 @@ nav a{
 /* Animation for span element in the menu (both large & small screens). */
 @keyframes upNdown{
 	0%{
-		opacity: 0;
-		transform:scale(0);
+		transform:translateY(-3px);
 	}
 	100%{
-		opacity: 1;
-		transform: scale(1);
+		transform:translateY(3px);
 	}
 }
