@@ -12,7 +12,7 @@ That includes (index.html,popular-movies.html,search-movies.html,top-rated.html,
 /* Global parameters. */
 body{
 	color: #eee;
-	background-color: #2979FF;
+	background-color: #121010;
 	font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
 a{
@@ -60,8 +60,7 @@ ul{
 nav{
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
-	background-color: #C62828;
+	justify-content: flex-end;
 	color: #eee;
 }
 nav a{
@@ -74,7 +73,7 @@ nav a{
 }
 .menu{
 	font-weight: bold;
-	font-family: "Poppins";
+	font-family: "Montserrat", Arial, Helvetica, sans-serif;
 }
 .menu ul{
 	display: flex;
@@ -82,21 +81,20 @@ nav a{
 	z-index: 2;
 }
 .menu ul li{
-	padding: 15px 22px;
+	padding: 15px;
 	cursor: pointer;
 	position: relative;
 	transition: all 0.3s;
-	margin: 0 10px;
+	margin: 0 5px;
 }
 .menu ul li:hover{
-	background-color: #CFD8DC;
-	color: #EF5350;
+	color: #00E676;
 }
 .menu ul li a{
 	padding: 5px;
 }
 .menu ul li a:nth-child(1):hover{
-	color: #EF5350;
+	color: #00E676;
 }
 .menu ul li span{
 	display: inline-block;
@@ -111,7 +109,7 @@ nav a{
 .menu ul li:hover ul{
 	display: block;
 	position: absolute;
-	top: 54px;
+	top: 40px;
 	left: 0;
 	background-color: #eee;
 	width: 184px;
@@ -126,33 +124,33 @@ nav a{
 	transition: all 0.3s;
 }
 .menu ul li ul li:hover{
-	background-color:#1DE9B6;
+	background-color:#333;
 	padding-left: 5px;
 }
 .menu ul li ul li a{
 	display: block;
-	color: #C62828;
+	color: #333;
 	padding: 5px;
 	transition: all 0.3s;
 }
 .menu ul li ul li:hover a{
-	color:#EF5350;
+	color:#00E676;
 }
 @keyframes dropdown{
 	0%{
 		opacity: 0;
-		transform:rotateY(100deg);
+		transform:translateY(25px);
 	}
 	100%{
 		opacity: 1;
-		transform:rotateY(0deg);
+		transform:translateY(0px);
 	}
 }
 /* Navigation bar - END. */
 
 /* Page Title */
 .container h1{
-	font-family: "Poppins", Arial, Helvetica, sans-serif;
+	font-family: "Montserrat", Arial, Helvetica, sans-serif;
 	text-align: center;
 	margin: 25px 0;
 	font-size: 45px;
@@ -171,34 +169,32 @@ nav a{
 }
 .card{
 	height: 550px;
-	background-color: #eee;
-	color: #333;
+	background-color: #222;
+	color: #eee;
 	width: 300px;
 	position: relative;
 	transition: 0.35s;
 }
 .card:hover{
-	background-color: #C62828;
-	color: #eee;
-	box-shadow: 0 0px 35px rgba(198, 40, 40, 0.7);
-}
-.card:hover a{
-	color: goldenrod;
+	color: #00E670;
+	box-shadow: 0 5px 8px rgba(0,0,0,0.5);
+	transform: translateY(-15px);
 }
 .card a{
 	display: block;
 	width: 100%;
-	color: #C62828;
+	color: goldenrod;
 	font-weight: bold;
 	padding: 6px;
 	transition: 0.2s;
+	font-family: "montserrat";
 	font-weight: bold;
 	position: absolute;
 	bottom: 0;
 }
 .card a:hover{
-	background-color: #f4f4f4f4;
-	color: #C62828;
+	background-color: rgba(0,0,0,0.55);
+	color: #00E670;
 }
 /* Buttons for pages */
 .pages{
@@ -210,8 +206,8 @@ nav a{
 }
 .pages > *{
 	padding: 5px 15px;
-	background-color: #eee;
-	color: #0277bd;
+	background-color: #222;
+	color: #00E670;
 	font-family: "Poppins";
 	font-weight: bold;
 	font-size: 25px;
@@ -221,8 +217,8 @@ nav a{
 	cursor: pointer;
 }
 .pages > *:hover{
-	background-color:#008DB4;
-	color: #eee;
+	background-color:#00E670;
+	color: #222;
 }
 /* Movies/Tvshows output - END. */
 

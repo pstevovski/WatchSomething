@@ -2,7 +2,8 @@
 
 body{
 	width: 100%;
-	background-color: #2979FF;
+	background-color: #121010;
+	font-family: "Montserrat", Arial, Helvetica, sans-serif;
 }
 /* Movie/tv show page container (both poster and info sections). */
 .moviePage{
@@ -23,16 +24,18 @@ body{
 	flex-direction: column;
 	font-size:18px;
 	padding: 20px;
-	font-family: "Poppins";
 }
 .info h2{
 	font-size: 35px;
-	color: goldenrod;
+	color: #00E670;
 }
 .plot{
 	padding: 20px;
 	font-family: "Poppins", sans-serif;
 	flex-shrink: 16px;
+}
+.plot h3{
+	color: #00E670;
 }
 .buttons{
 	margin-top: 25px;
@@ -45,17 +48,20 @@ body{
 	font-size: 16px;
 	font-weight: bold;
 	padding: 5px;
-	background-color: #eee;
+	background-color: #222;
 	border-radius: 5px;
-	color: #00B8D4;
+	color: #00E670;
 	text-align: center;
 	transition: 0.3s;
-}
+	position: relative;
+	overflow: hidden;
+} 
 .buttons a:hover{
-	background-color: #00B8D4;
-	color: #eee;
+	background-color: #00E670;
+	color: #222;
 	box-shadow: 0 3px 8px rgba(0,0,0,0.2);
-}
+} 
+
 /* Movie/tv show info - END. */
 
 /* Movie/tv show trailer - START. */
@@ -87,7 +93,7 @@ body{
 	transition: 0.3s;
 }
 #close:hover {
-	color: #EF5350;
+	color: #00E670;
 }
 #trailer iframe{
 	border-radius: 5px;
@@ -99,28 +105,28 @@ body{
 	display: flex;
 	justify-content: center;
 	flex-wrap: wrap;
+	font-family: Arial, Helvetica, sans-serif;
 }
 #recommended > *{
 	margin: 15px 15px;
 }
 #rec_title{
 	padding: 20px;
+	color: #00E670;
 }
 .recommended_card{
 	text-align: center;
 	width: 200px;
-	background-color: #eee;
-	color: #333;
+	background-color: #222;
+	color: #eee;
 	border-radius: 3px;
 	transition: 0.35s;
+	position: relative;
 }
 .recommended_card:hover{
-	background-color: #00B8D4;
-	color: #eee;
-	box-shadow: 0 5px 5px rgba(0,0,0,0.4);
-}
-.recommended_card:hover a{
-	color: #eee;
+	transform:translateY(-10px);
+	color: #00E670;
+	box-shadow: 0 5px 5px rgba(0,0,0,0.5);
 }
 .recommended_card img{
 	border-radius: 3px;
@@ -131,14 +137,15 @@ body{
 	width: 100%;
 	transition: 0.3s;
 	padding: 5px;
-	color:  #0277bd;
+	color:  goldenrod;
+	font-family: "Montserrat", Arial, Helvetica, sans-serif;
 	font-weight: bold;
 	border-bottom-right-radius: 3px;
 	border-bottom-left-radius: 3px;
 }
 .recommended_card a:hover{
-	background-color: #eee;
-	color: #008DB4;
+	background-color: rgba(0,0,0,0.55);
+	color: #00E670;
 }
 /* Movie/tvshow recommended - END. */
 
