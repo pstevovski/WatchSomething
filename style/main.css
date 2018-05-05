@@ -40,18 +40,18 @@ ul{
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	height: 50px;
-	width: 50px;
+	height:40px;
+	width: 40px;
 	border-radius: 50%;
 	margin-top: -20px;
-	border: 4px solid #eee;
-	border-top: 4px solid #00E670;
-	border-bottom: 4px solid #00E670;
+	border: 3px solid #eee;
+	border-top-color: #00E670;
 	animation: spinner 0.5s ease infinite;
 }
+
 @keyframes spinner{
 	to{
-		transform:rotate(360deg);
+		transform:rotateZ(360deg);
 	}
 }
 /* Global parameters end. */
@@ -106,6 +106,7 @@ nav a{
 }
 .menu ul li ul{
 	display: none;
+	position: relative;
 }
 .menu ul li:hover ul{
 	display: block;
@@ -155,6 +156,11 @@ nav a{
 	text-align: center;
 	margin: 25px 0;
 	font-size: 45px;
+}
+#byYear{
+	color: #00E676;
+	font-size: 35px;
+	font-weight: bold;
 }
 /* Movies/Tvshows output - START. */
 .showcase{
@@ -240,6 +246,9 @@ nav a{
 }
 #form input:focus{
 	outline: none !important;
+}
+#byActor{
+	text-transform: capitalize;
 }
 
 /* 				Media Queries 			*/
