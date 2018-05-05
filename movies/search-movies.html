@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>PMDB | Search Movies</title>
+	<title>Search by Title | WhatToWatch</title>
 	<link rel="stylesheet" type="text/css" href="../style/main.css">
 </head>
 <body>
@@ -15,7 +15,9 @@
 				<li><a href="../index.html">Home</a></li>
 				<li>Movies<span><i class="ion-chevron-down arrow"></i></span>
 					<ul>
-						<li><a href="search-movies.html">Search movies</a></li>
+						<li><a href="search-movies.html">Search by Title</a></li>
+						<li><a href="year-movies.html">Search by Year</a></li>
+						<li><a href="byActor-movies.html">Search by Actor</a></li>
 						<li><a href="top-rated.html">Top rated</a></li>
 						<li><a href="popular-movies.html">Popular movies</a></li>
 						<li><a href="latest-movies.html">Latest movies</a></li>
@@ -23,8 +25,9 @@
 				</li>
 				<li>Series<span><i class="ion-chevron-down"></i></span>
 					<ul>
-						<li><a href="../series/search-series.html">Search series</a></li>
-						<li><a href="../series/series-popular.html">Popular series</a></li>
+						<li><a href="../series/search-series.html">Tv Shows by Title</a></li>
+						<li><a href="../series/series-year.html">Tv Shows by Year</a></li>
+						<li><a href="../series/series-popular.html">Popular tv shows</a></li>
 						<li><a href="../series/series-toprated.html">Top rated</a></li>
 						<li><a href="../series/series-latest.html">On air</a></li>
 					</ul>
@@ -44,7 +47,9 @@
 				<li><a href="../index.html">Home</a></li>
 				<li id="smallScreenMovies">Movies<span><i class="ion-chevron-down"></i></span>
 					<ul id="moviesDropdown">
-						<li><a href="search-movies.html">Search movies</a></li>
+						<li><a href="search-movies.html">Search by Title</a></li>
+						<li><a href="year-movies.html">Search by Year</a></li>
+						<li><a href="byActor-movies.html">Search by Actor</a></li>
 						<li><a href="top-rated.html">Top rated</a></li>
 						<li><a href="popular-movies.html">Popular movies</a></li>
 						<li><a href="latest-movies.html">Latest movies</a></li>
@@ -52,8 +57,9 @@
 				</li>
 				<li id="smallScreenSeries">Series<span><i class="ion-chevron-down"></i></span>
 					<ul id="seriesDropdown">
-						<li><a href="../series/search-series.html">Search series</a></li>
-						<li><a href="../series/series-popular.html">Popular series</a></li>
+						<li><a href="../series/search-series.html">Tv Shows by Title</a></li>
+						<li><a href="../series/series-year.html">Tv Shows by Year</a></li>
+						<li><a href="../series/series-popular.html">Popular tv shows</a></li>
 						<li><a href="../series/series-toprated.html">Top rated</a></li>
 						<li><a href="../series/series-latest.html">On air</a></li>
 					</ul>
@@ -66,7 +72,7 @@
 	<div class="spinner"></div>
 <!-- Container -->
 	<div class="container">
-		<h1>Search movies</h1>
+		<h1>Search by Title</h1>
 
 		<form id="form">
 			<input type="text" id="searchText" placeholder="Search for movies (by title)">
