@@ -33,6 +33,7 @@ function searchMovies(searchText){
 						<img src="http://image.tmdb.org/t/p/w300/${movie.poster_path}" onerror="this.onerror=null;this.src='../images/image2.png';">
 						<h3>${movie.title}</h3>
 						<p>${movie.vote_average} <strong>IMDB Rating</strong></p>
+						<p>Release date: <strong>${movie.release_date}</strong></p>
 						<a onclick="movieSelected('${movie.id}')" class="btn" href="#"> Movie Details </a>
 					</div>
 				`;

@@ -1,6 +1,17 @@
+//Spinner.
+const spinner = document.querySelector(".spinner");
+spinner.style.display = "none";
+const container = document.querySelector(".container");
+container.style.display = "none";
 //Gets the movie ID stored in the Session storage and uses it to display information about
 //the movie that has that ID.
 function getMovie(){
+	spinner.style.display = "block";
+	setTimeout(() => {
+		spinner.style.display = "none";
+		container.style.display = "block";
+	}, 1000);
+	
 	let movieId = sessionStorage.getItem("movieId");
 
 	axios.get("https://api.themoviedb.org/3/movie/"+movieId+'?api_key=fa155f635119344d33fcb84fb807649b&language=en-US')

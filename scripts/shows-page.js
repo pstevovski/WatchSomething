@@ -1,6 +1,16 @@
+//Spinner.
+const spinner = document.querySelector(".spinner");
+spinner.style.display = "none";
+const container = document.querySelector(".container");
+container.style.display = "none";
 //Gets the tv show ID stored in the Session storage and uses it to display information about
 //the tv show that has that ID.
 function getShowInfo(){
+	spinner.style.display = "block";
+	setTimeout(() => {
+		spinner.style.display = "none";
+		container.style.display = "block";
+	}, 1000);
 	const showId = sessionStorage.getItem("showId");
 	//Defines requests to the API as variable, so they can be used as part of Promise.all, to target
 	//mulitple requests at once.
