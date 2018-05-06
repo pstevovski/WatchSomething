@@ -1,15 +1,21 @@
 # What to Watch
-## Personal learning project.
-This project uses an API from (https://www.themoviedb.com) to list movies and tv shows by:
-* Top rated;
-* Popularity;
+### About
+This project uses an API from themoviedb.com in order to list movies & tv shows according to the following criteria:
 * Latest;
-* On air.
+* Popular (with set minimum and maximum dates);
+* Top rated (of all time);
+* On air (tv shows that are currently on air);
+It also provides an option to Search for movies/tv shows by:
+* Title;
+* Actor/Actress name;
+* Year (original year of release).
+Currently working on adding more features (sorting listed movies by genres.).
+#### Personal learning project.
+##### I do not hold any ownership of the images used in this project. This project is currently for non-commercial use.
 
-It also provides an option to search for a movie or a tv show by using its title. Thats if you want to, nobody's pushing you.
 Things to do:
-1. ~~Change the style of the pages to match the theme. ~~
+1. ~~Change the style of the pages to match the theme.~~
 2. ~~Add more search options (by year, per actor).~~
 3. Add more functionality to the pages.
-4. Add option to filter movies by Genres in (movies by actor, year, top rated, popular, latest.)
+4. Add option to filter movies/tv shows by Genres in (movies/tv shows by actor, year, top rated, popular, latest.)
 
