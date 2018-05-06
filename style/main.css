@@ -40,6 +40,7 @@ ul{
 	position: absolute;
 	top: 50%;
 	left: 50%;
+	transform:translate(-50%,-50%);
 	height:40px;
 	width: 40px;
 	border-radius: 50%;
@@ -50,8 +51,11 @@ ul{
 }
 
 @keyframes spinner{
+	from{
+		transform:translate(-50%,-50%) rotate(0deg);
+	}
 	to{
-		transform:rotateZ(360deg);
+		transform:translate(-50%,-50%) rotate(360deg);
 	}
 }
 /* Global parameters end. */
@@ -275,14 +279,16 @@ nav a{
 		width: 28px;
 		display: block;
 		margin-right: 15px;
+		margin-top: 15px;
 		position: relative;
 		overflow: hidden;
+		cursor: pointer;
 	}
 	.burger span{
 		width: 100%;
 		height: 5px;
 		border-radius: 2px;
-		background-color: #0277bd;
+		background-color: #00E670;
 		display: block;
 		position: absolute;
 		transition: all 0.5s;
@@ -299,6 +305,7 @@ nav a{
 	.burger.active span:nth-child(1){
 		top: 15px;
 		transform:rotate(45deg);
+		z-index: 9;
 	}
 	.burger.active span:nth-child(2){
 		left: -30px;
@@ -307,11 +314,16 @@ nav a{
 	.burger.active span:nth-child(3){
 		top:15px;
 		transform:rotate(-45deg);
+		z-index: 9;
+	}
+	.burger.active:hover span{
+		background-color: #EF5350;
+		box-shadow: 0 1px 5px rgba(0,0,0,0.3);
 	}
 	.slide{
 		display: block;
 		position: absolute;
-		top: 40px;
+		top: 0px;
 		color: #0277bd;
 		width: 100%;
 		background-color: #eee;

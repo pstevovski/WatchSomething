@@ -38,7 +38,6 @@ function getMovie(){
 							<li><strong>Revenue:</strong> ${revenue}</li>
 							<li><strong>Status:</strong> ${movie.status}</li>
 							<li><strong>Production companies:</strong> ${movie.production_companies[0].name}</li>
-							<li><strong>Spoken Languages:</strong> ${movie.spoken_languages[0].name}</li>
 						</ul>
 
 						<div class="buttons">
