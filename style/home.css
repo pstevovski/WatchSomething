@@ -13,6 +13,13 @@ a{
     text-decoration: none;
     color: #eee;
 }
+.overlay p{
+    font-family: "Roboto", Arial, Helvetica, sans-serif;
+    color: #eee;
+    width: 345px;
+    font-weight:600;
+    text-align: center;
+}
 /* First section */
 .first{
     background: url("../images/bg.png") center center no-repeat;
@@ -29,6 +36,7 @@ a{
     z-index: 999;
     font-size: 75px;
     font-weight: bold;
+    transition: all 0.3s;
 }
 .first p{
     color: #00E670;
@@ -136,12 +144,6 @@ a{
 }
 .movies_button:hover::before{
     height: 100%;
-}
-.overlay p{
-    color: #00E676;
-    width: 345px;
-    font-weight:bold;
-    text-align: center;
 }
 /* Third section - Tv Shows */
 .third{
@@ -286,5 +288,10 @@ footer .logo, .text, .links{
 @media (max-width: 400px){
     .second{
         background: url("../images/joker.jpg") right right no-repeat;
+    }
+}
+@media (max-width: 380px){
+    .first h1{
+        font-size: 35px;
     }
 }
