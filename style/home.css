@@ -15,26 +15,35 @@ a{
 }
 /* First section */
 .first{
+    background: url("../images/bg.png") center center no-repeat;
+    background-size: cover;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 600px;
+    min-height: 640px;
+    z-index: 1;
 }
 .first h1{
+    color: #00E670;
+    z-index: 999;
     font-size: 75px;
     font-weight: bold;
 }
 .first p{
+    color: #00E670;
+    z-index: 999;
     font-style: italic;
     font-weight: 600;
 }
 .first .link{
+    color: #00E670;
+    z-index: 999;
     margin: 25px 0;
 }
 .button{
     padding: 10px 35px;
-    border: 2px solid #333;
+    border: 2px solid #eee;
     transition: 0.25s ease-out;
     font-weight: 500;
     border-radius: 2px;
@@ -42,18 +51,19 @@ a{
     overflow: hidden;
 }
 .button:hover{
-    color:#00E676;
+    color:#222;
+    border:none;
 }
 .button::before{
     content: "";
     position: absolute;
     bottom: 0;
     left: 0;
-    background-color: #333;
+    background-color: #00E670;
     width: 100%;
     height: 0%;
     z-index: -1;
-    transition: 0.15s ease-out;
+    transition: 0.35s ease-out;
 }
 .button:hover:before{
     height: 100%;
@@ -61,10 +71,14 @@ a{
 .pointer{
     position: absolute;
     bottom: 25px;
-    left: 50%;
+    left: 49%;
     font-size: 40px;
     animation: point 0.75s ease-out infinite;
-    transform: translateX(-50%);
+    transform: translateX(-49%);
+}
+.pointer span{
+    color: #00E670;
+    z-index: 999;;
 }
 @keyframes point{
     0%{
@@ -77,8 +91,7 @@ a{
 /* Second section - Movies */
 .second{
     box-shadow: 0 -3px 5px rgba(0,0,0,0.25);
-    margin-top: 35px;
-    background: url("../images/joker.jpg") center center no-repeat;
+    background: url("../images/45119.jpg") center center no-repeat;
     background-size: cover;
     min-height: 640px; 
 }
@@ -94,12 +107,12 @@ a{
 }
 .overlay .link > *{
     margin: 35px 0;
+    font-weight: bold;
 }
 .movies_button{
     padding: 10px 35px;
     border: 2px solid #eee;
     transition: 0.25s ease-out;
-    font-weight: 500;
     border-radius: 2px;
     position: relative;
     overflow: hidden;
@@ -125,14 +138,15 @@ a{
     height: 100%;
 }
 .overlay p{
-    color: #eee;
-    width: 550px;
-    font-weight: 500;
+    color: #00E676;
+    width: 345px;
+    font-weight:bold;
     text-align: center;
 }
 /* Third section - Tv Shows */
 .third{
-    background: url("../images/walker.jpg") center center no-repeat;
+    border-top: 1px solid #111;
+    background: url("../images/punisher.png") center center no-repeat;
     background-size: cover;
     min-height: 640px;
 }
@@ -272,8 +286,5 @@ footer .logo, .text, .links{
 @media (max-width: 400px){
     .second{
         background: url("../images/joker.jpg") right right no-repeat;
-    }
-    .third{
-        background: url("../images/walker.jpg") left center no-repeat;
     }
 }
