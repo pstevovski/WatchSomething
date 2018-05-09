@@ -2,9 +2,10 @@ const form = document.getElementById("form");
 form.addEventListener("submit", (e)=>{
     var actor = document.getElementById("actor").value;
     var byActor = document.getElementById("byActor");
-    byActor.innerHTML = actor;
+    byActor.innerHTML = ": "+actor;
     discoverByActor(actor).then(moviesByActor);
     moviesByActor();
+    discoverByActor(actor).then(genres);
     e.preventDefault();
 })
 function discoverByActor(actor){
@@ -46,22 +47,6 @@ function movieSelected(id){
     location.replace("../movie-page.html");
     return false;
 }
-//Define page number
-var pageNum = 1;
-//Click on "PREVIOUS" to go back one page (decrement pageNum)
-var prev = document.getElementById("prev");
-prev.addEventListener("click", ()=>{
-    pageNum--;
-    window.scrollTo(0,0)
-    movieByActorPage(pageNum);
-})
-//Click on "NEXT" to go forwards one page (increment pageNum)
-var next = document.getElementById("next");
-next.addEventListener("click", ()=>{
-    pageNum++;
-    window.scrollTo(0,0);
-    movieByActorPage(pageNum);
-})
 //List movies by that actor again after page change.
 function movieByActorPage(pageNum){
     let actorId = sessionStorage.getItem("theActorId");
@@ -86,23 +71,82 @@ function movieByActorPage(pageNum){
         moviesInfo.innerHTML = output;
     })
 }
-//Burger menu.
-const burger = document.querySelector(".burger");
-const slide = document.querySelector(".slide");
-burger.addEventListener("click", ()=>{
-	burger.classList.toggle("active");
-	//Slide menu.
-	slide.classList.toggle("slideIn");
-});
-//Click on DROPDOWN - MOVIES on small screen to display/hide the list.
-const smallMovies = document.getElementById("smallScreenMovies");
-smallMovies.addEventListener("click", ()=>{
-	const moviesDropdown = document.getElementById("moviesDropdown");
-	moviesDropdown.classList.toggle("drop");
-});
-//Click on DROPDOWN - SERIES on small screen to display/hide the list.
-const smallSeries = document.getElementById("smallScreenSeries");
-smallSeries.addEventListener("click", ()=>{
-	const seriesDropdown = document.getElementById("seriesDropdown");
-	seriesDropdown.classList.toggle("drop");
-});
+//Select
+const genre = document.getElementById("selected");
+genre.addEventListener("change", ()=>{
+    genres();
+})
+function genres(){
+    let actorId = sessionStorage.getItem("theActorId");
+    const select = document.getElementById("selected");
+    select.addEventListener("change", (e)=>{
+    //Set genre to session storage.
+    sessionStorage.setItem("genre",e.target.options[e.target.selectedIndex].id);
+    //API request.
+    axios.get("https://api.themoviedb.org/3/discover/movie?api_key=fa155f635119344d33fcb84fb807649b&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=" + e.target.options[e.target.selectedIndex].id+'&with_people='+actorId)
+    .then((response) => {
+        console.log(response);
+        let movies = response.data.results;
+        let output = "";
+
+        $.each(movies, (index, movie)=>{
+            output +=`
+            <div class="card">
+                    <img src="http://image.tmdb.org/t/p/w300/${movie.poster_path}" onerror="this.onerror=null;this.src='../images/image2.png';">
+                    <h3>${movie.title}</h3>
+                    <p>${movie.vote_average} <strong>IMDB Rating</strong></p>
+                    <p>Release date: <strong>${movie.release_date}</strong></p>
+                    <a onclick="movieSelected('${movie.id}')" class="btn" href="#"> Movie Details </a>
+                </div>
+            `
+        })
+        let moviesInfo = document.getElementById("movies");
+        moviesInfo.innerHTML = output;
+    })
+ })
+}
+//Define page number
+var pageNum = 1;
+//Click on "PREVIOUS" to go back one page (decrement pageNum)
+var prev = document.getElementById("prev");
+prev.addEventListener("click", ()=>{
+    pageNum--;
+    window.scrollTo(0,0)
+    movieByActorPage(pageNum);
+    movieByActorWithGenrePage(pageNum);
+})
+//Click on "NEXT" to go forwards one page (increment pageNum)
+var next = document.getElementById("next");
+next.addEventListener("click", ()=>{
+    pageNum++;
+    window.scrollTo(0,0);
+    movieByActorPage(pageNum);
+    movieByActorWithGenrePage(pageNum);
+})
+//Add a function when you change the page with selected genre, to list movies with that actor
+//with the set genre.
+function movieByActorWithGenrePage(pageNum){
+    let actorId = sessionStorage.getItem("theActorId");
+    let genre = sessionStorage.getItem("genre");
+
+    axios.get("https://api.themoviedb.org/3/discover/movie?api_key=fa155f635119344d33fcb84fb807649b&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page="+pageNum+'&with_genres='+genre+'&with_people='+actorId)
+    .then((response) => {
+        console.log(response);
+        let movies = response.data.results;
+        let output = "";
+
+        $.each(movies, (index, movie)=>{
+            output +=`
+            <div class="card">
+                    <img src="http://image.tmdb.org/t/p/w300/${movie.poster_path}" onerror="this.onerror=null;this.src='../images/image2.png';">
+                    <h3>${movie.title}</h3>
+                    <p>${movie.vote_average} <strong>IMDB Rating</strong></p>
+                    <p>Release date: <strong>${movie.release_date}</strong></p>
+                    <a onclick="movieSelected('${movie.id}')" class="btn" href="#"> Movie Details </a>
+                </div>
+            `
+        })
+        let moviesInfo = document.getElementById("movies");
+        moviesInfo.innerHTML = output;
+    })
+ }
