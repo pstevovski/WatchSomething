@@ -10,32 +10,42 @@
 <body>
 	<!-- Navigation Bar -->
 	<nav>
-            <!-- The Menu -->
-            <div class="menu">
-                <ul>
-                    <li><a href="../index.html">Home</a></li>
-                    <li>Movies<span><i class="ion-chevron-down arrow"></i></span>
-                        <ul>
-                                <li><a href="search-movies.html">Search by Title</a></li>
+ <!-- The Menu -->
+ <!-- The Menu -->
+ <div class="menu">
+        <ul>
+            <li class="list"><a href="../index.html">Home</a></li>
+            <li class="list">Movies<span class="drop"><i class="ion-chevron-down arrow"></i></span>
+                <ul class="firstUnordered">
+                        <li><a href="top-rated.html">Top rated</a></li>
+                        <li><a href="popular-movies.html">Popular movies</a></li>
+                        <li><a href="latest-movies.html">Latest movies</a></li>
+                        <li class="search">Search Movies
+                             <ul class="secondUnordered">
                                 <li><a href="year-movies.html">Search by Year</a></li>
                                 <li><a href="byActor-movies.html">Search by Actor</a></li>
-                                <li><a href="top-rated.html">Top rated</a></li>
-                                <li><a href="popular-movies.html">Popular movies</a></li>
-                                <li><a href="latest-movies.html">Latest movies</a></li>
-                        </ul>
-                    </li>
-                    <li>Series<span><i class="ion-chevron-down"></i></span>
-                        <ul>
-                            <li><a href="../series/search-series.html">Tv Shows by Title</a></li>
-                            <li><a href="../series/series-year.html">Tv Shows by Year</a></li>
-                            <li><a href="../series/series-popular.html">Popular tv shows</a></li>
-                            <li><a href="../series/series-toprated.html">Top rated</a></li>
-                            <li><a href="../series/series-latest.html">On air</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="../about.html">About</a></li>
+                                <li><a href="byGenre-movies.html">Search By Genre</a></li>
+                             </ul>
+                        </li>
                 </ul>
-            </div>
+            </li>
+            <li class="list">Series<span class="drop"><i class="ion-chevron-down"></i></span>
+                <ul class="firstUnordered">
+                    <li><a href="../series/series-popular.html">Popular tv shows</a></li>
+                    <li><a href="../series/series-toprated.html">Top rated</a></li>
+                    <li><a href="../series/series-latest.html">On air</a></li>
+                    <li class="search">Tv Shows
+                            <ul class="secondUnordered">
+                                <li><a href="../series/search-series.html">Tv Shows by Title</a></li>
+                                <li><a href="../series/series-year.html">Tv Shows by Year</a></li>
+                                <li><a href="../series/seires-genre.html">TV Shows by Genre</a></li>
+                            </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="list"><a href="../about.html">About</a></li>
+        </ul>
+    </div>
             <!-- The burger menu for small screens -->
             <div class="burger">
                 <span></span>
@@ -73,10 +83,32 @@
     <div class="spinner"></div>	 -->
     <!-- Container -->
         <div class="container">
-            <h1>Actor: <span id="byActor"></span></h1>
+            <h1>Actor <span id="byActor"></span></h1>
             <form id="form">
                     <input type="text" id="actor" placeholder="Search for movies (by actor name)">
              </form>
+             <select id="selected">
+                 <option>SELECT GENRE </option>
+                 <option id="28" class="tag">Action</option>
+                 <option id="12" class="tag">Adventure</option>
+                 <option id="16" class="tag">Animation</option>
+                 <option id="35" class="tag">Comedy</option>
+                 <option id="80" class="tag">Crime</option>
+                 <option id="99" class="tag">Documentary</option>
+                 <option id="18" class="tag">Drama</option>
+                 <option id="10751" class="tag">Family</option>
+                 <option id="14" class="tag">Fantasy</option>
+                 <option id="36" class="tag">History</option>
+                 <option id="27" class="tag">Horror</option>
+                 <option id="10402" class="tag">Music</option>
+                 <option id="9648" class="tag">Mystery</option>
+                 <option id="10749" class="tag">Romance</option>
+                 <option id="878" class="tag">Sci-Fi</option>
+                 <option id="10770" class="tag">TV Movie</option>
+                 <option id="53" class="tag">Thriller</option>
+                 <option id="10752" class="tag">War</option>
+                 <option id="37" class="tag">Western</option>
+             </select>
         </div>
     <!-- Showcase - lists movies by year -->
         <div class="showcase">
@@ -90,6 +122,7 @@
         </div>
 <!-- Script link -->
 <script src="../scripts/byActor.js"></script>
+<script src="../scripts/global.js"></script>
 <!-- Axios link -->
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <!-- Jquery CDN -->

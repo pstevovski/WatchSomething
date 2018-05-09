@@ -10,32 +10,41 @@
 <body>
 	<!-- Navigation Bar -->
 	<nav>
-            <!-- The Menu -->
-            <div class="menu">
-                <ul>
-                    <li><a href="../index.html">Home</a></li>
-                    <li>Movies<span><i class="ion-chevron-down arrow"></i></span>
-                        <ul>
-                                <li><a href="search-movies.html">Search by Title</a></li>
+ <!-- The Menu -->
+ <div class="menu">
+        <ul>
+            <li class="list"><a href="../index.html">Home</a></li>
+            <li class="list">Movies<span class="drop"><i class="ion-chevron-down arrow"></i></span>
+                <ul class="firstUnordered">
+                        <li><a href="top-rated.html">Top rated</a></li>
+                        <li><a href="popular-movies.html">Popular movies</a></li>
+                        <li><a href="latest-movies.html">Latest movies</a></li>
+                        <li class="search">Search Movies
+                             <ul class="secondUnordered">
                                 <li><a href="year-movies.html">Search by Year</a></li>
                                 <li><a href="byActor-movies.html">Search by Actor</a></li>
-                                <li><a href="top-rated.html">Top rated</a></li>
-                                <li><a href="popular-movies.html">Popular movies</a></li>
-                                <li><a href="latest-movies.html">Latest movies</a></li>
-                        </ul>
-                    </li>
-                    <li>Series<span><i class="ion-chevron-down"></i></span>
-                        <ul>
-                            <li><a href="../series/search-series.html">Tv Shows by Title</a></li>
-                            <li><a href="../series/series-year.html">Tv Shows by Year</a></li>
-                            <li><a href="../series/series-popular.html">Popular tv shows</a></li>
-                            <li><a href="../series/series-toprated.html">Top rated</a></li>
-                            <li><a href="../series/series-latest.html">On air</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="../about.html">About</a></li>
+                                <li><a href="byGenre-movies.html">Search By Genre</a></li>
+                             </ul>
+                        </li>
                 </ul>
-            </div>
+            </li>
+            <li class="list">Series<span class="drop"><i class="ion-chevron-down"></i></span>
+                <ul class="firstUnordered">
+                    <li><a href="../series/series-popular.html">Popular tv shows</a></li>
+                    <li><a href="../series/series-toprated.html">Top rated</a></li>
+                    <li><a href="../series/series-latest.html">On air</a></li>
+                    <li class="search">Tv Shows
+                            <ul class="secondUnordered">
+                                <li><a href="../series/search-series.html">Tv Shows by Title</a></li>
+                                <li><a href="../series/series-year.html">Tv Shows by Year</a></li>
+                                <li><a href="../series/seires-genre.html">TV Shows by Genre</a></li>
+                            </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="list"><a href="../about.html">About</a></li>
+        </ul>
+    </div>
             <!-- The burger menu for small screens -->
             <div class="burger">
                 <span></span>
@@ -90,6 +99,7 @@
         </div>
 <!-- Script link -->
 <script src="../scripts/year-movies.js"></script>
+<script src="../scripts/global.js"></script>
 <!-- Axios link -->
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <!-- Jquery CDN -->
