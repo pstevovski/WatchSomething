@@ -70,6 +70,23 @@ nav{
 nav a{
 	color: #eee;
 }
+.sticky{
+	background-color: rgba(0,0,0,0.8);
+	width: 100%;
+	position: fixed;
+	right: 0;
+	z-index: 999;
+	transition: 0.35s ease-in-out;
+	animation: navbarSlide 0.4s 1;
+}
+@keyframes navbarSlide{
+	0%{
+		transform: translateY(-50px)
+	}
+	100%{
+		transform: translateY(0px)
+	}
+}
 .logo{
 	font-family: "Berkshire Swash Regular";
 	font-size: 22px;
@@ -84,35 +101,38 @@ nav a{
 	margin-right: 50px;
 	z-index: 2;
 }
-.menu ul li{
+.menu ul .list{
 	padding: 15px;
 	cursor: pointer;
 	position: relative;
 	transition: all 0.3s;
 	margin: 0 5px;
 }
-.menu ul li:hover{
+.menu ul .list:hover{
 	color: #00E676;
 }
-.menu ul li a{
+.menu ul .list:hover .firstUnordered .search{
+	color: #333;
+}
+.menu ul .list a{
 	padding: 5px;
 	position: relative;
 }
-.menu ul li a:nth-child(1):hover{
+.menu ul .list a:nth-child(1):hover{
 	color: #00E676;
 }
-.menu ul li span{
+.menu ul .list span{
 	display: inline-block;
 	opacity: 1;
 }
-.menu ul li:hover span{
+.menu ul .list:hover .drop{
 	animation: upNdown 0.6s ease-in-out forwards infinite;
 }
-.menu ul li ul{
+.menu ul .list .firstUnordered{
 	display: none;
 	position: relative;
 }
-.menu ul li:hover ul{
+.menu ul .list:hover .firstUnordered{
 	display: block;
 	position: absolute;
 	top: 40px;
@@ -121,13 +141,38 @@ nav a{
 	width: 184px;
 	box-shadow: 0 3px 5px rgba(0,0,0,0.4);
 	animation: dropdown 0.5s ease-out forwards;
+	z-index: 9;
 }
-.menu ul li ul li{
+.menu ul .list .firstUnordered li{
 	display: block;
 	width: 100%;
 	margin: 0;
 	padding: 10px;
 	transition: all 0.3s;
+	z-index: 9;
+}
+.menu ul .list .firstUnordered .search{
+	position: relative;
+}
+.menu ul .list .firstUnordered .search:hover{
+	color: #00E670;
+}
+.menu ul .list .firstUnordered .secondUnordered{
+	display: none;
+	position: absolute;
+	left: -158px;
+	top: 0;
+	z-index: -1;
+}
+.menu ul .list .firstUnordered .search:hover .secondUnordered{
+	display: block;
+	background-color: #eee;
+	animation: sideway 0.5s ease-out forwards;
+}
+.menu ul .list .firstUnordered .search:hover .secondUnordered li{
+	padding: 5px;
+	color: #333;
+	width: 158px;
 }
 .menu ul li ul li:hover{
 	background-color:#333;
@@ -139,12 +184,18 @@ nav a{
 	padding: 5px;
 	transition: all 0.3s;
 }
+.menu ul .list .firstUnordered .search .secondUnordered a{
+	color: #333;
+}
+.menu ul .list .firstUnordered .search .secondUnordered a:hover{
+	color: #00E676;
+}
 .menu ul li ul li:hover a{
 	color:#00E676;
 }
 @keyframes dropdown{
 	0%{
-		opacity: 1;
+		opacity: 0;
 		transform:translateY(25px);
 	}
 	100%{
@@ -155,6 +206,11 @@ nav a{
 /* Navigation bar - END. */
 
 /* Page Title */
+.container{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
 .container h1{
 	font-family: "Montserrat", Arial, Helvetica, sans-serif;
 	text-align: center;
@@ -252,7 +308,31 @@ nav a{
 	outline: none !important;
 }
 #byActor{
+	color: #00E670;
 	text-transform: capitalize;
+}
+#genreName{
+	color: #00E670;
+}
+/* Select */
+#selected{
+	width: 150px;
+	margin-bottom: 25px;
+	padding: 3px 7px;
+	font-family: "Montserrat", Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	border: none;
+	border-radius: 3px;
+	transition: 0.25s;
+}
+#selected:hover{
+	background-color: #333;
+	color: #00E670;
+}
+#selected:focus{
+	outline: none !important;
+	background-color: #333;
+	color: #00E670;
 }
 
 /* 				Media Queries 			*/
@@ -433,5 +513,16 @@ nav a{
 	}
 	100%{
 		transform:translateY(3px);
+	}
+}
+/* Animation for sideway submenu */
+@keyframes sideway{
+	0%{
+		opacity: 0;
+		transform: rotateX(90deg);
+	}
+	100%{
+		opacity: 1;
+		transform: rotateX(0deg)
 	}
 }
