@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>By year | WhatToWatch</title>
+    <link rel="stylesheet" href="../style/main.css">
+</head>
+<body>
+<!-- Switch between light/dark version. -->
+    <div class="change">
+        <img src="../images/switch-off.png" alt="light-on" width="30px" id="white" onclick="changeCSS('../style/main.css', 0)">
+        <img src="../images/switch-on.png" alt="light-off" width="30px" id="dark" onclick="changeCSS('../style/dark.css', 0)">
+    </div>
+<!-- Navigation Bar -->
+	<nav>
+ <!-- The Menu -->
+        <div class="menu">
+        <ul>
+            <li class="list"><a href="../index.html">Home</a></li>
+            <li class="list">Movies<span class="drop"><i class="ion-chevron-down arrow"></i></span>
+                <ul class="firstUnordered">
+                        <li><a href="top-rated.html">Top rated</a></li>
+                        <li><a href="popular-movies.html">Popular movies</a></li>
+                        <li><a href="latest-movies.html">Latest movies</a></li>
+                        <li class="search">Search Movies
+                             <ul class="secondUnordered">
+                                    <li><a href="search-movies.html">Search by Title</a></li>
+                                    <li><a href="year-movies.html">Search by Year</a></li>
+                                    <li><a href="byActor-movies.html">Search by Actor</a></li>
+                                    <li><a href="byGenre-movies.html">Search By Genre</a></li>
+                             </ul>
+                        </li>
+                </ul>
+            </li>
+            <li class="list">Series<span class="drop"><i class="ion-chevron-down"></i></span>
+                <ul class="firstUnordered">
+                    <li><a href="../series/series-popular.html">Popular tv shows</a></li>
+                    <li><a href="../series/series-toprated.html">Top rated</a></li>
+                    <li><a href="../series/series-latest.html">On air</a></li>
+                    <li class="search">Tv Shows
+                            <ul class="secondUnordered">
+                                <li><a href="../series/search-series.html">Tv Shows by Title</a></li>
+                                <li><a href="../series/series-year.html">Tv Shows by Year</a></li>
+                                <li><a href="../series/seires-genre.html">TV Shows by Genre</a></li>
+                            </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="list"><a href="../about.html">About</a></li>
+        </ul>
+        </div>
+            <!-- The burger menu for small screens -->
+            <div class="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <!-- Slide menu for small screens -->
+            <div class="slide">
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li id="smallScreenMovies">Movies<span><i class="ion-chevron-down"></i></span>
+                        <ul id="moviesDropdown">
+                                <li><a href="search-movies.html">Search by Title</a></li>
+                                <li><a href="year-movies.html">Search by Year</a></li>
+                                <li><a href="byActor-movies.html">Search by Actor</a></li>
+                                <li><a href="top-rated.html">Top rated</a></li>
+                                <li><a href="popular-movies.html">Popular movies</a></li>
+                                <li><a href="latest-movies.html">Latest movies</a></li>
+                        </ul>
+                    </li>
+                    <li id="smallScreenSeries">Series<span><i class="ion-chevron-down"></i></span>
+                        <ul id="seriesDropdown">
+                            <li><a href="../series/search-series.html">Tv Shows by Title</a></li>
+                            <li><a href="../series/series-year.html">Tv Shows by Year</a></li>
+                            <li><a href="../series/series-popular.html">Popular tv shows</a></li>
+                            <li><a href="../series/series-toprated.html">Top rated</a></li>
+                            <li><a href="../series/series-latest.html">On air</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </div>
+        </nav>
+    <!-- Spinner
+    <div class="spinner"></div>	 -->
+    <!-- Container -->
+        <div class="container">
+            <h1>Upcoming movies</h1>    
+        </div>
+    <!-- Showcase - lists movies by year -->
+        <div class="showcase">
+            <div id="movies" class="moviesRows"></div>
+    
+            <!-- Buttons for Pages -->
+            <div class="pages">
+                <div id="prev"><</div>
+                <div id="next">></div>
+            </div>
+        </div>
+<!-- Script link -->
+<script src="../scripts/upcoming-movies.js"></script>
+<script src="../scripts/global.js"></script>
+<!-- Axios link -->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!-- Jquery CDN -->
+<script
+src="https://code.jquery.com/jquery-3.3.1.min.js"
+integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+crossorigin="anonymous"></script>
+</body>
+</html>
