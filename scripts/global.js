@@ -1,7 +1,7 @@
 //Scroll effect.
 window.onscroll = function () {scrollFunction()}
 
-const navbar = document.getElementsByTagName("nav");
+const navbar = document.querySelector("nav");
 const sticky = navbar.offsetTop;
 
 function scrollFunction(){
@@ -31,3 +31,37 @@ smallSeries.addEventListener("click", ()=>{
 	const seriesDropdown = document.getElementById("seriesDropdown");
 	seriesDropdown.classList.toggle("drop");
 });
+//Modal box and question mark.
+let questionMark = document.getElementById("questionMark");
+let modal = document.querySelector(".modal");
+modal.style.display = "none";
+questionMark.addEventListener("click", ()=>{
+	modal.style.display = "block";
+})
+let close = document.getElementById("close");
+close.addEventListener("click", ()=>{
+	modal.style.display = "none";
+})
+
+//Change colors.
+//test
+function changeCSS(cssFile, cssLinkIndex){
+    let oldlink = document.getElementsByTagName("link").item(cssLinkIndex);
+
+    let newlink = document.createElement("link");
+    newlink.setAttribute("rel", "stylesheet");
+    newlink.setAttribute("type", "text/css");
+    newlink.setAttribute("href", cssFile);
+
+    document.getElementsByTagName("head").item(0).replaceChild(newlink, oldlink)
+}
+let white = document.getElementById("white");
+let dark  = document.getElementById("dark");
+white.addEventListener("click", ()=>{
+    dark.style.display = "block";
+    white.style.display = "none";
+})
+dark.addEventListener("click", ()=>{
+    white.style.display = "block";
+    dark.style.display = "none";
+})

@@ -11,7 +11,7 @@ window.onload = function getMovies(){
 		container.style.display = "flex";
 	}, 1000);
 	//Get the API.
-	axios.get("https://api.themoviedb.org/3/movie/now_playing?api_key=fa155f635119344d33fcb84fb807649b&language=en-US&page=1")
+	axios.get("https://api.themoviedb.org/3/movie/now_playing?api_key=fa155f635119344d33fcb84fb807649b&language=en-US&page=1&region=US")
 		.then( (response) =>{
 			console.log(response)
 			//Fetches the data - > results from the API.
@@ -21,11 +21,16 @@ window.onload = function getMovies(){
 			$.each(movies, (index,movie)=>{
 				output += `
 					<div class="card">
-						<img src="http://image.tmdb.org/t/p/w300/${movie.poster_path}" onerror="this.onerror=null;this.src='../images/image2.png';">
-						<h3>${movie.title}</h3>
-						<p>Rating: <strong>${movie.vote_average}</strong></p>
-						<p>Release date: <strong>${movie.release_date}</strong></p>
-						<a onclick="movieSelected('${movie.id}')" class="btn" href="#"> Movie Details </a>
+						<div class="addBtn"><span><i class="ion-plus-circled"></i></span></div>
+						<div class="card_img">
+							<img src="http://image.tmdb.org/t/p/w300/${movie.poster_path}" onerror="this.onerror=null;this.src='../images/image2.png';">
+						</div>
+						<div class="card_text">
+							<h3>${movie.title}</h3>
+							<p>Rating: <strong>${movie.vote_average}</strong></p>
+							<p>Release date: <strong>${movie.release_date}</strong></p>
+							<a onclick="movieSelected('${movie.id}')" class="btn" href="#"> Movie Details </a>
+						</div>
 					</div>
 				`;
 			})
@@ -80,11 +85,16 @@ function search(pageNum){
 			$.each(movies, (index,movie)=>{
 				output += `
 					<div class="card">
-						<img src="http://image.tmdb.org/t/p/w300/${movie.poster_path}" onerror="this.onerror=null;this.src='../images/image2.png';">
-						<h3>${movie.title}</h3>
-						<p>Rating: <strong>${movie.vote_average}</strong></p>
-						<p>Release date: <strong>${movie.release_date}</strong></p>
-						<a onclick="movieSelected('${movie.id}')" class="btn" href="#"> Movie Details </a>
+						<div class="addBtn"><span><i class="ion-plus-circled"></i></span></div>
+						<div class="card_img">
+							<img src="http://image.tmdb.org/t/p/w300/${movie.poster_path}" onerror="this.onerror=null;this.src='../images/image2.png';">
+						</div>
+						<div class="card_text">
+							<h3>${movie.title}</h3>
+							<p>Rating: <strong>${movie.vote_average}</strong></p>
+							<p>Release date: <strong>${movie.release_date}</strong></p>
+							<a onclick="movieSelected('${movie.id}')" class="btn" href="#"> Movie Details </a>
+						</div>
 					</div>
 				`;
 			})

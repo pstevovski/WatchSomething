@@ -16,23 +16,46 @@ function getShowInfo(){
 	//mulitple requests at once.
 	const seriesPromise = axios.get("https://api.themoviedb.org/3/tv/"+showId+'?api_key=fa155f635119344d33fcb84fb807649b&language=en-US');
 	const imdbPromise = axios.get("https://api.themoviedb.org/3/tv/"+showId+'/external_ids?api_key=fa155f635119344d33fcb84fb807649b&language=en-US');
+	const seriesCast = axios.get("https://api.themoviedb.org/3/tv/"+showId+'/credits?api_key=fa155f635119344d33fcb84fb807649b&language=en-US')
 	//Uses the Promise.all to target multiple requests to the API, uses the defined variables as
 	//link holders.
-	Promise.all([seriesPromise, imdbPromise])
-		.then( ([seriesResponse, imdbResponse]) =>{
+	Promise.all([seriesPromise, imdbPromise, seriesCast])
+		.then( ([seriesResponse, imdbResponse, seriesCastResponse]) =>{
 			const series = seriesResponse.data;
 			const imdb_id = imdbResponse.data.imdb_id;
+			const cast = seriesCastResponse.data.cast;
+			const genres = seriesResponse.data.genres;
+			cast.length = 5;
+			console.log(cast);
 			//Grab the popularity parameter from the data and rounds it to a whole number%.
 			popularity = seriesResponse.data.popularity;
 			popularity = Math.floor(popularity);
 			console.log(seriesResponse)
+			for(let i = 0; i < cast.length; i++){
 			let output = `
 			<div class="moviePage">
 					<div class="poster"><img src="http://image.tmdb.org/t/p/w300/${series.poster_path}"></div>
 					<div class="info">
 						<h2>${series.name}</h2>
 						<ul>
-							<li><strong>Genres:</strong> ${series.genres[0].name}</li>
+							<li><strong>Cast:</strong>`;
+							 for(let i = 0; i < cast.length; i++){
+								 if ( i != cast.length - 1){
+									 output += `${cast[i].name},`
+								 } else {
+									 output += `${cast[i].name}.`
+								 }
+							 }
+							output +=`</li>
+							<li><strong>Genres:</strong> `;
+							for(let i = 0; i < genres.length; i++){
+								if ( i != genres.length -1){
+									output += `${genres[i].name}, `;
+								} else {
+									output += `${genres[i].name}.`;
+								}
+							}
+							output += `</li>
 							<li><strong>Episode runtime:</strong> ${series.episode_run_time[0]}min </li>
 							<li><strong>Frist air date:</strong> ${series.first_air_date}</li>
 							<li><strong>Networks:</strong> ${series.networks[0].name}</li>
@@ -62,7 +85,7 @@ function getShowInfo(){
 			//that will be used to output the data results to.
 			let info = document.getElementById("movie");
 			info.innerHTML = output;
-		})
+		}})
 		//If there is an error, it logs the error in the console.
 		.catch ((err)=>{
 			console.log(err);
@@ -143,4 +166,52 @@ function openTrailer(){
 		overlay.style.display = "none";
 		body.style.position = "relative";
 	})
+}
+//Page number.
+let pageNum = 1;
+//Previous page for recommended.
+let prev = document.getElementById("prev");
+prev.addEventListener("click", ()=>{
+	pageNum--;
+	recommendedPage(pageNum);
+})
+//Next page for recommended.
+let next = document.getElementById("next");
+next.addEventListener("click", ()=>{
+	pageNum++;
+	recommendedPage(pageNum);
+})
+//Recommended page change.
+function recommendedPage(pageNum){
+	const showId = sessionStorage.getItem("showId");
+
+	axios.get("https://api.themoviedb.org/3/tv/"+showId+'/similar?api_key=fa155f635119344d33fcb84fb807649b&language=en-US&page='+pageNum)
+			.then ((response)=>{
+				let series = response.data.results;
+				//Makes the series parameter dynamic, and sets the length of it to 5 (5 similar movies will
+				//be shown.)
+				series.length = Math.min(series.length, 5);
+				console.log(series);
+				let output = "";
+
+				$.each(series, (index,series)=>{
+					output += `
+					<div class="recommended_card">
+						<img src="http://image.tmdb.org/t/p/w200/${series.poster_path}">
+						<h4>${series.name}</h4>
+						<p>Rating: <strong>${series.vote_average} IMDB</strong></p>
+						<p>Release date: <strong>${series.first_air_date}</strong></p>
+						<a onclick="showSelected('${series.id}')" class="buttons" href="#"> Show Details </a>
+					</div>
+					`;
+				})
+				//Creates a variable that targets the "recommended" element in the HTML
+				//that will be used to output the data results to.
+				let recommended = document.getElementById("recommended");
+				recommended.innerHTML = output;
+			})
+			//If there is an error, it logs it in the console.
+			.catch ((err)=>{
+				console.log(err);
+			})
 }

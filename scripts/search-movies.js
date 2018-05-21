@@ -29,13 +29,18 @@ function searchMovies(searchText){
 			//Appends to the output the info for each fetched result.
 			$.each(movies, (index, movie)=>{
 				output += `
-					<div class="card">
+				<div class="card">
+					<div class="addBtn"><span><i class="ion-plus-circled"></i></span></div>
+					<div class="card_img">
 						<img src="http://image.tmdb.org/t/p/w300/${movie.poster_path}" onerror="this.onerror=null;this.src='../images/image2.png';">
+					</div>
+					<div class="card_text">
 						<h3>${movie.title}</h3>
-						<p>${movie.vote_average} <strong>IMDB Rating</strong></p>
+						<p>Rating: <strong>${movie.vote_average}</strong></p>
 						<p>Release date: <strong>${movie.release_date}</strong></p>
 						<a onclick="movieSelected('${movie.id}')" class="btn" href="#"> Movie Details </a>
 					</div>
+				</div>
 				`;
 			});
 			//Creates a variable that targets the "movies" element in the HTML
@@ -88,12 +93,18 @@ function search(pageNum){
 
 			$.each(movies, (index, movie)=>{
 				output += `
-					<div class="card">
+				<div class="card">
+					<div class="addBtn"><span><i class="ion-plus-circled"></i></span></div>
+					<div class="card_img">
 						<img src="http://image.tmdb.org/t/p/w300/${movie.poster_path}" onerror="this.onerror=null;this.src='../images/image2.png';">
+					</div>
+					<div class="card_text">
 						<h3>${movie.title}</h3>
-						<p>${movie.vote_average} <strong>IMDB Rating</strong></p>
+						<p>Rating: <strong>${movie.vote_average}</strong></p>
+						<p>Release date: <strong>${movie.release_date}</strong></p>
 						<a onclick="movieSelected('${movie.id}')" class="btn" href="#"> Movie Details </a>
 					</div>
+				</div>
 				`;
 			});
 

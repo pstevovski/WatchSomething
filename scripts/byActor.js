@@ -1,8 +1,17 @@
+//Hide the select  genres.
+let selected = document.getElementById("selected");
+selected.style.display = "none";
+//Get the value from the form on submit and then run the functions.
 const form = document.getElementById("form");
 form.addEventListener("submit", (e)=>{
-    var actor = document.getElementById("actor").value;
+    let actor = document.getElementById("actor").value;
     var byActor = document.getElementById("byActor");
     byActor.innerHTML = ": "+actor;
+    //Show the select genres.
+    selected.style.display = "block";
+    selected.selectedIndex = 0;
+    sessionStorage.setItem("genre", "");
+    reset.style.display = "none";
     discoverByActor(actor).then(moviesByActor);
     moviesByActor();
     discoverByActor(actor).then(genres);
@@ -26,12 +35,17 @@ function moviesByActor(){
             $.each(movies, (index, movie)=>{
                 output +=`
                 <div class="card">
-						<img src="http://image.tmdb.org/t/p/w300/${movie.poster_path}" onerror="this.onerror=null;this.src='../images/image2.png';">
-						<h3>${movie.title}</h3>
-						<p>${movie.vote_average} <strong>IMDB Rating</strong></p>
-						<p>Release date: <strong>${movie.release_date}</strong></p>
-						<a onclick="movieSelected('${movie.id}')" class="btn" href="#"> Movie Details </a>
-					</div>
+                <div class="addBtn"><span><i class="ion-plus-circled"></i></span></div>
+                <div class="card_img">
+                    <img src="http://image.tmdb.org/t/p/w300/${movie.poster_path}" onerror="this.onerror=null;this.src='../images/image2.png';">
+                </div>
+                <div class="card_text">
+                    <h3>${movie.title}</h3>
+                    <p>Rating: <strong>${movie.vote_average}</strong></p>
+                    <p>Release date: <strong>${movie.release_date}</strong></p>
+                    <a onclick="movieSelected('${movie.id}')" class="btn" href="#"> Movie Details </a>
+                </div>
+            </div>
                 `
             })
             let moviesInfo = document.getElementById("movies");
@@ -59,12 +73,17 @@ function movieByActorPage(pageNum){
         $.each(movies, (index, movie)=>{
             output +=`
             <div class="card">
+                <div class="addBtn"><span><i class="ion-plus-circled"></i></span></div>
+                <div class="card_img">
                     <img src="http://image.tmdb.org/t/p/w300/${movie.poster_path}" onerror="this.onerror=null;this.src='../images/image2.png';">
+                </div>
+                <div class="card_text">
                     <h3>${movie.title}</h3>
-                    <p>${movie.vote_average} <strong>IMDB Rating</strong></p>
+                    <p>Rating: <strong>${movie.vote_average}</strong></p>
                     <p>Release date: <strong>${movie.release_date}</strong></p>
                     <a onclick="movieSelected('${movie.id}')" class="btn" href="#"> Movie Details </a>
                 </div>
+            </div>
             `
         })
         let moviesInfo = document.getElementById("movies");
@@ -80,6 +99,7 @@ function genres(){
     let actorId = sessionStorage.getItem("theActorId");
     const select = document.getElementById("selected");
     select.addEventListener("change", (e)=>{
+    reset.style.display = "block";
     //Set genre to session storage.
     sessionStorage.setItem("genre",e.target.options[e.target.selectedIndex].id);
     //API request.
@@ -92,12 +112,17 @@ function genres(){
         $.each(movies, (index, movie)=>{
             output +=`
             <div class="card">
+                <div class="addBtn"><span><i class="ion-plus-circled"></i></span></div>
+                <div class="card_img">
                     <img src="http://image.tmdb.org/t/p/w300/${movie.poster_path}" onerror="this.onerror=null;this.src='../images/image2.png';">
+                </div>
+                <div class="card_text">
                     <h3>${movie.title}</h3>
-                    <p>${movie.vote_average} <strong>IMDB Rating</strong></p>
+                    <p>Rating: <strong>${movie.vote_average}</strong></p>
                     <p>Release date: <strong>${movie.release_date}</strong></p>
                     <a onclick="movieSelected('${movie.id}')" class="btn" href="#"> Movie Details </a>
                 </div>
+            </div>
             `
         })
         let moviesInfo = document.getElementById("movies");
@@ -138,15 +163,35 @@ function movieByActorWithGenrePage(pageNum){
         $.each(movies, (index, movie)=>{
             output +=`
             <div class="card">
+                <div class="addBtn"><span><i class="ion-plus-circled"></i></span></div>
+                <div class="card_img">
                     <img src="http://image.tmdb.org/t/p/w300/${movie.poster_path}" onerror="this.onerror=null;this.src='../images/image2.png';">
+                </div>
+                <div class="card_text">
                     <h3>${movie.title}</h3>
-                    <p>${movie.vote_average} <strong>IMDB Rating</strong></p>
+                    <p>Rating: <strong>${movie.vote_average}</strong></p>
                     <p>Release date: <strong>${movie.release_date}</strong></p>
                     <a onclick="movieSelected('${movie.id}')" class="btn" href="#"> Movie Details </a>
                 </div>
+            </div>
             `
         })
         let moviesInfo = document.getElementById("movies");
         moviesInfo.innerHTML = output;
     })
  }
+let reset = document.getElementById("reset");
+reset.style.display = "none";
+reset.addEventListener("click", ()=>{
+    sessionStorage.setItem("genre", "");
+    let actor = document.getElementById("actor").value;
+    let selected = document.getElementById("selected");
+    selected.selectedIndex = 0;
+    discoverByActor(actor).then(moviesByActor);
+    reset.style.display = "none";
+})
+
+
+window.onload = function resetGenre(){
+    sessionStorage.setItem("genre", "");
+}

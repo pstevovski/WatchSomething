@@ -31,11 +31,16 @@ function searchSeries(searchText){
 			$.each(series, (index, series)=>{
 				output += `
 				<div class="card">
-						<img src="http://image.tmdb.org/t/p/w300/${series.poster_path}"  onerror="this.onerror=null;this.src='../images/image2.png';">
-						<h3>${series.name}</h3>
-						<p>Rating: <strong>${series.vote_average}</strong></p>
-						<p>First air date: <strong>${series.first_air_date}</strong></p>
-						<a onclick="showSelected('${series.id}')" class="btn" href="#"> Show Details </a>
+						<div class="addBtn"><span><i class="ion-plus-circled"></i></span></div>
+						<div class="card_img">
+							<img src="http://image.tmdb.org/t/p/w300/${series.poster_path}"  onerror="this.onerror=null;this.src='../images/image2.png';">
+						</div>
+						<div class="card_text">
+							<h3>${series.name}</h3>
+							<p>Rating: <strong>${series.vote_average}</strong></p>
+							<p>First air date: <strong>${series.first_air_date}</strong></p>
+							<a onclick="showSelected('${series.id}')" class="btn" href="#"> Show Details </a>
+						</div>
 					</div>
 				`;
 			})
@@ -91,12 +96,17 @@ function search(pageNum){
 			$.each(series, (index, series)=>{
 				output += `
 				<div class="card">
-						<img src="http://image.tmdb.org/t/p/w300/${series.poster_path}"  onerror="this.onerror=null;this.src='../images/image2.png';">
-						<h3>${series.name}</h3>
-						<p>Rating: <strong>${series.vote_average}</strong></p>
-						<p>First air date: <strong>${series.first_air_date}</strong></p>
-						<a onclick="showSelected('${series.id}')" class="btn" href="#"> Show Details </a>
-					</div>
+						<div class="addBtn"><span><i class="ion-plus-circled"></i></span></div>
+						<div class="card_img">
+							<img src="http://image.tmdb.org/t/p/w300/${series.poster_path}"  onerror="this.onerror=null;this.src='../images/image2.png';">
+						</div>
+						<div class="card_text">
+							<h3>${series.name}</h3>
+							<p>Rating: <strong>${series.vote_average}</strong></p>
+							<p>First air date: <strong>${series.first_air_date}</strong></p>
+							<a onclick="showSelected('${series.id}')" class="btn" href="#"> Show Details </a>
+						</div>
+				</div>
 				`;
 			})
 			//Creates a variable that targets the "movies" element in the HTML
