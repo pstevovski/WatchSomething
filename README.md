@@ -5,17 +5,18 @@ This project uses an API from themoviedb.com in order to list movies & tv shows 
 * Popular (with set minimum and maximum dates);
 * Top rated (of all time);
 * On air (tv shows that are currently on air);
+* Upcoming movies (W.I.P);
 It also provides an option to Search for movies/tv shows by:
 * Title;
 * Actor/Actress name;
-* Year (original year of release).
-Currently working on adding more features (sorting listed movies by genres.).
+* Year (original year of release);
+* Genre.
 #### Personal learning project.
 ##### I do not hold any ownership of the images used in this project. This project is currently for non-commercial use.
 
 #### Big Update v1.0
 A lot of changes and improvements have been made, from functionality to design. Here's a list of what's been changed/imporved so far.
-######DONE:
+###### DONE:
 * Add genres  movies by year.  -Done.
 * Add page change option to shows/movies-page. - Done.
 * Add genres to tv shows by year. - Done.
