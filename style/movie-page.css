@@ -1,8 +1,10 @@
-/* The movie-page.css file hold the CSS for both the movies-page.html && shows-page.html.  */
+/* The movie-page.css file hold the CSS for both the movies-page.html && shows-page.html.  
+#0091EA
+#E53935*/
 
 body{
 	width: 100%;
-	background-color: #121010;
+	background-color: #eee;
 	font-family: "Montserrat", Arial, Helvetica, sans-serif;
 }
 /* Movie/tv show page container (both poster and info sections). */
@@ -15,7 +17,7 @@ body{
 	padding: 20px;
 }
 .poster img{
-	box-shadow: 0 3px 10px rgba(0,0,0,0.8);
+	box-shadow: 0 3px 10px rgba(0,0,0,0.45);
 }
 /* Movie/tv show poster - END. */
 
@@ -27,7 +29,7 @@ body{
 }
 .info h2{
 	font-size: 35px;
-	color: #00E670;
+	color:#E53935;
 }
 .plot{
 	padding: 20px;
@@ -35,7 +37,7 @@ body{
 	flex-shrink: 16px;
 }
 .plot h3{
-	color: #00E670;
+	color: #E53935;
 }
 .buttons{
 	margin-top: 25px;
@@ -48,20 +50,40 @@ body{
 	font-size: 16px;
 	font-weight: bold;
 	padding: 5px;
-	background-color: #222;
+	background-color: #fff;
 	border-radius: 5px;
-	color: #00E670;
+	color: #0091EA;
 	text-align: center;
-	transition: 0.3s;
+	transition: 0.2s;
 	position: relative;
 	overflow: hidden;
 } 
 .buttons a:hover{
-	background-color: #00E670;
-	color: #222;
+	background-color: #E53935;
+	color: #fff;
 	box-shadow: 0 3px 8px rgba(0,0,0,0.2);
-} 
-
+}
+.page{
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+#prev, #next {
+	margin: 5px 5px;
+	font-size: 25px;
+	font-weight: bold;
+	font-family: "Poppins", Arial, Helvetica, sans-serif;
+	background-color: #222;
+	color: #fff;
+	padding:0 10px;
+	cursor: pointer;
+	border-radius: 3px;
+	transition: 0.3s ease;
+}
+#prev:hover, #next:hover{
+	background-color: #222;
+	color: #E53935;
+}
 /* Movie/tv show info - END. */
 
 /* Movie/tv show trailer - START. */
@@ -93,7 +115,7 @@ body{
 	transition: 0.3s;
 }
 #close:hover {
-	color: #00E670;
+	color: #E53935;
 }
 #trailer iframe{
 	border-radius: 5px;
@@ -106,27 +128,41 @@ body{
 	justify-content: center;
 	flex-wrap: wrap;
 	font-family: Arial, Helvetica, sans-serif;
+	width: 100%;
+	min-height: 450px;
+	overflow: hidden;
 }
 #recommended > *{
 	margin: 15px 15px;
 }
 #rec_title{
 	padding: 20px;
-	color: #00E670;
+	color: #E53935;
 }
 .recommended_card{
 	text-align: center;
 	width: 200px;
-	background-color: #222;
-	color: #eee;
+	background-color: #0091EA;
+	color: #fff;
 	border-radius: 3px;
 	transition: 0.35s;
 	position: relative;
+	animation: recommended 0.5s ease-in forwards;
+}
+@keyframes recommended{
+	0%{
+		opacity: 0;
+		transform: translateX(-300px)
+	}
+	100%{
+		opacity: 1;
+		transform: translateX(0px)
+	}
 }
 .recommended_card:hover{
 	transform:translateY(-10px);
-	color: #00E670;
-	box-shadow: 0 5px 5px rgba(0,0,0,0.5);
+	color: #fff;
+	box-shadow: 0 5px 5px rgba(0,0,0,0.3);
 }
 .recommended_card img{
 	border-radius: 3px;
@@ -142,10 +178,12 @@ body{
 	font-weight: bold;
 	border-bottom-right-radius: 3px;
 	border-bottom-left-radius: 3px;
+	position: absolute;
+	bottom: 0;
 }
 .recommended_card a:hover{
-	background-color: rgba(0,0,0,0.55);
-	color: #00E670;
+	background-color: rgba(0,0,0,0.6);
+	color: #E53935;
 }
 /* Movie/tvshow recommended - END. */
 

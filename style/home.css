@@ -5,7 +5,7 @@
     padding: 0;
 }
 body{
-    background-color: #00E676;
+    background-color: #fff;
     color: #333;
     font-family: "Montserrat", Arial, Helvetica, sans-serif;
 }
@@ -20,72 +20,149 @@ a{
     font-weight:600;
     text-align: center;
 }
+.randomImage{
+    position: absolute;
+    left: 50%;
+    bottom: -10px;
+    transform:translate(-50%);
+}
 /* First section */
 .first{
-    background: url("../images/bg.png") center center no-repeat;
-    background-size: cover;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    background-color: #0091ea;
     min-height: 640px;
-    z-index: 1;
-}
-.first h1{
-    color: #00E670;
-    z-index: 999;
-    font-size: 75px;
-    font-weight: bold;
-    transition: all 0.3s;
-}
-.first p{
-    color: #00E670;
-    z-index: 999;
-    font-style: italic;
-    font-weight: 600;
-}
-.first .link{
-    color: #00E670;
-    z-index: 999;
-    margin: 25px 0;
-}
-.button{
-    padding: 10px 35px;
-    border: 2px solid #eee;
-    transition: 0.25s ease-out;
-    font-weight: 500;
-    border-radius: 2px;
+    display: block;
     position: relative;
     overflow: hidden;
 }
-.button:hover{
-    color:#222;
-    border:none;
-}
-.button::before{
-    content: "";
+#theSvg{
     position: absolute;
-    bottom: 0;
-    left: 0;
-    background-color: #00E670;
     width: 100%;
-    height: 0%;
-    z-index: -1;
-    transition: 0.35s ease-out;
+    bottom: -10px;
 }
-.button:hover:before{
-    height: 100%;
+.modal{
+    display: none;
+    width: 350px;
+    position: relative;
+    left: 50%;
+    margin-top: 50px;
+    transform: translateX(-50%) translateY(350px);
+    background-color: #eee;
+    color: #0091ea;
+    font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
+    padding: 25px;
+    border-radius: 2px;
+    animation: modal 1.25s ease forwards;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.35);
+}
+.modal.slideOut{
+    animation: slideOut 1s ease forwards;
+}
+#close span{
+    display: inline;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+#close i{
+    font-size: 25px;
+    transition: 0.35s;
+}
+#close i:hover{
+    color: rgb(170, 9, 9);
+}
+@keyframes modal{
+    0%{
+        transform: translateX(-53%) translateY(350px)
+    }
+    100%{
+        transform: translateX(-53%) translateY(-25px)
+    }
+}
+@keyframes slideOut{
+    0%{
+        transform: translateX(-53%) translateY(0px)
+    }
+    100%{
+        transform: translateX(-53%) translateY(550px)
+    }
+}
+.introText{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+.introText h1{
+    font-size: 60px;
+    font-family: "Montserrat Black", Arial, Helvetica, sans-serif;
+    color: #fff;
+    text-align: center;
+    margin: 0 auto;;
+}
+.learn{  
+    opacity: 0;
+    animation: learnSlide 1s ease-out forwards;
+    animation-delay: 1.5s;
+    transform: translateY(20px);
+}
+.learn a{
+    cursor: pointer;
+    padding: 5px;
+    background-color: #fff;
+    color: #0091ea;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: 0.35s ease;
+    display: block;
+}
+@keyframes learnSlide{
+    from{
+        opacity: 0;
+    }to{
+        opacity: 1;
+    }
+}
+.learn a:hover{
+    box-shadow: 0 3px 5px rgba(0,0,0,0.25);
+    transform:scale(1.05) rotate(5deg);
+}
+#quote{
+    text-align: center;
+    color: #eee;
+    width: 650px;
+    font-style: italic;
+    font-weight: bold;
+    margin-top: 80px;
+    opacity: 0;
+    animation: quote 0.5s ease forwards 1;
+}
+@keyframes quote{
+    to{
+        opacity: 1;
+    }
+}
+#quote.quoteFade{
+    animation: quoteFade 0.5s ease forwards;
+}
+@keyframes quoteFade{
+    0%{
+        opacity:0;
+    }
+    100%{
+        opacity: 1;
+    }
 }
 .pointer{
     position: absolute;
-    bottom: 25px;
+    bottom: 25%;
     left: 49%;
     font-size: 40px;
     animation: point 0.75s ease-out infinite;
     transform: translateX(-49%);
 }
 .pointer span{
-    color: #00E670;
+    color: #fff;
     z-index: 999;;
 }
 @keyframes point{
@@ -96,98 +173,202 @@ a{
         transform: translateY(0px)
     }
 }
+.tvshows_images{
+    position: absolute;
+    right: 0;
+    bottom: 190px;
+    transition: all 0.35s;
+}
+.movies_images{
+    position: absolute;
+    left: 0;
+    bottom: 190px;
+    transition: all 0.35s;
+}
+.image{
+    transition: 0.4s;
+}
+.image:hover{
+    transform:translateY(-50px) rotate(0deg);
+}
+.ST{
+    position: absolute;
+    right: 230px;
+    bottom: -100px;
+    transform:rotate(-5deg)
+}
+.BB{
+    position: absolute;
+    right: 130px;
+    bottom: -90px;
+    transform: rotate(-3deg);
+}
+.GOT{
+    position: absolute;
+    right: 0px;
+    bottom: -100px;
+    transform:rotate(5deg)
+}
+.avengers{
+    position: absolute;
+    left: -10px;
+    bottom: -100px;
+    transform: rotate(-5deg);
+}
+.starwars{
+    position: absolute;
+    left: 90px;
+    bottom: -90px;
+}
+.deadpool{
+    position: absolute;
+    left: 190px;
+    bottom: -85px;
+    transform:rotate(5deg);
+}
 /* Second section - Movies */
 .second{
-    box-shadow: 0 -3px 5px rgba(0,0,0,0.25);
-    background: url("../images/45119.jpg") center center no-repeat;
-    background-size: cover;
-    min-height: 640px; 
-}
-.overlay{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    text-align: center;
-    width: 100%;
+    background-color: #fff;
     min-height: 640px;
-    background-color: rgba(0,0,0,0.75);
-}
-.overlay .link > *{
-    margin: 35px 0;
-    font-weight: bold;
-}
-.movies_button{
-    padding: 10px 35px;
-    border: 2px solid #eee;
-    transition: 0.25s ease-out;
-    border-radius: 2px;
+    z-index: 999;
     position: relative;
     overflow: hidden;
-    z-index: 2;;
-    color: #00E676;
-} 
-.movies_button:hover{
-    color: #333;
-    border-color: #00E676;
 }
-.movies_button::before{
-    content: "";
+.heroe-top{
+    display: none;
     position: absolute;
-    bottom: 0;
+    top: 120px;
     left: 0;
-    background-color: #00E676;
-    width: 100%;
-    height: 0%;
-    z-index: -1;
-    transition: 0.35s ease-out;
+    transform: rotate(90deg);
 }
-.movies_button:hover::before{
-    height: 100%;
+.heroe-top.slide{
+    animation: spidey 2.5s ease-out infinite alternate;
+}
+ @keyframes spidey{
+    0%{
+        transform: translateX(-250px) rotate(-90deg);
+    }
+    100%{
+        transform: translateX(-80px) rotate(-90deg);
+    }
+}
+.popup{
+    display: none;
+    position: absolute;
+    right: 125px;
+    bottom: 170px;
+    animation-duration: 3s;
+    animation-delay: 1.75s;
+}
+.heroes-botLeft{
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+}
+.heroe-botRight{
+    position: absolute;
+    bottom: -10px;
+    right: 5px;
+}
+.link{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.link a{
+    color: #fff;
+    background-color: #0091ea;
+    padding: 10px;
+    border-radius: 5px;
+    width: 160px;
+    text-align: center;
+    font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
+    transition: 0.3s;
+}
+.link a::before{
+    content: "Search for Movies";
+    text-align: center;
+    transform: translateX(5px);
+    display: inline-block;
+    transition:0.35s ease;
+}
+.link2 a{
+    width: 180px;
+}
+.link2 a::before{
+    content: "Search for TV Shows";
+    text-align: center;
+    transform: translateX(5px);
+    display: inline-block;
+    transition:0.35s ease;
+}
+.link a::after{
+    display: inline-block;
+    content: ">>";
+    font-family: "Poppins", Arial, Helvetica, sans-serif;
+    opacity: 0;
+    transition: 0.35s;
+}
+.link a:hover:before{
+    transform: translateX(-5px);
+}
+.link a:hover:after{
+    opacity: 1;
+    transform: translateX(5px);
+}
+.link p{
+    margin-top: 10px;
+    width: 320px;
+    color: #333;
+    font-family: "Montserrat", Arial, Helvetica, sans-serif;
+}
+.link a:hover{
+    box-shadow: 0 3px 5px rgba(0,0,0,0.10);
 }
 /* Third section - Tv Shows */
 .third{
-    border-top: 1px solid #111;
-    background: url("../images/punisher.png") center center no-repeat;
-    background-size: cover;
+    background-color: #fff;
     min-height: 640px;
-}
-.shows_button{
-    display: inline-block;
-    width: 170px;
-    padding: 10px 35px;
-    border: 2px solid #eee;
-    transition: 0.25s ease-out;
-    font-weight: 500;
-    border-radius: 2px;
-    position: relative;
-    z-index: 1;
-    color: #00E676;
     overflow: hidden;
+    position: relative;
 }
-.shows_button:hover{
-    color: #333;
-    border-color: #00E676;
-}
-.shows_button::before{
-    content: '';
+.group-left{
     position: absolute;
-    bottom: 0;
     left: 0;
-    width: 100%;
-    transform:translateY(-50px);
-    height:100%;
-    background-color: #00E676;
-    z-index: -1;
-    transition: 0.35s ease-out;
+    bottom: -80px;
 }
-.shows_button:hover:before{
-    transform: translateY(0px);
+.group-right{
+    position: absolute;
+    right: 0;
+    bottom: -65px;
+}
+.heisenberg{
+    display:none;
+    position: absolute;
+    bottom: 140px;
+    left: 200px;
+    animation-duration: 3s;
+    animation-delay: 0.5s;
+}
+.barney{
+    display:none;
+    position: absolute;
+    bottom: 220px;
+    right: 135px;
+    animation-duration: 3s;
+    animation-delay: 1.5s;
 }
 /* Footer */
 footer{
-    background-color: #121010;
-    min-height: 80px;
+    padding: 20px;
+    background-color: #0091ea;
+    min-height: 50px;
     display: grid;
     grid-template-columns: 170px 1fr 1fr;
     grid-template-areas: "logo text links";
@@ -204,13 +385,15 @@ footer .logo, .text, .links{
 .text{
     grid-area: text;
     color: #eee;
+    font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
 }
 .text a{
-    color: rgba(255,255,255,0.3);
+    color: #333;
     transition: 0.2s;
+    position: relative;
 }
 .text a:hover{
-    color: #00E676;
+    color: #fff;
 }
 .links{
     grid-area: links;
@@ -221,7 +404,7 @@ footer .logo, .text, .links{
     font-weight: 600;
     position: relative;
 }
-.links a::before{
+.links a::before, .text a::before{
     position: absolute;
     content: "";
     bottom: -5px;
@@ -231,11 +414,11 @@ footer .logo, .text, .links{
     border: 1px solid #eee;
     transition: 0.3s ease-out;
 }
-.links a:hover:before{
+.links a:hover:before, .text a:hover:before{
     opacity: 1;
     width: 50%;
 }
-.links a::after{
+.links a::after, .text a::after{
     position: absolute;
     content: "";
     bottom: -5px;
@@ -245,15 +428,17 @@ footer .logo, .text, .links{
     border: 1px solid #eee;
     transition: 0.3s ease-out;
 }
-.links a:hover:after{
+.links a:hover:after, .text a:hover:after{
     opacity: 1;
     width: 50%;
 }
-.links a:hover{
-    color: #00E676;
-}
 
 /* Media Queries */
+@media (max-width: 900px){
+    .movies_images, .tvshows_images{
+        display: none;
+    }
+}
 @media (max-width:890px){
     footer{
         display: grid;
@@ -268,6 +453,26 @@ footer .logo, .text, .links{
         text-align: center;
     }
 }
+@media (max-width: 805px){
+    .introText{
+        margin-top: 10px;
+        width: auto;
+        text-align: center;
+    }
+    .pointer{
+        left: 50%;
+        bottom:20%;
+    }
+}
+@media (max-width: 650px){
+    .introText{
+        align-items: center;
+    }
+    #quote{
+        width: auto;
+        text-align: center;
+    }
+}
 @media (max-width: 580px){
     .first h1{
         font-size:40px;
@@ -275,19 +480,31 @@ footer .logo, .text, .links{
     .first p{
         font-size: 14px;
     }
-    .overlay p{
-        margin: 0 auto;
-        width: auto;
-        text-align: center;
-    }
     .pointer{
         left: 47%;
-        bottom: 10px;
+        bottom:-15px;
     }
 }
-@media (max-width: 400px){
-    .second{
-        background: url("../images/joker.jpg") right right no-repeat;
+@media (max-width: 500px){
+    .heroes-botLeft, .heroe-botRight, .heroe-top.slide, .heroe-top, .group-left, .group-right{
+        display: none;
+    }
+    .modal{
+        width: 75%;
+        margin: 0 auto;
+    }
+    @keyframes modal{
+        0%{
+            transform: translateX(-53%) translateY(350px)
+        }
+        100%{
+            transform: translateX(-53%) translateY(30px)
+        }
+    }
+}
+@media  (max-width:470px){
+    footer{
+        padding: 0;
     }
 }
 @media (max-width: 380px){
