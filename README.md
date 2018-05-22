@@ -18,18 +18,18 @@ It also provides an option to Search for movies/tv shows by:
 #### Big Update v1.0 (2018-05-22)
 A lot of changes and improvements have been made, from functionality to design. Here's a list of what's been changed/imporved so far.
 ###### DONE:
-* Add genres  movies by year.  -Done.
-* Add page change option to shows/movies-page. - Done.
-* Add genres to tv shows by year. - Done.
-* Add animation to GENRE select. (yearMovies done / byActor done); - Done.
-* Add modal box, question mark, info in modal box. - Done.
-* Add reset button for the genres - Done.
-* Add code to reset the genres and the selected tag on name/year change in the input. -Done.
-* Add option to change color (dark/white). - Done.
-* Add cast info for movies/tv shows. - Done.
-* Add upcoming movies, with today(each day) date as minimum release date, and a static set max date(2019-01-01). -Done.
-* Re-design home page. - Done.
-* Add modal box to Learn More @  Home page. - Done.
+* Added option to search by genres in movies by year.
+* Added option to serach by genres in tv shows by year.
+* Added page change option for "recommended" to shows/movies-page.
+* Added animation to Genre select to all pages where genre option is available.
+* Added modal box, question mark, info in modal box.
+* Added reset button for the genres, that resets the selected genre while the inputed actor/year remains the same, and re-loads from page 1.
+* Added option to reset the selected genres on name(by actor)/year(by year) change in the input.
+* Added cast info for movies/tv shows & fixed bug where not all genres were shown properly.
+* Added upcoming movies, with today(each day) date as minimum release date, and a static set max date(2019-01-01). (* Working on making the end date dynamic.)
+* Added animations to movie / tv show cards @ the search pages.
+* Re-designed home page, movie / tv show info page, and all pages for searching options.
+* Added modal box to Learn More @  Home page, containing some basic info how to use the website.
 
 ###### Bugs Fixed:
 * year-movies.js : function discoverMoviesPageLoad(pageNum){} -> does not list movies from 2nd page(returns 0 results) untill genre is selected, then it works normally. -> FIXED.
@@ -39,3 +39,5 @@ A lot of changes and improvements have been made, from functionality to design. 
 * Add option to select season/episode and show the plot about it for TV Shows.(?)
 * Create list for movies. (?);
 * Correct the links. Currently some links are missing, add the appropriate links and connect them.
+
+###### Known bugs: 0 (currently at the time of big update v1.0).
