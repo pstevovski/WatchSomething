@@ -5,239 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>WhatToWatch</title>
-    <link rel="stylesheet" href="style/home.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" />
+    <link rel="stylesheet" href="style/landingPage.css">
 </head>
 <body>
-<!-- First section -->
-    <section class="first">
-        <div class="introText">
-            <h1>WhatToWatch</h1>
-            <p id="quote"></p>
-            <!-- Learn more -->
-            <div class="learn" id="info">
-                <a>Learn More</a>
-            </div>
+    <img id="filmstrip" src="images/filmstrip.svg" alt="filmstrip">
+    <section class="titleAndText">
+        <div class="title">
+        <h1>What</h1>
+        <h1>ToWatch<span id="com">.com</span></h1>
         </div>
-        <!-- Modal box -->
-        <div class="modal" id="modal">
-            <p>Search movies, tv shows & series by actor, genre, year or title. You can also search for the top rated, latest, popular & upcoming. Hover on images to show some info for the movie/tv show, and click on "Movie Details" to get full information.</p>
-            <div id="close">
-                <span><i class="ion-close-circled"></i></span>
-            </div>
-        </div>
-        <!-- Images for Movies -->
-        <div class="movies_images">
-            <img class="image avengers " src="images/avengers.jpg" alt="Avengers" width="150px">
-            <img class="image starwars" src="images/starwars.jpg" alt="StarWars" width="150px">
-            <img class="image deadpool" src="images/deadpool.jpg" alt="Deadpool" width="150px">
-        </div>
-        <!-- Images for TV Series -->
-        <div class="tvshows_images">
-            <img class="image ST"src="images/strangerthings.jpg" alt="stranger things" width="150px">
-            <img class="image BB"src="images/breakingbad.jpg" alt="Breaking Bad" width="150px">
-            <img class="image GOT"src="images/got.jpg" alt="GoT" width="150px">
-        </div> 
-        <!-- SVG layer -->
-        <div id="theSvg">
-            <img src="images/Asset 1.svg" alt="" width="100%">
-        </div>
-    </section>
-    <!-- Pointer -->
-    <div class="pointer">
-        <span><i class="ion-chevron-down"></i></span>
-    </div>
-    <!-- Second Section -->
-    <section class="second">
-        <!-- Spidey -->
-        <div class="heroe-top">
-            <img src="images/Assets/spiderman.png" alt="spiderman" width="150px">
-        </div>
-        <!-- Avengers group -->
-        <div class="heroes-botLeft">
-                <img src="images/Avengers group.png" alt="">
-        </div>
-        <!-- Thanos -->
-        <div class="heroe-botRight">
-            <div id="scroll-to" class="popup">
-                <img src="images/chatbox.png" alt="" width="100px">
-            </div>
-            <img src="images/Assets/thanos.png" alt="Thanos" width="250px">
-        </div>
-        <!-- Link button -->
-        <div class="link">
-            <a href="movies/search-movies.html"></a>
-            <p>Find a movie to watch. Search by title, genre, year or actor.</p>
-        </div>
-        <!-- Random image generated (for small screen - mobile) -->
-        <div class="randomImage">
-            <img id="theImage" src="" alt="" width="150px">
-        </div>
-    </section>
-    <!-- Third section - Tv shows -->
-    <section class="third">
-        <div class="group-left">
-            <div id="scroll-to-two" class="heisenberg">
-                <img src="images/heisenbergBox.png" alt="" width="100px">
-            </div>
-            <img src="images/Tv Shows - left.png" alt="TV Show crew">
-        </div>
-        <div class="group-right">
-            <div id="scroll-to-two" class="barney">
-                <img src="images/legendaryBox.png" alt="" width="100px">
-            </div>
-            <img src="images/TV shows - right.png" alt="TV Show crew">
-        </div>
-        <div class="link link2">
-                <a href="series/search-series.html"></a>
-                <p>Find TV Shows / series to watch. Search by title, genre, year or actor.</p>
-        </div>
-        <!-- Random image generated (for small screen - mobile) -->
-        <div class="randomImage">
-            <img id="theImage2" src="" alt="" width="150px">
-        </div>
-    </section>
-    <!-- Footer -->
-    <footer>
-        <!-- Logo -->
-        <div class="logo">
-            <a href="home.html"><img src="images/Logo.svg" alt="" width="170px"></a>
-        </div>
-        <!-- Text -->
         <div class="text">
-            <p>This project uses API from <a href="https://www.themoviedb.com">themoviedb.com</a></p>
+            <h3>Can't find a movie to watch?</h3>
+            <p>Worry no more! You're at the right place.</p>
+            <p>Explore a vast variety of movies and tv shows.</p>
+            <div id="learn">
+                <a href="about.html"></a>
+            </div>
+            <!-- Quote -->
+            <h4 id="quote"></h4>    
         </div>
-        <!-- Links -->
-        <div class="links">
-            <a href="home.html">HOME</a>
-            <a href="movies/search-movies.html">MOVIES</a>
-            <a href="series/search-series.html">SERIES</a>
-            <a href="about.html">ABOUT</a>
-        </div>
-    </footer>
+    </section>
+    <div class="container">
+        <a class="button" id="adventure">Adventure time !</a>
+        <a href="movies/search-movies.html" class="button" id="movies">Search Movies</a>
+        <a href="series/search-series.html" class="button" id="series">Search Series</a>
+    </div>
+    <!-- Featured movies -->
+    <h3 id="featuredTitle">Featured Movies: </h3>
+    <div class="featured_container">
+        <!-- Featured movies output goes here. -->
+        <div id="featuredMovies"></div>
+
+        <div class="arrow" id="right"> > </div>
+        <div id="left"> < </div>
+    </div>
 </body>
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<script>
-//When user scrolls to element with #scroll-to tag, and the element is in his
-//viewsight, add/remove classList and style.
-$(window).scroll(function() {
-   var hT = $('#scroll-to').offset().top,
-       hH = $('#scroll-to').outerHeight(),
-       wH = $(window).height(),
-       wS = $(this).scrollTop();
-       let popup = document.querySelector(".popup");
-       let spidey = document.querySelector(".heroe-top");
-   if (wS > (hT+hH-wH) && (wS+wH > hT+hH)){
-       popup.style.display = "block";
-       popup.classList.add("animated", "bounceIn");
-       spidey.style.display = "block";
-       spidey.classList.add("slide");
-   } else {
-       popup.style.display = "none";
-       popup.classList.remove("animated", "bounceIn");
-       spidey.style.display = "none";
-       spidey.classList.remove("slide");
-   }
-});
-//When user scrolls to element with #scroll-to-two tag, and the element is in his
-//viewsight, add/remove classList and style.
-$(window).scroll(function(){
-    let hT = $("#scroll-to-two").offset().top,
-        hH = $("#scroll-to-two").outerHeight(),
-        wH = $(window).height(),
-        wS = $(this).scrollTop();
-
-       let barney = document.querySelector(".barney");
-       let heisenberg = document.querySelector(".heisenberg");
-
-    if(wS > (hT+hH-wH)){
-       barney.style.display = "block";
-       barney.classList.add("animated", "bounceIn");
-       heisenberg.style.display = "block";
-       heisenberg.classList.add("animated", "bounceIn");
-    } else {
-        barney.style.display = "none";
-        barney.classList.remove("animated", "bounceIn");
-        heisenberg.style.display = "none";
-        heisenberg.classList.remove("animated", "bounceIn");
-    }
-})
-//Random quote on page load.
-let randomQuote = new Array();
-randomQuote[0] = " 'I'm going on an adventure!' - Bilbo Baggins, The Hobbit";
-randomQuote[1] = " 'I'm going to make him an offer he can't refuse.' - Vito Corleone, The Godfather";
-randomQuote[2] = " 'You talkin' to me?' - Travis Bickle, Taxi Driver";
-randomQuote[3] = " 'Bond. James Bond.' - James Bond";
-randomQuote[4] = " 'I'll be back.' - Terminator, The Terminator";
-randomQuote[5] = " 'My mama always said, 'Life is (was) like a box of chocolates. You never know what you're gonna get.' - Forrest Gump, Forrest Gump";
-randomQuote[6] = " 'I see dead people.' - Cole Sear, The Sixth Sense";
-randomQuote[7] = " 'Keep your friends close, but your enemies closer.' - Michael Corleone, The Godfather part II";
-randomQuote[8] = " 'Say 'hello' to my little friend!' -Tony Montana, Scarface";
-randomQuote[9] = " 'Hasta la vista, baby.' - The Terminator, Terminator 2: Judgement Day";
-randomQuote[10] = " 'Bye Felicia !' - Ice Cube, Friday";
-randomQuote[11] = " 'My precious.' - Gollum, The Lord of the rings: The Two Towers";
-randomQuote[12] = " 'Houston, we have a problem.' - Jim Lovell, Apollo 13";
-randomQuote[13] = " 'Yippie-Ki-Yay, Motherfucker!' - John McClane, Die Hard";
-randomQuote[14] = " 'May the Force be with you' - Obi-Wan Kenobi, Star Wars";
-randomQuote[15] = " 'A wizard is never late, Frodo Baggins. Nor is he early. He arrives precisely when he means to.' - Gandalf, The Lord of the Rings: Fellowship of the";
-let quote = document.getElementById("quote");
-quote.style.display = "none";
-window.onload = function showRandomQuote(){
-    document.getElementById("quote").innerHTML = randomQuote[Math.round(Math.random()*16)];
-    quote.style.display = "block";
-    quote.classList.remove("quoteFade");
-}
-setInterval(() => {
-    quote.classList.add("quoteFade");
-    document.getElementById("quote").innerHTML = randomQuote[Math.round(Math.random()*16)];
-    }, 8000);
-//Media query
-let maxWidth = window.matchMedia("(max-width: 700px)")
-myFunction(maxWidth) // Call listener function at run time
-maxWidth.addListener(myFunction) // Attach listener function on state changes
-
-function myFunction(maxWidth) {
-     if (maxWidth.matches) { 
-        let ImageSwitchMovies = new Array();
-        ImageSwitchMovies[0] = 'images/Assets/deadpool2.png';
-        ImageSwitchMovies[1]='images/Assets/darth2.png';
-        ImageSwitchMovies[2] = 'images/Assets/godfather.png';
-        ImageSwitchMovies[3] = 'images/Assets/hulk render2.png';
-        ImageSwitchMovies[4] = 'images/Assets/blackwidow.png';
-        console.log(ImageSwitchMovies);
-        let ImageSwitchTvShows = new Array();
-        ImageSwitchTvShows[0] ='images/Assets/barney.png';
-        ImageSwitchTvShows[1] = 'images/Assets/homer 2 render.png';
-        ImageSwitchTvShows[2] = 'images/Assets/punisher.png';
-        ImageSwitchTvShows[3] = 'images/Assets/peterGriffin.png';
-        ImageSwitchTvShows[4] = 'images/Assets/khaleesi render.png';
-        console.log(ImageSwitchTvShows);
-        window.onload = function swapImage() 
-        {
-            document.getElementById("theImage").setAttribute("src", ImageSwitchMovies[
-            Math.round(Math.random()*5)]);
-            document.getElementById("theImage2").setAttribute("src", ImageSwitchTvShows[
-            Math.round(Math.random()*5)]);
-
-            document.getElementById("quote").innerHTML = randomQuote[Math.round(Math.random()*16)];
-            quote.style.display = "block";
-            setInterval(() => {
-            document.getElementById("quote").innerHTML = randomQuote[Math.round(Math.random()*16)];
-            }, 8000);
-        };
-
-        }
-     }
-//Modal box
-let info = document.getElementById("info");
-let close = document.getElementById("close");
-let modal = document.getElementById("modal");
-info.addEventListener("click", ()=>{
-    modal.style.display = "block";
-    modal.classList.remove("slideOut");
-})
-close.addEventListener("click", ()=>{
-    modal.classList.add("slideOut");
-})
-</script>
+<script src="scripts/homePage.js"></script>
+<!-- Axios link -->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!-- Jquery CDN -->
+<script
+src="https://code.jquery.com/jquery-3.3.1.min.js"
+integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+crossorigin="anonymous"></script>
 </html>
