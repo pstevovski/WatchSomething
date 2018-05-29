@@ -1,0 +1,357 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: #0091EA;
+    color: #fff;
+}
+a{
+    text-decoration: none;
+}
+#filmstrip{
+    position: absolute;
+    top: -195px;
+    left: 110px;
+    z-index: -1;
+    opacity: 0.2;
+    transform:rotate(55deg);
+    width: 150px;
+    transition: all 0.35s; 
+}
+.title h1{
+    font-size: 120px;
+    font-family: "Montserrat Black", Arial, Helvetica, sans-serif;
+    transition: all 0.35s ease;
+}
+#com{
+    font-family: "Pacifico", Arial, Helvetica, sans-serif;
+    font-size: 30px;
+}
+.titleAndText{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 300px;
+}
+.title{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    margin-left: 45px;
+}
+.text{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 30px 0 0 100px;
+}
+.text h3{
+    font-size: 25px;
+    font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
+}
+.text p{
+    font-family: "Montserrat Light", Arial, Helvetica, sans-serif;
+}
+#learn{
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+}
+#chair{
+    margin: 20px 0 0 10px;
+}
+.text a{
+    padding: 5px;
+    background-color: #fff;
+    color: #0091EA;
+    font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
+    border-radius: 3px;
+    margin-top: 15px;
+    font-size: 15px;
+    transition: all 0.35s ease;
+    width: 125px;
+}
+.text a::before{
+    content: "Learn More";
+    font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
+    display: inline-block;
+    transition: 0.55s ease;
+    transform: translateX(10px);
+}
+.text a:hover:before{
+    transform: translateX(0px);
+}
+.text a::after{
+    content: ">>";
+    font-family: "Poppins", Arial, Helvetica, sans-serif;
+    display: inline-block;
+    font-weight: bold;
+    opacity: 0;
+    transition: 0.35s ease;
+    transform: translateY(1px) translateX(10px);
+}
+.text a:hover:after{
+    opacity: 1;
+    transform: translateY(1px) translateX(3px);
+}
+.text a:hover{
+    box-shadow: 0 3px 5px rgba(0,0,0,0.25);
+}
+.container{
+    width: 100%;
+    height: 70px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.button{
+    padding: 5px;
+    border-radius: 3px;
+    background-color: #fff;
+    color: #0091EA;
+    font-family: "Montserrat", Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.35s;
+}
+.button:hover{
+    box-shadow: 0 3px 5px rgba(0,0,0,0.25);
+}
+#adventure{
+    position: absolute;
+    left: 45px;
+    top: 25px;
+    transition: 0.5s ease;
+    transform: scale(1);
+}
+#adventure.active{
+    opacity: 0;
+    transform:scale(0);
+}
+#movies{
+    position: absolute;
+    left: 45px;
+    top: 25px;
+    transform: translateY(-70px);
+    opacity: 0;
+}
+#series{
+    position: absolute;
+    left: 185px;
+    top: 25px;
+    transform: translateY(-70px);
+    opacity: 0;
+}
+#movies.slideIn, #series.slideIn{
+    opacity: 1;
+    transform: translateY(0px);
+}
+/* Featured movies */
+#featuredTitle{
+    font-family: "Montserrat Black", Arial, Helvetica, sans-serif;
+    margin-left: 45px;
+    font-size: 35px;
+    letter-spacing: 1px;
+    color: #fff;
+}
+.featured_container{
+    position: relative;
+    width: 100%;
+    height: 224px;
+    overflow: hidden;
+}
+#featuredMovies{
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(20, 1fr);
+    grid-gap: 0px;
+    transition: 0.5s ease;
+}
+.card{
+    height: 230px;
+    width: 200px;
+    position: relative;
+}
+.link a{
+    position: absolute;
+    z-index: 99;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%) scale(0);
+    padding: 5px 10px;
+    background-color: #fff;
+    border-radius: 2px;
+    font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
+    color: #0091EA;
+    box-shadow: 0 3px 5px rgba(0,0,0,0.6);
+    transition: 0.35s ease;
+}
+.card:hover .link a{
+    opacity: 1;
+    transform: translate(-50%,-50%) scale(1);
+}
+.link a:hover{
+    background-color: #0091EA;
+    color: #fff;
+}
+.card img{
+    height: 100%;
+    width: 100%;
+}
+.arrow{
+    position: absolute;
+    bottom: 45px;
+    right: 15px;
+    font-size: 80px;
+    font-weight: bold;
+    z-index: 99;
+    font-family: "Poppins", Arial, Helvetica, sans-serif;
+    cursor: pointer;
+    transition: 0.3s ease;
+    color: #fff;
+    text-shadow: 0 0 5px rgba(0,0,0,0.7);
+}
+#left{
+    position: absolute;
+    bottom: 45px;
+    left: 15px;
+    font-size: 80px;
+    font-weight: bold;
+    z-index: 99;
+    font-family: "Poppins", Arial, Helvetica, sans-serif;
+    cursor: pointer;
+    transition: 0.3s ease;
+    transform: scale(0);
+    text-shadow: 0 0 5px rgba(0,0,0,0.7);
+}
+.popup{
+    animation: popup 0.45s ease forwards;
+}
+@keyframes popup{
+    0%{
+        transform: scale(0);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+.removePopup{
+    animation: removePopup 0.45s ease forwards;
+}
+@keyframes removePopup{
+    0%{
+        transform: scale(1);
+    }
+    100%{
+        transform: scale(0);
+    }
+}
+.arrow:hover, #left:hover{
+    color: #00B8D4;
+}
+#quote{
+    font-family: "Montserrat Light", Arial, Helvetica, sans-serif;
+    width: auto;
+    margin-top: 30px;
+    font-style: italic;
+    font-size: 14px;
+}
+
+@media (max-width: 1160px){
+    .titleAndText{
+        display: grid;
+        grid-template-columns: 1fr;
+        height: 500px;
+    }
+    .text{
+        margin: 10px 0 0 50px;
+    }
+    #adventure{
+        left: 50px;
+    }
+    #movies{
+        left: 50px;
+    }
+    #series{
+        left: 185px;
+    }
+}
+@media (max-width: 700px){
+    .text{      
+        margin: 10px 0 0 15px;
+    }
+    .title{
+        margin-left: 15px;
+    }
+    .title h1{
+        font-size: 80px;
+    }
+    #adventure{
+        left: 15px;
+    }
+    #movies{
+        left: 15px;
+    }
+    #series{
+        left: 155px;
+    }
+    #featuredTitle{
+        margin-left: 15px;
+    }
+    #quote{
+        width: 60%;
+    }
+    .container{
+        margin-top: -40px;
+    }
+}
+@media (max-width: 500px){
+    .featured_container{
+        width: 100%;
+    }
+    #filmstrip{
+        position: absolute;
+        top: -195px;
+        left: 100px;
+        z-index: -1;
+        opacity: 0.2;
+        transform:rotate(55deg);
+        width: 30%;
+    }
+}
+@media (max-width: 475px){
+    .title h1{
+        font-size: 65px;
+    }
+}
+@media (max-width: 411px){
+    #filmstrip{
+        position: absolute;
+        top: -155px;
+        left: 60px;
+        z-index: -1;
+        opacity: 0.2;
+        transform:rotate(55deg);
+        width: 30%;
+    }
+}
+@media (max-width: 405px){
+    .title h1{
+        font-size: 50px;
+    }
+}
+@media(max-width: 330px){
+    .title h1{
+        font-size: 35px;
+    }
+    .text{
+        margin: 10px 0 0 15px;
+    }
+    .text h3{
+        font-size: 20px;
+    }
+}
