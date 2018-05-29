@@ -20,33 +20,20 @@ function getShowInfo(){
 	//Uses the Promise.all to target multiple requests to the API, uses the defined variables as
 	//link holders.
 	Promise.all([seriesPromise, imdbPromise, seriesCast])
-		.then( ([seriesResponse, imdbResponse, seriesCastResponse]) =>{
+		.then( ([seriesResponse, imdbResponse]) =>{
 			const series = seriesResponse.data;
 			const imdb_id = imdbResponse.data.imdb_id;
-			const cast = seriesCastResponse.data.cast;
 			const genres = seriesResponse.data.genres;
-			cast.length = 5;
-			console.log(cast);
 			//Grab the popularity parameter from the data and rounds it to a whole number%.
 			popularity = seriesResponse.data.popularity;
 			popularity = Math.floor(popularity);
 			console.log(seriesResponse)
-			for(let i = 0; i < cast.length; i++){
 			let output = `
 			<div class="moviePage">
 					<div class="poster"><img src="http://image.tmdb.org/t/p/w300/${series.poster_path}"></div>
 					<div class="info">
 						<h2>${series.name}</h2>
 						<ul>
-							<li><strong>Cast:</strong>`;
-							 for(let i = 0; i < cast.length; i++){
-								 if ( i != cast.length - 1){
-									 output += `${cast[i].name},`
-								 } else {
-									 output += `${cast[i].name}.`
-								 }
-							 }
-							output +=`</li>
 							<li><strong>Genres:</strong> `;
 							for(let i = 0; i < genres.length; i++){
 								if ( i != genres.length -1){
@@ -56,15 +43,14 @@ function getShowInfo(){
 								}
 							}
 							output += `</li>
-							<li><strong>Episode runtime:</strong> ${series.episode_run_time[0]}min </li>
-							<li><strong>Frist air date:</strong> ${series.first_air_date}</li>
-							<li><strong>Networks:</strong> ${series.networks[0].name}</li>
-							<li><strong>Popularity:</strong> ${popularity} %</li>
-							<li><strong>Number of episodes:</strong> ${series.number_of_episodes}</li>
-							<li><strong>Number of seasons:</strong> ${series.number_of_seasons}</li>
-							<li><strong>Production companies:</strong> ${series.production_companies[0].name}</li>
-							<li><strong>Status:</strong> ${series.status}</li>
-							<li><strong>Type: </strong>${series.type}</li>
+							<li><strong>Episode runtime:</strong> ${series.episode_run_time[0]}min. </li>
+							<li><strong>Frist air date:</strong> ${series.first_air_date}.</li>
+							<li><strong>Networks:</strong> ${series.networks[0].name}.</li>
+							<li><strong>Popularity:</strong> ${popularity} %.</li>
+							<li><strong>Number of episodes:</strong> ${series.number_of_episodes}.</li>
+							<li><strong>Number of seasons:</strong> ${series.number_of_seasons}.</li>
+							<li><strong>Status:</strong> ${series.status}.</li>
+							<li><strong>Type: </strong>${series.type}.</li>
 						</ul>
 
 						<div class="buttons">
@@ -85,11 +71,77 @@ function getShowInfo(){
 			//that will be used to output the data results to.
 			let info = document.getElementById("movie");
 			info.innerHTML = output;
-		}})
+		})
 		//If there is an error, it logs the error in the console.
 		.catch ((err)=>{
 			console.log(err);
 		});
+		//Another API call, if there's cast info about the tv show.
+		Promise.all([seriesPromise, imdbPromise, seriesCast])
+		.then( ([seriesResponse, imdbResponse, seriesCastResponse]) =>{
+			const series = seriesResponse.data;
+			const imdb_id = imdbResponse.data.imdb_id;
+			const cast = seriesCastResponse.data.cast;
+			const genres = seriesResponse.data.genres;
+			cast.length = 5;
+			//Grab the popularity parameter from the data and rounds it to a whole number%.
+			popularity = seriesResponse.data.popularity;
+			popularity = Math.floor(popularity);
+			console.log(seriesResponse)
+			let i = 0;
+			let output = `
+			<div class="moviePage">
+					<div class="poster"><img src="http://image.tmdb.org/t/p/w300/${series.poster_path}"></div>
+					<div class="info">
+						<h2>${series.name}</h2>
+						<ul>
+							<li><strong>Cast:</strong>`;
+							for( i; i < cast.length; i++){
+								if ( i != cast.length - 1){
+									output += `${cast[i].name},`
+								} else {
+									output += `${cast[i].name}.`
+								}
+							}
+							output += `</li>
+							<li><strong>Genres:</strong> `;
+							for(let i = 0; i < genres.length; i++){
+								if ( i != genres.length -1){
+									output += `${genres[i].name}, `;
+								} else {
+									output += `${genres[i].name}.`;
+								}
+							}
+							output += `</li>
+							<li><strong>Episode runtime:</strong> ${series.episode_run_time[0]}min. </li>
+							<li><strong>Frist air date:</strong> ${series.first_air_date}.</li>
+							<li><strong>Networks:</strong> ${series.networks[0].name}.</li>
+							<li><strong>Popularity:</strong> ${popularity} %.</li>
+							<li><strong>Number of episodes:</strong> ${series.number_of_episodes}.</li>
+							<li><strong>Number of seasons:</strong> ${series.number_of_seasons}.</li>
+							<li><strong>Status:</strong> ${series.status}.</li>
+							<li><strong>Type: </strong>${series.type}.</li>
+						</ul>
+
+						<div class="buttons">
+							<a href="https://www.imdb.com/title/${imdb_id}"target="_blank"> IMDB Link </a>
+							<a href="#" onclick="openTrailer()"> Trailer </a>
+							<a href="https://www.titlovi.com/titlovi/?prijevod=${series.name}" target="_blank"> Subtitle </a>
+							<a href="https://www.thepiratebay.org/search/${series.name}" target="_blank"> Pirate bay </a>
+							<a href="javascript:history.back()"> Go back </a>
+						</div>
+					</div>
+				</div>
+				<div class="plot">
+					<h3>Plot: </h3>
+					<p>${series.overview}</p>
+				</div>
+				`;
+			//Creates a variable that targets the "movie" element in the HTML
+			//that will be used to output the data results to.
+			let info = document.getElementById("movie");
+			info.innerHTML = output;
+		})
 		//Gets the trailer link from youtube. Video is hidden until users click on TRAILER
 		//button.
 		axios.get("https://api.themoviedb.org/3/tv/"+showId+'/videos?api_key=fa155f635119344d33fcb84fb807649b&language=en-US')
