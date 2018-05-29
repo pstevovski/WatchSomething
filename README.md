@@ -5,16 +5,23 @@ This project uses an API from themoviedb.com in order to list movies & tv shows 
 * Popular (with set minimum and maximum dates);
 * Top rated (of all time);
 * On air (tv shows that are currently on air);
-* Upcoming movies (W.I.P);
+* Upcoming movies.
 
-It also provides an option to Search for movies/tv shows by:
+It also provides an option to SEARCH for movies/tv shows by:
 * Title;
 * Actor/Actress name;
 * Year (original year of release);
 * Genre.
 #### Personal learning project.
-##### I do not hold any ownership of the images used in this project. This project is currently for non-commercial use.
+##### I do not hold any ownership of the images used in this project. This project is for non-commercial use.
 
+#### Update v2.0 (2018-05-29)
+Lists are here !! Personal watchlist and favorites list(for movies and tv shows).
+###### DONE:
+* Re-designed the home page.
+* Created list for movies/tv shows to watch, and favorites list for movies/tv shows.
+* Added an option to add to watchlist or favorites list for every search option( top rated, upcoming,latest, popular, by year, by actor, by genre, by title for movies/tv shows).
+* Corrected the links to match properly with each other.
 #### Big Update v1.0 (2018-05-22)
 A lot of changes and improvements have been made, from functionality to design. Here's a list of what's been changed/imporved so far.
 ###### DONE:
@@ -37,7 +44,8 @@ A lot of changes and improvements have been made, from functionality to design. 
 
 ###### Not completed:
 * Add option to select season/episode and show the plot about it for TV Shows.(?)
-* Create list for movies. (?);
-* Correct the links. Currently some links are missing, add the appropriate links and connect them.
+* Make the end date of upcoming movies dynamic.
+* Create an "about" page - how to use the website.
+* Re-design the cards for the recommended movie/tv show (on detailed info page).
 
-###### Known bugs: 0 (currently at the time of big update v1.0).
+###### Known bugs: 0 (currently at the time of update v2.0).
