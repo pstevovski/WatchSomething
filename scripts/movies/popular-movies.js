@@ -1,28 +1,18 @@
-//Gets the form and uses its value (on submit) to showcase the movies matching the inputed value. After
-//the user presses enter, a spinner animation shows up, lasts 1 second, then lists the movies that match
-//the inputed value.
+//Spinner
 const spinner = document.querySelector(".spinner");
 spinner.style.display = "none";
-const form = document.getElementById("form");
-form.addEventListener("submit", (e)=>{
-	var searchText = document.getElementById("searchText").value;
-	pageNum = 1;
-	searchMovies(searchText);
-	const spinner = document.querySelector(".spinner");
+const container = document.querySelector(".showcase");
+container.style.display = "none"
+//When window is loaded, it runs the function getMovies(), which lists the current popular movies by grabing the API from themoviedb.com.
+window.onload = function getMovies(){
 	spinner.style.display = "block";
-	const container = document.querySelector(".showcase");
-	container.style.display = "none";
 	setTimeout(() => {
 		spinner.style.display = "none";
 		container.style.display = "flex";
 	}, 1000);
-	e.preventDefault();
-})
-//Get the API data and output it on screen, using the searchText(inputed value in the form & submited on //enter), that lists the movies matching the input.
-function searchMovies(searchText){
-	axios.get("https://api.themoviedb.org/3/search/movie?query="+searchText+'&api_key=fa155f635119344d33fcb84fb807649b&language=en-US&page='+pageNum+'&include_adult=false')
-		.then( (response) =>{
-			//Fetches the data - > results from the API.
+	//Get the API.
+	axios.get("https://api.themoviedb.org/3/movie/popular?api_key=fa155f635119344d33fcb84fb807649b&language=en-US&page=1")
+		.then ((response)=>{
 			console.log(response);
 			let movies = response.data.results;
 			let output = "";
@@ -30,7 +20,8 @@ function searchMovies(searchText){
 			$.each(movies, (index, movie)=>{
 				output += `
 				<div class="card">
-					<div class="addBtn"><span><i class="ion-plus-circled"></i></span></div>
+					<div class="addBtn"><span><i class="ion-android-add-circle" onclick="addToList('${movie.id}')"></i></span>
+					<span><i class="ion-heart heart" onclick="favorite('${movie.id}')"></i></span></div>
 					<div class="card_img">
 						<img src="http://image.tmdb.org/t/p/w300/${movie.poster_path}" onerror="this.onerror=null;this.src='../images/image2.png';">
 					</div>
@@ -42,21 +33,21 @@ function searchMovies(searchText){
 					</div>
 				</div>
 				`;
-			});
+			})
 			//Creates a variable that targets the "movies" element in the HTML
 			//that will be used to output the data results to.
 			let movieInfo = document.getElementById("movies");
 			movieInfo.innerHTML = output;
+			//Show the pages buttons after movies are listed
+			let pages = document.querySelector(".pages");
+			pages.style.display = "flex";
 		})
 		//If theres an error, it logs it in the console.
 		.catch ((err)=>{
 			console.log(err);
 		})
-		//Displays the pages buttons (default display:none), after movies are shown.
-		let pages = document.querySelector(".pages");
-		pages.style.display = "flex";
 }
-//When the user clicks on "Movie Details", it sets the ID of that particular movie into the Session storage,//and changes the current page to the "movie-page.html", listing the info for the movie that matches the id
+//When the user clicks on "Movie Details", it sets the ID of that particular movie into the Session storage,//and changes the current page to the "movie-page.html", listing the info for the movie that matches the id.
 function movieSelected(id){
 	sessionStorage.setItem("movieId", id);
 	location.replace("../movie-page.html");
@@ -84,9 +75,8 @@ next.addEventListener("click", ()=>{
 })
 //Showcases the movies after the user changed the page by clicking previous/next button.
 function search(pageNum){
-		var searchText = document.getElementById("searchText").value;
-		axios.get("https://api.themoviedb.org/3/search/movie?query="+searchText+'&api_key=fa155f635119344d33fcb84fb807649b&language=en-US&page='+pageNum+'&include_adult=false')
-		.then( (response) =>{
+	axios.get("https://api.themoviedb.org/3/movie/popular?api_key=fa155f635119344d33fcb84fb807649b&language=en-US&page="+pageNum)
+		.then((response)=>{
 			console.log(response);
 			let movies = response.data.results;
 			let output = "";
@@ -94,7 +84,8 @@ function search(pageNum){
 			$.each(movies, (index, movie)=>{
 				output += `
 				<div class="card">
-					<div class="addBtn"><span><i class="ion-plus-circled"></i></span></div>
+					<div class="addBtn"><span><i class="ion-android-add-circle" onclick="addToList('${movie.id}')"></i></span>
+					<span><i class="ion-heart heart" onclick="favorite('${movie.id}')"></i></span></div>
 					<div class="card_img">
 						<img src="http://image.tmdb.org/t/p/w300/${movie.poster_path}" onerror="this.onerror=null;this.src='../images/image2.png';">
 					</div>
@@ -106,12 +97,28 @@ function search(pageNum){
 					</div>
 				</div>
 				`;
-			});
-
+			})
 			let movieInfo = document.getElementById("movies");
 			movieInfo.innerHTML = output;
+			//Show the pages buttons after movies are listed.
+			let pages = document.querySelector(".pages");
+			pages.style.display = "flex";
 		})
-		.catch( (err) =>{
+		.catch ((err)=>{
 			console.log(err);
 		})
+}
+//Add movie to watch list.
+function addToList(id){
+    let storedId = JSON.parse(localStorage.getItem("movies")) || [];
+    storedId.push(id);
+    localStorage.setItem("movies", JSON.stringify(storedId));
+    console.log(storedId);
+}
+//Add movie to favorite movies.
+function favorite(id){
+    let favorite = JSON.parse(localStorage.getItem("favorite")) || [];
+    favorite.push(id);
+    localStorage.setItem("favorite", JSON.stringify(favorite));
+    console.log(favorite);
 }

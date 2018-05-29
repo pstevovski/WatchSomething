@@ -21,7 +21,8 @@ window.onload = function getMovies(){
 			$.each(movies, (index,movie)=>{
 				output += `
 					<div class="card">
-						<div class="addBtn"><span><i class="ion-plus-circled"></i></span></div>
+						<div class="addBtn"><span><i class="ion-android-add-circle" onclick="addToList('${movie.id}')"></i></span>
+						<span><i class="ion-heart heart" onclick="favorite('${movie.id}')"></i></span></div>
 						<div class="card_img">
 							<img src="http://image.tmdb.org/t/p/w300/${movie.poster_path}" onerror="this.onerror=null;this.src='../images/image2.png';">
 						</div>
@@ -85,7 +86,8 @@ function search(pageNum){
 			$.each(movies, (index,movie)=>{
 				output += `
 					<div class="card">
-						<div class="addBtn"><span><i class="ion-plus-circled"></i></span></div>
+						<div class="addBtn"><span><i class="ion-android-add-circle" onclick="addToList('${movie.id}')"></i></span>
+						<span><i class="ion-heart heart" onclick="favorite('${movie.id}')"></i></span></div>
 						<div class="card_img">
 							<img src="http://image.tmdb.org/t/p/w300/${movie.poster_path}" onerror="this.onerror=null;this.src='../images/image2.png';">
 						</div>
@@ -104,4 +106,18 @@ function search(pageNum){
 		.catch( (err) =>{
 			console.log(err);
 		})
+}
+//Add movie to watch list.
+function addToList(id){
+    let storedId = JSON.parse(localStorage.getItem("movies")) || [];
+    storedId.push(id);
+    localStorage.setItem("movies", JSON.stringify(storedId));
+    console.log(storedId);
+}
+//Add movie to favorite movies.
+function favorite(id){
+    let favorite = JSON.parse(localStorage.getItem("favorite")) || [];
+    favorite.push(id);
+    localStorage.setItem("favorite", JSON.stringify(favorite));
+    console.log(favorite);
 }

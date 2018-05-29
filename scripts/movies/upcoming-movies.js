@@ -11,12 +11,13 @@ window.onload = function upcoming(){
 			console.log(response);
             let upcoming = response.data.results;
 			let output = ""
-            $.each(upcoming, (index,upcoming)=>{
+            $.each(upcoming, (index,movie)=>{
 				output += `
 				<div class="card">
-					<div class="addBtn"><span><i class="ion-plus-circled"></i></span></div>
+					<div class="addBtn"><span><i class="ion-android-add-circle" onclick="addToList('${movie.id}')"></i></span>
+					<span><i class="ion-heart heart" onclick="favorite('${movie.id}')"></i></span></div>
 					<div class="card_img">
-						<img src="http://image.tmdb.org/t/p/w300/${movie.poster_path}" onerror="this.onerror=null;this.src='../images/image2.png';">
+						<img src="http://image.tmdb.org/t/p/w300/${movie.poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
 					</div>
 					<div class="card_text">
 						<h3>${movie.title}</h3>
@@ -68,15 +69,16 @@ function search(pageNum){
 		axios.get("https://api.themoviedb.org/3/discover/movie?api_key=fa155f635119344d33fcb84fb807649b&language=en-US&sort_by=primary_release_date.asc&include_adult=false&include_video=false&page="+pageNum+'&primary_release_date.gte='+today+'&primary_release_date.lte='+endDate)
 		.then( (response) =>{
 			console.log(response)
-			let movies = response.data.results;
+			let upcoming = response.data.results;
 			let output = "";
 
-			$.each(movies, (index,movie)=>{
+			$.each(upcoming, (index,movie)=>{
 				output += `
 				<div class="card">
-					<div class="addBtn"><span><i class="ion-plus-circled"></i></span></div>
+					<div class="addBtn"><span><i class="ion-android-add-circle" onclick="addToList('${movie.id}')"></i></span>
+					<span><i class="ion-heart heart" onclick="favorite('${movie.id}')"></i></span></div>
 					<div class="card_img">
-						<img src="http://image.tmdb.org/t/p/w300/${movie.poster_path}" onerror="this.onerror=null;this.src='../images/image2.png';">
+						<img src="http://image.tmdb.org/t/p/w300/${movie.poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
 					</div>
 					<div class="card_text">
 						<h3>${movie.title}</h3>
@@ -93,4 +95,18 @@ function search(pageNum){
 		.catch( (err) =>{
 			console.log(err);
 		})
+}
+//Add movie to watch list.
+function addToList(id){
+    let storedId = JSON.parse(localStorage.getItem("movies")) || [];
+    storedId.push(id);
+    localStorage.setItem("movies", JSON.stringify(storedId));
+    console.log(storedId);
+}
+//Add movie to favorite movies.
+function favorite(id){
+    let favorite = JSON.parse(localStorage.getItem("favorite")) || [];
+    favorite.push(id);
+    localStorage.setItem("favorite", JSON.stringify(favorite));
+    console.log(favorite);
 }

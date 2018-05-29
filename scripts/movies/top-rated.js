@@ -2,8 +2,8 @@
 const spinner = document.querySelector(".spinner");
 spinner.style.display = "none";
 const container = document.querySelector(".showcase");
-container.style.display = "none"
-//When window is loaded, it runs the function getMovies(), which lists the current popular movies by grabing the API from themoviedb.com.
+container.style.display = "none";
+//When window is loaded, it runs the function getMovies() showcasing the top rated movies.
 window.onload = function getMovies(){
 	spinner.style.display = "block";
 	setTimeout(() => {
@@ -11,8 +11,9 @@ window.onload = function getMovies(){
 		container.style.display = "flex";
 	}, 1000);
 	//Get the API.
-	axios.get("https://api.themoviedb.org/3/movie/popular?api_key=fa155f635119344d33fcb84fb807649b&language=en-US&page=1")
-		.then ((response)=>{
+	axios.get("https://api.themoviedb.org/3/movie/top_rated?api_key=fa155f635119344d33fcb84fb807649b&language=en-US&page=1")
+		.then( (response) =>{
+			//Fetches the data - > results from the API.
 			console.log(response);
 			let movies = response.data.results;
 			let output = "";
@@ -20,7 +21,8 @@ window.onload = function getMovies(){
 			$.each(movies, (index, movie)=>{
 				output += `
 				<div class="card">
-					<div class="addBtn"><span><i class="ion-plus-circled"></i></span></div>
+					<div class="addBtn"><span><i class="ion-android-add-circle" onclick="addToList('${movie.id}')"></i></span>
+					<span><i class="ion-heart heart" onclick="favorite('${movie.id}')"></i></span></div>
 					<div class="card_img">
 						<img src="http://image.tmdb.org/t/p/w300/${movie.poster_path}" onerror="this.onerror=null;this.src='../images/image2.png';">
 					</div>
@@ -41,7 +43,7 @@ window.onload = function getMovies(){
 			let pages = document.querySelector(".pages");
 			pages.style.display = "flex";
 		})
-		//If theres an error, it logs it in the console.
+		//If theres an error, logs the error in console.
 		.catch ((err)=>{
 			console.log(err);
 		})
@@ -59,22 +61,22 @@ const prev = document.getElementById("prev");
 prev.addEventListener("click", ()=>{
 	//Decrements(?) the page number by 1.
 	pageNum--;
-	//Scrolls to top of the window after the button is clicked.
+	//Get to the top of the page when a page changes
 	window.scrollTo(0,0);
 	search(pageNum);
 })
-//Targets the pages button with "next" id, and goes forwards one page.
+//Go forward 1 page
 const next = document.getElementById("next");
 next.addEventListener("click", ()=>{
 	//Increments the page number by 1.
 	pageNum++;
-	//Scrolls to top of the window after the button is clicked.
+	//Get to the top of the page when a page changes
 	window.scrollTo(0,0);
 	search(pageNum);
 })
 //Showcases the movies after the user changed the page by clicking previous/next button.
 function search(pageNum){
-	axios.get("https://api.themoviedb.org/3/movie/popular?api_key=fa155f635119344d33fcb84fb807649b&language=en-US&page="+pageNum)
+	axios.get("https://api.themoviedb.org/3/movie/top_rated?api_key=fa155f635119344d33fcb84fb807649b&language=en-US&page="+pageNum)
 		.then((response)=>{
 			console.log(response);
 			let movies = response.data.results;
@@ -83,7 +85,8 @@ function search(pageNum){
 			$.each(movies, (index, movie)=>{
 				output += `
 				<div class="card">
-					<div class="addBtn"><span><i class="ion-plus-circled"></i></span></div>
+					<div class="addBtn"><span><i class="ion-android-add-circle" onclick="addToList('${movie.id}')"></i></span>
+					<span><i class="ion-heart heart" onclick="favorite('${movie.id}')"></i></span></div>
 					<div class="card_img">
 						<img src="http://image.tmdb.org/t/p/w300/${movie.poster_path}" onerror="this.onerror=null;this.src='../images/image2.png';">
 					</div>
@@ -98,11 +101,25 @@ function search(pageNum){
 			})
 			let movieInfo = document.getElementById("movies");
 			movieInfo.innerHTML = output;
-			//Show the pages buttons after movies are listed.
+			//Show the pages buttons after movies are listed
 			let pages = document.querySelector(".pages");
 			pages.style.display = "flex";
 		})
 		.catch ((err)=>{
 			console.log(err);
 		})
+}
+//Add movie to watch list.
+function addToList(id){
+    let storedId = JSON.parse(localStorage.getItem("movies")) || [];
+    storedId.push(id);
+    localStorage.setItem("movies", JSON.stringify(storedId));
+    console.log(storedId);
+}
+//Add movie to favorite movies.
+function favorite(id){
+    let favorite = JSON.parse(localStorage.getItem("favorite")) || [];
+    favorite.push(id);
+    localStorage.setItem("favorite", JSON.stringify(favorite));
+    console.log(favorite);
 }

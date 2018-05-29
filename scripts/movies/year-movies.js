@@ -22,7 +22,8 @@ form.addEventListener("submit", (e)=>{
     //Prevents default action.
     e.preventDefault();
 })
-
+var mykey = config.MY_KEY;
+console.log(mykey);
 function discoverMovies(year){
     axios.get("https://api.themoviedb.org/3/discover/movie?api_key=fa155f635119344d33fcb84fb807649b&language=en-US&sort_by=popularity.desc&page=1&primary_release_year="+year)
         .then((response)=>{
@@ -32,7 +33,8 @@ function discoverMovies(year){
             $.each(yearly, (index, movie)=>{
                 output +=`
 				<div class="card">
-				        <div class="addBtn"><span><i class="ion-plus-circled" onclick="addToList('${movie.id}')"></i></span></div>
+                        <div class="addBtn"><span><i class="ion-android-add-circle" onclick="addToList('${movie.id}')"></i></span>
+                        <span><i class="ion-heart heart" onclick="favorite('${movie.id}')"></i></span></div>
 					<div class="card_img">
 						<img src="http://image.tmdb.org/t/p/w300/${movie.poster_path}" onerror="this.onerror=null;this.src='../images/image2.png';">
 					</div>
@@ -56,11 +58,19 @@ function discoverMovies(year){
         })
 }
 //Koga ke stisnam na '+', treba da go zeme Id-to na filmot/serijata, da go stavi vo localStorage. Koga ke otidam na stranata "My Lists", treba da mozam da napravam/uredam/izbrisasm lista(i). Koga ke ja otvoram lista "x", treba da gi zemam Id od localStorage sto odgovaraat na taa lista, i da gi prikazam.
-//Add to list
+//Add movie to watch list.
 function addToList(id){
-    let movieList = [];
-    movieList.push(id);
-    console.log(movieList)
+    let toWatch = JSON.parse(localStorage.getItem("movies")) || [];
+    toWatch.push(id);
+    localStorage.setItem("movies", JSON.stringify(toWatch));
+    console.log(toWatch);
+}
+//Add movie to favorite movies.
+function favorite(id){
+    let favorite = JSON.parse(localStorage.getItem("favoriteMovies")) || [];
+    favorite.push(id);
+    localStorage.setItem("favoriteMovies", JSON.stringify(favorite));
+    console.log(favorite);
 }
 //Set the movie Id into session storage.
 function movieSelected(id){
@@ -103,7 +113,8 @@ function discoverMoviesPageLoad(pageNum){
         $.each(yearly, (index, movie)=>{
             output +=`
             <div class="card">
-                <div class="addBtn"><span><i class="ion-plus-circled"></i></span></div>
+                <div class="addBtn"><span><i class="ion-android-add-circle" onclick="addToList('${movie.id}')"></i></span>
+                <span><i class="ion-heart heart" onclick="favorite('${movie.id}')"></i></span></div>
                 <div class="card_img">
                     <img src="http://image.tmdb.org/t/p/w300/${movie.poster_path}" onerror="this.onerror=null;this.src='../images/image2.png';">
                 </div>
@@ -143,7 +154,8 @@ function genres(){
         $.each(movies, (index, movie)=>{
             output +=`
             <div class="card">
-                <div class="addBtn"><span><i class="ion-plus-circled"></i></span></div>
+                <div class="addBtn"><span><i class="ion-android-add-circle" onclick="addToList('${movie.id}')"></i></span>
+                <span><i class="ion-heart heart" onclick="favorite('${movie.id}')"></i></span></div>
                 <div class="card_img">
                     <img src="http://image.tmdb.org/t/p/w300/${movie.poster_path}" onerror="this.onerror=null;this.src='../images/image2.png';">
                 </div>

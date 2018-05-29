@@ -75,8 +75,7 @@ function getMovie(){
 		<div class="plot">
 			<h3>Plot: </h3>
 			<p>${movie.overview}</p>
-		</div>
-	`;
+		</div>`;
 			//Creates a variable that targets the "movie" element in the HTML
 			//that will be used to output the data results to.
 			let info = document.getElementById("movie");
@@ -85,6 +84,18 @@ function getMovie(){
 		//If there is an error, it logs the error in the console.
 		.catch ((err)=>{
 			console.log(err);
+			let output = "";
+			output += `<h1 id="errorTitle">SORRY !</h1>
+			<p id="errorText">We could not provide informations about this movie at this particular moment. Be sure to come back again. Thank you for your understanding. </p>
+			<div class="buttons errorBack">
+				<a href="javascript:history.back()"> Go back </a>
+			</div>`;
+			let info = document.getElementById("movie");
+			info.innerHTML = output;
+			let rec_title = document.getElementById("rec_title");
+			rec_title.style.display = 'none';
+			let page = document.querySelector(".page");
+			page.style.display = "none";
 		});
 		//Gets the trailer link from youtube. Video is hidden until users click on TRAILER
 		//button.
@@ -106,6 +117,10 @@ function getMovie(){
 			//If there is an error, it logs the error in the console.
 			.catch ((err)=>{
 				console.log(err);
+				let rec_title = document.getElementById("rec_title");
+				rec_title.style.display = 'none';
+				let page = document.querySelector(".page");
+				page.style.display = "none";
 			});
 		//Gets similar movies from the API, to the current one that is open.
 		axios.get("https://api.themoviedb.org/3/movie/"+movieId+'/similar?api_key=fa155f635119344d33fcb84fb807649b&language=en-US&page=1')
@@ -135,6 +150,10 @@ function getMovie(){
 			//If there is an error, it logs it in the console.
 			.catch ((err)=>{
 				console.log(err);
+				let rec_title = document.getElementById("rec_title");
+				rec_title.style.display = 'none';
+				let page = document.querySelector(".page");
+				page.style.display = "none";
 			})
 }
 //On click on "TRAILER" button, it sets the trailer(video) to be displayed as flex(default:none), dims the

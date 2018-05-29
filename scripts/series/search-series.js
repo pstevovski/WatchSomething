@@ -31,7 +31,8 @@ function searchSeries(searchText){
 			$.each(series, (index, series)=>{
 				output += `
 				<div class="card">
-						<div class="addBtn"><span><i class="ion-plus-circled"></i></span></div>
+					<div class="addBtn"><span><i class="ion-android-add-circle" onclick="addToList('${series.id}')"></i></span>
+					<span><i class="ion-heart heart" onclick="favorite('${series.id}')"></i></span></div>
 						<div class="card_img">
 							<img src="http://image.tmdb.org/t/p/w300/${series.poster_path}"  onerror="this.onerror=null;this.src='../images/image2.png';">
 						</div>
@@ -96,7 +97,8 @@ function search(pageNum){
 			$.each(series, (index, series)=>{
 				output += `
 				<div class="card">
-						<div class="addBtn"><span><i class="ion-plus-circled"></i></span></div>
+					<div class="addBtn"><span><i class="ion-android-add-circle" onclick="addToList('${series.id}')"></i></span>
+					<span><i class="ion-heart heart" onclick="favorite('${series.id}')"></i></span></div>
 						<div class="card_img">
 							<img src="http://image.tmdb.org/t/p/w300/${series.poster_path}"  onerror="this.onerror=null;this.src='../images/image2.png';">
 						</div>
@@ -120,4 +122,18 @@ function search(pageNum){
 		.catch ((err)=>{
 			console.log(err);
 		})
+}
+//Add series to "series to watch" list.
+function addToList(id){
+	let toWatch = JSON.parse(localStorage.getItem("series")) || [];
+	toWatch.push(id);
+	localStorage.setItem("series", JSON.stringify(toWatch));
+	console.log(toWatch);
+}
+//Add favorite series to "favorite series" list.
+function favorite(id){
+	let favorite = JSON.parse(localStorage.getItem("favoriteSeries")) || [];
+	favorite.push(id);
+	localStorage.setItem("favoriteSeries", JSON.stringify(favorite));
+	console.log(favorite);
 }
