@@ -26,14 +26,16 @@ body{
 	flex-direction: column;
 	font-size:18px;
 	padding: 20px;
+	font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
 }
 .info h2{
+	font-family: "Montserrat Black", Arial, Helvetica, sans-serif;
 	font-size: 35px;
 	color:#E53935;
 }
 .plot{
 	padding: 20px;
-	font-family: "Poppins", sans-serif;
+	font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
 	flex-shrink: 16px;
 }
 .plot h3{
@@ -46,9 +48,8 @@ body{
 	margin: 0 5px;
 }
 .buttons a{
-	font-family: "Poppins";
+	font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
 	font-size: 16px;
-	font-weight: bold;
 	padding: 5px;
 	background-color: #fff;
 	border-radius: 5px;
@@ -62,6 +63,21 @@ body{
 	background-color: #E53935;
 	color: #fff;
 	box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+}
+#errorTitle{
+	font-family: "Montserrat Black", Arial, Helvetica, sans-serif;
+}
+.errorBack{
+	position: absolute;
+	top: 40%;
+	left: 50%;
+	transform: translate(-50%,-40%);
+	width: 120px;
+}
+#errorText{
+	text-align: center;
+	width: auto;
+	font-family: "Montserrat Medium",Arial, Helvetica, sans-serif;
 }
 .page{
 	width: 100%;

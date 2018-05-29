@@ -86,13 +86,19 @@ nav a{
 	color: #0091EA;
 }
 .sticky{
-	background-color: rgba(255,255,255,0.95);
+	background-color: #0091EA;
 	width: 100%;
 	position: fixed;
 	right: 0;
 	z-index: 999;
 	transition: 0.35s ease-in-out;
 	animation: navbarSlide 0.4s 1;
+}
+.sticky a{
+	color: #fff;
+}
+.sticky li{
+	color: #fff;
 }
 @keyframes navbarSlide{
 	0%{
@@ -126,6 +132,9 @@ nav a{
 }
 .menu ul .list:hover{
 	color: #E53935;
+}
+.sticky .menu ul .list:hover{
+	color: gold;
 }
 .menu ul .list:hover .firstUnordered .search{
 	color: #333;
@@ -176,10 +185,13 @@ nav a{
 .menu ul .list .firstUnordered .search:hover{
 	color: #E53935;
 }
+.menu ul .list .firstUnordered li:nth-last-child(1){
+	margin-left: 5px;
+}
 .menu ul .list .firstUnordered .secondUnordered{
 	display: none;
 	position: absolute;
-	left: -190px;
+	left: -201px;
 	top: 0;
 	z-index: -1;
 }
@@ -265,6 +277,7 @@ nav a{
 	z-index: 2;
 	transition: 0.35s ease-out;
 }
+
 .card .card_text{
 	position: relative;
 	color: #0091EA;
@@ -284,21 +297,32 @@ nav a{
 	position: absolute;
 	top: 10px;
 	right: 10px;
+	display: flex;
+}
+.card .addBtn > *{
+	margin: 0 3px;
 }
 .addBtn i {
 	font-size: 30px;
 	opacity: 0;
 	transition: 0.2s ease-out;
 	cursor: pointer;
-	color: #E53935;
+	color: #fff;
 	display: block;
+	transform:scale(0);
+	text-shadow: 0 0 5px rgba(0,0,0,0.45);
 }
 .card:hover .addBtn i{
 	opacity: 1;
+	transform: scale(0.9);
 }
 .addBtn i:hover{
 	color: #0091EA;
-	transform: scale(1.25) rotate(90deg);
+	transform: scale(1.25);
+	text-shadow: 0 0 5px rgba(0,0,0,0.25);
+}
+.addBtn .heart:hover{
+	color: #E53935;
 }
 .upcoming{
 	height: 550px;
