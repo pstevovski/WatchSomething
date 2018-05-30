@@ -100,7 +100,7 @@ function search(pageNum){
 				output += `
 				<div class="card">
 					<div class="addBtn"><span><ion-icon name="add-circle" onclick="addToList('${series.id}')"></ion-icon></span>
-					<span><i class="ion-heart heart" onclick="favorite('${series.id}')"></i></span></div>
+					<span><ion-icon name="heart" onclick="favorite('${series.id}')"></ion-icon></span></div>
 						<div class="card_img">
 							<img src="http://image.tmdb.org/t/p/w300/${series.poster_path}"  onerror="this.onerror=null;this.src='../images/image2.png';">
 						</div>
