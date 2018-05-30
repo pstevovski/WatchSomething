@@ -2,7 +2,7 @@
 That includes (index.html,popular-movies.html,search-movies.html,top-rated.html,search-series.html,series-latest.html, series-popular & series-toprated.html). It also holds the CSS for the menu, burger menu, slide menu for the movie-page.html and shows-page.html. */
 
 /* Import Ionicons. */
-@import "http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css";
+@import "https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css";
 /* Target the whole document. */
 *{
 	margin: 0;
