@@ -99,7 +99,7 @@ function search(pageNum){
 			$.each(series, (index, series)=>{
 				output += `
 				<div class="card">
-					<div class="addBtn"><span><i class="ion-android-add-circle" onclick="addToList('${series.id}')"></i></span>
+					<div class="addBtn"><span><ion-icon name="add-circle" onclick="addToList('${series.id}')"></ion-icon></span>
 					<span><i class="ion-heart heart" onclick="favorite('${series.id}')"></i></span></div>
 						<div class="card_img">
 							<img src="http://image.tmdb.org/t/p/w300/${series.poster_path}"  onerror="this.onerror=null;this.src='../images/image2.png';">
