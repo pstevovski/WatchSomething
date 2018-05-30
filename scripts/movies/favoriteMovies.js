@@ -1,9 +1,12 @@
+//API KEY.
+var API_KEY = config.API_KEY;
+
 function favorites(){
     let favorite = JSON.parse(localStorage.getItem("favoriteMovies")) || [];
     console.log(favorite);
     for(let i = 0; i < favorite.length; i++){
         console.log(favorite.length);
-        axios.get("https://api.themoviedb.org/3/movie/"+favorite[i]+'?api_key=fa155f635119344d33fcb84fb807649b&language=en-US')
+        axios.get("https://api.themoviedb.org/3/movie/"+favorite[i]+'?api_key='+API_KEY+'&language=en-US')
             .then((response)=>{
                 let movies = response.data;
                 document.getElementById("movies").innerHTML += `<div class="card">
@@ -24,10 +27,10 @@ function favorites(){
 
 //Delete favorite movie from the list (array).
 function movieSplice(id){
-    let favorite = JSON.parse(localStorage.getItem("favorite")) || [];
+    let favorite = JSON.parse(localStorage.getItem("favoriteMovies")) || [];
     let index = favorite.indexOf(id);
     favorite.splice(index, 1);
-    localStorage.setItem("favorite", JSON.stringify(favorite));
+    localStorage.setItem("favoriteMovies", JSON.stringify(favorite));
     location.reload();
     console.log(favorite);
 }

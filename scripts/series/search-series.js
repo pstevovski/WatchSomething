@@ -1,3 +1,5 @@
+//API KEY.
+var API_KEY = config.API_KEY;
 //Get the FORM and the INPUTED VALUE in it.
 const spinner = document.querySelector(".spinner");
 spinner.style.display = "none";
@@ -21,7 +23,7 @@ form.addEventListener("submit", (e)=>{
 })
 //Get the API data and output it on screen, using the searchText(inputed value in the form & submited on //enter), that lists the movies matching the input 
 function searchSeries(searchText){
-	axios.get("https://api.themoviedb.org/3/search/tv?query="+searchText+'&api_key=fa155f635119344d33fcb84fb807649b&language=en-US&page='+pageNum)
+	axios.get("https://api.themoviedb.org/3/search/tv?query="+searchText+'&api_key='+API_KEY+'&language=en-US&page='+pageNum)
 		.then((response)=>{
 			//Fetches the data - > results from the API.
 			console.log(response);
@@ -88,7 +90,7 @@ next.addEventListener("click", ()=>{
 //Showcases the tv shows after the user changed the page by clicking previous/next button.
 function search(pageNum){
 	var searchText = document.getElementById("searchText").value;
-	axios.get("https://api.themoviedb.org/3/search/tv?query="+searchText+'&api_key=fa155f635119344d33fcb84fb807649b&language=en-US&page='+pageNum)
+	axios.get("https://api.themoviedb.org/3/search/tv?query="+searchText+'&api_key='+API_KEY+'&language=en-US&page='+pageNum)
 		.then((response)=>{
 			console.log(response);
 			let series = response.data.results;

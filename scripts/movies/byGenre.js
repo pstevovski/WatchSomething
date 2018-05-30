@@ -1,3 +1,5 @@
+//API KEY.
+var API_KEY = config.API_KEY;
 //Genres function.
 window.onload = function genres(){
     const select = document.getElementById("selected");
@@ -7,7 +9,7 @@ window.onload = function genres(){
         //Send the ID of the selected element into sessionStorage.
         sessionStorage.setItem("genre", e.target.options[e.target.selectedIndex].id)
         //API request.
-        axios.get("https://api.themoviedb.org/3/discover/movie?api_key=fa155f635119344d33fcb84fb807649b&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres="+e.target.options[e.target.selectedIndex].id)
+        axios.get("https://api.themoviedb.org/3/discover/movie?api_key="+API_KEY+'&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres='+e.target.options[e.target.selectedIndex].id)
             .then((response)=>{
                 console.log(response);
                 let movies = response.data.results;
@@ -66,7 +68,7 @@ function genresPage(pageNum){
         let genre = sessionStorage.getItem("genre");
         console.log(genre)
 
-        axios.get("https://api.themoviedb.org/3/discover/movie?api_key=fa155f635119344d33fcb84fb807649b&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page="+pageNum+'&with_genres='+genre)
+        axios.get("https://api.themoviedb.org/3/discover/movie?api_key="+API_KEY+'&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page='+pageNum+'&with_genres='+genre)
             .then((response)=>{
                 console.log(response);
                 let movies = response.data.results;
@@ -102,8 +104,8 @@ function addToList(id){
 }
 //Add movie to favorite movies.
 function favorite(id){
-    let favorite = JSON.parse(localStorage.getItem("favorite")) || [];
+    let favorite = JSON.parse(localStorage.getItem("favoriteMovies")) || [];
     favorite.push(id);
-    localStorage.setItem("favorite", JSON.stringify(favorite));
+    localStorage.setItem("favoriteMovies", JSON.stringify(favorite));
     console.log(favorite);
 }

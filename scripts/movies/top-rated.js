@@ -1,3 +1,5 @@
+//API KEY.
+var API_KEY = config.API_KEY;
 //Spinner
 const spinner = document.querySelector(".spinner");
 spinner.style.display = "none";
@@ -11,7 +13,7 @@ window.onload = function getMovies(){
 		container.style.display = "flex";
 	}, 1000);
 	//Get the API.
-	axios.get("https://api.themoviedb.org/3/movie/top_rated?api_key=fa155f635119344d33fcb84fb807649b&language=en-US&page=1")
+	axios.get("https://api.themoviedb.org/3/movie/top_rated?api_key="+API_KEY+'&language=en-US&page=1')
 		.then( (response) =>{
 			//Fetches the data - > results from the API.
 			console.log(response);
@@ -76,7 +78,7 @@ next.addEventListener("click", ()=>{
 })
 //Showcases the movies after the user changed the page by clicking previous/next button.
 function search(pageNum){
-	axios.get("https://api.themoviedb.org/3/movie/top_rated?api_key=fa155f635119344d33fcb84fb807649b&language=en-US&page="+pageNum)
+	axios.get("https://api.themoviedb.org/3/movie/top_rated?api_key="+API_KEY+'&language=en-US&page='+pageNum)
 		.then((response)=>{
 			console.log(response);
 			let movies = response.data.results;
@@ -118,8 +120,8 @@ function addToList(id){
 }
 //Add movie to favorite movies.
 function favorite(id){
-    let favorite = JSON.parse(localStorage.getItem("favorite")) || [];
+    let favorite = JSON.parse(localStorage.getItem("favoriteMovies")) || [];
     favorite.push(id);
-    localStorage.setItem("favorite", JSON.stringify(favorite));
+    localStorage.setItem("favoriteMovies", JSON.stringify(favorite));
     console.log(favorite);
 }

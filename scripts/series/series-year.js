@@ -1,3 +1,5 @@
+//API KEY.
+var API_KEY = config.API_KEY;
 let selected = document.getElementById("selected");
 selected.style.display = "none";
 
@@ -20,7 +22,7 @@ form.addEventListener("submit", (e)=>{
     e.preventDefault();
 })
 function discoverShows(year){
-    axios.get("https://api.themoviedb.org/3/discover/tv?api_key=fa155f635119344d33fcb84fb807649b&language=en-US&sort_by=popularity.desc&first_air_date_year="+year+'&page=1&include_null_first_air_dates=false')
+    axios.get("https://api.themoviedb.org/3/discover/tv?api_key="+API_KEY+'&language=en-US&sort_by=popularity.desc&first_air_date_year='+year+'&page=1&include_null_first_air_dates=false')
         .then((response)=>{
             let shows = response.data.results;
             let output = "";
@@ -82,7 +84,7 @@ function discoverShowsPage(pageNum){
     if(!genre || !genre.length){
         genre = '';
     }
-    axios.get("https://api.themoviedb.org/3/discover/tv?api_key=fa155f635119344d33fcb84fb807649b&language=en-US&sort_by=popularity.desc&first_air_date_year="+year+'&page='+pageNum+'&include_null_first_air_dates=false&with_genres='+genre)
+    axios.get("https://api.themoviedb.org/3/discover/tv?api_key="+API_KEY+'&language=en-US&sort_by=popularity.desc&first_air_date_year='+year+'&page='+pageNum+'&include_null_first_air_dates=false&with_genres='+genre)
         .then((response)=>{
             let shows = response.data.results;
             let output = "";
@@ -122,7 +124,7 @@ function genres(){
     select.addEventListener("change", (e)=>{
         sessionStorage.setItem("genre",e.target.options[e.target.selectedIndex].id);
         reset.style.display = "block";
-        axios.get("https://api.themoviedb.org/3/discover/tv?api_key=fa155f635119344d33fcb84fb807649b&language=en-US&sort_by=popularity.desc&first_air_date_year="+year+'&with_genres=' + e.target.options[e.target.selectedIndex].id+'&page=1&include_null_first_air_dates=false')
+        axios.get("https://api.themoviedb.org/3/discover/tv?api_key="+API_KEY+'&language=en-US&sort_by=popularity.desc&first_air_date_year='+year+'&with_genres=' + e.target.options[e.target.selectedIndex].id+'&page=1&include_null_first_air_dates=false')
         .then((response)=>{
             let shows = response.data.results;
             let output = "";

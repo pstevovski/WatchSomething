@@ -1,3 +1,6 @@
+//API KEY variable.
+var API_KEY = config.API_KEY;
+
 const adventure = document.getElementById("adventure");
 const movies = document.getElementById("movies");
 const series = document.getElementById("series");
@@ -103,7 +106,7 @@ function myFunction(maxWidth){
 let today = new Date().toJSON().slice(0,10);
 // apiKey fa155f635119344d33fcb84fb807649b
 window.onload = function featuredMovies(){
-    axios.get("https://api.themoviedb.org/3/discover/movie?api_key=fa155f635119344d33fcb84fb807649b&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&primary_release_date.gte=2017-12-01&primary_release_date.lte="+today+'&vote_average.gte=6.5&vote_average.lte=10&with_original_language=en')
+    axios.get("https://api.themoviedb.org/3/discover/movie?api_key="+API_KEY+'&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&primary_release_date.gte=2017-12-01&primary_release_date.lte='+today+'&vote_average.gte=6.5&vote_average.lte=10&with_original_language=en')
         .then((response)=>{
             console.log(response)
             const featured = response.data.results;;

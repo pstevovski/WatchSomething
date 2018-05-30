@@ -1,3 +1,5 @@
+//API KEY.
+var API_KEY = config.API_KEY;
 //Getting today's date.
 let today = new Date().toJSON().slice(0,10);
 let day = 1;
@@ -6,7 +8,7 @@ let endDate = new Date(2019, 4, 17 + 1).toJSON().slice(0,10);
 console.log(endDate);
 
 window.onload = function upcoming(){
-	axios.get("https://api.themoviedb.org/3/discover/movie?api_key=fa155f635119344d33fcb84fb807649b&language=en-US&sort_by=primary_release_date.asc&include_adult=false&include_video=false&page=1&primary_release_date.gte="+today+'&primary_release_date.lte='+endDate+'&with_original_language=en')
+	axios.get("https://api.themoviedb.org/3/discover/movie?api_key="+API_KEY+'&language=en-US&sort_by=primary_release_date.asc&include_adult=false&include_video=false&page=1&primary_release_date.gte='+today+'&primary_release_date.lte='+endDate+'&with_original_language=en')
         .then ((response)=>{
 			console.log(response);
             let upcoming = response.data.results;
@@ -66,7 +68,7 @@ next.addEventListener("click", ()=>{
 })
 //Showcases the movies after the user changed the page by clicking previous/next button.
 function search(pageNum){
-		axios.get("https://api.themoviedb.org/3/discover/movie?api_key=fa155f635119344d33fcb84fb807649b&language=en-US&sort_by=primary_release_date.asc&include_adult=false&include_video=false&page="+pageNum+'&primary_release_date.gte='+today+'&primary_release_date.lte='+endDate)
+		axios.get("https://api.themoviedb.org/3/discover/movie?api_key="+API_KEY+'&language=en-US&sort_by=primary_release_date.asc&include_adult=false&include_video=false&page='+pageNum+'&primary_release_date.gte='+today+'&primary_release_date.lte='+endDate)
 		.then( (response) =>{
 			console.log(response)
 			let upcoming = response.data.results;
@@ -105,8 +107,8 @@ function addToList(id){
 }
 //Add movie to favorite movies.
 function favorite(id){
-    let favorite = JSON.parse(localStorage.getItem("favorite")) || [];
+    let favorite = JSON.parse(localStorage.getItem("favoriteMovies")) || [];
     favorite.push(id);
-    localStorage.setItem("favorite", JSON.stringify(favorite));
+    localStorage.setItem("favoriteMovies", JSON.stringify(favorite));
     console.log(favorite);
 }

@@ -1,3 +1,6 @@
+//API KEY.
+var API_KEY = config.API_KEY;
+
 //Gets the form and uses its value (on submit) to showcase the movies matching the inputed value. After
 //the user presses enter, a spinner animation shows up, lasts 1 second, then lists the movies that match
 //the inputed value.
@@ -20,7 +23,7 @@ form.addEventListener("submit", (e)=>{
 })
 //Get the API data and output it on screen, using the searchText(inputed value in the form & submited on //enter), that lists the movies matching the input.
 function searchMovies(searchText){
-	axios.get("https://api.themoviedb.org/3/search/movie?query="+searchText+'&api_key=fa155f635119344d33fcb84fb807649b&language=en-US&page='+pageNum+'&include_adult=false')
+	axios.get("https://api.themoviedb.org/3/search/movie?query="+searchText+'&api_key='+API_KEY+'&language=en-US&page='+pageNum+'&include_adult=false')
 		.then( (response) =>{
 			//Fetches the data - > results from the API.
 			console.log(response);
@@ -86,7 +89,7 @@ next.addEventListener("click", ()=>{
 //Showcases the movies after the user changed the page by clicking previous/next button.
 function search(pageNum){
 		var searchText = document.getElementById("searchText").value;
-		axios.get("https://api.themoviedb.org/3/search/movie?query="+searchText+'&api_key=fa155f635119344d33fcb84fb807649b&language=en-US&page='+pageNum+'&include_adult=false')
+		axios.get("https://api.themoviedb.org/3/search/movie?query="+searchText+'&api_key='+API_KEY+'&language=en-US&page='+pageNum+'&include_adult=false')
 		.then( (response) =>{
 			console.log(response);
 			let movies = response.data.results;
@@ -126,8 +129,8 @@ function addToList(id){
 }
 //Add movie to favorite movies.
 function favorite(id){
-    let favorite = JSON.parse(localStorage.getItem("favorite")) || [];
+    let favorite = JSON.parse(localStorage.getItem("favoriteMovies")) || [];
     favorite.push(id);
-    localStorage.setItem("favorite", JSON.stringify(favorite));
+    localStorage.setItem("favoriteMovies", JSON.stringify(favorite));
     console.log(favorite);
 }

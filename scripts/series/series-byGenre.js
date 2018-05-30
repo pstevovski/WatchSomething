@@ -1,3 +1,5 @@
+//API KEY.
+var API_KEY = config.API_KEY;
 window.onload = function genres(){
     const select = document.getElementById("selected");
     select.addEventListener("change", (e)=>{
@@ -6,7 +8,7 @@ window.onload = function genres(){
         sessionStorage.setItem("genre",e.target.options[e.target.selectedIndex].id)
 
         //API request.
-        axios.get("https://api.themoviedb.org/3/discover/tv?api_key=fa155f635119344d33fcb84fb807649b&language=en-US&sort_by=popularity.desc&page=1&timezone=America%2FNew_York&with_genres="+e.target.options[e.target.selectedIndex].id+'&include_null_first_air_dates=false')
+        axios.get("https://api.themoviedb.org/3/discover/tv?api_key="+API_KEY+'&language=en-US&sort_by=popularity.desc&page=1&timezone=America%2FNew_York&with_genres='+e.target.options[e.target.selectedIndex].id+'&include_null_first_air_dates=false')
         .then((response)=>{
             let shows = response.data.results;
             let output = "";
@@ -67,7 +69,7 @@ function genres(pageNum){
     let genre = sessionStorage.getItem("genre");
 
     //API request.
-    axios.get("https://api.themoviedb.org/3/discover/tv?api_key=fa155f635119344d33fcb84fb807649b&language=en-US&sort_by=popularity.desc&page="+pageNum+'&timezone=America%2FNew_York&with_genres='+genre+'&include_null_first_air_dates=false')
+    axios.get("https://api.themoviedb.org/3/discover/tv?api_key="+API_KEY+'&language=en-US&sort_by=popularity.desc&page='+pageNum+'&timezone=America%2FNew_York&with_genres='+genre+'&include_null_first_air_dates=false')
     .then((response)=>{
         let shows = response.data.results;
         let output = "";

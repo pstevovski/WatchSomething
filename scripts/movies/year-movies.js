@@ -1,3 +1,6 @@
+//API KEY.
+var API_KEY = config.API_KEY;
+
 let selected = document.getElementById("selected");
 selected.style.display = "none";
 //Get the form and its inputed value.
@@ -25,7 +28,7 @@ form.addEventListener("submit", (e)=>{
 var mykey = config.MY_KEY;
 console.log(mykey);
 function discoverMovies(year){
-    axios.get("https://api.themoviedb.org/3/discover/movie?api_key=fa155f635119344d33fcb84fb807649b&language=en-US&sort_by=popularity.desc&page=1&primary_release_year="+year)
+    axios.get("https://api.themoviedb.org/3/discover/movie?api_key="+API_KEY+'&language=en-US&sort_by=popularity.desc&page=1&primary_release_year='+year)
         .then((response)=>{
             console.log(response)
             let yearly = response.data.results;
@@ -104,7 +107,7 @@ function discoverMoviesPageLoad(pageNum){
     if (!genre || !genre.length){
         genre = '';
     }
-    axios.get('https://api.themoviedb.org/3/discover/movie?api_key=fa155f635119344d33fcb84fb807649b&language=en-US&sort_by=popularity.desc&page='+pageNum+'&primary_release_year='+year+'&with_genres='+genre)
+    axios.get('https://api.themoviedb.org/3/discover/movie?api_key='+API_KEY+'&language=en-US&sort_by=popularity.desc&page='+pageNum+'&primary_release_year='+year+'&with_genres='+genre)
     .then((response)=>{
         console.log(response)
         let yearly = response.data.results;
@@ -145,7 +148,7 @@ function genres(){
     //Set genre to session storage.
     sessionStorage.setItem("genre",e.target.options[e.target.selectedIndex].id);
     //API request.
-    axios.get("https://api.themoviedb.org/3/discover/movie?api_key=fa155f635119344d33fcb84fb807649b&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=" + e.target.options[e.target.selectedIndex].id+'&primary_release_year='+year)
+    axios.get("https://api.themoviedb.org/3/discover/movie?api_key="+API_KEY+'&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=' + e.target.options[e.target.selectedIndex].id+'&primary_release_year='+year)
     .then((response) => {
         console.log(response);
         let movies = response.data.results;

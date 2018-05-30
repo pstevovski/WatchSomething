@@ -1,7 +1,9 @@
+//API KEY.
+var API_KEY = config.API_KEY;
 function seriesToWatch(){
     let toWatch = JSON.parse(localStorage.getItem("series")) || [];
     for(let i = 0; i < toWatch.length; i++){
-        axios.get("https://api.themoviedb.org/3/tv/"+toWatch[i]+'?api_key=fa155f635119344d33fcb84fb807649b&language=en-US')
+        axios.get("https://api.themoviedb.org/3/tv/"+toWatch[i]+'?api_key='+API_KEY+'&language=en-US')
             .then((response)=>{
                 let series = response.data;
                 document.getElementById("movies").innerHTML +=  `<div class="card">

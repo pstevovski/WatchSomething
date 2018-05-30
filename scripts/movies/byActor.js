@@ -1,3 +1,5 @@
+//API KEY.
+var API_KEY = config.API_KEY;
 //Hide the select  genres.
 let selected = document.getElementById("selected");
 selected.style.display = "none";
@@ -18,7 +20,7 @@ form.addEventListener("submit", (e)=>{
     e.preventDefault();
 })
 function discoverByActor(actor){
-    return axios.get("https://api.themoviedb.org/3/search/person?api_key=fa155f635119344d33fcb84fb807649b&language=en-US&query="+actor+'&page=1&include_adult=false')
+    return axios.get("https://api.themoviedb.org/3/search/person?api_key="+API_KEY+'&language=en-US&query='+actor+'&page=1&include_adult=false')
         .then((response)=>{
             let actorId = response.data.results[0].id;
             sessionStorage.setItem("theActorId", actorId);
@@ -26,7 +28,7 @@ function discoverByActor(actor){
 };
 function moviesByActor(){
     let actorId = sessionStorage.getItem("theActorId");
-    axios.get("https://api.themoviedb.org/3/discover/movie?api_key=fa155f635119344d33fcb84fb807649b&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_people="+actorId)
+    axios.get("https://api.themoviedb.org/3/discover/movie?api_key="+API_KEY+'&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_people='+actorId)
         .then((response)=>{
             console.log(response);
             let movies = response.data.results;
@@ -65,7 +67,7 @@ function movieSelected(id){
 //List movies by that actor again after page change.
 function movieByActorPage(pageNum){
     let actorId = sessionStorage.getItem("theActorId");
-    axios.get("https://api.themoviedb.org/3/discover/movie?api_key=fa155f635119344d33fcb84fb807649b&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page="+pageNum+'&with_people='+actorId)
+    axios.get("https://api.themoviedb.org/3/discover/movie?api_key="+API_KEY+'&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page='+pageNum+'&with_people='+actorId)
     .then((response)=>{
         console.log(response);
         let movies = response.data.results;
@@ -105,7 +107,7 @@ function genres(){
     //Set genre to session storage.
     sessionStorage.setItem("genre",e.target.options[e.target.selectedIndex].id);
     //API request.
-    axios.get("https://api.themoviedb.org/3/discover/movie?api_key=fa155f635119344d33fcb84fb807649b&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=" + e.target.options[e.target.selectedIndex].id+'&with_people='+actorId)
+    axios.get("https://api.themoviedb.org/3/discover/movie?api_key="+API_KEY+'&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=' + e.target.options[e.target.selectedIndex].id+'&with_people='+actorId)
     .then((response) => {
         console.log(response);
         let movies = response.data.results;
@@ -157,7 +159,7 @@ function movieByActorWithGenrePage(pageNum){
     let actorId = sessionStorage.getItem("theActorId");
     let genre = sessionStorage.getItem("genre");
 
-    axios.get("https://api.themoviedb.org/3/discover/movie?api_key=fa155f635119344d33fcb84fb807649b&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page="+pageNum+'&with_genres='+genre+'&with_people='+actorId)
+    axios.get("https://api.themoviedb.org/3/discover/movie?api_key="+API_KEY+'&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page='+pageNum+'&with_genres='+genre+'&with_people='+actorId)
     .then((response) => {
         console.log(response);
         let movies = response.data.results;
@@ -209,8 +211,8 @@ function addToList(id){
 }
 //Add movie to favorite movies.
 function favorite(id){
-    let favorite = JSON.parse(localStorage.getItem("favorite")) || [];
+    let favorite = JSON.parse(localStorage.getItem("favoriteMovies")) || [];
     favorite.push(id);
-    localStorage.setItem("favorite", JSON.stringify(favorite));
+    localStorage.setItem("favoriteMovies", JSON.stringify(favorite));
     console.log(favorite);
 }

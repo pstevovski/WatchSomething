@@ -1,3 +1,5 @@
+//API KEY.
+var API_KEY = config.API_KEY;
 //Spinner.
 const spinner = document.querySelector(".spinner");
 spinner.style.display = "none";
@@ -14,8 +16,8 @@ function getMovie(){
 	
 	let movieId = sessionStorage.getItem("movieId");
 
-	const movieInfo = axios.get("https://api.themoviedb.org/3/movie/"+movieId+'?api_key=fa155f635119344d33fcb84fb807649b&language=en-US');
-	const movieCast = axios.get("https://api.themoviedb.org/3/movie/"+movieId+'/credits?api_key=fa155f635119344d33fcb84fb807649b')
+	const movieInfo = axios.get("https://api.themoviedb.org/3/movie/"+movieId+'?api_key='+API_KEY+'&language=en-US');
+	const movieCast = axios.get("https://api.themoviedb.org/3/movie/"+movieId+'/credits?api_key='+API_KEY)
 	Promise.all([movieInfo, movieCast])
 		.then( ([movieInfoResponse, movieCastResponse]) =>{
 			console.log(movieInfoResponse, movieCastResponse);
@@ -99,7 +101,7 @@ function getMovie(){
 		});
 		//Gets the trailer link from youtube. Video is hidden until users click on TRAILER
 		//button.
-		axios.get("https://api.themoviedb.org/3/movie/"+movieId+'/videos?api_key=fa155f635119344d33fcb84fb807649b&language=en-US')
+		axios.get("https://api.themoviedb.org/3/movie/"+movieId+'/videos?api_key='+API_KEY+'&language=en-US')
 			.then((response)=>{
 				console.log(response);
 				//Targets the first item in the results Array, that hold the "key" parameter.
@@ -123,7 +125,7 @@ function getMovie(){
 				page.style.display = "none";
 			});
 		//Gets similar movies from the API, to the current one that is open.
-		axios.get("https://api.themoviedb.org/3/movie/"+movieId+'/similar?api_key=fa155f635119344d33fcb84fb807649b&language=en-US&page=1')
+		axios.get("https://api.themoviedb.org/3/movie/"+movieId+'/similar?api_key='+API_KEY+'&language=en-US&page=1')
 			.then ((response)=>{
 				console.log(response);
 				//Makes the movie parameter dynamic, and sets the length of it to 5 (5 similar movies will
@@ -199,7 +201,7 @@ next.addEventListener("click", ()=>{
 function recommendedPage(pageNum){
 	let movieId = sessionStorage.getItem("movieId");
 
-	axios.get("https://api.themoviedb.org/3/movie/"+movieId+'/similar?api_key=fa155f635119344d33fcb84fb807649b&language=en-US&page='+pageNum)
+	axios.get("https://api.themoviedb.org/3/movie/"+movieId+'/similar?api_key='+API_KEY+'&language=en-US&page='+pageNum)
 	.then ((response)=>{
 				console.log(response);
 				//Makes the movie parameter dynamic, and sets the length of it to 5 (5 similar movies will

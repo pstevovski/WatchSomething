@@ -1,3 +1,5 @@
+//API KEY.
+var API_KEY = config.API_KEY;
 //Spinner.
 const spinner = document.querySelector(".spinner");
 spinner.style.display = "none";
@@ -14,9 +16,9 @@ function getShowInfo(){
 	const showId = sessionStorage.getItem("showId");
 	//Defines requests to the API as variable, so they can be used as part of Promise.all, to target
 	//mulitple requests at once.
-	const seriesPromise = axios.get("https://api.themoviedb.org/3/tv/"+showId+'?api_key=fa155f635119344d33fcb84fb807649b&language=en-US');
-	const imdbPromise = axios.get("https://api.themoviedb.org/3/tv/"+showId+'/external_ids?api_key=fa155f635119344d33fcb84fb807649b&language=en-US');
-	const seriesCast = axios.get("https://api.themoviedb.org/3/tv/"+showId+'/credits?api_key=fa155f635119344d33fcb84fb807649b&language=en-US')
+	const seriesPromise = axios.get("https://api.themoviedb.org/3/tv/"+showId+'?api_key='+API_KEY+'&language=en-US');
+	const imdbPromise = axios.get("https://api.themoviedb.org/3/tv/"+showId+'/external_ids?api_key='+API_KEY+'&language=en-US');
+	const seriesCast = axios.get("https://api.themoviedb.org/3/tv/"+showId+'/credits?api_key='+API_KEY+'&language=en-US')
 	//Uses the Promise.all to target multiple requests to the API, uses the defined variables as
 	//link holders.
 	Promise.all([seriesPromise, imdbPromise, seriesCast])
@@ -144,7 +146,7 @@ function getShowInfo(){
 		})
 		//Gets the trailer link from youtube. Video is hidden until users click on TRAILER
 		//button.
-		axios.get("https://api.themoviedb.org/3/tv/"+showId+'/videos?api_key=fa155f635119344d33fcb84fb807649b&language=en-US')
+		axios.get("https://api.themoviedb.org/3/tv/"+showId+'/videos?api_key='+API_KEY+'&language=en-US')
 			.then ((response)=>{
 				//Targets the first item in the results Array, that hold the "key" parameter.
 				let trailer = response.data.results[0].key;
@@ -164,7 +166,7 @@ function getShowInfo(){
 				console.log(err);
 			})		
 		//Show similar tv shows to the one that is currently open.
-		axios.get("https://api.themoviedb.org/3/tv/"+showId+'/similar?api_key=fa155f635119344d33fcb84fb807649b&language=en-US&page=1')
+		axios.get("https://api.themoviedb.org/3/tv/"+showId+'/similar?api_key='+API_KEY+'&language=en-US&page=1')
 			.then ((response)=>{
 				let series = response.data.results;
 				//Makes the series parameter dynamic, and sets the length of it to 5 (5 similar movies will
@@ -237,7 +239,7 @@ next.addEventListener("click", ()=>{
 function recommendedPage(pageNum){
 	const showId = sessionStorage.getItem("showId");
 
-	axios.get("https://api.themoviedb.org/3/tv/"+showId+'/similar?api_key=fa155f635119344d33fcb84fb807649b&language=en-US&page='+pageNum)
+	axios.get("https://api.themoviedb.org/3/tv/"+showId+'/similar?api_key='+API_KEY+'&language=en-US&page='+pageNum)
 			.then ((response)=>{
 				let series = response.data.results;
 				//Makes the series parameter dynamic, and sets the length of it to 5 (5 similar movies will
