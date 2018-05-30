@@ -17,7 +17,7 @@ window.onload = function upcoming(){
 				output += `
 				<div class="card">
 					<div class="addBtn"><span><i class="ion-android-add-circle" onclick="addToList('${movie.id}')"></i></span>
-					<span><i class="ion-heart heart" onclick="favorite('${movie.id}')"></i></span></div>
+					<span><ion-icon name="heart" onclick="favorite('${movie.id}')"></ion-icon></div>
 					<div class="card_img">
 						<img src="http://image.tmdb.org/t/p/w300/${movie.poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
 					</div>
