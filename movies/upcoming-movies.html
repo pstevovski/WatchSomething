@@ -4,7 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>By year | WhatToWatch</title>
+    <title>Upcoming movies | WhatToWatch</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon/favicon-16x16.png">
+    <link rel="manifest" href="../favicon/site.webmanifest">
+    <link rel="mask-icon" href="../favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="../style/main.css">
 </head>
 <body>
@@ -39,7 +46,7 @@
                                        <ul class="secondUnordered">
                                            <li><a href="../series/search-series.html">Tv Shows by Title</a></li>
                                            <li><a href="../series/series-year.html">Tv Shows by Year</a></li>
-                                           <li><a href="../series/seires-genre.html">TV Shows by Genre</a></li>
+                                           <li><a href="../series/series-genre.html">TV Shows by Genre</a></li>
                                        </ul>
                                </li>
                            </ul>
@@ -89,28 +96,42 @@
                                    <li><a href="../series/series-latest.html">On air</a></li>
                                </ul>
                            </li>
-                           <li class="list">My Lists<span class="drop"><i class="ion-chevron-down"></i></span></a>
-                            <ul class="firstUnordered">
+                           <li class="list" id="smallScreenList">My Lists<span class="drop"><i class="ion-chevron-down"></i></span></a>
+                            <ul id="myListsDropdown">
                                 <li><a href="moviesToWatch.html">Movies to Watch</a></li>
                                 <li><a href="../series/seriesToWatch.html">Series to Watch</a></li>
-                                <li class="search">Favorites
-                                    <ul class="secondUnordered">
-                                            <li><a href="favoriteMovies.html">Favorite Movies</a></li>
-                                            <li><a href="../series/favoriteSeries.html">Favorite Series</a></li>
-                                    </ul>
-                                </li>
+                                <li><a href="favoriteMovies.html">Favorite Movies</a></li>
+                                <li><a href="../series/favoriteSeries.html">Favorite Series</a></li>
                             </ul>
                             </li>
                            <li><a href="../about.html">About</a></li>
                        </ul>
                    </div>
                </nav>
-    <!-- Spinner
-    <div class="spinner"></div>	 -->
     <!-- Container -->
         <div class="container">
-            <h1>Upcoming movies</h1>    
+            <h1>Upcoming movies <span id="upcomingDate"></span></h1>    
+            <!-- Sort by Dates -->
+    <select id="dates">
+            <option>Select Month: </option>
+            <option id="primary_release_date.gte=2018-01-01&primary_release_date.lte=2018-01-31">January</option>
+            <option id="primary_release_date.gte=2018-02-01&primary_release_date.lte=2018-02-28">February</option>
+            <option id="primary_release_date.gte=2018-03-01&primary_release_date.lte=2018-03-31">March</option>
+            <option id="primary_release_date.gte=2018-04-01&primary_release_date.lte=2018-04-30">April</option>
+            <option id="primary_release_date.gte=2018-05-01&primary_release_date.lte=2018-05-31">May</option>
+            <option id="primary_release_date.gte=2018-06-01&primary_release_date.lte=2018-06-30">June</option>
+            <option id="primary_release_date.gte=2018-07-01&primary_release_date.lte=2018-07-31">July</option>
+            <option id="primary_release_date.gte=2018-08-01&primary_release_date.lte=2018-08-31">August</option>
+            <option id="primary_release_date.gte=2018-09-01&primary_release_date.lte=2018-09-30">September</option>
+            <option id="primary_release_date.gte=2018-10-01&primary_release_date.lte=2018-10-31">October</option>
+            <option id="primary_release_date.gte=2018-11-01&primary_release_date.lte=2018-11-30">November</option>
+            <option id="primary_release_date.gte=2018-12-01&primary_release_date.lte=2018-12-31">December</option>
+        </select>
+        <span><button id="resetUpcoming"><i class="ion-trash-a"></i></button></span>
         </div>
+    <!-- Notifications -->
+    <div class="notification" id="added"></div>
+    <div class="notification" id="alreadyStored"></div>
     <!-- Showcase - lists movies by year -->
         <div class="showcase">
             <div id="movies" class="moviesRows"></div>
@@ -127,10 +148,5 @@
 <script src="../scripts/global.js"></script>
 <!-- Axios link -->
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<!-- Jquery CDN -->
-<script
-src="https://code.jquery.com/jquery-3.3.1.min.js"
-integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-crossorigin="anonymous"></script>
 </body>
 </html>

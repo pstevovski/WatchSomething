@@ -3,7 +3,14 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Favorite Series</title>
+	<title>Favorite Shows | WhatToWatch</title>
+	<link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon/favicon-16x16.png">
+    <link rel="manifest" href="../favicon/site.webmanifest">
+    <link rel="mask-icon" href="../favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
 	<link rel="stylesheet" type="text/css" href="../style/main.css">
 </head>
 <body>
@@ -38,7 +45,7 @@
 										<ul class="secondUnordered">
 											<li><a href="search-series.html">Tv Shows by Title</a></li>
 											<li><a href="series-year.html">Tv Shows by Year</a></li>
-											<li><a href="seires-genre.html">TV Shows by Genre</a></li>
+											<li><a href="series-genre.html">TV Shows by Genre</a></li>
 										</ul>
 								</li>
 							</ul>
@@ -73,6 +80,7 @@
 						<li><a href="../movies/search-movies.html">Search by Title</a></li>
 						<li><a href="../movies/year-movies.html">Search by Year</a></li>
 						<li><a href="../movies/byActor-movies.html">Search by Actor</a></li>
+						<li><a href="../movies/byGenre-movies.html">Search by Genre</a></li>
 						<li><a href="../movies/top-rated.html">Top rated</a></li>
 						<li><a href="../movies/popular-movies.html">Popular movies</a></li>
 						<li><a href="../movies/latest-movies.html">Latest movies</a></li>
@@ -82,22 +90,19 @@
 				<li id="smallScreenSeries">Series<span><i class="ion-chevron-down"></i></span>
 					<ul id="seriesDropdown">
 						<li><a href="search-series.html">Tv Shows by Title</a></li>
-                        <li><a href="series-year.html">Tv Shows by Year</a></li>
+						<li><a href="series-year.html">Tv Shows by Year</a></li>
+						<li><a href="series-byGenre.html">Tv Shows by Genre</a></li>
 						<li><a href="series-popular.html">Popular tv shows</a></li>
 						<li><a href="series-toprated.html">Top rated</a></li>
                         <li><a href="series-latest.html">On air</a></li>
 					</ul>
 				</li>
-				<li class="list">My Lists<span class="drop"><i class="ion-chevron-down"></i></span></a>
-					<ul class="firstUnordered">
+				<li class="list" id="smallScreenList">My Lists<span class="drop"><i class="ion-chevron-down"></i></span></a>
+					<ul id="myListsDropdown">
 						<li><a href="../movies/moviesToWatch.html">Movies to Watch</a></li>
 						<li><a href="seriesToWatch.html">Series to Watch</a></li>
-						<li class="search">Favorites
-							<ul class="secondUnordered">
-									<li><a href="../movies/favoriteMovies.html">Favorite Movies</a></li>
-									<li><a href="favoriteSeries.html">Favorite Series</a></li>
-							</ul>
-						</li>
+						<li><a href="../movies/favoriteMovies.html">Favorite Movies</a></li>
+						<li><a href="favoriteSeries.html">Favorite Series</a></li>
 					</ul>
 				</li>
 				<li><a href="../about.html">About</a></li>
@@ -106,7 +111,9 @@
 	</nav>
 <!-- Container -->
 	<div class="container">
-		<h1>Series to Watch</h1>
+		<h1>Favorite Series</h1>
+			<button id="removeAll">Clear List</button>
+			<span id="smallSpinner"></span>
 	</div>
 <!-- Showcase - lists on top rated shows -->
 	<div class="showcase">
@@ -124,11 +131,6 @@
 <script src="../scripts/global.js"></script>
 <!-- Axios link -->
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<!-- Jquery CDN -->
-<script
-src="https://code.jquery.com/jquery-3.3.1.min.js"
-integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-crossorigin="anonymous"></script>
 <script>
     favoriteSeries();
 </script>
