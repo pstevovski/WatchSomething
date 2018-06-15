@@ -189,16 +189,16 @@ function getShowInfo(){
 				console.log(series);
 				let output = "";
 
-				$.each(series, (index,series)=>{
+				for(let i = 0; i < series.length; i++){
 					output += `
 					<div class="recommended_card">
-						<img src="http://image.tmdb.org/t/p/w200/${series.poster_path}">
-						<h4>${series.name}</h4>
-						<p>Rating: <strong>${series.vote_average} IMDB</strong></p>
-						<a onclick="showSelected('${series.id}')" class="buttons" href="#"> Show Details </a>
+						<img src="http://image.tmdb.org/t/p/w200/${series[i].poster_path}">
+						<h4>${series[i].name}</h4>
+						<p>Rating: <strong>${series[i].vote_average} IMDB</strong></p>
+						<a onclick="showSelected('${series[i].id}')" class="buttons" href="#"> Show Details </a>
 					</div>
 					`;
-				})
+				}
 				//Creates a variable that targets the "recommended" element in the HTML
 				//that will be used to output the data results to.
 				let recommended = document.getElementById("recommended");
