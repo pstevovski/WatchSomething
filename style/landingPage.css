@@ -175,24 +175,24 @@ a{
     height: 230px;
     width: 200px;
     position: relative;
+    transition: 0.35s;
 }
 .link a{
     position: absolute;
     z-index: 99;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%) scale(0);
+    transform: translate(-50%,200px);
     padding: 5px 10px;
     background-color: #fff;
     border-radius: 2px;
     font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
     color: #0091EA;
     box-shadow: 0 3px 5px rgba(0,0,0,0.6);
-    transition: 0.35s ease;
+    transition: 0.7s ease-in-out;
 }
 .card:hover .link a{
-    opacity: 1;
-    transform: translate(-50%,-50%) scale(1);
+    transform: translate(-50%,-50%);
 }
 .link a:hover{
     background-color: #0091EA;

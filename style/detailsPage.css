@@ -43,6 +43,7 @@ body{
 }
 .buttons{
 	margin-top: 25px;
+	width: 100%;
 }
 .buttons > *{
 	margin: 0 5px;
@@ -66,12 +67,13 @@ body{
 }
 #errorTitle{
 	font-family: "Montserrat Black", Arial, Helvetica, sans-serif;
+	color: #E53935;
 }
 .errorBack{
 	position: absolute;
-	top: 40%;
+	top: 30%;
 	left: 50%;
-	transform: translate(-50%,-40%);
+	transform: translate(-50%,-30%);
 	width: 120px;
 }
 #errorText{
@@ -83,22 +85,28 @@ body{
 	width: 100%;
 	display: flex;
 	justify-content: center;
+	margin-bottom: 20px;
 }
 #prev, #next {
 	margin: 5px 5px;
 	font-size: 25px;
 	font-weight: bold;
 	font-family: "Poppins", Arial, Helvetica, sans-serif;
-	background-color: #222;
-	color: #fff;
-	padding:0 10px;
+	background-color: #fff;
+	color: #0091EA;
+	box-shadow: 0 2px 5px rgba(0,0,0,0.20);
+	width: 35px;
+	height: 35px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	cursor: pointer;
-	border-radius: 3px;
+	border-radius: 50%;
 	transition: 0.3s ease;
 }
 #prev:hover, #next:hover{
-	background-color: #222;
-	color: #E53935;
+	background-color: #E53935;
+	color: #fff;
 }
 /* Movie/tv show info - END. */
 
@@ -123,15 +131,18 @@ body{
 	background: rgba(0,0,0,0.7);
 }
 #close{
-	display: inline;
-	font-size: 25px;
-	font-weight: bold;
+	background-color: #fff;
+	width: 80px;
+	text-align: center;
+	border-radius: 5px;
+	font-size: 18px;
 	cursor: pointer;
-	font-family: "Poppins";
+	font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
 	transition: 0.3s;
 }
 #close:hover {
 	color: #E53935;
+	background-color: #eee;
 }
 #trailer iframe{
 	border-radius: 5px;
@@ -158,12 +169,21 @@ body{
 .recommended_card{
 	text-align: center;
 	width: 200px;
-	background-color: #0091EA;
-	color: #fff;
+	height: 380px;
+	font-family: "Montserrat Regular", Arial, Helvetica, sans-serif;
+	color: #0091EA;
 	border-radius: 3px;
 	transition: 0.35s;
 	position: relative;
+	box-shadow: 0 3px 5px rgba(0,0,0,0.20);
 	animation: recommended 0.5s ease-in forwards;
+}
+.recommended_card h4{
+	font-size: 16px;
+	font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
+}
+.recommended_card p{
+	font-size: 15px;
 }
 @keyframes recommended{
 	0%{
@@ -177,10 +197,10 @@ body{
 }
 .recommended_card:hover{
 	transform:translateY(-10px);
-	color: #fff;
-	box-shadow: 0 5px 5px rgba(0,0,0,0.3);
+	color: #0091EA;
 }
 .recommended_card img{
+	height: 300px;
 	border-radius: 3px;
 }
 .recommended_card a{
@@ -189,7 +209,7 @@ body{
 	width: 100%;
 	transition: 0.3s;
 	padding: 5px;
-	color:  goldenrod;
+	color:  #E53935;
 	font-family: "Montserrat", Arial, Helvetica, sans-serif;
 	font-weight: bold;
 	border-bottom-right-radius: 3px;
@@ -198,13 +218,57 @@ body{
 	bottom: 0;
 }
 .recommended_card a:hover{
-	background-color: rgba(0,0,0,0.6);
-	color: #E53935;
+	background-color: #0091EA;
+	color: #eee;
+}
+
+.notification{
+	background-color: #0091EA;
+	padding: 10px;
+	border-radius: 3px;
+	width: 190px;
+	font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
+	color: #fff;
+	position: absolute;
+	left: 30px;
+	bottom: -50px;
+	opacity: 0;
+	box-shadow: 0 5px 5px rgba(0,0,0,0.35);
+}
+#alreadyStored{
+	background-color: #E53935;
+}
+.notification.animate{
+	animation: notification 2s forwards;
+}
+@keyframes notification{
+	0%{
+		opacity: 0;
+		transform:translateY(-50px);
+	}
+	50%{
+		opacity: 1;
+		transform: translateY(-100px);
+	}
+	80%{
+		opacity: 1;
+		transform: translateY(-100px);
+	}
+	100%{
+		opacity: 0;
+		transform: translateY(-100px);
+	}
 }
 /* Movie/tvshow recommended - END. */
 
 /* 		Media Queries		 */
-
+@media (max-width: 1207px){
+	.notification{
+		position: fixed;
+		left: 30px;
+		bottom: 50px;
+	}
+}
 /* Max-width 854 px. */
 @media(max-width: 854px){
 	.moviePage{
@@ -215,13 +279,18 @@ body{
 	}
 }
 /* Max-width 450 px. */
+@media (max-width:645px){
+	#trailer iframe{
+		width: 450px;
+	}
+}
 @media (max-width: 450px){
 	#trailer iframe {
 		width: 100%;
 	}
 }
-/* Max-width 430 px. */
-@media (max-width: 430px){
+/* Max-width 470 px. */
+@media (max-width: 470px){
 	.buttons{
 		display: flex;
 		flex-direction: column;

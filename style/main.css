@@ -18,6 +18,9 @@ body{
 li{
 	color: #0091EA;
 }
+li:hover{
+	color: #E53935;
+}
 a{
 	text-decoration: none;
 	color: #0091EA;
@@ -64,7 +67,6 @@ ul{
 	border-top-color: #0091EA;
 	animation: spinner 0.5s ease infinite;
 }
-
 @keyframes spinner{
 	from{
 		transform:translate(-50%,-50%) rotate(0deg);
@@ -93,6 +95,7 @@ nav a{
 	z-index: 999;
 	transition: 0.35s ease-in-out;
 	animation: navbarSlide 0.4s 1;
+	box-shadow: 0 3px 5px rgba(0,0,0,0.15);
 }
 .sticky a{
 	color: #fff;
@@ -129,6 +132,9 @@ nav a{
 	transition: all 0.3s;
 	margin: 0 5px;
 	transition: 0.25s;
+}
+.menu ul .list a:hover {
+	color: #E53935;
 }
 .menu ul .list:hover .firstUnordered .search{
 	color: #333;
@@ -169,6 +175,7 @@ nav a{
 	padding: 10px;
 	transition: all 0.3s;
 	z-index: 9;
+	background-color: transparent;
 }
 .menu ul .list .firstUnordered .search{
 	position: relative;
@@ -177,12 +184,12 @@ nav a{
 	color: #E53935;
 }
 .menu ul .list .firstUnordered li:nth-last-child(1){
-	margin-left: 5px;
+	padding-left: 15px;
 }
 .menu ul .list .firstUnordered .secondUnordered{
 	display: none;
 	position: absolute;
-	left: -201px;
+	left: -190px;
 	top: 0;
 	z-index: -1;
 }
@@ -225,14 +232,19 @@ nav a{
 	align-items: center;
 }
 .container h1{
-	font-family: "Montserrat", Arial, Helvetica, sans-serif;
+	font-family: "Montserrat Black", Arial, Helvetica, sans-serif;
 	text-align: center;
 	margin: 25px 0;
-	font-size: 45px;
+	font-size:50px;
 }
 #byYear{
 	color: #E53935;
 	font-size: 40px;
+	font-weight: bold;
+}
+#upcomingDate{
+	color: #E53935;
+	font-size: 50px;
 	font-weight: bold;
 }
 /* Movies/Tvshows output - START. */
@@ -328,7 +340,7 @@ nav a{
 	margin: 0 3px;
 }
 .addBtn i {
-	font-size: 30px;
+	font-size: 35px;
 	opacity: 0;
 	transition: 0.2s ease-out;
 	cursor: pointer;
@@ -456,7 +468,7 @@ nav a{
 	left: 50%;
 	transform:translateX(-50%);
 	animation:modal 0.5s ease-in-out forwards;
-	box-shadow: 0 3px 5px rgba(0,0,0,0.6);
+	box-shadow: 0 3px 5px rgba(0,0,0,0.1);
 }
 .modal h3{
 	color: #E53935;
@@ -501,8 +513,8 @@ nav a{
 }
 #selected{
 	width: 250px;
-	margin-bottom: 25px;
-	margin-right: 32px;
+	margin-bottom: 18px;
+	margin-right: 60px;
 	padding: 3px 7px;
 	font-family: "Montserrat", Arial, Helvetica, sans-serif;
 	font-weight: bold;
@@ -514,6 +526,55 @@ nav a{
 	position: relative;
 	box-shadow: 0 2px 5px rgba(0,0,0,0.15);
 	animation: select 0.35s ease-in-out 1 forwards;
+}
+#rating{
+	width: 100px;
+	margin-bottom: 25px;
+	padding: 3px 7px;
+	font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
+	border: none;
+	border-radius: 3px;
+	transition: 0.25s;
+	opacity: 0;
+	display: none;
+	position: relative;
+	box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+	animation: select 0.35s ease-in-out 1 forwards;
+}
+#dates{
+	width: 130px;
+	margin-bottom: 15px;
+	padding: 3px 7px;
+	font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
+	border: none;
+	border-radius: 3px;
+	transition: 0.25s;
+	opacity: 0;
+	position: relative;
+	box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+	animation: select 0.35s ease-in-out 1 forwards;
+}
+.buttons{
+	margin-right: 50px;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+}
+.buttons > * {
+	margin: 0px 0px 10px 10px;
+	padding: 5px;
+	border-radius: 3px;
+	border:none;
+	font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
+	color: #0091EA;
+	background-color: #fff;
+	box-shadow: 0 3px 5px rgba(0,0,0,0.15);
+	cursor: pointer;
+	transition: 0.25s ease;
+}
+#byRating:hover,  #byGenre:hover{
+	background-color: #0091EA;
+	color: #fff;
 }
 #reset{
 	padding: 0px 5px;
@@ -528,12 +589,62 @@ nav a{
 	opacity: 0;
 	animation: resetBtn 2s ease forwards;
 	box-shadow: 0 2px 5px rgba(0,0,0,0.15);
-	position: relative;
+	position: absolute;
+	margin-left: -25px;
 }
-#reset i {
+#removeAll{
+	display: none;
+	padding: 5px;
+	border-radius: 3px;
+	border: none;
+	background-color: #E53935;
+	color: #fff;
+	font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	transition: 0.25s;
+	cursor: pointer;
+	box-shadow: 0 3px 5px rgba(0,0,0,0.10);
+	margin-bottom: 25px;
+}
+#removeAll:hover{
+	background-color: #fff;
+	color: #E53935;
+}
+#smallSpinner{
+	display: none;
+	content: '';
+	box-sizing: border-box;
+	position: relative;
+	margin-left: 140px;
+	height:15px;
+	width: 15px;
+	border-radius: 50%;
+	margin-top: -39px;
+	border: 3px solid #eee;
+	border-top-color: #E53935;
+	animation: spinner 0.5s ease infinite;
+}
+#resetUpcoming{
+	margin:0 0 30px 0px;
+	padding: 0px 5px;
+	border-radius: 3px;
+	border:none;
+	background-color: #fff;
+	color: #E53935;
+	font-family: "Poppins", Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	transition: 0.3s;
+	cursor: pointer;
+	opacity: 0;
+	animation: resetBtn 2s ease forwards;
+	box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+	position: relative;
+	display: none;
+}
+#reset i, #resetUpcoming i {
 	font-size: 16px;
 }
-#reset::after{
+#reset::after, #resetUpcoming::after{
 	content:"Reset";
 	position: absolute;
 	bottom: -22px;
@@ -546,14 +657,14 @@ nav a{
 	opacity: 0;
 	transition: 0.35s;
 }
-#reset:hover::after{
+#reset:hover::after, #resetUpcoming:hover::after{
 	opacity: 1;
 }
- #reset:hover{
+ #reset:hover, #resetUpcoming:hover{
 	background-color: #E53935;
 	color: #fff;
 } 
-#reset:focus{
+#reset:focus, #resetUpcoming:focus{
 	outline: none !important;
 }
 
@@ -565,6 +676,47 @@ nav a{
 	outline: none !important;
 	background-color: #E53935;
 	color: #fff;
+}
+.notification{
+	z-index: 999;
+	background-color: #0091EA;
+	padding: 10px;
+	border-radius: 3px;
+	width: 190px;
+	font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
+	color: #fff;
+	position: fixed;
+	left: 30px;
+	bottom: -50px;
+	opacity: 0;
+	box-shadow: 0 5px 5px rgba(0,0,0,0.35);
+}
+#alreadyStored{
+	background-color: #E53935;
+}
+.notification.added{
+	animation: notification 2s forwards;
+}
+.notification.alreadyStored{
+	animation: notification 2s forwards;
+}
+@keyframes notification{
+	0%{
+		opacity: 0;
+		transform:translateY(-50px);
+	}
+	50%{
+		opacity: 1;
+		transform: translateY(-100px);
+	}
+	80%{
+		opacity: 1;
+		transform: translateY(-100px);
+	}
+	100%{
+		opacity: 0;
+		transform: translateY(-100px);
+	}
 }
 
 /* 				Media Queries 			*/
@@ -591,7 +743,7 @@ nav a{
 		width: 28px;
 		display: block;
 		margin-right: 15px;
-		margin-top: 5px;
+		margin-top: 15px;
 		position: relative;
 		overflow: hidden;
 		cursor: pointer;
@@ -604,6 +756,12 @@ nav a{
 		display: block;
 		position: absolute;
 		transition: all 0.5s;
+	}
+	.sticky{
+		padding: 5px 0;
+	}
+	.sticky .burger span{
+		background-color: #fff;
 	}
 	.burger span:nth-child(1){
 		top: 0px;
@@ -628,6 +786,9 @@ nav a{
 		transform:rotate(-45deg);
 		z-index: 9;
 	}
+	.burger.active span{
+		background-color: #EF5350;
+	}
 	.burger.active:hover span{
 		background-color: #EF5350;
 		box-shadow: 0 1px 5px rgba(0,0,0,0.3);
@@ -636,24 +797,26 @@ nav a{
 		display: block;
 		position: absolute;
 		top: 0px;
-		color: #00E676;
+		color: #333;
 		width: 100%;
 		min-height: 100vh;
-		background-color: rgba(0,0,0,0.94);
+		background-color: #fff;
 		transition: all 0.35s;
 		font-weight: bold;
 		z-index: 8;
 		transform: translateX(-700px);
+		font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
 	}
 	.slide.slideIn{
 		transform: translateX(0px);
 	}
 	.slide a{
-		color:#0091EA;
+		color:#333;
+		transition: 0.35s;
 		display: block;
 	}
 	.slide a:hover{
-		color: #eee;
+		color: #0091EA;
 	}
 	.slide ul{
 		margin-top: 25px;
@@ -666,6 +829,7 @@ nav a{
 		cursor: pointer;
 		display: block;
 		position: relative;
+		color: #333;
 	}
 	.slide ul li span{
 		position: absolute;
@@ -677,7 +841,7 @@ nav a{
 		animation: upNdown 0.4s ease-in-out forwards;
 	}
 	.slide ul li:hover{
-		color: #eee;
+		color: #0091EA;
 	}
 	.slide ul li #moviesDropdown{
 		display: none;
@@ -693,6 +857,13 @@ nav a{
 		display: block;
 		animation: smallDrop 1s forwards;
 	}
+	.slide ul li #myListsDropdown{
+		display: none;
+	}
+	.slide ul li #myListsDropdown.drop{
+		display: block;
+		animation: smallDrop 1s forwards;
+	}
 	.slide ul li ul li{
 		font-size: 16px;
 		display: block;
@@ -705,7 +876,7 @@ nav a{
 		color: #0091EA;
 	}
 	.slide ul li ul li a{
-		color: #0091EA;
+		color: #333;
 	}
 }
 /* Max-width 650 px. */
