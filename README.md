@@ -1,4 +1,8 @@
-# What to Watch
+#WhatToWatch - Find a movie or tv show to watch with ease !
+<p align="center">
+    <img src="images/repoImage.png" width="500px"/>
+</p>
+
 ### About
 This project uses an API from themoviedb.com in order to list movies & tv shows according to the following criteria:
 * Latest;
@@ -14,6 +18,19 @@ It also provides an option to SEARCH for movies/tv shows by:
 * Genre.
 #### Personal learning project.
 ##### I do not hold any ownership of the images used in this project. This project is for non-commercial use.
+
+#### Update v3.0 (2018-06-14)
+###### DONE:
+* Added option to sort the output by set min/max average rating (for movies by year and genre only).
+* Added option to sort "UPCOMING" movies by month.
+* Re-designed the cards for recommended movies/tv shows on detailed info page.
+* Added a button to "Add to watchlist" at detailed info page for movies/tv shows.
+* Re-designed the slide menu for small screens.
+* Corrected the links.
+* Added a notification when you add to watchlist/favorites list.
+* Added option to remove ALL movies/tv shows from watchlist / favorites list, at ONCE.
+* Corrected titles of pages.
+* Created the about page, giving credits to TMDB and Flaticon(Freepik).
 
 #### Update v2.0 (2018-05-29)
 Lists are here !! Personal watchlist and favorites list(for movies and tv shows).
@@ -38,14 +55,7 @@ A lot of changes and improvements have been made, from functionality to design. 
 * Re-designed home page, movie / tv show info page, and all pages for searching options.
 * Added modal box to Learn More @  Home page, containing some basic info how to use the website.
 
-###### Bugs Fixed:
-* year-movies.js : function discoverMoviesPageLoad(pageNum){} -> does not list movies from 2nd page(returns 0 results) untill genre is selected, then it works normally. -> FIXED.
-* series-year.js - page & genre load bugs; -> FIXED.
-
-###### Not completed:
+###### To-Do in a future update:
 * Add option to select season/episode and show the plot about it for TV Shows.(?)
 * Make the end date of upcoming movies dynamic.
-* Create an "about" page - how to use the website.
-* Re-design the cards for the recommended movie/tv show (on detailed info page).
-
 ###### Known bugs: 0 (currently at the time of update v2.0).
