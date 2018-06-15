@@ -4,19 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>About | PMDB </title>
+    <title>About | WhatToWatch</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
+    <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="style/about.css">
 </head>
 <body>
-    <h1>About</h1>
-    <p> This project uses free API key from themoviedb.com.This page is created for learning purposes. It lists all the movies(latest, currently popular & top rated) and series(those on air, currently popular & top rated).It also has an option to search for a movie/tv show by title. For every movie and tv show, there's a details page, where it takes the ID of the movie/tv show stored in the Session Storage, and lists info about it. It includes a link to the IMDB page, YouTube trailer, a link to a subtitles page and also to thepiratebay (if you're into those pirate stuff..). It will be updated with new stuff regulary as I learn more and more.
-    </p>
-    <div class="link">
-        <span><i class="ion-social-github"></i></span>
-        <span><i class="ion-social-reddit"></i></span>
+    <!-- Title -->
+    <div class="title">
+        <h1>About</h1>
+    </div>
+    <!-- Links to my github -->
+    <div class="github">
+        <a href="https://github.com/pecko95/What-to-Watch" title="Github link."><span><i class="ion-social-github"></i></span></a>
+    </div>
+    <!-- Info -->
+    <div class="text">
+        <ul>
+            <li>Search for movies and tv shows by title, year, actor & genre.</li>
+            <li>List the top rated, latest, popular & upcoming movies.</li>
+            <li>List popular, top rated and currently On Air tv shows.</li>
+            <li>Add movies and tv shows to your watchlist or favorites list !</li>
+            <li>Sort movies and tv shows by rating and / or genre.</li>
+            <li>Get detailed informations about the selected movie / tv show.</li>
+        </ul>
     </div>
     <div class="back">
-        <span><a href="javascript:history.back()"><i class="ion-android-arrow-back"></i></a></span>
+            <button id="goBack" onclick="javascript:history.back()">Go Back.</button>
+    </div>
+
+    <br>
+    
+    <h3>Credits</h3>
+    <!-- Credits -->
+    <div class="credits">
+        <!-- TMDB -->
+        <div class="tmdbCredits">
+            <p>This project uses <a class="tmdb" href="https://www.themoviedb.org" target="_blank">themoviedb(TMDb)</a> API in order to list the movies and tv shows.</p>
+            <br>
+            <p>This project is used for learning purposes. No intentions for commercial usage and making profit of it for now.</p>
+            <!-- TMDB logo -->
+            <a id="tmdbImage" href="https://www.themoviedb.org" target="_blank"><img src="images/tmdb.svg" alt="TMDb" width="140px"></a>
+        </div>
+        <!-- Flaticon credits -->
+        <div class="flaticon"><p>Logo image provided by: </p>
+                <a href="http://www.freepik.com" title="Freepik">Freepik</a> from 
+                <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com
+                </a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" 
+                title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+        </div>
+        <!-- Checkmark image credits -->
+        <div class="checkmarkImage"><p>Checkmark image provided by: </p>
+                <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+        </div>
     </div>
 </body>
 </html>
