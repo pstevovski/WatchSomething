@@ -1,40 +1,139 @@
 @import "http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css";
+
 *{
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 body{
-    font-family: 'Poppins', Arial, Helvetica, sans-serif;
-    text-align: center;
-    background-color: #222;
+    background-color: #fff;
+    color: #0091EA;
+}
+.title{
+    position: relative;
+    width: 100%;
 }
 h1{
-    color:#1DE9B6;
+    font-family: "Montserrat Black", Arial, Helvetica, sans-serif;
+    font-size: 60px;
+    text-align: center;
+    position: relative;
 }
-p{  
-    color: #eee;
-    width: 75%;
-    margin: 0 auto;
-}
-.link > *{
-    margin: 0 10px;
-}
-i{
-    font-size: 35px;
-    transition: 0.3s;
-    cursor: pointer;
-    color: #eee;
-}
-i:hover{
-    color: #1DE9B6;
+h3{
+    font-family: "Montserrat Black", Arial, Helvetica, sans-serif;
+    font-size: 40px;
+    text-align: center;
+    color: #E53935;
 }
 .back{
-    position: absolute;
-    left: 15px;
-    bottom: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
-@media (max-width: 450px){
-    p{
-        width: 90%;
+#goBack{
+    padding: 5px;
+    border: none;
+    border-radius: 3px;
+    background-color: #0091EA;
+    color: #fff;
+    font-family: "Montserrat Regular", Arial, Helvetica, sans-serif;
+    transition: 0.35s;
+    cursor: pointer;
+}
+#goBack:hover{
+    box-shadow: 0 2px 5px rgba(0,0,0,0.35);
+}
+.image{
+    position: absolute;
+    bottom: 5px;
+    left: 15px;
+    cursor: pointer;
+    transform: scale(0);
+    transform-origin: center;
+    animation: image 0.4s ease-in forwards;
+    animation-delay: 0.6s;
+}
+ul{
+    margin-top: -30px;
+}
+li{
+    margin: 15px 0;
+    list-style-image: url("../images/icon.png");
+    list-style-position: inside;
+    font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
+}
+.github{
+    margin-top: 10px;
+    width: 100%;
+    text-align: center;
+}
+.github a{
+    color: #0091EA;
+    transition: 0.35s ease;
+}
+.github a:hover{
+    color: #333;
+}
+span i{
+    font-size: 40px;
+    text-align: center;
+}
+a{
+    text-decoration: none; 
+}
+.credits{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+}
+.creditsToSuppliers{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.flaticon{
+    font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
+}
+.flaticon a{
+    font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
+    color: #E53935;
+}
+.tmdb{
+    font-size: 18px;
+    font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
+    color: #01d277;
+    transition: 0.35s;
+}
+.tmdb:hover{
+    color: #081c24;
+}
+.checkmarkImage{
+    font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
+}
+.checkmarkImage a{
+    font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
+    color: #E53935;
+}
+p{
+    font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
+}
+.text{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+}
+
+@media (max-width: 895px){
+    .credits{
+        width: auto;
+        text-align: center;
+    }
+}
+@media (max-width: 630px){
+    .credits{
+        grid-template-columns: 1fr;
     }
 }
