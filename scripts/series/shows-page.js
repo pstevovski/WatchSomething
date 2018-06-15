@@ -58,8 +58,7 @@ function getShowInfo(){
 						<div class="buttons">
 							<a href="https://www.imdb.com/title/${imdb_id}"target="_blank"> IMDB Link </a>
 							<a href="#" onclick="openTrailer()"> Trailer </a>
-							<a href="https://www.titlovi.com/titlovi/?prijevod=${series.name}" target="_blank"> Subtitle </a>
-							<a href="https://www.thepiratebay.org/search/${series.name}" target="_blank"> Pirate bay </a>
+							<a id="addToWatchList" onclick="addToList('${movie.id}')"> Add to watchlist </a>
 							<a href="javascript:history.back()"> Go back </a>
 						</div>
 					</div>
@@ -128,8 +127,7 @@ function getShowInfo(){
 						<div class="buttons">
 							<a href="https://www.imdb.com/title/${imdb_id}"target="_blank"> IMDB Link </a>
 							<a href="#" onclick="openTrailer()"> Trailer </a>
-							<a href="https://www.titlovi.com/titlovi/?prijevod=${series.name}" target="_blank"> Subtitle </a>
-							<a href="https://www.thepiratebay.org/search/${series.name}" target="_blank"> Pirate bay </a>
+							<a id="addToWatchList" onclick="addToList('${series.id}')"> Add to watchlist </a>
 							<a href="javascript:history.back()"> Go back </a>
 						</div>
 					</div>
@@ -144,6 +142,22 @@ function getShowInfo(){
 			let info = document.getElementById("movie");
 			info.innerHTML = output;
 		})
+		.catch ((err)=>{
+			let output = "";
+			output += `<h1 id="errorTitle">SORRY !</h1>
+			<p id="errorText">We could not provide informations about this tv show at this particular moment. Be sure to come back again. Thank you for your understanding. </p>
+			<div class="buttons errorBack">
+				<a href="javascript:history.back()"> Go back </a>
+			</div>`;
+			let info = document.getElementById("movie");
+			info.innerHTML = output;
+			let rec_title = document.getElementById("rec_title");
+			rec_title.style.display = 'none';
+			let page = document.querySelector(".page");
+			page.style.display = "none";
+			const recommended = document.getElementById("recommended");
+			recommended.style.display = "none";
+		})
 		//Gets the trailer link from youtube. Video is hidden until users click on TRAILER
 		//button.
 		axios.get("https://api.themoviedb.org/3/tv/"+showId+'/videos?api_key='+API_KEY+'&language=en-US')
@@ -153,7 +167,7 @@ function getShowInfo(){
 				let output = `
 					<div class="video">
 					<iframe width="620" height="400" src="https://www.youtube.com/embed/${response.data.results[0].key}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-					<span id="close">X</span>
+					<div id="close"> Close </div>
 					</div>
 				`;
 				//Creates a variable that targets the "trailer" element in the HTML
@@ -181,7 +195,6 @@ function getShowInfo(){
 						<img src="http://image.tmdb.org/t/p/w200/${series.poster_path}">
 						<h4>${series.name}</h4>
 						<p>Rating: <strong>${series.vote_average} IMDB</strong></p>
-						<p>Release date: <strong>${series.first_air_date}</strong></p>
 						<a onclick="showSelected('${series.id}')" class="buttons" href="#"> Show Details </a>
 					</div>
 					`;
@@ -254,7 +267,6 @@ function recommendedPage(pageNum){
 						<img src="http://image.tmdb.org/t/p/w200/${series.poster_path}">
 						<h4>${series.name}</h4>
 						<p>Rating: <strong>${series.vote_average} IMDB</strong></p>
-						<p>Release date: <strong>${series.first_air_date}</strong></p>
 						<a onclick="showSelected('${series.id}')" class="buttons" href="#"> Show Details </a>
 					</div>
 					`;
@@ -268,4 +280,29 @@ function recommendedPage(pageNum){
 			.catch ((err)=>{
 				console.log(err);
 			})
+}
+
+//Add to watchlist.
+function addToList(id){
+	let storedId = JSON.parse(localStorage.getItem("series")) || [];
+	if(storedId.indexOf(id) === -1){
+		storedId.push(id);
+		localStorage.setItem("series", JSON.stringify(storedId));
+
+		//Notification that it will be added to Watchlist.
+		const added = document.getElementById("added");
+		added.classList.add("animate");
+
+		setTimeout(() => {
+			added.classList.remove("animate");
+		}, 1500);
+	} else {
+		//Notification that it has already been added to the watchlist.
+		const alreadyStored = document.getElementById("alreadyStored");
+		alreadyStored.classList.add("animate");
+
+		setTimeout(() => {
+			alreadyStored.classList.remove("animate");
+		}, 1500);
+	}
 }

@@ -1,23 +1,30 @@
 //API KEY.
-var API_KEY = config.API_KEY;
-
+const API_KEY = config.API_KEY;
+//Define the "selected" element and set it to display none.
 let selected = document.getElementById("selected");
 selected.style.display = "none";
 //Get the form and its inputed value.
 const form = document.getElementById("form");
 form.addEventListener("submit", (e)=>{
+    //Display the rating dropdown.
+    rating.style.display = "block";
+    //Reset the page number to #1.
+    pageNum = 1;
+    //Reset the rating.
+    sessionStorage.setItem("ratingChange", " ");
+    rating.selectedIndex = 0;
     let year = document.getElementById("year").value;
+    sessionStorage.setItem("year", year);
     //Add the number next to the title.
     let byYear = document.getElementById("byYear");
     byYear.innerHTML = ": "+year;
-    //Genres
+    //Reset the selected genre.
     selected.style.display = "block";
-    sessionStorage.setItem("year", year);
     selected.selectedIndex = 0;
     sessionStorage.setItem("genre", "");
     //Hide the reset button.
     reset.style.display = "none";
-    //Page number (default).
+    //Set the page number to 1(default).
     pageNum = 1;
     //Call function.
     discoverMovies(year);
@@ -25,31 +32,29 @@ form.addEventListener("submit", (e)=>{
     //Prevents default action.
     e.preventDefault();
 })
-var mykey = config.MY_KEY;
-console.log(mykey);
+//Display movies from the set year (the argument "year" is given from the form submit).
 function discoverMovies(year){
     axios.get("https://api.themoviedb.org/3/discover/movie?api_key="+API_KEY+'&language=en-US&sort_by=popularity.desc&page=1&primary_release_year='+year)
         .then((response)=>{
-            console.log(response)
-            let yearly = response.data.results;
+            let movie = response.data.results;
             let output = "";
-            $.each(yearly, (index, movie)=>{
+            for(let i = 0; i < movie.length; i++){
                 output +=`
 				<div class="card">
-                        <div class="addBtn"><span><i class="ion-android-add-circle" onclick="addToList('${movie.id}')"></i></span>
-                        <span><i class="ion-heart heart" onclick="favorite('${movie.id}')"></i></span></div>
+                        <div class="addBtn"><span><i class="ion-android-add-circle" onclick="addToList('${movie[i].id}')"></i></span>
+                        <span><i class="ion-heart heart" onclick="favorite('${movie[i].id}')"></i></span></div>
 					<div class="card_img">
-						<img src="http://image.tmdb.org/t/p/w300/${movie.poster_path}" onerror="this.onerror=null;this.src='../images/image2.png';">
+						<img src="http://image.tmdb.org/t/p/w300/${movie[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
 					</div>
 					<div class="card_text">
-						<h3>${movie.title}</h3>
-						<p>Rating: <strong>${movie.vote_average}</strong></p>
-						<p>Release date: <strong>${movie.release_date}</strong></p>
-						<a onclick="movieSelected('${movie.id}')" class="btn" href="#"> Movie Details </a>
+						<h3>${movie[i].title}</h3>
+						<p>Rating: <strong>${movie[i].vote_average}</strong></p>
+						<p>Release date: <strong>${movie[i].release_date}</strong></p>
+						<a onclick="movieSelected('${movie[i].id}')" class="btn" href="#"> Movie Details </a>
 					</div>
 				</div>
 				`;
-            })
+            }
             let moviesInfo = document.getElementById("movies");
             moviesInfo.innerHTML = output;
             //Displays the pages buttons (default display:none), after movies are shown.
@@ -60,22 +65,54 @@ function discoverMovies(year){
             console.log(err);
         })
 }
-//Koga ke stisnam na '+', treba da go zeme Id-to na filmot/serijata, da go stavi vo localStorage. Koga ke otidam na stranata "My Lists", treba da mozam da napravam/uredam/izbrisasm lista(i). Koga ke ja otvoram lista "x", treba da gi zemam Id od localStorage sto odgovaraat na taa lista, i da gi prikazam.
 //Add movie to watch list.
 function addToList(id){
-    let toWatch = JSON.parse(localStorage.getItem("movies")) || [];
-    toWatch.push(id);
-    localStorage.setItem("movies", JSON.stringify(toWatch));
-    console.log(toWatch);
+    let storedId = JSON.parse(localStorage.getItem("movies")) || [];
+	if(storedId.indexOf(id) === -1){
+		storedId.push(id);
+		localStorage.setItem("movies", JSON.stringify(storedId));
+		//Notification that it will be added to Watchlist.
+        const added = document.getElementById("added");
+        added.innerHTML = "Added to watchlist !"
+        added.classList.add("added");
+        setTimeout(() => {
+            added.classList.remove("added");
+        }, 1500);
+	} else {
+		//Notification that it has already been added to the watchlist.
+        const alreadyStored = document.getElementById("alreadyStored");
+        alreadyStored.innerHTML = "Already in watchlist !"
+        alreadyStored.classList.add("alreadyStored");
+        setTimeout(() => {
+            alreadyStored.classList.remove("alreadyStored");
+        }, 1500);
+	}
 }
 //Add movie to favorite movies.
 function favorite(id){
-    let favorite = JSON.parse(localStorage.getItem("favoriteMovies")) || [];
-    favorite.push(id);
-    localStorage.setItem("favoriteMovies", JSON.stringify(favorite));
-    console.log(favorite);
+    let storedId = JSON.parse(localStorage.getItem("favoriteMovies")) || [];
+	if(storedId.indexOf(id) === -1){
+		storedId.push(id);
+		localStorage.setItem("favoriteMovies", JSON.stringify(storedId));
+
+		//Notification that it will be added to Watchlist.
+        const added = document.getElementById("added");
+        added.innerHTML = "Added to Favorites !";
+        added.classList.add("added");
+        setTimeout(() => {
+            added.classList.remove("added");
+        }, 1500);
+	} else {
+		//Notification that it has already been added to the watchlist.
+		const alreadyStored = document.getElementById("alreadyStored");
+        alreadyStored.innerHTML = "Already in favorites !";
+        alreadyStored.classList.add("alreadyStored");
+        setTimeout(() => {
+            alreadyStored.classList.remove("alreadyStored");
+        }, 1500);
+	}
 }
-//Set the movie Id into session storage.
+//Take the user to detailed info page.
 function movieSelected(id){
     sessionStorage.setItem("movieId", id);
     location.replace("../movie-page.html");
@@ -89,6 +126,7 @@ prev.addEventListener("click", ()=>{
     pageNum--;
     window.scrollTo(0,0);
     discoverMoviesPageLoad(pageNum);
+    withRating(pageNum);
 })
 //Click on "NEXT" button to increment page number.
 const next = document.getElementById("next");
@@ -96,8 +134,9 @@ next.addEventListener("click", ()=>{
     pageNum++;
     window.scrollTo(0,0);
     discoverMoviesPageLoad(pageNum);
+    withRating(pageNum);
 })
-//Showcase movies by year corresponding to the correct page number. 
+//Display movies by year corresponding to the correct page number. 
 function discoverMoviesPageLoad(pageNum){
     let year = sessionStorage.getItem("year");
     //Get the genre from the session storage. If theres a genre seleced and stored, it will
@@ -109,27 +148,25 @@ function discoverMoviesPageLoad(pageNum){
     }
     axios.get('https://api.themoviedb.org/3/discover/movie?api_key='+API_KEY+'&language=en-US&sort_by=popularity.desc&page='+pageNum+'&primary_release_year='+year+'&with_genres='+genre)
     .then((response)=>{
-        console.log(response)
-        let yearly = response.data.results;
+        let movie = response.data.results;
         let output = "";
-
-        $.each(yearly, (index, movie)=>{
+        for(let i = 0; i < movie.length; i++){
             output +=`
             <div class="card">
-                <div class="addBtn"><span><i class="ion-android-add-circle" onclick="addToList('${movie.id}')"></i></span>
-                <span><i class="ion-heart heart" onclick="favorite('${movie.id}')"></i></span></div>
+                <div class="addBtn"><span><i class="ion-android-add-circle" onclick="addToList('${movie[i].id}')"></i></span>
+                <span><i class="ion-heart heart" onclick="favorite('${movie[i].id}')"></i></span></div>
                 <div class="card_img">
-                    <img src="http://image.tmdb.org/t/p/w300/${movie.poster_path}" onerror="this.onerror=null;this.src='../images/image2.png';">
+                    <img src="http://image.tmdb.org/t/p/w300/${movie[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
                 </div>
                 <div class="card_text">
-                    <h3>${movie.title}</h3>
-                    <p>Rating: <strong>${movie.vote_average}</strong></p>
-                    <p>Release date: <strong>${movie.release_date}</strong></p>
-                    <a onclick="movieSelected('${movie.id}')" class="btn" href="#"> Movie Details </a>
+                    <h3>${movie[i].title}</h3>
+                    <p>Rating: <strong>${movie[i].vote_average}</strong></p>
+                    <p>Release date: <strong>${movie[i].release_date}</strong></p>
+                    <a onclick="movieSelected('${movie[i].id}')" class="btn" href="#"> Movie Details </a>
                 </div>
             </div>
             `;
-        })
+        }
         let moviesInfo = document.getElementById("movies");
         moviesInfo.innerHTML = output;
         //Displays the pages buttons (default display:none), after movies are shown.
@@ -140,42 +177,48 @@ function discoverMoviesPageLoad(pageNum){
         console.log(err);
     })
 }
+//Display movies by set year with selected genre.
 function genres(){
     let year = sessionStorage.getItem("year");
     const select = document.getElementById("selected");
     select.addEventListener("change", (e)=>{
+    let ratingChange = sessionStorage.getItem("ratingChange");
+    if (!ratingChange || !ratingChange.length){
+        ratingChange = '';
+    }
+    //Reset the page number to 1.
+    pageNum = 1;
     reset.style.display = "block";
     //Set genre to session storage.
     sessionStorage.setItem("genre",e.target.options[e.target.selectedIndex].id);
     //API request.
-    axios.get("https://api.themoviedb.org/3/discover/movie?api_key="+API_KEY+'&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=' + e.target.options[e.target.selectedIndex].id+'&primary_release_year='+year)
+    axios.get("https://api.themoviedb.org/3/discover/movie?api_key="+API_KEY+'&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=' + e.target.options[e.target.selectedIndex].id+'&primary_release_year='+year+'&'+ratingChange)
     .then((response) => {
-        console.log(response);
-        let movies = response.data.results;
+        let movie = response.data.results;
         let output = "";
-
-        $.each(movies, (index, movie)=>{
+        for(let i = 0; i < movie.length; i++){
             output +=`
             <div class="card">
-                <div class="addBtn"><span><i class="ion-android-add-circle" onclick="addToList('${movie.id}')"></i></span>
-                <span><i class="ion-heart heart" onclick="favorite('${movie.id}')"></i></span></div>
+                <div class="addBtn"><span><i class="ion-android-add-circle" onclick="addToList('${movie[i].id}')"></i></span>
+                <span><i class="ion-heart heart" onclick="favorite('${movie[i].id}')"></i></span></div>
                 <div class="card_img">
-                    <img src="http://image.tmdb.org/t/p/w300/${movie.poster_path}" onerror="this.onerror=null;this.src='../images/image2.png';">
+                    <img src="http://image.tmdb.org/t/p/w300/${movie[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
                 </div>
                 <div class="card_text">
-                    <h3>${movie.title}</h3>
-                    <p>Rating: <strong>${movie.vote_average}</strong></p>
-                    <p>Release date: <strong>${movie.release_date}</strong></p>
-                    <a onclick="movieSelected('${movie.id}')" class="btn" href="#"> Movie Details </a>
+                    <h3>${movie[i].title}</h3>
+                    <p>Rating: <strong>${movie[i].vote_average}</strong></p>
+                    <p>Release date: <strong>${movie[i].release_date}</strong></p>
+                    <a onclick="movieSelected('${movie[i].id}')" class="btn" href="#"> Movie Details </a>
                 </div>
             </div>
-            `
-        })
+            `;
+        }
         let moviesInfo = document.getElementById("movies");
         moviesInfo.innerHTML = output;
     })
  })
 }
+//Define the "reset" button. Reloads "discoverMovies(year)" and clears sessionStorage from rating and genre. 
 let reset = document.getElementById("reset");
 reset.style.display = "none";
 reset.addEventListener("click", ()=>{
@@ -183,10 +226,84 @@ reset.addEventListener("click", ()=>{
     let year = document.getElementById("year").value;
     let selected = document.getElementById("selected");
     selected.selectedIndex = 0;
+    rating.selectedIndex = 0;
+    sessionStorage.setItem("ratingChange", "");
     discoverMovies(year);
     reset.style.display = "none";
 })
-
+//When page loads, clear the genre and rating from session storage.
 window.onload = function resetGenre(){
     sessionStorage.setItem("genre", "");
+    sessionStorage.setItem("ratingChange", "");
+}
+//Define the rating element and on change, run the "withRating()" function.
+let rating = document.getElementById("rating");
+rating.addEventListener("change", (e)=>{
+    pageNum = 1;
+    let ratingChange = e.target.options[e.target.selectedIndex].id;
+    sessionStorage.setItem("ratingChange", ratingChange);
+    withRating();
+});
+//Sort movies by rating with included genre & year.
+function withRating(){
+    let genre = sessionStorage.getItem("genre");
+    let year = sessionStorage.getItem("year");
+    let ratingChange = sessionStorage.getItem("ratingChange");
+    if (!genre || !genre.length){
+        genre = '';
+    }
+    axios.get("https://api.themoviedb.org/3/discover/movie?api_key="+API_KEY+'&language=en-US&page=1&primary_release_year='+year+'&with_genres='+genre+'&'+ratingChange+'&with_original_language=en')
+        .then((response)=>{
+            let movies = response.data.results;
+            let output = "";
+
+            for(let i = 0; i < movies.length; i++){
+                output += `<div class="card">
+                <div class="addBtn"><span><i class="ion-android-add-circle" onclick="addToList('${movies[i].id}')"></i></span>
+                <span><i class="ion-heart heart" onclick="favorite('${movies[i].id}')"></i></span></div>
+                <div class="card_img">
+                    <img src="http://image.tmdb.org/t/p/w300/${movies[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
+                </div>
+                <div class="card_text">
+                    <h3>${movies[i].title}</h3>
+                    <p>Rating: <strong>${movies[i].vote_average}</strong></p>
+                    <p>Release date: <strong>${movies[i].release_date}</strong></p>
+                    <a onclick="movieSelected('${movies[i].id}')" class="btn" href="#"> Movie Details </a>
+                </div>
+            </div>`;
+            }
+            let moviesInfo = document.getElementById("movies");
+            moviesInfo.innerHTML = output;
+        })
+}
+//Sort movies by rating with included genre & year corresponding to the page number(after page number changes).
+function withRating(pageNum){
+    let genre = sessionStorage.getItem("genre");
+    let year = sessionStorage.getItem("year");
+    let ratingChange = sessionStorage.getItem("ratingChange");
+    if (!genre || !genre.length){
+        genre = '';
+    }
+    axios.get("https://api.themoviedb.org/3/discover/movie?api_key="+API_KEY+'&language=en-US&sort_by=popularity.desc&page='+pageNum+'&primary_release_year='+year+'&with_genres='+genre+'&'+ratingChange+'&with_original_language=en')
+        .then((response)=>{
+            let movies = response.data.results;
+            let output = "";
+            for(let i = 0; i < movies.length; i++){
+                output += `<div class="card">
+                <div class="addBtn"><span><i class="ion-android-add-circle" onclick="addToList('${movies[i].id}')"></i></span>
+                <span><i class="ion-heart heart" onclick="favorite('${movies[i].id}')"></i></span></div>
+                <div class="card_img">
+                    <img src="http://image.tmdb.org/t/p/w300/${movies[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
+                </div>
+                <div class="card_text">
+                    <h3>${movies[i].title}</h3>
+                    <p>Rating: <strong>${movies[i].vote_average}</strong></p>
+                    <p>Release date: <strong>${movies[i].release_date}</strong></p>
+                    <a onclick="movieSelected('${movies[i].id}')" class="btn" href="#"> Movie Details </a>
+                </div>
+            </div>`;
+            }
+            let moviesInfo = document.getElementById("movies");
+            moviesInfo.innerHTML = output;
+        })
 }

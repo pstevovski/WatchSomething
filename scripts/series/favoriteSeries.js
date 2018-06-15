@@ -18,7 +18,10 @@ function favoriteSeries(){
                         <a onclick="showSelected('${series.id}')" class="btn" href="#"> Movie Details </a>
                     </div>
                 </div>`;
-    })}
+    })
+        //Display "Clear List" button.
+        removeAll.style.display = "block";
+    }
 }
 //Delete selected tv show from the list (array).
 function seriesSplice(id){
@@ -34,3 +37,14 @@ function showSelected(id){
     location.replace("../shows-page.html");
     return false;
 }
+//Remove all series from favorites list.
+const removeAll = document.getElementById("removeAll");
+removeAll.addEventListener("click", ()=>{
+    localStorage.removeItem("favoriteSeries");
+    const smallSpinner = document.getElementById("smallSpinner");
+    smallSpinner.style.display = "block";
+    setTimeout(() => {
+        location.reload();
+        removeAll.style.display = "none";
+    }, 1000);
+})

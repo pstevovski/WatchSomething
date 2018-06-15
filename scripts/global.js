@@ -1,10 +1,8 @@
-//Scroll effect.
-window.onscroll = function () {scrollFunction()}
-
+//Define variables.
 const navbar = document.querySelector("nav");
 const sticky = navbar.offsetTop;
-
-function scrollFunction(){
+//When window scroll reaches pageYOffset >=250, show the "sticky" navbar.
+window.onscroll = function scrollFunction(){
     if(window.pageYOffset >= 250){
         navbar.classList.add("sticky");
     } else {
@@ -31,6 +29,12 @@ smallSeries.addEventListener("click", ()=>{
 	const seriesDropdown = document.getElementById("seriesDropdown");
 	seriesDropdown.classList.toggle("drop");
 });
+//Click on DROPDOWN - MY LISTS on small screen to display/hide the list.
+const smallLists = document.getElementById("smallScreenList");
+smallLists.addEventListener("click", ()=>{
+	const smallListsDropdown = document.getElementById("myListsDropdown");
+	smallListsDropdown.classList.toggle("drop");
+})
 //Modal box and question mark.
 let questionMark = document.getElementById("questionMark");
 let modal = document.querySelector(".modal");

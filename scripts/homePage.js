@@ -1,6 +1,6 @@
 //API KEY variable.
-var API_KEY = config.API_KEY;
-
+const API_KEY = config.API_KEY;
+//Define buttons.
 const adventure = document.getElementById("adventure");
 const movies = document.getElementById("movies");
 const series = document.getElementById("series");
@@ -9,10 +9,12 @@ adventure.addEventListener("click", ()=>{
     movies.classList.add("slideIn");
     series.classList.add("slideIn");
 })
+//Define left/right arrows that will move the output left/right correspondingly.
 const right = document.getElementById("right");
 const left = document.getElementById("left");
 left.style.display = "none";
 const featuredMovies = document.getElementById("featuredMovies");
+//Define the starting value of the left/right button.
 let moveLeft = 0;
 let movedLeft = 0;
 let movedRight = 0;
@@ -23,7 +25,6 @@ right.addEventListener("click", ()=>{
     moveLeft += -200;
     movedLeft = -200;
     featuredMovies.style.transform = "translate("+moveLeft+"px)";
-    //console.log(moveLeft)
     if(moveLeft === end){
         right.classList.add("removePopup");
     }
@@ -33,6 +34,7 @@ right.addEventListener("click", ()=>{
         left.classList.remove("removePopup");
     }
 })
+//Slide featured movies to the right(hide movies on the right).
 left.addEventListener("click", ()=>{
     moveRight = 200;
     moveLeft += moveRight;
@@ -54,10 +56,12 @@ left.addEventListener("click", ()=>{
         right.classList.add("removePopup");
     }
 })
+//Media query.
 let maxWidth = window.matchMedia("(max-width: 400px)")
 myFunction(maxWidth) // Call listener function at run time
 maxWidth.addListener(myFunction) // Attach listener function on state changes
 function myFunction(maxWidth){
+    //Define the starting values for left/right button for small screen(400px).
     let moveLeftSmall = 0;
     let movedLeftSmall = 0;
     let movedRightSmall = 0;
@@ -104,11 +108,9 @@ function myFunction(maxWidth){
 }
 //Todays date.
 let today = new Date().toJSON().slice(0,10);
-// apiKey fa155f635119344d33fcb84fb807649b
 window.onload = function featuredMovies(){
     axios.get("https://api.themoviedb.org/3/discover/movie?api_key="+API_KEY+'&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&primary_release_date.gte=2017-12-01&primary_release_date.lte='+today+'&vote_average.gte=6.5&vote_average.lte=10&with_original_language=en')
         .then((response)=>{
-            console.log(response)
             const featured = response.data.results;;
             let output = "";
             for(let i = 0; i < featured.length; i++){
@@ -126,8 +128,7 @@ window.onload = function featuredMovies(){
             //Random quote on page load.
             document.getElementById("quote").innerHTML = randomQuote[Math.round(Math.random()*16)];
             quote.style.display = "block";
-            quote.classList.remove("quoteFade");
-            
+            quote.classList.remove("quoteFade");  
         })
 }
 //Takes you to detailed info page.

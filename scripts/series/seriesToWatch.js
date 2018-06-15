@@ -1,5 +1,6 @@
 //API KEY.
-var API_KEY = config.API_KEY;
+const API_KEY = config.API_KEY;
+
 function seriesToWatch(){
     let toWatch = JSON.parse(localStorage.getItem("series")) || [];
     for(let i = 0; i < toWatch.length; i++){
@@ -19,6 +20,8 @@ function seriesToWatch(){
                     </div>
                 </div>`;
             })
+            //Display the "Clear List" button.
+            removeAll.style.display = "block";
     } 
 }
 //Delete selected tv show from the list (array).
@@ -36,3 +39,14 @@ function showSelected(id){
     location.replace("../shows-page.html");
     return false;
 }
+//Remove all series from watchlist.
+const removeAll = document.getElementById("removeAll");
+removeAll.addEventListener("click", ()=>{
+    localStorage.removeItem("series");
+    const smallSpinner = document.getElementById("smallSpinner");
+    smallSpinner.style.display = "block";
+    setTimeout(() => {
+        location.reload();
+        removeAll.style.display = "none";
+    }, 1000);
+})
