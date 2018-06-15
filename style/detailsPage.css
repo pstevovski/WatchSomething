@@ -42,6 +42,8 @@ body{
 	color: #E53935;
 }
 .buttons{
+	display: flex;
+	justify-content: flex-start;
 	margin-top: 25px;
 	width: 100%;
 }
