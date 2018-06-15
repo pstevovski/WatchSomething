@@ -1,6 +1,8 @@
-#WhatToWatch - Find a movie or tv show to watch with ease !
+# WhatToWatch - Find a movie or tv show to watch with ease !
 <p align="center">
     <img src="images/repoImage.png" width="500px"/>
+    <img src="images/repoImage2.png" width="500px"/>
+    <img src="images/repoImage3.png" width="500px"/>
 </p>
 
 ### About
