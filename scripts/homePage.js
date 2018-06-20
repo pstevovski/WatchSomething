@@ -1,140 +1,106 @@
 //API KEY variable.
 const API_KEY = config.API_KEY;
-//Define buttons.
-const adventure = document.getElementById("adventure");
-const movies = document.getElementById("movies");
-const series = document.getElementById("series");
-adventure.addEventListener("click", ()=>{
-    adventure.classList.add("active");
-    movies.classList.add("slideIn");
-    series.classList.add("slideIn");
-})
-//Define left/right arrows that will move the output left/right correspondingly.
-const right = document.getElementById("right");
-const left = document.getElementById("left");
-left.style.display = "none";
-const featuredMovies = document.getElementById("featuredMovies");
-//Define the starting value of the left/right button.
-let moveLeft = 0;
-let movedLeft = 0;
-let movedRight = 0;
-let end = -2600;
-let start = 0;
-//Slide featured movies to the left(unveil new movie to the right).
-right.addEventListener("click", ()=>{
-    moveLeft += -200;
-    movedLeft = -200;
-    featuredMovies.style.transform = "translate("+moveLeft+"px)";
-    if(moveLeft === end){
-        right.classList.add("removePopup");
-    }
-    if(moveLeft === movedLeft){
-        left.style.display = "block";
-        left.classList.add("popup");
-        left.classList.remove("removePopup");
-    }
-})
-//Slide featured movies to the right(hide movies on the right).
-left.addEventListener("click", ()=>{
-    moveRight = 200;
-    moveLeft += moveRight;
-    featuredMovies.style.transform = "translate("+moveLeft+"px)";
-    console.log(moveLeft)
-    if(moveLeft === start){
-        left.classList.add("removePopup")
-        left.classList.remove("popup");
-    }
-    //If you go back (left arrow) 200px, then show right arrow again.
-    let endMinusRight = end + moveRight; 
-    if(moveLeft === endMinusRight){
-        right.style.display = "block";
-        right.classList.add("popup");
-        right.classList.remove("removePopup")
-    }
-    //If you reach the end of the length (2600 is the set length), remove the right arrow.
-    if(moveLeft === end){
-        right.classList.add("removePopup");
-    }
-})
-//Media query.
-let maxWidth = window.matchMedia("(max-width: 400px)")
-myFunction(maxWidth) // Call listener function at run time
-maxWidth.addListener(myFunction) // Attach listener function on state changes
-function myFunction(maxWidth){
-    //Define the starting values for left/right button for small screen(400px).
-    let moveLeftSmall = 0;
-    let movedLeftSmall = 0;
-    let movedRightSmall = 0;
-    let endSmall = -3600;
-    let startSmall = 0;
-    if(maxWidth.matches){
-    //Slide featured movies to the left(unveil new movie to the right).
-    right.addEventListener("click", ()=>{
-        moveLeftSmall += -400;
-        movedLeftSmall = -400;
-        featuredMovies.style.transform = "translate("+moveLeftSmall+"px)";
-        console.log(moveLeftSmall)
-        if(moveLeftSmall === endSmall){
-            right.classList.add("removePopup");
-        }
-        if(moveLeftSmall === movedLeftSmall){
-            left.style.display = "block";
-            left.classList.add("popup");
-            left.classList.remove("removePopup");
-        }
-    })
-    left.addEventListener("click", ()=>{
-        moveRightSmall= 400;
-        moveLeftSmall+= moveRightSmall;
-        featuredMovies.style.transform = "translate("+moveLeftSmall+"px)";
-        console.log(moveLeftSmall)
-        if(moveLeftSmall === startSmall){
-            left.classList.add("removePopup")
-            left.classList.remove("popup");
-        }
-        //If you go back (left arrow) 200px, then show right arrow again.
-        let endMinusRight = end + moveRight; 
-        if(moveLeftSmall === endMinusRight){
-            right.style.display = "block";
-            right.classList.add("popup");
-            right.classList.remove("removePopup")
-        }
-        //If you reach the end of the length (2600 is the set length), remove the right arrow.
-        if(moveLeftSmall === end){
-            right.classList.add("removePopup");
-        }
-    })
-    }
-}
 //Todays date.
 let today = new Date().toJSON().slice(0,10);
 window.onload = function featuredMovies(){
     axios.get("https://api.themoviedb.org/3/discover/movie?api_key="+API_KEY+'&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&primary_release_date.gte=2017-12-01&primary_release_date.lte='+today+'&vote_average.gte=6.5&vote_average.lte=10&with_original_language=en')
         .then((response)=>{
-            const featured = response.data.results;;
+            const featured = response.data.results;
+            //featured.length = 7;
             let output = "";
             for(let i = 0; i < featured.length; i++){
                 output += `
                 <div class="card">
-                    <img src="http://image.tmdb.org/t/p/w200/${featured[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
-                    <div class="link">
-                        <a onclick="movieSelected('${featured[i].id}')" href="#"> Details</a>
-                    </div>
+                    <img  onclick="movieSelected('${featured[i].id}')" src="http://image.tmdb.org/t/p/w200/${featured[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
                 </div>
                 `;
-                let featuredOutput = document.getElementById("featuredMovies");
+                let featuredOutput = document.getElementById("movies");
                 featuredOutput.innerHTML = output;
             }
-            //Random quote on page load.
-            document.getElementById("quote").innerHTML = randomQuote[Math.round(Math.random()*16)];
-            quote.style.display = "block";
-            quote.classList.remove("quoteFade");  
-        })
-}
+        });
+        //On page load, output Tv Shows.
+        axios.get("https://api.themoviedb.org/3/tv/popular?api_key="+API_KEY+'&language=en-US&page=1')
+            .then((response)=>{
+                const shows = response.data.results;
+                let output = "";
+                for(let i = 0; i < shows.length; i++){
+                    output +=`
+                    <div class="card" onclick="showSelected('${shows[i].id}')">
+                        <img src="http://image.tmdb.org/t/p/w200/${shows[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
+                    </div>`;
+                    }
+                    const popularShows = document.getElementById("tvShows");
+                    popularShows.innerHTML = output;
+                })
+                
+        //Random quote on page load.
+         document.getElementById("quote").innerHTML = randomQuote[Math.round(Math.random()*16)];
+        quote.style.display = "block";
+        quote.classList.remove("quoteFade");  
+        }
+
+//Movies drag slider.
+const slider = document.getElementById("movies");
+let isDown = false;
+let startX;
+let scrollLeft;
+
+slider.addEventListener("mousedown", (e)=>{
+    isDown = true;
+    startX = e.pageX - slider.offsetLeft;
+    scrollLeft = slider.scrollLeft;
+    e.preventDefault();
+    console.log(startX);
+})
+slider.addEventListener("mouseup", ()=>{
+    isDown = false;
+})
+slider.addEventListener("mouseleave", (e)=>{
+    slider.classList.remove("active");
+    isDown = false;
+})
+slider.addEventListener("mousemove", (e)=>{
+    if(!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - slider.offsetLeft;
+    const walk = x - startX;
+    slider.scrollLeft = scrollLeft - walk;
+})
+
+//Drag slider for tv shows.
+const sliderForTvShows = document.getElementById("tvShows");
+sliderForTvShows.addEventListener("mousedown", (e)=>{
+    sliderForTvShows.classList.add("active");
+    isDown = true;
+    startX = e.pageX - sliderForTvShows.offsetLeft;
+    scrollLeft = sliderForTvShows.scrollLeft;
+    e.preventDefault();
+    console.log(startX);
+})
+sliderForTvShows.addEventListener("mouseup", ()=>{
+    sliderForTvShows.classList.remove("active");
+    isDown = false;
+})
+sliderForTvShows.addEventListener("mouseleave", (e)=>{
+    sliderForTvShows.classList.remove("active");
+    isDown = false;
+})
+sliderForTvShows.addEventListener("mousemove", (e)=>{
+    if(!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - sliderForTvShows.offsetLeft;
+    const walk = x - startX;
+    sliderForTvShows.scrollLeft = scrollLeft - walk;
+})
 //Takes you to detailed info page.
 function movieSelected(id){
     sessionStorage.setItem("movieId", id);
     location.replace("movie-page.html");
+    return false;
+}//Takes you to detailed tv shows info page.
+function showSelected(id){
+    sessionStorage.setItem("showId", id);
+    location.replace("shows-page.html");
     return false;
 }
 //Array for random quotes.
@@ -156,7 +122,7 @@ randomQuote[13] = " 'Yippie-Ki-Yay, Motherfucker!' - John McClane, Die Hard";
 randomQuote[14] = " 'May the Force be with you' - Obi-Wan Kenobi, Star Wars";
 randomQuote[15] = " 'A wizard is never late, Frodo Baggins. Nor is he early. He arrives precisely when he means to.' - Gandalf, The Lord of the Rings: Fellowship of the";
 let quote = document.getElementById("quote");
-quote.style.display = "none";
+//quote.style.display = "none";
 //Change quote(with fade in/out animation) at the set interval.
 setInterval(() => {
     quote.classList.remove("quoteFade");
