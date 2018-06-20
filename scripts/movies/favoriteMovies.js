@@ -36,7 +36,7 @@ function movieSplice(id){
 //Takes you to detailed movie info page.
 function movieSelected(id){
     sessionStorage.setItem("movieId", id);
-    location.replace("movie-page.html");
+    location.replace("../../movie-page.html");
     return false;
 }
 //Remove all movies from favorites list.

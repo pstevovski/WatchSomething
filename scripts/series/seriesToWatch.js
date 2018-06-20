@@ -36,7 +36,7 @@ function seriesSplice(id){
 //Open detailed info page about the selected tv show.
 function showSelected(id){
     sessionStorage.setItem("showId", id);
-    location.replace("../shows-page.html");
+    location.replace("../../shows-page.html");
     return false;
 }
 //Remove all series from watchlist.
