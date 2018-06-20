@@ -28,7 +28,7 @@ It also provides an option to SEARCH for movies/tv shows by:
 * Fix the bugs.
 
 #### Update v4 (2018-06-20)
-####### DONE:
+###### DONE:
 * New color scheme (black/red).
 * Edited navigation bar with better animation, so now it doesnt looks buggy.
 * Edited Detailed info page.
@@ -38,7 +38,7 @@ It also provides an option to SEARCH for movies/tv shows by:
 * Updated the about page.
 * Fixed some animations, to smooth them out.
 
-####### BUGS:
+###### BUGS:
 * When user drags the movies / tv shows outputed on the home page, if he releases the mouse click while still on top of some of the cards, it auto-triggers the click event, and takes the user to the detailed info page.
 * Users can't swipe left/right trough the movies / tv shows outputs on the home page, no "swipe" listener added yet.
 * If the user opens the detailed page for some movie / tv show from the home page, if he click on "back" button, or uses the browser's back option, it won't go back to the previous page (home page) as it's supposed to.* This occurs only when user opens detailed info page from the movies/tv shows that are outputted on the home page.
