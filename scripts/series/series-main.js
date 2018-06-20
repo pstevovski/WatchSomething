@@ -7,12 +7,16 @@ const spinner = document.querySelector(".spinner");
 spinner.style.display = "none";
 const container = document.querySelector(".showcase");
 container.style.display = "none"
+//Pages
+const pages = document.querySelector(".pages");
+pages.style.display = "none";
 //Run "getSeries" function on page load.
 window.onload = function getSeries(){
 	spinner.style.display = "block";
 	setTimeout(() => {
 		spinner.style.display = "none";
 		container.style.display = "flex";
+		pages.style.display = "flex";
 	}, 1000);
 	//Get the API.
 	axios.get("https://api.themoviedb.org/3/tv/on_the_air?api_key="+API_KEY+'&language=en-US&page=1')
@@ -42,9 +46,6 @@ window.onload = function getSeries(){
 			//Append the "output" to the movies element.
 			let seriesInfo = document.getElementById("movies");
 			seriesInfo.innerHTML = output;
-			//Show pages buttons.
-			let pages = document.querySelector(".pages");
-			pages.style.display = "flex";
 		})
 		//If theres an error, it logs it in the console.
 		.catch ((err)=>{

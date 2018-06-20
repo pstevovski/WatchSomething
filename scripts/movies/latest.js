@@ -6,12 +6,16 @@ spinner.style.display = "none";
 //Define the container where movies will be listed.
 const container = document.querySelector(".showcase");
 container.style.display = "none"
+//Pages
+const pages = document.querySelector(".pages");
+pages.style.display = "none";
 //Run "getMovies()" on page load.
 window.onload = function getMovies(){
 	spinner.style.display = "block";
 	setTimeout(() => {
 		spinner.style.display = "none";
 		container.style.display = "flex";
+		pages.style.display = "flex";
 	}, 1000);
 	//Get the API.
 	axios.get("https://api.themoviedb.org/3/movie/now_playing?api_key="+API_KEY+'&language=en-US&page=1&region=US')
@@ -40,9 +44,6 @@ window.onload = function getMovies(){
 			//Append the output to the "movies" element.
 			let movieInfo = document.getElementById("movies");
 			movieInfo.innerHTML = output;
-			//Show the pages buttons after movies are listed.
-			let pages = document.querySelector(".pages");
-			pages.style.display = "flex";
 		})
 		//If theres an error, logs the error in console.
 		.catch( (err) =>{

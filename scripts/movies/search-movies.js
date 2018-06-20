@@ -3,6 +3,9 @@ const API_KEY = config.API_KEY;
 //Define the spinner and set it to display none.
 const spinner = document.querySelector(".spinner");
 spinner.style.display = "none";
+//Pages
+const pages = document.querySelector(".pages");
+pages.style.display = "none";
 //Define the "form" and run function on submit.
 const form = document.getElementById("form");
 form.addEventListener("submit", (e)=>{
@@ -17,6 +20,7 @@ form.addEventListener("submit", (e)=>{
 	setTimeout(() => {
 		spinner.style.display = "none";
 		container.style.display = "flex";
+		pages.style.display = "flex";
 	}, 1000);
 	e.preventDefault();
 })
@@ -53,9 +57,6 @@ function searchMovies(searchText){
 		.catch ((err)=>{
 			console.log(err);
 		})
-		//Displays the pages buttons (default display:none), after movies are shown.
-		let pages = document.querySelector(".pages");
-		pages.style.display = "flex";
 }
 //Take the user to detailed info page.
 function movieSelected(id){

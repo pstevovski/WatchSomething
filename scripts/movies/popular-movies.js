@@ -5,12 +5,16 @@ const spinner = document.querySelector(".spinner");
 spinner.style.display = "none";
 const container = document.querySelector(".showcase");
 container.style.display = "none"
+//Pages
+const pages = document.querySelector(".pages");
+pages.style.display = "none";
 //When window is loaded, it runs the function getMovies(), which lists the current popular movies by grabing the API from themoviedb.com.
 window.onload = function getMovies(){
 	spinner.style.display = "block";
 	setTimeout(() => {
 		spinner.style.display = "none";
 		container.style.display = "flex";
+		pages.style.display = "flex";
 	}, 1000);
 	//Get the API.
 	axios.get("https://api.themoviedb.org/3/movie/popular?api_key="+API_KEY+'&language=en-US&page=1')
@@ -40,9 +44,6 @@ window.onload = function getMovies(){
 			//that will be used to output the data results to.
 			let movieInfo = document.getElementById("movies");
 			movieInfo.innerHTML = output;
-			//Show the pages buttons after movies are listed
-			let pages = document.querySelector(".pages");
-			pages.style.display = "flex";
 		})
 		//If theres an error, it logs it in the console.
 		.catch ((err)=>{

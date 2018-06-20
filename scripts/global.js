@@ -3,10 +3,13 @@ const navbar = document.querySelector("nav");
 const sticky = navbar.offsetTop;
 //When window scroll reaches pageYOffset >=250, show the "sticky" navbar.
 window.onscroll = function scrollFunction(){
-    if(window.pageYOffset >= 250){
-        navbar.classList.add("sticky");
+    if(window.pageYOffset >= 30){
+		navbar.style.top = "0px"
+		navbar.style.background = "#222";
+		navbar.style.boxShadow = "0px 3px 5px rgba(0,0,0,0.15)";
     } else {
-        navbar.classList.remove("sticky");
+		navbar.style.background = "transparent";
+		navbar.style.boxShadow = "none";
     }
 }
 //Burger Menu.

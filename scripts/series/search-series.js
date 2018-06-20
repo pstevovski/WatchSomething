@@ -3,6 +3,9 @@ const API_KEY = config.API_KEY;
 //Hide the spinner.
 const spinner = document.querySelector(".spinner");
 spinner.style.display = "none";
+//Pages
+const pages = document.querySelector(".pages");
+pages.style.display = "none";
 //Get the FORM and the INPUTED VALUE in it.
 const form = document.getElementById("form");
 form.addEventListener("submit", (e)=>{
@@ -18,6 +21,7 @@ form.addEventListener("submit", (e)=>{
 	setTimeout(() => {
 		container.style.display = "flex";
 		spinner.style.display = "none";
+		pages.style.display = "flex";
 	}, 1000);
 	//Prevent the default action of the FORM
 	e.preventDefault();
@@ -51,9 +55,6 @@ function searchSeries(searchText){
 			//Append the "output" to the movies element.
 			let seriesInfo = document.getElementById("movies");
 			seriesInfo.innerHTML = output;
-			//Show pages buttons.
-			let pages = document.querySelector(".pages");
-			pages.style.display = "flex";
 		})
 		//If theres an error, it logs it in the console.
 		.catch ((err)=>{

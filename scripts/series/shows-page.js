@@ -59,7 +59,7 @@ function getShowInfo(){
 							<a href="https://www.imdb.com/title/${imdb_id}"target="_blank"> IMDB Link </a>
 							<a href="#" onclick="openTrailer()"> Trailer </a>
 							<a id="addToWatchList" onclick="addToList('${movie.id}')"> Add to watchlist </a>
-							<a href="javascript:history.back()"> Go back </a>
+							<a onclick="goBack()"> Go back </a>
 						</div>
 					</div>
 				</div>
@@ -208,6 +208,10 @@ function getShowInfo(){
 			.catch ((err)=>{
 				console.log(err);
 			})
+}
+//Go back button function.
+function goBack(){
+	history.go(-1);
 }
 //When the user clicks on "Show Details" link in the similar movies, it gets the ID from the similar 
 //tv shows, below the information about the current movie, and sets it in the session storage, so it can be //accsesed, and showcased.

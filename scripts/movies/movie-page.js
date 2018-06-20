@@ -70,7 +70,7 @@ function getMovie(){
 					<a href="https://www.imdb.com/title/${movie.imdb_id}" target="_blank"> IMDB Link </a>
 					<a href="#" onclick="openTrailer()"> Trailer </a>
 					<a id="addToWatchList" onclick="addToList('${movie.id}')"> Add to watchlist </a>
-					<a href="javascript:history.back()"> Go back </a>
+					<a onclick="goBack()"> Go back </a>
 				</div>
 			</div>
 		</div>
@@ -128,7 +128,7 @@ function getMovie(){
 			.then ((response)=>{
 				const movie = response.data.results;
 				//Set the movie length (output) to 5.
-				movie.length = Math.min(movie.length, 5);
+				movie.length = Math.min(movie.length, 4);
 				let output = "";
 				for(let i = 0; i < movie.length; i++){
 					output += `
@@ -148,6 +148,10 @@ function getMovie(){
 			.catch ((err)=>{
 				console.log(err);
 			})
+}
+//Go back button function.
+function goBack(){
+	history.go(-1);
 }
 
 //Open trailer for the current movie.
@@ -225,7 +229,7 @@ function addToList(id){
 
 		//Notification that it will be added to Watchlist.
         const added = document.getElementById("added");
-        added.innerHTML = "Added to Favorites !";
+        added.innerHTML = "Added to Watchlist!";
         added.classList.add("added");
 		setTimeout(() => {
             added.classList.remove("added");
@@ -233,7 +237,7 @@ function addToList(id){
 	} else {
 		//Notification that it has already been added to the watchlist.
 		const alreadyStored = document.getElementById("alreadyStored");
-        alreadyStored.innerHTML = "Already in favorites !";
+        alreadyStored.innerHTML = "Already in Watchlist!";
         alreadyStored.classList.add("alreadyStored");
 		setTimeout(() => {
             alreadyStored.classList.remove("alreadyStored");
