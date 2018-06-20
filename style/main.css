@@ -3,6 +3,7 @@ That includes (index.html,popular-movies.html,search-movies.html,top-rated.html,
 
 /* Import Ionicons. */
 @import "https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css";
+
 /* Target the whole document. */
 *{
 	margin: 0;
@@ -11,19 +12,19 @@ That includes (index.html,popular-movies.html,search-movies.html,top-rated.html,
 }
 /* Global parameters. */
 body{
-	color: #0091EA;
-	background-color: #eee;
+	color: #E53935;
+	background-color: #111;
 	font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
 li{
-	color: #0091EA;
+	color: #E53935;
 }
 li:hover{
-	color: #E53935;
+	color: #fff;
 }
 a{
 	text-decoration: none;
-	color: #0091EA;
+	color: #E53935;
 }
 ul{
 	list-style: none;
@@ -63,8 +64,8 @@ ul{
 	width: 40px;
 	border-radius: 50%;
 	margin-top: -20px;
-	border: 3px solid #eee;
-	border-top-color: #0091EA;
+	border: 3px solid #fff;
+	border-top-color: #E53935;
 	animation: spinner 0.5s ease infinite;
 }
 @keyframes spinner{
@@ -79,37 +80,20 @@ ul{
 
 /* Navigation bar - START. */
 nav{
+	position: fixed;
+	top: 0px;
+	width: 100%;
+	transition: 0.2s ease;
+	background-color: transparent;
+	z-index: 999;
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
 	color: #eee;
+	margin-bottom: 30px;
 }
 nav a{
-	color: #0091EA;
-}
-.sticky{
-	background-color: #0091EA;
-	width: 100%;
-	position: fixed;
-	right: 0;
-	z-index: 999;
-	transition: 0.35s ease-in-out;
-	animation: navbarSlide 0.4s 1;
-	box-shadow: 0 3px 5px rgba(0,0,0,0.15);
-}
-.sticky a{
-	color: #fff;
-}
-.sticky li{
-	color: #fff;
-}
-@keyframes navbarSlide{
-	0%{
-		transform: translateY(-50px)
-	}
-	100%{
-		transform: translateY(0px)
-	}
+	color: #E53935;
 }
 .logo{
 	font-family: "Berkshire Swash Regular";
@@ -118,7 +102,7 @@ nav a{
 }
 .menu{
 	font-weight: bold;
-	font-family: "Montserrat", Arial, Helvetica, sans-serif;
+	font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
 }
 .menu ul{
 	display: flex;
@@ -146,12 +130,12 @@ nav a{
 .menu ul .list a:nth-child(1){
 	transition: 0.25s;
 }
+.menu ul .list a:hover:nth-child(1){
+	color: #fff;
+}
 .menu ul .list span{
 	display: inline-block;
 	opacity: 1;
-}
-.menu ul .list:hover .drop{
-	animation: upNdown 0.6s ease-in-out forwards infinite;
 }
 .menu ul .list .firstUnordered{
 	display: none;
@@ -162,9 +146,9 @@ nav a{
 	position: absolute;
 	top: 90%;
 	left: 0;
-	background-color: #eee;
+	background-color: #222;
 	width: 184px;
-	box-shadow: 0 3px 5px rgba(0,0,0,0.15);
+	box-shadow: 0 3px 5px rgba(0,0,0,0.35);
 	animation: dropdown 0.5s ease-out forwards;
 	z-index: 9;
 }
@@ -179,12 +163,14 @@ nav a{
 }
 .menu ul .list .firstUnordered .search{
 	position: relative;
+	color: #E53935 !important;
 }
 .menu ul .list .firstUnordered .search:hover{
-	color: #E53935;
+	color: #fff !important;
 }
 .menu ul .list .firstUnordered li:nth-last-child(1){
 	padding-left: 15px;
+	/* color: #E53935 !important; */
 }
 .menu ul .list .firstUnordered .secondUnordered{
 	display: none;
@@ -195,13 +181,13 @@ nav a{
 }
 .menu ul .list .firstUnordered .search:hover .secondUnordered{
 	display: block;
-	background-color: #eee;
+	background-color: #222;
 	box-shadow: 0px 2px 5px rgba(0,0,0,0.15);
 	animation: sideway 0.5s ease-out forwards;
 }
 .menu ul .list .firstUnordered .search:hover .secondUnordered li{
 	padding: 5px;
-	color: #333;
+	color: #E53935;
 	width: 190px;
 }
 .menu ul li ul li:hover{
@@ -210,15 +196,15 @@ nav a{
 }
 .menu ul li ul li a{
 	display: block;
-	color: #333;
+	color: #E53935;
 	padding: 5px;
 	transition: all 0.3s;
 }
 .menu ul .list .firstUnordered .search .secondUnordered a{
-	color: #333;
+	color: #E53935;
 }
 .menu ul .list .firstUnordered .search .secondUnordered a:hover{
-	color: #E53935;
+	color: #fff;
 }
 .menu ul li ul li:hover a{
 	color:#E53935;
@@ -227,6 +213,7 @@ nav a{
 
 /* Page Title */
 .container{
+	margin-top: 20px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -238,12 +225,12 @@ nav a{
 	font-size:50px;
 }
 #byYear{
-	color: #E53935;
+	color: #fff;
 	font-size: 40px;
 	font-weight: bold;
 }
 #upcomingDate{
-	color: #E53935;
+	color: #fff;
 	font-size: 50px;
 	font-weight: bold;
 }
@@ -261,11 +248,12 @@ nav a{
 }
 @media (min-width: 650px){
 	.card{
-	height: 470px;
+	height: 570px; /* smeneto */
 	color: #fff;
 	width: 300px;
 	position: relative;
-	transition: 0.35s;
+	margin-bottom: 10px;
+	/* transition: 0.35s; */
 	z-index: 2;
 	overflow: hidden;
 }
@@ -279,18 +267,18 @@ nav a{
 	height: 450px;
 	overflow: hidden;
 	z-index: 2;
-	transition: 0.35s ease-out;
+	/* transition: 0.35s ease-out; */
 }
 
 .card .card_text{
 	position: relative;
-	color: #0091EA;
+	color: #E53935;
 	font-family: "Montserrat",Arial, Helvetica, sans-serif;
-	background-color: #ecf0f1;
+	background-color: #fff;
 	height:120px;
-	transform:translateY(-300px);
+	/* transform:translateY(-300px); */
 	z-index: -1;
-	transition: 0.5s ease-out;
+	/* transition: 0.5s ease-in-out; */
 	overflow: hidden;
 	display: flex;
 	flex-direction: column;
@@ -305,18 +293,19 @@ nav a{
 	height: 450px;
 }
 .card:hover .card_text{
-	transform:translateY(0px);
+	/* transform:translateY(0px); */
 	box-shadow: 0 3px 5px rgba(0,0,0,0.25),
 				inset 0 0 5px rgba(0,0,0,0.10);
 }
-.card:hover .card_img{
+/* .card:hover .card_img{
 	height: 330px;
-}
+} */
+
 }
 .card a{
 	display: block;
 	width: 100%;
-	background-color: #0091EA;
+	background-color: #E53935;
 	color: #fff;
 	font-weight: bold;
 	padding: 6px;
@@ -326,10 +315,6 @@ nav a{
 	position: absolute;
 	bottom: 0;
 }
-.card a:hover{
-	background-color: rgba(0,0,0,0.55);
-	color: #eee;
- }
 .card .addBtn{
 	position: absolute;
 	top: 10px;
@@ -354,7 +339,7 @@ nav a{
 	transform: scale(0.9);
 }
 .addBtn i:hover{
-	color: #0091EA;
+	color: #e53935;
 	transform: scale(1.25);
 	text-shadow: 0 0 5px rgba(0,0,0,0.25);
 }
@@ -363,20 +348,20 @@ nav a{
 }
 /* Buttons for pages */
 .pages{
-	display:none;
-	position: absolute;
-	bottom: -3%;
-	left: 50%;
-	transform:translateX(-50%);
+	width: 100%;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	margin-top: 20px;
 }
 .pages > *{
-	width: 35px;
-	height: 35px;
+	width: 30px;
+	height: 30px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: #fff;
-	color: #0091EA;
+	background-color: #E53935;
+	color: #fff;
 	font-family: "Poppins", Arial, Helvetica, sans-serif;
 	font-weight: bold;
 	font-size: 22px;
@@ -388,6 +373,7 @@ nav a{
 }
 .pages > *:hover{
 	color: #E53935;
+	background-color: #fff;
 }
 /* Movies/Tvshows output - END. */
 
@@ -406,9 +392,9 @@ nav a{
 	border: none;
 	background-color: #fff;
 	box-shadow: 0 1px 5px rgba(0,0,0,0.25);
-	color: #0277bd;
+	color: #e53935;
 	width: 250px;
-	font-family: "Poppins";
+	font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
 	position: relative;
 }
 #searchImg i{
@@ -458,7 +444,7 @@ nav a{
 	font-weight: 500;
 	width: 450px;
 	background-color: #fff;
-	color: #0091EA;
+	color: #e53935;
 	border-radius: 3px;
 	padding: 5px;
 	text-align: center;
@@ -468,7 +454,7 @@ nav a{
 	left: 50%;
 	transform:translateX(-50%);
 	animation:modal 0.5s ease-in-out forwards;
-	box-shadow: 0 3px 5px rgba(0,0,0,0.1);
+	box-shadow: 0 3px 5px rgba(0,0,0,0.35);
 }
 .modal h3{
 	color: #E53935;
@@ -495,10 +481,10 @@ nav a{
 	font-weight: bold;
 	font-size: 25px;
 	cursor: pointer;
-	transition: 0.3s;
+	transition: 0.2s;
 }
 #close:hover{
-	color: #E53935;
+	color: #222;
 }
 /* Select */
 .wrap{
@@ -553,28 +539,6 @@ nav a{
 	position: relative;
 	box-shadow: 0 2px 5px rgba(0,0,0,0.15);
 	animation: select 0.35s ease-in-out 1 forwards;
-}
-.buttons{
-	margin-right: 50px;
-	text-align: center;
-	display: flex;
-	justify-content: center;
-}
-.buttons > * {
-	margin: 0px 0px 10px 10px;
-	padding: 5px;
-	border-radius: 3px;
-	border:none;
-	font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
-	color: #0091EA;
-	background-color: #fff;
-	box-shadow: 0 3px 5px rgba(0,0,0,0.15);
-	cursor: pointer;
-	transition: 0.25s ease;
-}
-#byRating:hover,  #byGenre:hover{
-	background-color: #0091EA;
-	color: #fff;
 }
 #reset{
 	padding: 0px 5px;
@@ -679,7 +643,7 @@ nav a{
 }
 .notification{
 	z-index: 999;
-	background-color: #0091EA;
+	background-color: #00C853;
 	padding: 10px;
 	border-radius: 3px;
 	width: 190px;
@@ -732,6 +696,15 @@ nav a{
 	#movies{
 		grid-template-columns: repeat(2,1fr);
 	}
+	.card:hover .addBtn i{
+		opacity: 1;
+		transform: scale(1);
+	}
+	.card .addBtn i{
+		opacity: 1;
+		transform:scale(1);
+		font-size: 30px;
+	}
 }
 /* Max-width 684 px. */
 @media (max-width: 684px){
@@ -743,7 +716,7 @@ nav a{
 		width: 28px;
 		display: block;
 		margin-right: 15px;
-		margin-top: 15px;
+		margin-top: 5px;
 		position: relative;
 		overflow: hidden;
 		cursor: pointer;
@@ -752,16 +725,16 @@ nav a{
 		width: 100%;
 		height: 5px;
 		border-radius: 2px;
-		background-color: #0091EA;
+		background-color: #E53935;
 		display: block;
 		position: absolute;
 		transition: all 0.5s;
 	}
-	.sticky{
+	nav{
 		padding: 5px 0;
 	}
 	.sticky .burger span{
-		background-color: #fff;
+		background-color: #E53935;
 	}
 	.burger span:nth-child(1){
 		top: 0px;
@@ -797,10 +770,10 @@ nav a{
 		display: block;
 		position: absolute;
 		top: 0px;
-		color: #333;
+		color: #E53935;
 		width: 100%;
 		min-height: 100vh;
-		background-color: #fff;
+		background-color: #111;
 		transition: all 0.35s;
 		font-weight: bold;
 		z-index: 8;
@@ -811,12 +784,12 @@ nav a{
 		transform: translateX(0px);
 	}
 	.slide a{
-		color:#333;
+		color:#E53935;
 		transition: 0.35s;
 		display: block;
 	}
 	.slide a:hover{
-		color: #0091EA;
+		color: #fff;
 	}
 	.slide ul{
 		margin-top: 25px;
@@ -829,7 +802,7 @@ nav a{
 		cursor: pointer;
 		display: block;
 		position: relative;
-		color: #333;
+		color: #E53935;
 	}
 	.slide ul li span{
 		position: absolute;
@@ -841,7 +814,7 @@ nav a{
 		animation: upNdown 0.4s ease-in-out forwards;
 	}
 	.slide ul li:hover{
-		color: #0091EA;
+		color: #fff;
 	}
 	.slide ul li #moviesDropdown{
 		display: none;
@@ -873,10 +846,10 @@ nav a{
 		text-align: left;
 	}
 	.slide ul li ul li:hover{
-		color: #0091EA;
+		color: #fff;
 	}
 	.slide ul li ul li a{
-		color: #333;
+		color: #E53935;
 	}
 }
 /* Max-width 650 px. */
@@ -888,10 +861,10 @@ nav a{
 	}
 	.card{
 		height: 470px;
-		color: #fff;
+		color: #E53935;
 		width: 300px;
 		position: relative;
-		transition: 0.35s;
+		transition: 0.2s;
 		z-index: 2;
 	}
 	.card .card_img img{
@@ -902,18 +875,18 @@ nav a{
 	.card .card_img{
 		height: 330px;
 		z-index: 2;
-		transition: 0.35s ease-out;
+		transition: 0.2s ease-out;
 	}
 	
 	.card .card_text{
 		position: relative;
-		color: #0091EA;
+		color: #E53935;
 		font-family: "Montserrat",Arial, Helvetica, sans-serif;
-		background-color: #ecf0f1;
-		height:120px;
+		background-color: #fff;
+		height:130px;
 		transform:translateY(0px);
 		z-index: -1;
-		transition: 0.5s ease-out;
+		transition: 0.4s ease-out;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -940,18 +913,32 @@ nav a{
 	.modal{
 		width: 85%;
 	}
+	.card{
+		margin: 10px 0;
+	}
 }
 /* Max-width 320 px. */
 @media (max-width: 320px){
 	.card{
-		width: 280px;
+		margin: 20px 0;
+		width: 260px;
+		height: 470px;
 		transition: all 0.35s;
 	}
-	.card img{
-		width: 280px;
+	.card .card_text{
+		height: 130px;
+	}
+	.card_img{
+		width: 260px;
+	}
+	.card_img img{
+		width: 260px;
 		transition: all 0.35s;
 	}
 }
+
+/* ANIMATIONS  */
+
 /* Animation for dropdown menu on small screens. */
 @keyframes smallDrop{
 	0%{
@@ -964,14 +951,6 @@ nav a{
 	}
 }
 /* Animation for span element in the menu (both large & small screens). */
-@keyframes upNdown{
-	0%{
-		transform:translateY(-3px);
-	}
-	100%{
-		transform:translateY(3px);
-	}
-}
 /* Animation for sideway submenu */
 @keyframes sideway{
 	0%{

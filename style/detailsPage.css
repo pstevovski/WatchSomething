@@ -4,8 +4,11 @@
 
 body{
 	width: 100%;
-	background-color: #eee;
+	background-color: #111;
 	font-family: "Montserrat", Arial, Helvetica, sans-serif;
+}
+nav ul li:hover{
+	color: #fff;
 }
 /* Movie/tv show page container (both poster and info sections). */
 .moviePage{
@@ -31,7 +34,10 @@ body{
 .info h2{
 	font-family: "Montserrat Black", Arial, Helvetica, sans-serif;
 	font-size: 35px;
-	color:#E53935;
+	color:#fff;
+}
+li:hover{
+	color: #E53935;
 }
 .plot{
 	padding: 20px;
@@ -49,6 +55,7 @@ body{
 }
 .buttons > *{
 	margin: 0 5px;
+	cursor: pointer;
 }
 .buttons a{
 	font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
@@ -56,7 +63,7 @@ body{
 	padding: 5px;
 	background-color: #fff;
 	border-radius: 5px;
-	color: #0091EA;
+	color: #E53935;
 	text-align: center;
 	transition: 0.2s;
 	position: relative;
@@ -94,8 +101,8 @@ body{
 	font-size: 25px;
 	font-weight: bold;
 	font-family: "Poppins", Arial, Helvetica, sans-serif;
-	background-color: #fff;
-	color: #0091EA;
+	background-color: #E53935;
+	color: #fff;
 	box-shadow: 0 2px 5px rgba(0,0,0,0.20);
 	width: 35px;
 	height: 35px;
@@ -107,8 +114,8 @@ body{
 	transition: 0.3s ease;
 }
 #prev:hover, #next:hover{
-	background-color: #E53935;
-	color: #fff;
+	background-color: #fff;
+	color: #E53935;
 }
 /* Movie/tv show info - END. */
 
@@ -171,9 +178,10 @@ body{
 .recommended_card{
 	text-align: center;
 	width: 200px;
-	height: 380px;
+	height: 390px;
 	font-family: "Montserrat Regular", Arial, Helvetica, sans-serif;
-	color: #0091EA;
+	color: #E53935;
+	background-color: #fff;
 	border-radius: 3px;
 	transition: 0.35s;
 	position: relative;
@@ -199,7 +207,7 @@ body{
 }
 .recommended_card:hover{
 	transform:translateY(-10px);
-	color: #0091EA;
+	color: #E53935;
 }
 .recommended_card img{
 	height: 300px;
@@ -220,12 +228,12 @@ body{
 	bottom: 0;
 }
 .recommended_card a:hover{
-	background-color: #0091EA;
-	color: #eee;
+	background-color: #E53935;
+	color: #fff;
 }
 
 .notification{
-	background-color: #0091EA;
+	background-color: #00C853;
 	padding: 10px;
 	border-radius: 3px;
 	width: 190px;

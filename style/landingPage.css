@@ -1,357 +1,206 @@
+/* Import ionicons v2. */
+@import "http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css";
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
 body{
-    background-color: #0091EA;
-    color: #fff;
+    background-color:#111;
+    color: #e53935;
 }
 a{
     text-decoration: none;
+    color: #e53935;
+    font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
 }
-#filmstrip{
-    position: absolute;
-    top: -195px;
-    left: 110px;
-    z-index: -1;
-    opacity: 0.2;
-    transform:rotate(55deg);
-    width: 150px;
-    transition: all 0.35s; 
+li{
+    list-style-type: none;
 }
-.title h1{
-    font-size: 120px;
-    font-family: "Montserrat Black", Arial, Helvetica, sans-serif;
-    transition: all 0.35s ease;
-}
-#com{
-    font-family: "Pacifico", Arial, Helvetica, sans-serif;
-    font-size: 30px;
-}
-.titleAndText{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    height: 300px;
-}
-.title{
+/* Global end. */
+
+/* Navigation bar. */
+nav ul{
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    margin-left: 45px;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 10px;
 }
+nav ul li{
+    margin: 0 5px;
+    padding: 5px;
+}
+nav ul li a{
+    position: relative;
+    padding: 5px;
+    display: block;
+}
+nav ul li a::after{
+    content: '';
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 1px;
+	border: 2px solid #e53935;
+	border-width: 0 0 2px 0;
+	transition: 0.3s ease-out;
+	opacity: 0;
+}
+nav ul li a:hover::after{
+    width: 100%;
+    opacity: 1;
+    right: 10px;
+}
+/* Navigation bar end. */
+
+/* Text */
 .text{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin: 30px 0 0 100px;
+    margin-left: 10px;
 }
-.text h3{
-    font-size: 25px;
+.text h1{
+    font-family: "Montserrat Black", Arial, Helvetica, sans-serif;
+    font-size: 70px;
+    transition: all 0.25s;
+}
+.text h4{
     font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
 }
 .text p{
-    font-family: "Montserrat Light", Arial, Helvetica, sans-serif;
-}
-#learn{
-    margin-top: 5px;
-    display: flex;
-    align-items: center;
-}
-#chair{
-    margin: 20px 0 0 10px;
-}
-.text a{
-    padding: 5px;
-    background-color: #fff;
-    color: #0091EA;
     font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
-    border-radius: 3px;
-    margin-top: 15px;
-    font-size: 15px;
-    transition: all 0.35s ease;
-    width: 125px;
+    width: 650px;
 }
-.text a::before{
-    content: "Learn More";
+.text #quote{
     font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
-    display: inline-block;
-    transition: 0.55s ease;
-    transform: translateX(10px);
+    color: #fff;
+    font-style: italic;
+    margin: 20px 0;
+    width: 550px;
 }
-.text a:hover:before{
-    transform: translateX(0px);
+/* Text end. */
+
+/* Homer */
+.homer{
+    position: absolute;
+    right: 15px;
+    top: 80px;
 }
-.text a::after{
-    content: ">>";
-    font-family: "Poppins", Arial, Helvetica, sans-serif;
-    display: inline-block;
-    font-weight: bold;
-    opacity: 0;
-    transition: 0.35s ease;
-    transform: translateY(1px) translateX(10px);
-}
-.text a:hover:after{
-    opacity: 1;
-    transform: translateY(1px) translateX(3px);
-}
-.text a:hover{
-    box-shadow: 0 3px 5px rgba(0,0,0,0.25);
-}
-.container{
-    width: 100%;
-    height: 70px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
+/* Homer end. */
+
+/* Search movies. */
+.search_movies{
     position: relative;
 }
-.button{
-    padding: 5px;
-    border-radius: 3px;
-    background-color: #fff;
-    color: #0091EA;
-    font-family: "Montserrat", Arial, Helvetica, sans-serif;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.35s;
+.search_movies a{
+    font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
+    margin-left: 10px;
+    font-size: 22px;
+    transition: 0.25s;
 }
-.button:hover{
-    box-shadow: 0 3px 5px rgba(0,0,0,0.25);
-}
-#adventure{
-    position: absolute;
-    left: 45px;
-    top: 25px;
-    transition: 0.5s ease;
-    transform: scale(1);
-}
-#adventure.active{
-    opacity: 0;
-    transform:scale(0);
+.search_movies a:hover{
+    color: #fff;
 }
 #movies{
-    position: absolute;
-    left: 45px;
-    top: 25px;
-    transform: translateY(-70px);
-    opacity: 0;
-}
-#series{
-    position: absolute;
-    left: 185px;
-    top: 25px;
-    transform: translateY(-70px);
-    opacity: 0;
-}
-#movies.slideIn, #series.slideIn{
-    opacity: 1;
-    transform: translateY(0px);
-}
-/* Featured movies */
-#featuredTitle{
-    font-family: "Montserrat Black", Arial, Helvetica, sans-serif;
-    margin-left: 45px;
-    font-size: 35px;
-    letter-spacing: 1px;
-    color: #fff;
-}
-.featured_container{
-    position: relative;
-    width: 100%;
-    height: 224px;
+    margin:15px 0;
     overflow: hidden;
-}
-#featuredMovies{
-    height: 100%;
     width: 100%;
-    display: grid;
-    grid-template-columns: repeat(20, 1fr);
-    grid-gap: 0px;
-    transition: 0.5s ease;
+    display: flex;
+    cursor: grabbing;
+    cursor: -webkit-grabbing;
 }
-.card{
-    height: 230px;
-    width: 200px;
+/* Search movies end */
+
+/* Search tv shows. */
+.search_tvshows{
     position: relative;
-    transition: 0.35s;
 }
-.link a{
-    position: absolute;
-    z-index: 99;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,200px);
-    padding: 5px 10px;
-    background-color: #fff;
-    border-radius: 2px;
+.search_tvshows a{
     font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
-    color: #0091EA;
-    box-shadow: 0 3px 5px rgba(0,0,0,0.6);
-    transition: 0.7s ease-in-out;
+    margin-left: 10px;
+    font-size: 22px;
+    transition: 0.25s;
 }
-.card:hover .link a{
-    transform: translate(-50%,-50%);
-}
-.link a:hover{
-    background-color: #0091EA;
+.search_tvshows a:hover{
     color: #fff;
 }
-.card img{
-    height: 100%;
+#tvShows{
+    margin: 15px 0;
+    overflow: hidden;
     width: 100%;
-}
-.arrow{
-    position: absolute;
-    bottom: 45px;
-    right: 15px;
-    font-size: 80px;
-    font-weight: bold;
-    z-index: 99;
-    font-family: "Poppins", Arial, Helvetica, sans-serif;
-    cursor: pointer;
-    transition: 0.3s ease;
-    color: #fff;
-    text-shadow: 0 0 5px rgba(0,0,0,0.7);
-}
-#left{
-    position: absolute;
-    bottom: 45px;
-    left: 15px;
-    font-size: 80px;
-    font-weight: bold;
-    z-index: 99;
-    font-family: "Poppins", Arial, Helvetica, sans-serif;
-    cursor: pointer;
-    transition: 0.3s ease;
-    transform: scale(0);
-    text-shadow: 0 0 5px rgba(0,0,0,0.7);
-}
-.popup{
-    animation: popup 0.45s ease forwards;
-}
-@keyframes popup{
-    0%{
-        transform: scale(0);
-    }
-    100%{
-        transform: scale(1);
-    }
-}
-.removePopup{
-    animation: removePopup 0.45s ease forwards;
-}
-@keyframes removePopup{
-    0%{
-        transform: scale(1);
-    }
-    100%{
-        transform: scale(0);
-    }
-}
-.arrow:hover, #left:hover{
-    color: #00B8D4;
-}
-#quote{
-    font-family: "Montserrat Light", Arial, Helvetica, sans-serif;
-    width: auto;
-    margin-top: 30px;
-    font-style: italic;
-    font-size: 14px;
+    display: flex;
+    cursor: grabbing;
+    cursor: -webkit-grabbing;
 }
 
-@media (max-width: 1160px){
-    .titleAndText{
-        display: grid;
-        grid-template-columns: 1fr;
-        height: 500px;
-    }
-    .text{
-        margin: 10px 0 0 50px;
-    }
-    #adventure{
-        left: 50px;
-    }
-    #movies{
-        left: 50px;
-    }
-    #series{
-        left: 185px;
+/* Footer */
+footer{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-gap: 5px;
+    grid-template-areas: 
+    "copy deadpool powered";
+}
+footer .copy{
+    grid-area: copy;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
+}
+footer .deadpool{
+    grid-area: deadpool;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+footer .deadpool img{
+    width:250px;
+}
+footer .poweredBy{
+    grid-area: powered;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width:770px){
+    .homer{
+        display: none;
     }
 }
-@media (max-width: 700px){
-    .text{      
-        margin: 10px 0 0 15px;
+@media (max-width: 680px){
+    .text p{
+        width: 90%;
     }
-    .title{
-        margin-left: 15px;
-    }
-    .title h1{
-        font-size: 80px;
-    }
-    #adventure{
-        left: 15px;
-    }
-    #movies{
-        left: 15px;
-    }
-    #series{
-        left: 155px;
-    }
-    #featuredTitle{
-        margin-left: 15px;
-    }
-    #quote{
-        width: 60%;
-    }
-    .container{
-        margin-top: -40px;
+    .text #quote{
+        width: 80%;
     }
 }
-@media (max-width: 500px){
-    .featured_container{
-        width: 100%;
-    }
-    #filmstrip{
-        position: absolute;
-        top: -195px;
-        left: 100px;
-        z-index: -1;
-        opacity: 0.2;
-        transform:rotate(55deg);
-        width: 30%;
-    }
-}
-@media (max-width: 475px){
-    .title h1{
-        font-size: 65px;
-    }
-}
-@media (max-width: 411px){
-    #filmstrip{
-        position: absolute;
-        top: -155px;
-        left: 60px;
-        z-index: -1;
-        opacity: 0.2;
-        transform:rotate(55deg);
-        width: 30%;
-    }
-}
-@media (max-width: 405px){
-    .title h1{
+@media (max-width:575px){
+    .text h1{
         font-size: 50px;
     }
 }
-@media(max-width: 330px){
-    .title h1{
+@media (max-width: 455px){
+    footer{
+        width: 100%;
+        grid-template-areas:
+        "copy"
+        "powered"
+        "deadpool";
+    }
+    footer > *{
+        margin-left: 45px;
+    }
+}
+@media (max-width:420px){
+    .text h1{
         font-size: 35px;
+        margin-bottom: 20px;
     }
-    .text{
-        margin: 10px 0 0 15px;
-    }
-    .text h3{
-        font-size: 20px;
+    nav ul{
+        justify-content: center;
     }
 }
