@@ -13,42 +13,66 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="style/landingPage.css">
+    <link rel="stylesheet" href="style/fonts.css">
 </head>
 <body>
-    <img id="filmstrip" src="images/filmstrip.svg" alt="filmstrip">
-    <section class="titleAndText">
-        <div class="title">
-        <h1>What</h1>
-        <h1>ToWatch<span id="com">.com</span></h1>
+<!-- Navigation bar -->
+    <nav>
+        <!-- Logo -->
+
+        <!-- Links -->
+        <ul>
+            <li><a href="movies/search-movies.html">Movies</a></li>
+            <li><a href="series/search-series.html">Tv Shows</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+    </nav>
+<!-- Text -->
+    <section class="text">
+        <h1>WhatToWatch</h1>
+        <h4>Can't find anything to watch?</h4>
+        <div class="subText">
+            <p>You're at the right place. Explore a vast variety of movies and tv shows, sort them by genre and rating, and store them in your watchlist or favorites list !</p>
         </div>
-        <div class="text">
-            <h3>Can't find a movie to watch?</h3>
-            <p>Worry no more! You're at the right place.</p>
-            <p>Explore a vast variety of movies and tv shows.</p>
-            <div id="learn">
-                <a href="about.html"></a>
-            </div>
-            <!-- Quote -->
-            <h4 id="quote"></h4>    
+        <!-- Quote -->
+        <div id="quote"></div>
+    </section>
+<!-- Homer image -->
+    <div class="homer">
+        <img src="images/homer.png" alt="Homer Simpson" title="Homer">
+    </div>
+<!-- Search movies -->
+    <section class="search_movies">
+        <a href="movies/search-movies.html">Search Movies <span><i class="ion-arrow-right-b"></i></span></a>
+        <!-- Movies output -->
+        <div id="movies" class="scroll">
         </div>
     </section>
-    <div class="container">
-        <a class="button" id="adventure">Adventure time !</a>
-        <a href="movies/search-movies.html" class="button" id="movies">Search Movies</a>
-        <a href="series/search-series.html" class="button" id="series">Search Series</a>
+<!-- Search Tv Shows -->
+    <section class="search_tvshows">
+        <a href="series/search-series.html">Search Tv shows <span><i class="ion-arrow-right-b"></i></span></a>
+        <!-- Tv Shows output -->
+        <div id="tvShows" class="scroll"></div>
+    </section>
+<!-- Footer -->
+<footer>
+    <!-- 2018 Copyright -->
+    <div class="copy">
+        <p>2018 &copy;</p>
     </div>
-    <!-- Featured movies -->
-    <h3 id="featuredTitle">Featured Movies: </h3>
-    <div class="featured_container">
-        <!-- Featured movies output goes here. -->
-        <div id="featuredMovies"></div>
-
-        <div class="arrow" id="right"> > </div>
-        <div id="left"> < </div>
+    <!-- Deadpool image -->
+    <div class="deadpool">
+        <img src="images/deadpool.png" alt="deadpool">
     </div>
+    <!-- Powered by -->
+    <div class="poweredBy">
+        <a href="https://www.themoviedb.org"><img src="images/tmdb.svg" alt="TMDB" title="TMDB" width="90px"></a>
+    </div>
+</footer>
 </body>
 <script src="scripts/config.js"></script>
 <script src="scripts/homePage.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <!-- Axios link -->
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </html>

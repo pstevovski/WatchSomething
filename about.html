@@ -13,18 +13,16 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="style/about.css">
+    <link rel="stylesheet" href="style/fonts.css">
 </head>
 <body>
     <!-- Title -->
     <div class="title">
         <h1>About</h1>
     </div>
-    <!-- Links to my github -->
-    <div class="github">
-        <a href="https://github.com/pecko95/What-to-Watch" title="Github link."><span><i class="ion-social-github"></i></span></a>
-    </div>
     <!-- Info -->
     <div class="text">
+        <p>Find a movie or tv show to watch. With this website, you can: </p>
         <ul>
             <li>Search for movies and tv shows by title, year, actor & genre.</li>
             <li>List the top rated, latest, popular & upcoming movies.</li>
@@ -32,14 +30,18 @@
             <li>Add movies and tv shows to your watchlist or favorites list !</li>
             <li>Sort movies and tv shows by rating and / or genre.</li>
             <li>Get detailed informations about the selected movie / tv show.</li>
+            <li>And more options to be added in future updates.</li>
         </ul>
+        <p>This is a personal learning project, without any commercial / profitable intentions.</p>
+    </div>
+    <!-- Links to my github -->
+    <div class="github">
+        <p>Link to GitHub repository: </p>
+        <a href="https://github.com/pecko95/What-to-Watch" title="Github link."><span><i class="ion-social-github"></i></span></a>
     </div>
     <div class="back">
-            <button id="goBack" onclick="javascript:history.back()">Go Back.</button>
+            <button id="goBack">Go Back.</button>
     </div>
-
-    <br>
-    
     <h3>Credits</h3>
     <!-- Credits -->
     <div class="credits">
@@ -47,9 +49,8 @@
         <div class="tmdbCredits">
             <p>This project uses <a class="tmdb" href="https://www.themoviedb.org" target="_blank">themoviedb(TMDb)</a> API in order to list the movies and tv shows.</p>
             <br>
-            <p>This project is used for learning purposes. No intentions for commercial usage and making profit of it for now.</p>
             <!-- TMDB logo -->
-            <a id="tmdbImage" href="https://www.themoviedb.org" target="_blank"><img src="images/tmdb.svg" alt="TMDb" width="140px"></a>
+            <a id="tmdbImage" href="https://www.themoviedb.org" target="_blank"><img src="images/tmdb.svg" alt="TMDb" width="140px" style="margin: 15px 0;"></a>
         </div>
         <!-- Flaticon credits -->
         <div class="flaticon"><p>Logo image provided by: </p>
@@ -60,8 +61,21 @@
         </div>
         <!-- Checkmark image credits -->
         <div class="checkmarkImage"><p>Checkmark image provided by: </p>
-                <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+                <a href="https://www.flaticon.com/authors/alessio-atzeni" title="Alessio Atzeni">Alessio Atzeni</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+        </div>
+        <!-- Images on landing/about page -->
+        <div class="imagesCredits">
+            <p>Image for Homer provided by: </p>
+            <a href="http://ninjas-designer.blogspot.com/2011/08/render-homer-simpson-10_1993.html">Ninjas Designer</a>
+            <p>Image for Deadpool on landing page provided by: </p>
+            <a href="http://vgboxart.com/resource/13602/deadpool-render/">VG Box art</a>
         </div>
     </div>
 </body>
+<script>
+    const goBack = document.getElementById("goBack");
+    goBack.addEventListener("click", ()=>{
+        history.go(-1);
+    })
+</script>
 </html>
