@@ -15,3 +15,11 @@
 	font-family: "Poppins";
 	src: url("../fonts/Poppins-Regular.ttf");
 }
+/* Ionicons */
+@font-face{
+	font-family: "Ionicons";
+	src: url("../fonts/ionicons.eot"),
+		 url("../fonts/ionicons.ttf"),
+		 url("../fonts/ionicons.woff"),
+		 url("../fonts/ionicons.svg");
+}
