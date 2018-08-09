@@ -11,15 +11,35 @@
 	font-family: "Montserrat Black";
 	src: url("../fonts/Montserrat-Black.ttf")
 }
+@font-face{
+	font-family: "Montserrat SemiBold";
+	src: url("../fonts/Montserrat-SemiBold.ttf");
+}
 @font-face {
 	font-family: "Poppins";
 	src: url("../fonts/Poppins-Regular.ttf");
 }
+@font-face {
+	font-family: "Paytone One";
+	src: url("../fonts/PaytoneOne-Regular.ttf");
+}
 /* Ionicons */
 @font-face{
-	font-family: "Ionicons";
+	font-family: "ionicons";
 	src: url("../fonts/ionicons.eot"),
 		 url("../fonts/ionicons.ttf"),
 		 url("../fonts/ionicons.woff"),
 		 url("../fonts/ionicons.svg");
 }
+/* Material Design Icons */
+@font-face {
+	font-family: 'Material Icons';
+	font-style: normal;
+	font-weight: 400;
+	src: url("../fonts/MaterialIcons-Regular.eot"); /* For IE6-8 */
+	src: local('Material Icons'),
+	  local('MaterialIcons-Regular'),
+	  url("../fonts/MaterialIcons-Regular.woff2") format('woff2'),
+	  url("../fonts/MaterialIcons-Regular.woff") format('woff'),
+	  url("../fonts/MaterialIcons-Regular.ttf") format('truetype');
+  }
