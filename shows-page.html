@@ -21,50 +21,17 @@
             <!-- The Menu -->
             <div class="menu">
 					<ul>
-						<li class="list"><a href="index.html">Home</a></li>
-						<li class="list">Movies<span class="drop"><i class="ion-chevron-down arrow"></i></span>
-							<ul class="firstUnordered">
-									<li><a href="movies/top-rated.html">Top rated</a></li>
-									<li><a href="movies/popular-movies.html">Popular movies</a></li>
-									<li><a href="movies/latest-movies.html">Latest movies</a></li>
-									<li class="search">Search Movies
-										 <ul class="secondUnordered">
-											<li><a href="movies/search-movies.html">Search by Title</a></li>
-											<li><a href="movies/year-movies.html">Search by Year</a></li>
-											<li><a href="movies/byActor-movies.html">Search by Actor</a></li>
-											<li><a href="movies/byGenre-movies.html">Search By Genre</a></li>
-										 </ul>
-									</li>
-							</ul>
-						</li>
-						<li class="list">Series<span class="drop"><i class="ion-chevron-down"></i></span>
-							<ul class="firstUnordered">
-								<li><a href="series/series-popular.html">Popular tv shows</a></li>
-								<li><a href="series/series-toprated.html">Top rated</a></li>
-								<li><a href="series/series-latest.html">On air</a></li>
-								<li class="search">Tv Shows
-										<ul class="secondUnordered">
-											<li><a href="series/search-series.html">Tv Shows by Title</a></li>
-											<li><a href="series/series-year.html">Tv Shows by Year</a></li>
-											<li><a href="series/seires-genre.html">TV Shows by Genre</a></li>
-										</ul>
-								</li>
-							</ul>
-						</li>
-						<li class="list">My Lists<span class="drop"><i class="ion-chevron-down"></i></span></a>
-							<ul class="firstUnordered">
-								<li><a href="movies/moviesToWatch.html">Movies to Watch</a></li>
-								<li><a href="series/seriesToWatch.html">Series to Watch</a></li>
-								<li class="search">Favorites
-									<ul class="secondUnordered">
-											<li><a href="movies/favoriteMovies.html">Favorite Movies</a></li>
-											<li><a href="series/favoriteSeries.html">Favorite Series</a></li>
-									</ul>
-								</li>
-							</ul>
+							<li class="list"><a href="index.html">Home</a></li>
+							<li class="list"><a href="movies/latest-movies.html">Movies</a></li>
+							<li class="list"><a href="series/series-latest.html">TV Shows</a></li>
+							<li class="list">My Lists<span class="drop"><i class="ion-chevron-down"></i></span></a>
+								<ul class="firstUnordered">
+								   <li><a href="watchlist.html">Watchlist</a>
+								   <li><a href="favorites.html">Favorites</a>
+								</ul>
 							</li>
-						<li class="list"><a href="about.html">About</a></li>
-					</ul>
+							<li class="list"><a href="about.html">About</a></li>
+						</ul>
 				</div>
 		<!-- The burger menu for small screens -->
 		<div class="burger">
@@ -78,10 +45,7 @@
 				<li><a href="index.html">Home</a></li>
 				<li id="smallScreenMovies">Movies<span><i class="ion-chevron-down"></i></span>
 					<ul id="moviesDropdown">
-						<li><a href="movies/search-movies.html">Search by Title</a></li>
-						<li><a href="movies/year-movies.html">Search by Year</a></li>
-						<li><a href="movies/byActor-movies.html">Search by Actor</a></li>
-						<li><a href="movies/byGenre-movies.html">Search by Genre</a></li>
+						<li><a href="movies/search-movies.html">Search movies</a></li>
 						<li><a href="movies/top-rated.html">Top rated</a></li>
 						<li><a href="movies/popular-movies.html">Popular movies</a></li>
 						<li><a href="movies/latest-movies.html">Latest movies</a></li>
@@ -89,9 +53,7 @@
 				</li>
 				<li id="smallScreenSeries">Series<span><i class="ion-chevron-down"></i></span>
 					<ul id="seriesDropdown">
-						<li><a href="series/search-series.html">Tv Shows by Title</a></li>
-						<li><a href="series/series-year.html">Tv Shows by Year</a></li>
-						<li><a href="series/series-byGenre.html">Tv Shows by Genre</a></li>
+						<li><a href="series/search-series.html">Search tv shows</a></li>
 						<li><a href="series/series-popular.html">Popular tv shows</a></li>
 						<li><a href="series/series-toprated.html">Top rated</a></li>
                         <li><a href="series/series-latest.html">On air</a></li>
@@ -99,10 +61,8 @@
 				</li>
 				<li class="list" id="smallScreenList">My Lists<span class="drop"><i class="ion-chevron-down"></i></span></a>
 					<ul id="myListsDropdown">
-						<li><a href="movies/moviesToWatch.html">Movies to Watch</a></li>
-						<li><a href="series/seriesToWatch.html">Series to Watch</a></li>
-						<li><a href="movies/favoriteMovies.html">Favorite Movies</a></li>
-						<li><a href="series/favoriteSeries.html">Favorite Series</a></li>
+					   <li><a href="watchlist.html">Watchlist</a>
+					   <li><a href="favorites.html">Favorites</a>
 					</ul>
 					</li>
 				<li><a href="about.html">About</a></li>
@@ -117,15 +77,19 @@
 	<div class="notification" id="added"> Added to Watchlist !</div>
 	<div class="notification" id="alreadyStored"> Already in watchlist !</div>
 	<div id="movie"></div>
+	<h2 id="trailer_title">Trailer: </h2>
 	<div id="trailer"></div>
 	<h2 id="rec_title">Similar TV Shows: </h2>
 	<div id="recommended"></div>
 	<div class="page">
-			<span id="prev"><</span>
-			<span id="next">></span>
+		<button id="prev" title="Previous page">PREVIOUS</button>
+		<button id="next" title="Next page">NEXT</button>
 	</div>
 	<div id="overlay" class="overlay"></div>
 </div>
+ <!-- Smooth scroll to top button -->
+ <button id="scrollToTop"><i class="ion-chevron-up"></i></button>
+
 <!-- Script links -->
 <script src="scripts/config.js"></script>
 <script src="scripts/series/shows-page.js"></script>
