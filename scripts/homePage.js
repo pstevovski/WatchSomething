@@ -2,95 +2,229 @@
 const API_KEY = config.API_KEY;
 //Todays date.
 let today = new Date().toJSON().slice(0,10);
+//Setting the maximum(end) date. This is not dynamic. Looking for solution.
+let endDate = new Date(2019, 4, 17 + 1).toJSON().slice(0,10);
 window.onload = function featuredMovies(){
-    axios.get("https://api.themoviedb.org/3/discover/movie?api_key="+API_KEY+'&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&primary_release_date.gte=2017-12-01&primary_release_date.lte='+today+'&vote_average.gte=6.5&vote_average.lte=10&with_original_language=en')
+    // Random page number generator for top rated movies and tv shows.
+    let min = 1;
+    let max = 30;
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    let topRated = Math.floor(Math.random() * (max-min +1)) + min;
+
+    // Random page number generator for popular movies and tv shows.
+    let minPopular = 1;
+    let maxPopular = 15;
+    minPopular = Math.ceil(minPopular);
+    maxPopular = Math.floor(maxPopular);
+    let popular = Math.floor(Math.random() * (maxPopular - minPopular +1)) + minPopular;
+
+    // TOP RATED MOVIES.
+    axios.get("https://api.themoviedb.org/3/movie/top_rated?api_key="+API_KEY+'&language=en-US&page='+topRated)
+        .then ((response)=>{
+            let featured = response.data.results;
+            let output = ""
+            console.log(response)
+           	for(let i = 0; i < featured.length; i++){
+				output += `
+				<div class="card">
+                    <div class="overlay">
+                        <div class="movie">
+                            <h2>${featured[i].title}</h2>
+                            <p><strong>Rating:</strong> ${featured[i].vote_average}</p>
+                            <p><strong>Release date:</strong> ${featured[i].release_date}</p>
+                            <a onclick="movieSelected('${featured[i].id}')" href="#">Details</a>
+                        </div>
+                    </div>
+                <img src="http://image.tmdb.org/t/p/w400/${featured[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
+                </div>
+            `;
+            }
+            //Append the output to "movies" element.
+			let topRatedMovies= document.getElementById("topRated");
+            topRatedMovies.innerHTML = output;
+        })
+
+    // POPULAR MOVIES.
+    axios.get("https://api.themoviedb.org/3/discover/movie?api_key="+API_KEY+'&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page='+popular+'&primary_release_date.gte=2017-12-01&primary_release_date.lte='+today+'&vote_average.gte=6&vote_average.lte=10&with_original_language=en')
         .then((response)=>{
             const featured = response.data.results;
+            console.log(featured)
             //featured.length = 7;
             let output = "";
             for(let i = 0; i < featured.length; i++){
                 output += `
                 <div class="card">
-                    <img  onclick="movieSelected('${featured[i].id}')" src="http://image.tmdb.org/t/p/w200/${featured[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
+                    <div class="overlay">
+                        <div class="movie">
+                            <h2>${featured[i].title}</h2>
+                            <p><strong>Rating:</strong> ${featured[i].vote_average}</p>
+                            <p><strong>Release date:</strong> ${featured[i].release_date}</p>
+                            <a onclick="movieSelected('${featured[i].id}')" href="#">Details</a>
+                        </div>
+                    </div>
+                    <img src="http://image.tmdb.org/t/p/w400/${featured[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
                 </div>
                 `;
                 let featuredOutput = document.getElementById("movies");
                 featuredOutput.innerHTML = output;
             }
         });
-        //On page load, output Tv Shows.
-        axios.get("https://api.themoviedb.org/3/tv/popular?api_key="+API_KEY+'&language=en-US&page=1')
+
+        // TOP RATED TV SHOWS.
+        axios.get("https://api.themoviedb.org/3/tv/top_rated?api_key="+API_KEY+'&language=en-US&page='+topRated)
+		.then ((response)=>{
+			//Fetches the data - > results from the API.
+			console.log(response);
+			let shows = response.data.results;
+			let output = "";
+			//Appends to the output the info for each fetched result.
+			for(let i = 0; i < shows.length; i++){
+				output += `
+				<div class="card">
+                        <div class="overlay">
+                            <div class="movie">
+                                <h2>${shows[i].original_name}</h2>
+                                <p><strong>Rating:</strong> ${shows[i].vote_average}</p>
+                                <p><strong>Release date:</strong> ${shows[i].first_air_date}</p>
+                                <a onclick="showSelected('${shows[i].id}')" href="#">Details</a>
+                            </div>
+                        </div>
+                        <img src="http://image.tmdb.org/t/p/w400/${shows[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
+                    </div>`;
+			}
+			//Appends the "output" to the movies element.
+			let topRatedShows = document.getElementById("topRatedShows");
+			topRatedShows.innerHTML = output;
+        })
+        
+        // POPULAR TV SHOWS.
+        axios.get("https://api.themoviedb.org/3/tv/popular?api_key="+API_KEY+'&language=en-US&page='+popular)
             .then((response)=>{
                 const shows = response.data.results;
+                shows.length = 20;
+                console.log(shows)
                 let output = "";
                 for(let i = 0; i < shows.length; i++){
                     output +=`
-                    <div class="card" onclick="showSelected('${shows[i].id}')">
-                        <img src="http://image.tmdb.org/t/p/w200/${shows[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
+                    <div class="card">
+                        <div class="overlay">
+                            <div class="movie">
+                                <h2>${shows[i].original_name}</h2>
+                                <p><strong>Rating:</strong> ${shows[i].vote_average}</p>
+                                <p><strong>Release date:</strong> ${shows[i].first_air_date}</p>
+                                <a onclick="showSelected('${shows[i].id}' href="#")">Details</a>
+                            </div>
+                        </div>
+                        <img src="http://image.tmdb.org/t/p/w400/${shows[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
                     </div>`;
                     }
                     const popularShows = document.getElementById("tvShows");
                     popularShows.innerHTML = output;
                 })
-                
         //Random quote on page load.
          document.getElementById("quote").innerHTML = randomQuote[Math.round(Math.random()*16)];
         quote.style.display = "block";
         quote.classList.remove("quoteFade");  
-        }
-
-//Movies drag slider.
-const slider = document.getElementById("movies");
+}
+// TOP RATED MOVIES SLIDER
+const topRated = document.getElementById("topRated");
+topRated.addEventListener("mousedown", (e)=>{
+    isDown = true;
+    startX = e.pageX - topRated.offsetLeft;
+    scrollLeft = topRated.scrollLeft;
+    e.preventDefault();
+    console.log(startX);
+})
+topRated.addEventListener("mouseup", ()=>{
+    isDown = false;
+})
+topRated.addEventListener("mouseleave", (e)=>{
+    topRated.classList.remove("active");
+    isDown = false;
+})
+topRated.addEventListener("mousemove", (e)=>{
+    if(!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - topRated.offsetLeft;
+    const walk = x - startX;
+    topRated.scrollLeft = scrollLeft - walk;
+})
+// TOP RATED TV SHOWS SLIDER
+const topRatedShows = document.getElementById("topRatedShows");
+topRatedShows.addEventListener("mousedown", (e)=>{
+    isDown = true;
+    startX = e.pageX - topRatedShows.offsetLeft;
+    scrollLeft = topRatedShows.scrollLeft;
+    e.preventDefault();
+    console.log(startX);
+})
+topRatedShows.addEventListener("mouseup", ()=>{
+    isDown = false;
+})
+topRatedShows.addEventListener("mouseleave", (e)=>{
+    topRatedShows.classList.remove("active");
+    isDown = false;
+})
+topRatedShows.addEventListener("mousemove", (e)=>{
+    if(!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - topRatedShows.offsetLeft;
+    const walk = x - startX;
+    topRatedShows.scrollLeft = scrollLeft - walk;
+})
+// Popular movies slider
+const popularMoviesSlider = document.getElementById("movies");
 let isDown = false;
 let startX;
 let scrollLeft;
 
-slider.addEventListener("mousedown", (e)=>{
+popularMoviesSlider.addEventListener("mousedown", (e)=>{
     isDown = true;
-    startX = e.pageX - slider.offsetLeft;
-    scrollLeft = slider.scrollLeft;
+    startX = e.pageX - popularMoviesSlider.offsetLeft;
+    scrollLeft = popularMoviesSlider.scrollLeft;
     e.preventDefault();
     console.log(startX);
 })
-slider.addEventListener("mouseup", ()=>{
+popularMoviesSlider.addEventListener("mouseup", ()=>{
     isDown = false;
 })
-slider.addEventListener("mouseleave", (e)=>{
-    slider.classList.remove("active");
+popularMoviesSlider.addEventListener("mouseleave", (e)=>{
+    popularMoviesSlider.classList.remove("active");
     isDown = false;
 })
-slider.addEventListener("mousemove", (e)=>{
+popularMoviesSlider.addEventListener("mousemove", (e)=>{
     if(!isDown) return;
     e.preventDefault();
-    const x = e.pageX - slider.offsetLeft;
+    const x = e.pageX - popularMoviesSlider.offsetLeft;
     const walk = x - startX;
-    slider.scrollLeft = scrollLeft - walk;
+    popularMoviesSlider.scrollLeft = scrollLeft - walk;
 })
 
-//Drag slider for tv shows.
-const sliderForTvShows = document.getElementById("tvShows");
-sliderForTvShows.addEventListener("mousedown", (e)=>{
-    sliderForTvShows.classList.add("active");
+//Slider for tv shows.
+const popularTvShowsSlider = document.getElementById("tvShows");
+popularTvShowsSlider.addEventListener("mousedown", (e)=>{
+    popularTvShowsSlider.classList.add("active");
     isDown = true;
-    startX = e.pageX - sliderForTvShows.offsetLeft;
-    scrollLeft = sliderForTvShows.scrollLeft;
+    startX = e.pageX - popularTvShowsSlider.offsetLeft;
+    scrollLeft = popularTvShowsSlider.scrollLeft;
     e.preventDefault();
     console.log(startX);
 })
-sliderForTvShows.addEventListener("mouseup", ()=>{
-    sliderForTvShows.classList.remove("active");
+popularTvShowsSlider.addEventListener("mouseup", ()=>{
+    popularTvShowsSlider.classList.remove("active");
     isDown = false;
 })
-sliderForTvShows.addEventListener("mouseleave", (e)=>{
-    sliderForTvShows.classList.remove("active");
+popularTvShowsSlider.addEventListener("mouseleave", (e)=>{
+    popularTvShowsSlider.classList.remove("active");
     isDown = false;
 })
-sliderForTvShows.addEventListener("mousemove", (e)=>{
+popularTvShowsSlider.addEventListener("mousemove", (e)=>{
     if(!isDown) return;
     e.preventDefault();
-    const x = e.pageX - sliderForTvShows.offsetLeft;
+    const x = e.pageX - popularTvShowsSlider.offsetLeft;
     const walk = x - startX;
-    sliderForTvShows.scrollLeft = scrollLeft - walk;
+    popularTvShowsSlider.scrollLeft = scrollLeft - walk;
 })
 //Takes you to detailed info page.
 function movieSelected(id){
@@ -130,4 +264,4 @@ setInterval(() => {
         document.getElementById("quote").innerHTML = randomQuote[Math.round(Math.random()*16)];
         quote.classList.add("quoteFade");
         }, 2500); 
-    }, 8000);
+    }, 5000);

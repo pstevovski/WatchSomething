@@ -17,13 +17,13 @@ window.onload = function getSeries(){
 		pages.style.display = "flex";
 	}, 1000);
 	//Get the API.
-	axios.get("https://api.themoviedb.org/3/tv/popular?api_key="+API_KEY+'&language=en-US&page=1')
+	axios.get("https://api.themoviedb.org/3/tv/on_the_air?api_key="+API_KEY+'&language=en-US&page=1')
 		.then((response)=>{
 			//Fetches the data - > results from the API.
 			console.log(response)
 			let series = response.data.results;
 			let output = "";
-			console.log(response)
+			//Appends to the output the info for each fetched result.
 			for(let i = 0; i < series.length; i++){
 				let id = response.data.results[i].id;
 				id = JSON.stringify(id);
@@ -66,7 +66,7 @@ window.onload = function getSeries(){
 				`;
 				}
 			}
-			//Appends the "output" to the movies element.
+			//Append the "output" to the movies element.
 			let seriesInfo = document.getElementById("movies");
 			seriesInfo.innerHTML = output;
 			//Display pages buttons.
@@ -84,7 +84,7 @@ window.onload = function getSeries(){
 			console.log(err);
 		})
 }
-//Takes user to detailed tv show info page.
+//Take the user to detailed tv show info page.
 function showSelected(id){
 	sessionStorage.setItem("showId", id);
 	location.replace("../shows-page.html");
@@ -106,14 +106,14 @@ next.addEventListener("click", ()=>{
 	window.scrollTo(0,0);
 	search(pageNum);
 })
-//Display the tv shows after the user changed the page by clicking previous/next button.
+//Displays the tv shows after the user changed the page by clicking previous/next button.
 function search(pageNum){
-	axios.get("https://api.themoviedb.org/3/tv/popular?api_key="+API_KEY+'&language=en-US&page='+pageNum)
+	axios.get("https://api.themoviedb.org/3/tv/on_the_air?api_key="+API_KEY+'&language=en-US&page='+pageNum)
 		.then((response)=>{
 			console.log(response)
 			let series = response.data.results;
 			let output = "";
-			for(let i = 0; i < series.length; i ++){
+			for(let i = 0; i < series.length; i++){
 				let id = response.data.results[i].id;
 				id = JSON.stringify(id);
 				let favoriteSeries = JSON.parse(localStorage.getItem("favoriteSeries")) || [];
@@ -175,7 +175,7 @@ function search(pageNum){
 }
 //Add tv show to watch list.
 function addToList(id){
-	let storedId = JSON.parse(localStorage.getItem("series")) || [];
+    let storedId = JSON.parse(localStorage.getItem("series")) || [];
 	if(storedId.indexOf(id) === -1){
 		storedId.push(id);
 		localStorage.setItem("series", JSON.stringify(storedId));

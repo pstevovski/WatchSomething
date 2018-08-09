@@ -24,25 +24,59 @@ window.onload = function getMovies(){
 			let output = "";
 			//Appends to the output the info for each fetched result.
 			for(let i = 0; i < movie.length; i++){
-				output += `
-				<div class="card">
-					<div class="addBtn"><span><i class="ion-android-add-circle" onclick="addToList('${movie[i].id}')"></i></span>
-					<span><i class="ion-heart heart" onclick="favorite('${movie[i].id}')"></i></span></div>
-					<div class="card_img">
-						<img src="http://image.tmdb.org/t/p/w300/${movie[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
+				let id = response.data.results[i].id;
+				id = JSON.stringify(id);
+				let favoriteMovies = JSON.parse(localStorage.getItem("favoriteMovies")) || [];
+				if(favoriteMovies.indexOf(id) === -1){
+					output += `
+					<div class="card">
+						<div class="overlay">
+						<div class="addBtn"><span><i class="material-icons queue" onclick="addToList('${movie[i].id}')">add_to_queue</i></span>
+						<span><i class="material-icons favorite" onclick="favorite('${movie[i].id}')">favorite</i></span></div>
+						<div class="movie">
+							<h2>${movie[i].title}</h2>
+								<p><strong>Rating:</strong> ${movie[i].vote_average}</p>
+								<p><strong>First air date:</strong> ${movie[i].release_date}</p>
+								<a onclick="movieSelected('${movie[i].id}')" href="#">Details</a>
+						</div>
+						</div>
+						<div class="card_img">
+							<img src="http://image.tmdb.org/t/p/w400/${movie[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
+						</div>
 					</div>
-					<div class="card_text">
-						<h3>${movie[i].title}</h3>
-						<p>Rating: <strong>${movie[i].vote_average}</strong></p>
-						<p>Release date: <strong>${movie[i].release_date}</strong></p>
-						<a onclick="movieSelected('${movie[i].id}')" class="btn" href="#"> Movie Details </a>
+					`;
+				} else {
+					output += `
+                <div class="card">
+                    <div class="overlay">
+					<div class="addBtn"><span><i class="material-icons queue" onclick="addToList('${movie[i].id}')">add_to_queue</i></span>
+					<span><i id="heart" class="material-icons favoriteMarked" onclick="favorite('${movie[i].id}')">favorite</i></span></div>
+					<div class="movie">
+						<h2>${movie[i].title}</h2>
+                            <p><strong>Rating:</strong> ${movie[i].vote_average}</p>
+                            <p><strong>First air date:</strong> ${movie[i].release_date}</p>
+                            <a onclick="movieSelected('${movie[i].id}')" href="#">Details</a>
+                     </div>
+                    </div>
+                    <div class="card_img">
+						<img src="http://image.tmdb.org/t/p/w400/${movie[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
 					</div>
 				</div>
 				`;
+				}
 			}
 			//Append the output to "movies" element.
 			let movieInfo = document.getElementById("movies");
 			movieInfo.innerHTML = output;
+			//Display pages buttons.
+            let totalPages = response.data.total_pages;
+			let pages = document.querySelector(".pages");
+            if(totalPages < 2){
+				pages.style.display = "none";
+			} else if (pageNum === 1){
+				prev.style.display = "none";
+				next.style.display = "block";
+			}
 		})
 		//If theres an error, logs the error in console.
 		.catch ((err)=>{
@@ -78,27 +112,60 @@ function search(pageNum){
 			let movie = response.data.results;
 			let output = "";
 			for(let i = 0; i < movie.length; i++){
-				output += `
-				<div class="card">
-					<div class="addBtn"><span><i class="ion-android-add-circle" onclick="addToList('${movie[i].id}')"></i></span>
-					<span><i class="ion-heart heart" onclick="favorite('${movie[i].id}')"></i></span></div>
-					<div class="card_img">
-						<img src="http://image.tmdb.org/t/p/w300/${movie[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
+				let id = response.data.results[i].id;
+				id = JSON.stringify(id);
+				let favoriteMovies = JSON.parse(localStorage.getItem("favoriteMovies")) || [];
+				if(favoriteMovies.indexOf(id) === -1){
+					output += `
+					<div class="card">
+						<div class="overlay">
+						<div class="addBtn"><span><i class="material-icons queue" onclick="addToList('${movie[i].id}')">add_to_queue</i></span>
+						<span><i class="material-icons favorite" onclick="favorite('${movie[i].id}')">favorite</i></span></div>
+						<div class="movie">
+							<h2>${movie[i].title}</h2>
+								<p><strong>Rating:</strong> ${movie[i].vote_average}</p>
+								<p><strong>First air date:</strong> ${movie[i].release_date}</p>
+								<a onclick="movieSelected('${movie[i].id}')" href="#">Details</a>
+						</div>
+						</div>
+						<div class="card_img">
+							<img src="http://image.tmdb.org/t/p/w400/${movie[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
+						</div>
 					</div>
-					<div class="card_text">
-						<h3>${movie[i].title}</h3>
-						<p>Rating: <strong>${movie[i].vote_average}</strong></p>
-						<p>Release date: <strong>${movie[i].release_date}</strong></p>
-						<a onclick="movieSelected('${movie[i].id}')" class="btn" href="#"> Movie Details </a>
+					`;
+				} else {
+					output += `
+                <div class="card">
+                    <div class="overlay">
+					<div class="addBtn"><span><i class="material-icons queue" onclick="addToList('${movie[i].id}')">add_to_queue</i></span>
+					<span><i id="heart" class="material-icons favoriteMarked" onclick="favorite('${movie[i].id}')">favorite</i></span></div>
+					<div class="movie">
+						<h2>${movie[i].title}</h2>
+                            <p><strong>Rating:</strong> ${movie[i].vote_average}</p>
+                            <p><strong>First air date:</strong> ${movie[i].release_date}</p>
+                            <a onclick="movieSelected('${movie[i].id}')" href="#">Details</a>
+                     </div>
+                    </div>
+                    <div class="card_img">
+						<img src="http://image.tmdb.org/t/p/w400/${movie[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
 					</div>
 				</div>
 				`;
+				}
 			}
 			let movieInfo = document.getElementById("movies");
 			movieInfo.innerHTML = output;
-			//Show the pages buttons after movies are listed
+			//Show the pages buttons after movies are listed.
+			let totalPages = response.data.total_pages;
 			let pages = document.querySelector(".pages");
 			pages.style.display = "flex";
+            if(pageNum >= 2){
+				prev.style.display = "block";
+			} else if ( pageNum === totalPages){
+				next.style.display = "none";
+			} else if ( pageNum === 1) {
+				prev.style.display = "none";
+			}
 		})
 		.catch ((err)=>{
 			console.log(err);
@@ -147,6 +214,6 @@ function favorite(id){
         alreadyStored.classList.add("alreadyStored");
         setTimeout(() => {
             alreadyStored.classList.remove("alreadyStored");
-        }, 1500);
+		}, 1500);
 	}
 }

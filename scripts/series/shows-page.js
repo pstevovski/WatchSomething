@@ -5,6 +5,12 @@ const spinner = document.querySelector(".spinner");
 spinner.style.display = "none";
 const container = document.querySelector(".container");
 container.style.display = "none";
+// RANDOM NUMBER FOR TRAILER OUTPUT (ON EVERY PAGE LOAD, A DIFFERENT TRAILER WILL SHOW).
+let min = 0;
+let max = 3;
+min = Math.ceil(min);
+max = Math.floor(max);
+let trailerNumber = Math.floor(Math.random() * (max-min +1)) + min;
 //Gets the tv show ID stored in the Session storage and uses it to display information about
 //the tv show that has that ID.
 function getShowInfo(){
@@ -26,9 +32,8 @@ function getShowInfo(){
 			const series = seriesResponse.data;
 			const imdb_id = imdbResponse.data.imdb_id;
 			const genres = seriesResponse.data.genres;
-			//Grab the popularity parameter from the data and rounds it to a whole number%.
-			popularity = seriesResponse.data.popularity;
-			popularity = Math.floor(popularity);
+
+			homepage = series.homepage;
 			console.log(seriesResponse)
 			let output = `
 			<div class="moviePage">
@@ -48,17 +53,19 @@ function getShowInfo(){
 							<li><strong>Episode runtime:</strong> ${series.episode_run_time[0]}min. </li>
 							<li><strong>Frist air date:</strong> ${series.first_air_date}.</li>
 							<li><strong>Networks:</strong> ${series.networks[0].name}.</li>
-							<li><strong>Popularity:</strong> ${popularity} %.</li>
+							<li><strong>Rating:</strong> ${series.vote_average}.</li>
 							<li><strong>Number of episodes:</strong> ${series.number_of_episodes}.</li>
 							<li><strong>Number of seasons:</strong> ${series.number_of_seasons}.</li>
+							<li><strong>Last episode to air:</strong> ${series.last_episode_to_air.air_date} "${series.last_episode_to_air.name}".</li>
 							<li><strong>Status:</strong> ${series.status}.</li>
 							<li><strong>Type: </strong>${series.type}.</li>
+							<li><a href="${homepage}" target="_blank">Homepage</a></li>
 						</ul>
 
 						<div class="buttons">
 							<a href="https://www.imdb.com/title/${imdb_id}"target="_blank"> IMDB Link </a>
-							<a href="#" onclick="openTrailer()"> Trailer </a>
 							<a id="addToWatchList" onclick="addToList('${movie.id}')"> Add to watchlist </a>
+							<a class="twitter-share-button twitter" onclick="tweet('${series.name}')"></a>
 							<a onclick="goBack()"> Go back </a>
 						</div>
 					</div>
@@ -75,7 +82,20 @@ function getShowInfo(){
 		})
 		//If there is an error, it logs the error in the console.
 		.catch ((err)=>{
-			console.log(err);
+			let output = "";
+			output += `<h1 id="errorTitle">SORRY !</h1>
+			<p id="errorText">We could not provide informations about this tv show at this particular moment. Be sure to come back again. Thank you for your understanding. </p>
+			<div class="buttons errorBack">
+				<a href="javascript:history.back()"> Go back </a>
+			</div>`;
+			let info = document.getElementById("movie");
+			info.innerHTML = output;
+			document.getElementById("rec_title").style.display = 'none';
+			document.querySelector(".page").style.display = "none";
+			document.getElementById("recommended").style.display = "none";
+			document.getElementById("trailer").style.display = "none";
+			document.getElementById("trailer_title").style.display = "none";
+			document.getElementById("rec_title").style.display = "none";
 		});
 		//Another API call, if there's cast info about the tv show.
 		Promise.all([seriesPromise, imdbPromise, seriesCast])
@@ -85,9 +105,9 @@ function getShowInfo(){
 			const cast = seriesCastResponse.data.cast;
 			const genres = seriesResponse.data.genres;
 			cast.length = 5;
-			//Grab the popularity parameter from the data and rounds it to a whole number%.
-			popularity = seriesResponse.data.popularity;
-			popularity = Math.floor(popularity);
+			
+			homepage = seriesResponse.data.homepage;
+			console.log(homepage);
 			console.log(seriesResponse)
 			let i = 0;
 			let output = `
@@ -96,7 +116,7 @@ function getShowInfo(){
 					<div class="info">
 						<h2>${series.name}</h2>
 						<ul>
-							<li><strong>Cast:</strong>`;
+							<li><strong>Cast: </strong>`;
 							for( i; i < cast.length; i++){
 								if ( i != cast.length - 1){
 									output += `${cast[i].name},`
@@ -117,17 +137,19 @@ function getShowInfo(){
 							<li><strong>Episode runtime:</strong> ${series.episode_run_time[0]}min. </li>
 							<li><strong>Frist air date:</strong> ${series.first_air_date}.</li>
 							<li><strong>Networks:</strong> ${series.networks[0].name}.</li>
-							<li><strong>Popularity:</strong> ${popularity} %.</li>
+							<li><strong>Rating:</strong> ${series.vote_average}.</li>
 							<li><strong>Number of episodes:</strong> ${series.number_of_episodes}.</li>
 							<li><strong>Number of seasons:</strong> ${series.number_of_seasons}.</li>
+							<li><strong>Last episode to air:</strong> ${series.last_episode_to_air.air_date} "${series.last_episode_to_air.name}".</li>
 							<li><strong>Status:</strong> ${series.status}.</li>
 							<li><strong>Type: </strong>${series.type}.</li>
+							<li><a href="${homepage}" target="_blank">Homepage</a></li>
 						</ul>
 
 						<div class="buttons">
 							<a href="https://www.imdb.com/title/${imdb_id}"target="_blank"> IMDB Link </a>
-							<a href="#" onclick="openTrailer()"> Trailer </a>
 							<a id="addToWatchList" onclick="addToList('${series.id}')"> Add to watchlist </a>
+							<a class="twitter-share-button twitter" onclick="tweet('${series.name}')"></a>
 							<a href="javascript:history.back()"> Go back </a>
 						</div>
 					</div>
@@ -151,58 +173,69 @@ function getShowInfo(){
 			</div>`;
 			let info = document.getElementById("movie");
 			info.innerHTML = output;
-			let rec_title = document.getElementById("rec_title");
-			rec_title.style.display = 'none';
-			let page = document.querySelector(".page");
-			page.style.display = "none";
-			const recommended = document.getElementById("recommended");
-			recommended.style.display = "none";
+			document.getElementById("rec_title").style.display = 'none';
+			document.querySelector(".page").style.display = "none";
+			document.getElementById("recommended").style.display = "none";
+			document.getElementById("trailer").style.display = "none";
+			document.getElementById("trailer_title").style.display = "none";
+			document.getElementById("rec_title").style.display = "none";
 		})
 		//Gets the trailer link from youtube. Video is hidden until users click on TRAILER
 		//button.
 		axios.get("https://api.themoviedb.org/3/tv/"+showId+'/videos?api_key='+API_KEY+'&language=en-US')
 			.then ((response)=>{
 				//Targets the first item in the results Array, that hold the "key" parameter.
-				let trailer = response.data.results[0].key;
+				let trailer = response.data.results[trailerNumber].key;
 				let output = `
 					<div class="video">
-					<iframe width="620" height="400" src="https://www.youtube.com/embed/${response.data.results[0].key}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-					<div id="close"> Close </div>
+					<iframe width="620" height="400" src="https://www.youtube.com/embed/${trailer}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 					</div>
 				`;
 				//Creates a variable that targets the "trailer" element in the HTML
 				//that will be used to output the trailer to.
-				let video = document.getElementById("trailer");
-				video.innerHTML = output;
+				let trailerOutput = document.getElementById("trailer");
+				trailerOutput.innerHTML = output;
 			})
 			//If there is an error, it logs the error in the console.
 			.catch ((err)=>{
-				console.log(err);
+				let trailerOutput = document.getElementById("trailer");
+				trailerOutput.innerHTML =
+				 `<h3>We are sorry! </h3>
+				 <br>
+				 <p>No video available at this moment. Try reloading the page.</p>
+				`;
 			})		
 		//Show similar tv shows to the one that is currently open.
-		axios.get("https://api.themoviedb.org/3/tv/"+showId+'/similar?api_key='+API_KEY+'&language=en-US&page=1')
+		axios.get("https://api.themoviedb.org/3/tv/"+showId+'/recommendations?api_key='+API_KEY+'&language=en-US&page=1')
 			.then ((response)=>{
 				let series = response.data.results;
 				//Makes the series parameter dynamic, and sets the length of it to 5 (5 similar movies will
 				//be shown.)
-				series.length = Math.min(series.length, 5);
+				series.length = 5;
 				console.log(series);
 				let output = "";
 
 				for(let i = 0; i < series.length; i++){
-					output += `
-					<div class="recommended_card">
-						<img src="http://image.tmdb.org/t/p/w200/${series[i].poster_path}">
-						<h4>${series[i].name}</h4>
-						<p>Rating: <strong>${series[i].vote_average} IMDB</strong></p>
-						<a onclick="showSelected('${series[i].id}')" class="buttons" href="#"> Show Details </a>
+					output +=  `<div class="card">
+					<div class="overlay">
+					<div class="movie">
+						<h2>${series[i].name}</h2>
+							<p><strong>Rating:</strong> ${series[i].vote_average}</p>
+							<p><strong>First air date:</strong> ${series[i].first_air_date}</p>
+							<a onclick="showSelected('${series[i].id}')" href="#">Details</a>
+					 </div>
 					</div>
-					`;
+					<div class="card_img">
+						<img src="http://image.tmdb.org/t/p/w300/${series[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
+					</div>
+					</div>`;
 				}
 				//Creates a variable that targets the "recommended" element in the HTML
 				//that will be used to output the data results to.
 				let recommended = document.getElementById("recommended");
 				recommended.innerHTML = output;
+				// Hide the previous page button of the first page.
+				document.getElementById("prev").style.display = "none";
 			})
 			//If there is an error, it logs it in the console.
 			.catch ((err)=>{
@@ -219,24 +252,6 @@ function showSelected(id){
 	sessionStorage.setItem("showId", id);
 	location.replace("shows-page.html");
 	return false;
-}
-//On click on "TRAILER" button, it sets the trailer(video) to be displayed as flex(default:none), dims the
-//background by tackling the overlay which sets it to block(default:none), and fixes the body position so //it stays at one place.
-function openTrailer(){
-	let video = document.getElementById("trailer");
-	let overlay = document.getElementById("overlay");
-	let body = document.body;
-
-	video.style.display = "flex";
-	overlay.style.display = "block";
-	body.style.position = "fixed";
-	//Get the X (close) button to work, and to remove the trailer from screen
-	let close = document.getElementById("close");
-	close.addEventListener("click", ()=>{
-		video.style.display = "none";
-		overlay.style.display = "none";
-		body.style.position = "relative";
-	})
 }
 //Page number.
 let pageNum = 1;
@@ -256,29 +271,44 @@ next.addEventListener("click", ()=>{
 function recommendedPage(pageNum){
 	const showId = sessionStorage.getItem("showId");
 
-	axios.get("https://api.themoviedb.org/3/tv/"+showId+'/similar?api_key='+API_KEY+'&language=en-US&page='+pageNum)
+	axios.get("https://api.themoviedb.org/3/tv/"+showId+'/recommendations?api_key='+API_KEY+'&language=en-US&page='+pageNum)
 			.then ((response)=>{
 				let series = response.data.results;
 				//Makes the series parameter dynamic, and sets the length of it to 5 (5 similar movies will
 				//be shown.)
-				series.length = Math.min(series.length, 5);
+				series.length = 5;
 				console.log(series);
 				let output = "";
-
-				$.each(series, (index,series)=>{
-					output += `
-					<div class="recommended_card">
-						<img src="http://image.tmdb.org/t/p/w200/${series.poster_path}">
-						<h4>${series.name}</h4>
-						<p>Rating: <strong>${series.vote_average} IMDB</strong></p>
-						<a onclick="showSelected('${series.id}')" class="buttons" href="#"> Show Details </a>
+				for(let i = 0; i < series.length; i++){
+					output += `<div class="card">
+					<div class="overlay">
+					<div class="movie">
+						<h2>${series[i].name}</h2>
+							<p><strong>Rating:</strong> ${series[i].vote_average}</p>
+							<p><strong>First air date:</strong> ${series[i].first_air_date}</p>
+							<a onclick="showSelected('${series[i].id}')" href="#">Details</a>
+					 </div>
 					</div>
-					`;
-				})
+					<div class="card_img">
+						<img src="http://image.tmdb.org/t/p/w300/${series[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
+					</div>
+					</div>`;
+				}
 				//Creates a variable that targets the "recommended" element in the HTML
 				//that will be used to output the data results to.
 				let recommended = document.getElementById("recommended");
 				recommended.innerHTML = output;
+				let totalPages = response.data.total_pages;
+				if (pageNum >= 2) {
+					document.getElementById("prev").style.display = "flex";
+				}
+				
+				if( pageNum === totalPages) {
+					document.getElementById("next").style.display = "none";
+				} else if (pageNum === 1){
+					document.getElementById("prev").style.display = "none";
+					document.getElementById("next").style.display = "flex";
+				}
 			})
 			//If there is an error, it logs it in the console.
 			.catch ((err)=>{
@@ -309,4 +339,10 @@ function addToList(id){
 			alreadyStored.classList.remove("animate");
 		}, 1500);
 	}
+}
+// Share on Twitter.
+function tweet(title) {
+	var strWindowFeatures = "location=yes,height=255,width=520,scrollbars=yes,status=yes";
+	var URL = "https://twitter.com/intent/tweet?text=Going to watch "+ title +' . Find something to watch @ https://pecko95.github.io/What-to-Watch';
+	var win = window.open(URL, "_blank", strWindowFeatures);
 }

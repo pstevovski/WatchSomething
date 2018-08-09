@@ -6,6 +6,14 @@ spinner.style.display = "none";
 
 const container = document.querySelector(".container");
 container.style.display = "none";
+
+// RANDOM NUMBER FOR TRAILER OUTPUT (ON EVERY PAGE LOAD, A DIFFERENT TRAILER WILL SHOW).
+let min = 0;
+let max = 3;
+min = Math.ceil(min);
+max = Math.floor(max);
+let trailerNumber = Math.floor(Math.random() * (max-min +1)) + min;
+
 //Gets the movie ID stored in the Session storage and uses it to display information about
 //the movie that has that ID.
 function getMovie(){
@@ -60,7 +68,7 @@ function getMovie(){
 					<li><strong>Tagline:</strong> ${movie.tagline} </li>
 					<li><strong>Release Date:</strong> ${movie.release_date}</li>
 					<li><strong>Runtime:</strong> ${movie.runtime} (min)</li>
-					<li><strong>Popularity:</strong> ${popularity} %</li>
+					<li><strong>Rating:</strong> ${movie.vote_average} <span id="smallText">(${movie.vote_count} votes)</span></li>
 					<li><strong>Revenue:</strong> ${revenue}</li>
 					<li><strong>Status:</strong> ${movie.status}</li>
 					<li><strong>Production companies:</strong> ${movie.production_companies[0].name}</li>
@@ -68,8 +76,8 @@ function getMovie(){
 
 				<div class="buttons">
 					<a href="https://www.imdb.com/title/${movie.imdb_id}" target="_blank"> IMDB Link </a>
-					<a href="#" onclick="openTrailer()"> Trailer </a>
 					<a id="addToWatchList" onclick="addToList('${movie.id}')"> Add to watchlist </a>
+					<a class="twitter-share-button twitter" onclick="tweet('${movie.title}')"></a>
 					<a onclick="goBack()"> Go back </a>
 				</div>
 			</div>
@@ -93,56 +101,67 @@ function getMovie(){
 			</div>`;
 			let info = document.getElementById("movie");
 			info.innerHTML = output;
-			let rec_title = document.getElementById("rec_title");
-			rec_title.style.display = 'none';
-			let page = document.querySelector(".page");
-			page.style.display = "none";
-			const recommended = document.getElementById("recommended");
-			recommended.style.display = "none";
+			document.getElementById("rec_title").style.display = 'none';
+			document.querySelector(".page").style.display = "none";
+			document.getElementById("recommended").style.display = "none";
+			document.getElementById("trailer").style.display = "none";
+			document.getElementById("trailer_title").style.display = "none";
+			document.getElementById("rec_title").style.display = "none";
 		});
 
 		//Gets the trailer link from youtube.
 		axios.get("https://api.themoviedb.org/3/movie/"+movieId+'/videos?api_key='+API_KEY+'&language=en-US')
 			.then((response)=>{
-				let trailer = response.data.results[0].key;
+				//Targets the first item in the results Array, that hold the "key" parameter.
+				let trailer = response.data.results[trailerNumber].key;
 				let output = `
 					<div class="video">
-					<iframe width="620" height="400" src="https://www.youtube.com/embed/${response.data.results[0].key}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-					<div id="close">Close </div>
-					</div>`;
-
-			//Target the trailer element in which the video will be shown.
-			let video = document.getElementById("trailer");
-			video.innerHTML = output;
+					<iframe width="620" height="400" src="https://www.youtube.com/embed/${trailer}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+					</div>
+				`;
+				//Creates a variable that targets the "trailer" element in the HTML
+				//that will be used to output the trailer to.
+				let video = document.getElementById("trailer");
+				video.innerHTML = output;
 			})
 
 			.catch ((err)=>{
-				let rec_title = document.getElementById("rec_title");
-				rec_title.style.display = 'none';
-				let page = document.querySelector(".page");
-				page.style.display = "none";
+				let trailerOutput = document.getElementById("trailer");
+				trailerOutput.innerHTML =
+				 `<h3>We are sorry! </h3>
+				 <br>
+				 <p>No video available at this moment. Try reloading the page.</p>
+				`;
 			});
 
 		//Gets similar movies to the current one.
-		axios.get("https://api.themoviedb.org/3/movie/"+movieId+'/similar?api_key='+API_KEY+'&language=en-US&page=1')
+		axios.get("https://api.themoviedb.org/3/movie/"+movieId+'/recommendations?api_key='+API_KEY+'&language=en-US&page=1')
 			.then ((response)=>{
 				const movie = response.data.results;
-				//Set the movie length (output) to 5.
-				movie.length = Math.min(movie.length, 4);
+				//Set the movie length (output) to 4.
+				movie.length = 4;
 				let output = "";
+				console.log(response);
 				for(let i = 0; i < movie.length; i++){
-					output += `
-					<div class="recommended_card">
-						<img src="http://image.tmdb.org/t/p/w200/${movie[i].poster_path}">
-						<h4>${movie[i].title}</h4>
-						<p>IMDB Rating: <strong>${movie[i].vote_average}</strong></p>
-						<a onclick="movieSelected('${movie[i].id}')" class="buttons" href="#"> Movie Details </a>
+					output +=  `<div class="card">
+					<div class="overlay">
+					<div class="movie">
+						<h2>${movie[i].title}</h2>
+							<p><strong>Rating:</strong> ${movie[i].vote_average}</p>
+							<p><strong>Release date:</strong> ${movie[i].release_date}</p>
+							<a onclick="movieSelected('${movie[i].id}')" href="#">Details</a>
+					 </div>
 					</div>
-					`;
+					<div class="card_img">
+						<img src="http://image.tmdb.org/t/p/w300/${movie[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
+					</div>
+					</div>`;
 				}
 				//Target "recommended" and output the similar movies into it.
 				let recommended = document.getElementById("recommended");
 				recommended.innerHTML = output;
+				// Hide the previous page button of the first page.
+				document.getElementById("prev").style.display = "none";
 			})
 			//If there is an error, it logs it in the console.
 			.catch ((err)=>{
@@ -152,26 +171,6 @@ function getMovie(){
 //Go back button function.
 function goBack(){
 	history.go(-1);
-}
-
-//Open trailer for the current movie.
-function openTrailer(){
-	const video = document.getElementById("trailer");
-	const overlay = document.getElementById("overlay");
-	const body = document.body;
-	video.style.display = "flex";
-	overlay.style.display = "block";
-	body.style.position = "fixed";
-
-	//Get the close button on the video and when clicked turn trailer display into display none.
-	const close = document.getElementById("close");
-	close.addEventListener("click", ()=>{
-	let body = document.body;
-	let video = document.getElementById("trailer");
-		video.style.display = "none";
-		overlay.style.display = "none";
-		body.style.position = "relative";
-	})
 }
 //When the user clicks on "Movie Details" link in the similar movies, it gets the ID from the similar //movies, below the information about the current movie, and sets it in the session storage, so it can be //accsesed, and showcased.
 function movieSelected(id){
@@ -196,23 +195,40 @@ next.addEventListener("click", ()=>{
 //Recommended page change.
 function recommendedPage(pageNum){
 	let movieId = sessionStorage.getItem("movieId");
-	axios.get("https://api.themoviedb.org/3/movie/"+movieId+'/similar?api_key='+API_KEY+'&language=en-US&page='+pageNum)
+	axios.get("https://api.themoviedb.org/3/movie/"+movieId+'/recommendations?api_key='+API_KEY+'&language=en-US&page='+pageNum)
 	.then ((response)=>{
 				let movie = response.data.results;
-				movie.length = Math.min(movie.length, 5);
+				movie.length = 4;
+				console.log(response);
 				let output = "";
 				for(let i = 0; i < movie.length; i++) {
-					output += `
-					<div class="recommended_card">
-						<img src="http://image.tmdb.org/t/p/w200/${movie[i].poster_path}">
-						<h4>${movie[i].title}</h4>
-						<p>IMDB Rating : <strong>${movie[i].vote_average}</strong></p>
-						<a onclick="movieSelected('${movie[i].id}')" class="buttons" href="#"> Movie Details </a>
+					output += `<div class="card">
+					<div class="overlay">
+					<div class="movie">
+						<h2>${movie[i].title}</h2>
+							<p><strong>Rating:</strong> ${movie[i].vote_average}</p>
+							<p><strong>Release date:</strong> ${movie[i].release_date}</p>
+							<a onclick="movieSelected('${movie[i].id}')" href="#">Details</a>
+					 </div>
 					</div>
-					`;
+					<div class="card_img">
+						<img src="http://image.tmdb.org/t/p/w300/${movie[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
+					</div>
+					</div>`;
 				}
 				let recommended = document.getElementById("recommended");
 				recommended.innerHTML = output;
+				let totalPages = response.data.total_pages;
+				if (pageNum >= 2) {
+					document.getElementById("prev").style.display = "flex";
+				}
+				
+				if( pageNum === totalPages) {
+					document.getElementById("next").style.display = "none";
+				} else if (pageNum === 1){
+					document.getElementById("prev").style.display = "none";
+					document.getElementById("next").style.display = "flex";
+				}
 			})
 	//If there is an error, it logs it in the console.
 	.catch ((err)=>{
@@ -243,4 +259,11 @@ function addToList(id){
             alreadyStored.classList.remove("alreadyStored");
         }, 1500);
 	}
+}
+
+// Share on Twitter.
+function tweet(title) {
+	var strWindowFeatures = "location=yes,height=255,width=520,scrollbars=yes,status=yes";
+	var URL = "https://twitter.com/intent/tweet?text=Going to watch "+ title +' . Find something to watch @ https://pecko95.github.io/What-to-Watch';
+	var win = window.open(URL, "_blank", strWindowFeatures);
 }
