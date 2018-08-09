@@ -113,7 +113,7 @@ window.onload = function featuredMovies(){
                                 <h2>${shows[i].original_name}</h2>
                                 <p><strong>Rating:</strong> ${shows[i].vote_average}</p>
                                 <p><strong>Release date:</strong> ${shows[i].first_air_date}</p>
-                                <a onclick="showSelected('${shows[i].id}' href="#")">Details</a>
+                                <a onclick="showSelected('${shows[i].id}')"  href="#">Details</a>
                             </div>
                         </div>
                         <img src="http://image.tmdb.org/t/p/w400/${shows[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
