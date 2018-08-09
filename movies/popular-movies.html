@@ -17,55 +17,21 @@
 <body>
     <!-- Navigation Bar -->
 	<nav>
-            <!-- The Menu -->
-            <div class="menu">
-                   <ul>
-                       <li class="list"><a href="../index.html">Home</a></li>
-                       <li class="list">Movies<span class="drop"><i class="ion-chevron-down arrow"></i></span>
-                           <ul class="firstUnordered">
-                                   <li><a href="top-rated.html">Top rated</a></li>
-                                   <li><a href="popular-movies.html">Popular movies</a></li>
-                                   <li><a href="latest-movies.html">Latest movies</a></li>
-                                   <li><a href="upcoming-movies.html">Upcoming movies</a></li>
-                                   <li class="search">Search Movies
-                                        <ul class="secondUnordered">
-                                               <li><a href="search-movies.html">Search by Title</a></li>
-                                               <li><a href="year-movies.html">Search by Year</a></li>
-                                               <li><a href="byActor-movies.html">Search by Actor</a></li>
-                                               <li><a href="byGenre-movies.html">Search By Genre</a></li>
-                                        </ul>
-                                   </li>
-                           </ul>
-                       </li>
-                       <li class="list">Series<span class="drop"><i class="ion-chevron-down"></i></span>
-                           <ul class="firstUnordered">
-                               <li><a href="../series/series-popular.html">Popular tv shows</a></li>
-                               <li><a href="../series/series-toprated.html">Top rated</a></li>
-                               <li><a href="../series/series-latest.html">On air</a></li>
-                               <li class="search">Search Tv Shows
-                                       <ul class="secondUnordered">
-                                           <li><a href="../series/search-series.html">Tv Shows by Title</a></li>
-                                           <li><a href="../series/series-year.html">Tv Shows by Year</a></li>
-                                           <li><a href="../series/series-genre.html">TV Shows by Genre</a></li>
-                                       </ul>
-                               </li>
-                           </ul>
-                       </li>
-                       <li class="list">My Lists<span class="drop"><i class="ion-chevron-down"></i></span></a>
-                        <ul class="firstUnordered">
-                            <li><a href="moviesToWatch.html">Movies to Watch</a></li>
-                            <li><a href="../series/seriesToWatch.html">Series to Watch</a></li>
-                            <li class="search">Favorites
-                                <ul class="secondUnordered">
-                                        <li><a href="favoriteMovies.html">Favorite Movies</a></li>
-                                        <li><a href="../series/favoriteSeries.html">Favorite Series</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                        </li>
-                       <li class="list"><a href="../about.html">About</a></li>
-                   </ul>
-               </div>
+           <!-- The Menu -->
+           <div class="menu">
+            <ul>
+             <li class="list"><a href="../index.html">Home</a></li>
+             <li class="list"><a href="latest-movies.html">Movies</a></li>
+             <li class="list"><a href="../series/series-latest.html">TV Shows</a></li>
+             <li class="list">My Lists<span class="drop"><i class="ion-chevron-down"></i></span></a>
+                <ul class="firstUnordered">
+                   <li><a href="../watchlist.html">Watchlist</a>
+                   <li><a href="../favorites.html">Favorites</a>
+                </ul>
+            </li>
+             <li class="list"><a href="../about.html">About</a></li>
+         </ul>
+        </div>
                    <!-- The burger menu for small screens -->
                    <div class="burger">
                        <span></span>
@@ -78,10 +44,7 @@
                            <li><a href="../index.html">Home</a></li>
                            <li id="smallScreenMovies">Movies<span><i class="ion-chevron-down"></i></span>
                                <ul id="moviesDropdown">
-                                           <li><a href="search-movies.html">Search by Title</a></li>
-                                           <li><a href="year-movies.html">Search by Year</a></li>
-                                           <li><a href="byActor-movies.html">Search by Actor</a></li>
-                                           <li><a href="byGenre-movies.html">Search by Genre</a></li>
+                                           <li><a href="search-movies.html">Search movies</a></li>
                                            <li><a href="top-rated.html">Top rated</a></li>
                                            <li><a href="popular-movies.html">Popular movies</a></li>
                                            <li><a href="latest-movies.html">Latest movies</a></li>
@@ -90,9 +53,7 @@
                            </li>
                            <li id="smallScreenSeries">Series<span><i class="ion-chevron-down"></i></span>
                                <ul id="seriesDropdown">
-                                   <li><a href="../series/search-series.html">Tv Shows by Title</a></li>
-                                   <li><a href="../series/series-year.html">Tv Shows by Year</a></li>
-                                   <li><a href="../series/series-byGenre.html">Tv Shows by Genre</a></li>
+                                   <li><a href="../series/search-series.html">Search tv shows</a></li>
                                    <li><a href="../series/series-popular.html">Popular tv shows</a></li>
                                    <li><a href="../series/series-toprated.html">Top rated</a></li>
                                    <li><a href="../series/series-latest.html">On air</a></li>
@@ -100,16 +61,23 @@
                            </li>
                            <li class="list" id="smallScreenList">My Lists<span class="drop"><i class="ion-chevron-down"></i></span></a>
                             <ul id="myListsDropdown">
-                                <li><a href="moviesToWatch.html">Movies to Watch</a></li>
-                                <li><a href="../series/seriesToWatch.html">Series to Watch</a></li>
-                                <li><a href="favoriteMovies.html">Favorite Movies</a></li>
-                                <li><a href="../series/favoriteSeries.html">Favorite Series</a></li>
+                               <li><a href="../watchlist.html">Watchlist</a>
+                               <li><a href="../favorites.html">Favorites</a>
                             </ul>
                             </li>
                            <li><a href="../about.html">About</a></li>
                        </ul>
                    </div>
                </nav>
+               <!-- Submenu -->
+               <div class="submenu">
+                ★
+                <li><a href="search-movies.html">search movies</a></li>
+                <li><a href="top-rated.html">Top rated</a></li>
+                <li><a href="latest-movies.html">Latest movies</a></li>
+                <li><a href="upcoming-movies.html">Upcoming movies</a></li>
+                ★
+               </div>
 <!-- Spinner -->
 	<div class="spinner"></div>
 <!-- Container -->
@@ -119,6 +87,10 @@
     <!-- Notifications -->
     <div class="notification" id="added"></div>
     <div class="notification" id="alreadyStored"></div>
+
+    <!-- Smooth scroll to top button -->
+    <button id="scrollToTop"><i class="ion-chevron-up"></i></button>
+
 <!-- Showcase - lists the popular movies -->
 	<div class="showcase">
 		<div id="movies" class="moviesRows"></div>
@@ -126,8 +98,8 @@
 	</div>
     <!-- Buttons for Pages -->
     <div class="pages">
-        <div id="prev"><</div>
-        <div id="next">></div>
+        <button id="prev" title="Previous page">PREVIOUS</button>
+		<button id="next" title="Next page">NEXT</button>
     </div>
 <!-- Script links -->
 <script src="../scripts/config.js"></script>
