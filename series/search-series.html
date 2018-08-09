@@ -17,50 +17,17 @@
 <body>
 <!-- Navigation Bar -->
 <nav>
-	<!-- The Menu -->
-	<div class="menu">
+	 <!-- The Menu -->
+	 <div class="menu">
+		<ul>
 			<ul>
 				<li class="list"><a href="../index.html">Home</a></li>
-				<li class="list">Movies<span class="drop"><i class="ion-chevron-down arrow"></i></span>
-					<ul class="firstUnordered">
-							<li><a href="../movies/top-rated.html">Top rated</a></li>
-							<li><a href="../movies/popular-movies.html">Popular movies</a></li>
-							<li><a href="../movies/latest-movies.html">Latest movies</a></li>
-							<li><a href="../movies/upcoming-movies.html">Upcoming movies</a></li>
-							<li class="search">Search Movies
-								 <ul class="secondUnordered">
-										<li><a href="../movies/search-movies.html">Search by Title</a></li>
-										<li><a href="../movies/year-movies.html">Search by Year</a></li>
-										<li><a href="../movies/byActor-movies.html">Search by Actor</a></li>
-										<li><a href="../movies/byGenre-movies.html">Search By Genre</a></li>
-								 </ul>
-							</li>
-					</ul>
-				</li>
-				<li class="list">Series<span class="drop"><i class="ion-chevron-down"></i></span>
-					<ul class="firstUnordered">
-						<li><a href="series-popular.html">Popular tv shows</a></li>
-						<li><a href="series-toprated.html">Top rated</a></li>
-						<li><a href="series-latest.html">On air</a></li>
-						<li class="search">Tv Shows
-								<ul class="secondUnordered">
-									<li><a href="search-series.html">Tv Shows by Title</a></li>
-									<li><a href="series-year.html">Tv Shows by Year</a></li>
-									<li><a href="series-byGenre.html">Tv Shows by Genre</a></li>
-								</ul>
-						</li>
-					</ul>
-				</li>
+				<li class="list"><a href="../movies/latest-movies.html">Movies</a></li>
+				<li class="list"><a href="series-latest.html">TV Shows</a></li>
 				<li class="list">My Lists<span class="drop"><i class="ion-chevron-down"></i></span></a>
 					<ul class="firstUnordered">
-						<li><a href="../movies/moviesToWatch.html">Movies to Watch</a></li>
-						<li><a href="seriesToWatch.html">Series to Watch</a></li>
-						<li class="search">Favorites
-							<ul class="secondUnordered">
-									<li><a href="../movies/favoriteMovies.html">Favorite Movies</a></li>
-									<li><a href="favoriteSeries.html">Favorite Series</a></li>
-							</ul>
-						</li>
+					   <li><a href="../watchlist.html">Watchlist</a>
+					   <li><a href="../favorites.html">Favorites</a>
 					</ul>
 				</li>
 				<li class="list"><a href="../about.html">About</a></li>
@@ -78,10 +45,7 @@
 		<li><a href="../index.html">Home</a></li>
 		<li id="smallScreenMovies">Movies<span><i class="ion-chevron-down"></i></span>
 			<ul id="moviesDropdown">
-				<li><a href="../movies/search-movies.html">Search by Title</a></li>
-				<li><a href="../movies/year-movies.html">Search by Year</a></li>
-				<li><a href="../movies/byActor-movies.html">Search by Actor</a></li>
-				<li><a href="../movies/byGenre-movies.html">Search by Genre</a></li>
+				<li><a href="../movies/search-movies.html">Search movies</a></li>
 				<li><a href="../movies/top-rated.html">Top rated</a></li>
 				<li><a href="../movies/popular-movies.html">Popular movies</a></li>
 				<li><a href="../movies/latest-movies.html">Latest movies</a></li>
@@ -90,9 +54,7 @@
 		</li>
 		<li id="smallScreenSeries">Series<span><i class="ion-chevron-down"></i></span>
 			<ul id="seriesDropdown">
-				<li><a href="search-series.html">Tv Shows by Title</a></li>
-				<li><a href="series-year.html">Tv Shows by Year</a></li>
-				<li><a href="series-byGenre.html">Tv Shows by Genre</a></li>
+				<li><a href="search-series.html">Search tv shows</a></li>
 				<li><a href="series-popular.html">Popular tv shows</a></li>
 				<li><a href="series-toprated.html">Top rated</a></li>
 				<li><a href="series-latest.html">On air</a></li>
@@ -100,40 +62,81 @@
 		</li>
 		<li class="list" id="smallScreenList">My Lists<span class="drop"><i class="ion-chevron-down"></i></span></a>
 			<ul id="myListsDropdown">
-				<li><a href="../movies/moviesToWatch.html">Movies to Watch</a></li>
-				<li><a href="seriesToWatch.html">Series to Watch</a></li>
-				<li><a href="../movies/favoriteMovies.html">Favorite Movies</a></li>
-				<li><a href="favoriteSeries.html">Favorite Series</a></li>
+			   <li><a href="../watchlist.html">Watchlist</a>
+			   <li><a href="../favorites.html">Favorites</a>
 			</ul>
 		</li>
 		<li><a href="../about.html">About</a></li>
 	</ul>
 </div>
 </nav>
-<!-- Spinner -->
-<div class="spinner"></div>
+<!-- Submenu -->
+<div class="submenu">
+	★
+	<li><a href="series-toprated.html">Top rated tv shows</a></li>
+	<li><a href="series-popular.html">Popular tv shows</a></li>
+	<li><a href="series-latest.html">On air tv shows</a></li>
+	★
+</div>
 <!-- Container -->
-	<div class="container">
-		<h1>Search for Series</h1>
-
-		<form id="form">
-			<input type="text" id="searchText" placeholder="Search for series" autocomplete="off">
-			<span id="searchImg"><i class="ion-search"></i></span>
-		</form>
+	<div class="container_search">
+			<form id="form" autocomplete="off">
+                    <input type="text" id="inputField" placeholder="Title, genre, year...">
+                    <span id="questionMark"><i class="material-icons">info</i></span>
+			 </form>
+			 
+			 <div class="wrap">
+				<select id="selectedGenres">
+					<option>SELECT GENRE </option>
+					<option id="10759" class="tag">Action</option>
+					<option id="10759" class="tag">Adventure</option>
+					<option id="16" class="tag">Animation</option>
+					<option id="35" class="tag">Comedy</option>
+					<option id="80" class="tag">Crime</option>
+					<option id="99" class="tag">Documentary</option>
+					<option id="18" class="tag">Drama</option>
+					<option id="10751" class="tag">Family</option>
+					<option id="10762" class="tag">Kids</option>
+					<option id="9648" class="tag">Mystery</option>
+					<option id="10763" class="tag">News</option>
+					<option id="10764" class="tag">Reality</option>
+					<option id="10766" class="tag">Soap</option>
+					<option id="10767" class="tag">Talk</option>
+					<option id="10765" class="tag">Sci-Fi</option>
+					<option id="10765" class="tag">Fantasy</option>
+					<option id="10768" class="tag">War</option>
+					<option id="37" class="tag">Western</option>
+					<option id="10768" class="tag">Politics</option>
+				</select>
+		   </div>
 	</div>
 	    <!-- Notifications -->
 		<div class="notification" id="added"></div>
 		<div class="notification" id="alreadyStored"></div>
+
+		<!-- Modal box -->
+		<div class="modal">
+			<div class="modal_container">
+				<h3>INFO !</h3>
+				<hr>
+				<p>In the input field you can type in the title, year or genre, and it will list you all the tv shows corresponding to the searched query. Genres: Action, Adventure, Animation, Comedy, Crime, Documentary, Drama, Family, Kids, Mystery, News, Reality, Soap, Talk, Sci-Fi, Fantasy, War, Western, Politics.</p>
+				<button id="modalGotIt">I get it!</button>
+			</div>
+		</div>
+	
+		<!-- Smooth scroll to top button -->
+		<button id="scrollToTop"><i class="ion-chevron-up"></i></button>
+
 <!-- Showcase - area where tv shows will be listed -->
 	<div class="showcase">
+		<h1 id="searchedFor"></h1>
 		<div id="movies" class="moviesRows"></div>
-
 	</div>
 	<!-- Buttons for Pages -->
 	<div class="pages">
-		<div id="prev"><</div>
-		<div id="next">></div>
-	</div>
+        <button id="prev" title="Previous page">PREVIOUS</button>
+		<button id="next" title="Next page">NEXT</button>
+    </div>
 <!-- Script links -->
 <script src="../scripts/config.js"></script>
 <script src="../scripts/series/search-series.js"></script>
