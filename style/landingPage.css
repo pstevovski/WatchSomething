@@ -1,5 +1,4 @@
 @import "http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css";
-
 *{
     margin: 0;
     padding: 0;
@@ -66,11 +65,13 @@ nav ul{
 nav ul li{
     margin: 0 5px;
     padding: 5px;
+    font-family: "Montserrat SemiBold";
 }
 nav ul li a{
     position: relative;
     padding: 5px;
     display: block;
+    font-family: "Montserrat SemiBold";
 }
 nav ul li a::before{
     content: '';
