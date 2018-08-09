@@ -22,40 +22,50 @@
 
         <!-- Links -->
         <ul>
-            <li><a href="movies/search-movies.html">Movies</a></li>
-            <li><a href="series/search-series.html">Tv Shows</a></li>
+            <li><a href="movies/latest-movies.html">Movies</a></li>
+            <li><a href="series/series-latest.html">Tv Shows</a></li>
             <li><a href="about.html">About</a></li>
         </ul>
     </nav>
 <!-- Text -->
     <section class="text">
         <h1>WhatToWatch</h1>
-        <h4>Can't find anything to watch?</h4>
-        <div class="subText">
-            <p>You're at the right place. Explore a vast variety of movies and tv shows, sort them by genre and rating, and store them in your watchlist or favorites list !</p>
-        </div>
+        <h4> If you don't have any idea what to watch, you're at the right place. Find a movie or tv show to watch instantly.</h4>
         <!-- Quote -->
         <div id="quote"></div>
     </section>
-<!-- Homer image -->
-    <div class="homer">
-        <img src="images/homer.png" alt="Homer Simpson" title="Homer">
-    </div>
+<!-- Top Rated movies -->
+    <section class="topRated">
+        <h2 class="title">TOP RATED MOVIES <span><i class="material-icons star">stars</i></span></h2>
+        <a href="movies/top-rated.html">show more..</a>
+        <div id="topRated" class="scroll"></div>
+    </section>
 <!-- Search movies -->
     <section class="search_movies">
-        <a href="movies/search-movies.html">Search Movies <span><i class="ion-arrow-right-b"></i></span></a>
+        <h2 class="title">POPULAR MOVIES <span><i class="material-icons hot">whatshot</i></span></h2>
+        <a href="movies/popular-movies.html">show more..</a>
         <!-- Movies output -->
-        <div id="movies" class="scroll">
-        </div>
+        <div id="movies" class="scroll"></div>
+    </section>
+    <!-- Top Rated tv shows -->
+    <section class="topRatedShows">
+        <h2 class="title">TOP RATED TV SHOWS <span><i class="material-icons star">stars</i></span></h2>
+        <a href="series/series-toprated.html">show more..</a>
+        <div id="topRatedShows" class="scroll"></div>
     </section>
 <!-- Search Tv Shows -->
     <section class="search_tvshows">
-        <a href="series/search-series.html">Search Tv shows <span><i class="ion-arrow-right-b"></i></span></a>
+        <h2 class="title">POPULAR TV SHOWS <span><i class="material-icons hot">whatshot</i></span></h2>
+        <a href="series/series-popular.html">show more..</a>
         <!-- Tv Shows output -->
         <div id="tvShows" class="scroll"></div>
     </section>
 <!-- Footer -->
 <footer>
+    <!-- Powered by -->
+    <div class="poweredBy">
+        <a href="https://www.themoviedb.org"><img src="images/tmdb.svg" alt="TMDB" title="TMDB" width="90px"></a>
+    </div>
     <!-- 2018 Copyright -->
     <div class="copy">
         <p>2018 &copy;</p>
@@ -63,10 +73,6 @@
     <!-- Deadpool image -->
     <div class="deadpool">
         <img src="images/deadpool.png" alt="deadpool">
-    </div>
-    <!-- Powered by -->
-    <div class="poweredBy">
-        <a href="https://www.themoviedb.org"><img src="images/tmdb.svg" alt="TMDB" title="TMDB" width="90px"></a>
     </div>
 </footer>
 </body>
