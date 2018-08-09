@@ -22,7 +22,7 @@ Ever found yourself in a situation where you want to watch some movie or tv show
 * Add an option which will help the user to choose whether he wants to watch some movie, or a tv show, with specific genre or actor, which will narrow the choices the user needs to make.
 
 
-#### Update #4 (2018-08-09) - TOTAL OVERAHUL
+#### Update #4 (2018-08-09) - TOTAL OVERHAUL
 ###### DONE:
 * New design for the whole website.
 * New design for the movie cards.
