@@ -1,14 +1,20 @@
-/* The movie-page.css file hold the CSS for both the movies-page.html && shows-page.html.  
+/* This css file is for both movies-page and shows-page (detailed info pages). 
 #0091EA
 #E53935*/
 
 body{
 	width: 100%;
-	background-color: #111;
+	background-color: #f5f5f5;
 	font-family: "Montserrat", Arial, Helvetica, sans-serif;
 }
-nav ul li:hover{
-	color: #fff;
+button{
+	outline: none !important;
+}
+li {
+	outline: none !important;
+}
+a {
+	outline: none !important;
 }
 /* Movie/tv show page container (both poster and info sections). */
 .moviePage{
@@ -20,7 +26,7 @@ nav ul li:hover{
 	padding: 20px;
 }
 .poster img{
-	box-shadow: 0 3px 10px rgba(0,0,0,0.45);
+	box-shadow: 10px 6px rgba(0,0,0,0.1);
 }
 /* Movie/tv show poster - END. */
 
@@ -31,13 +37,24 @@ nav ul li:hover{
 	padding: 20px;
 	font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
 }
+#smallText{
+	font-size: 12px;
+	color: #333;
+	font-family: "Montserrat SemiBold";
+}
 .info h2{
 	font-family: "Montserrat Black", Arial, Helvetica, sans-serif;
 	font-size: 35px;
-	color:#fff;
+	color:#333;
+}
+.info li a{
+	color: #555;
+}
+.info li {
+	color:#e1302a;
 }
 li:hover{
-	color: #E53935;
+	color: #e1302a;
 }
 .plot{
 	padding: 20px;
@@ -45,7 +62,9 @@ li:hover{
 	flex-shrink: 16px;
 }
 .plot h3{
-	color: #E53935;
+	font-size: 25px;
+	font-family: "Montserrat Black";
+	color: #e1302a;
 }
 .buttons{
 	display: flex;
@@ -60,30 +79,48 @@ li:hover{
 .buttons a{
 	font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
 	font-size: 16px;
-	padding: 5px;
+	padding: 8px;
 	background-color: #fff;
-	border-radius: 5px;
-	color: #E53935;
+	box-shadow: 0 3px rgba(0,0,0,0.1);
+	border-radius: 1px;
+	color: #333;
 	text-align: center;
-	transition: 0.2s;
-	position: relative;
-	overflow: hidden;
+	transition: 0.2s ease;
 } 
 .buttons a:hover{
-	background-color: #E53935;
+	background-color: #e1302a;
 	color: #fff;
-	box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+	box-shadow: 4px 4px rgba(0,0,0,0.15);
 }
+.buttons .twitter{
+	display: block;
+	background-color: #fff;
+	color: #00aced;
+	width: 60px;
+	overflow: hidden;
+}
+.twitter::before{
+	display: block;
+	content: "\f243";
+	font-family: "Ionicons";
+	transition: 0.1s;
+	font-size: 18px;
+}
+.buttons .twitter:hover{
+	background-color: #00aced;
+}
+.buttons .twitter:hover::before{
+	color: #fff;
+}
+
 #errorTitle{
 	font-family: "Montserrat Black", Arial, Helvetica, sans-serif;
-	color: #E53935;
+	color: #e1302a;
 }
 .errorBack{
-	position: absolute;
-	top: 30%;
-	left: 50%;
-	transform: translate(-50%,-30%);
-	width: 120px;
+	margin: 0 auto;
+	transform: translateY(30px);
+	width: 140px;
 }
 #errorText{
 	text-align: center;
@@ -97,103 +134,68 @@ li:hover{
 	margin-bottom: 20px;
 }
 #prev, #next {
-	margin: 5px 5px;
-	font-size: 25px;
+	margin: 5px 25px;
+	font-size: 18px;
 	font-weight: bold;
-	font-family: "Poppins", Arial, Helvetica, sans-serif;
-	background-color: #E53935;
-	color: #fff;
-	box-shadow: 0 2px 5px rgba(0,0,0,0.20);
-	width: 35px;
+	font-family: "Montserrat Black", Arial, Helvetica, sans-serif;
+	border:none;
+	border-radius: 3px;
+	background-color: #fff;
+	box-shadow: 0 3px rgba(0,0,0,0.1);
+	color: #e1302a;
+	width: auto;
+	padding: 0 5px;
 	height: 35px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	cursor: pointer;
-	border-radius: 50%;
 	transition: 0.3s ease;
 }
 #prev:hover, #next:hover{
-	background-color: #fff;
-	color: #E53935;
+	color: #333;
+	box-shadow: 4px 4px rgba(0,0,0,0.15);
 }
 /* Movie/tv show info - END. */
 
 /* Movie/tv show trailer - START. */
 #trailer{
-	position: absolute;
-	top: 0%;
-	left:50%;
-	transform: translate(-50%,0%);
 	width: 100%;
-	display: none;
+	min-height: 50px;
+	display: flex;
+	flex-direction: column;
 	justify-content: center;
-	margin: 15px 0;
-	z-index: 999;
-}
-.overlay{
-	display:none;
-	position: absolute;
-	top: 0;
-	width: 100%;
-	height: 100vh;
-	background: rgba(0,0,0,0.7);
-}
-#close{
-	background-color: #fff;
-	width: 80px;
-	text-align: center;
-	border-radius: 5px;
-	font-size: 18px;
-	cursor: pointer;
-	font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
-	transition: 0.3s;
-}
-#close:hover {
-	color: #E53935;
-	background-color: #eee;
+	align-items: center;
 }
 #trailer iframe{
-	border-radius: 5px;
+	width: 649px;
+	height: 365px;
 }
+#trailer_title{
+	margin-left: 20px;
+	margin-top: 10px;
+	font-family: "Montserrat Black";
+}
+#trailer p {
+	text-align: center;
+}
+
 /* Movie/tv show trailer - END. */
 
 /* Movie/tv show recommended - START. */
 #recommended{
-	display: flex;
-	justify-content: center;
-	flex-wrap: wrap;
+	display: grid;
+	grid-template-columns: repeat(4,1fr);
 	font-family: Arial, Helvetica, sans-serif;
-	width: 100%;
-	min-height: 450px;
-	overflow: hidden;
+	width: 85%;
+	margin: 0 auto;
+	height: 420px;
+	overflow-x: hidden;
+	overflow-y: hidden;
 }
 #recommended > *{
 	margin: 15px 15px;
-}
-#rec_title{
-	padding: 20px;
-	color: #E53935;
-}
-.recommended_card{
-	text-align: center;
-	width: 200px;
-	height: 390px;
-	font-family: "Montserrat Regular", Arial, Helvetica, sans-serif;
-	color: #E53935;
-	background-color: #fff;
-	border-radius: 3px;
-	transition: 0.35s;
-	position: relative;
-	box-shadow: 0 3px 5px rgba(0,0,0,0.20);
-	animation: recommended 0.5s ease-in forwards;
-}
-.recommended_card h4{
-	font-size: 16px;
-	font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
-}
-.recommended_card p{
-	font-size: 15px;
+	animation: recommended 0.4s ease-in forwards;
 }
 @keyframes recommended{
 	0%{
@@ -205,33 +207,88 @@ li:hover{
 		transform: translateX(0px)
 	}
 }
-.recommended_card:hover{
-	transform:translateY(-10px);
+#rec_title{
+	padding: 20px;
+	font-family: "Montserrat Black";
 	color: #E53935;
 }
-.recommended_card img{
-	height: 300px;
-	border-radius: 3px;
-}
-.recommended_card a{
-	margin: 0;
-	display: block;
-	width: 100%;
-	transition: 0.3s;
-	padding: 5px;
-	color:  #E53935;
-	font-family: "Montserrat", Arial, Helvetica, sans-serif;
-	font-weight: bold;
-	border-bottom-right-radius: 3px;
-	border-bottom-left-radius: 3px;
-	position: absolute;
-	bottom: 0;
-}
-.recommended_card a:hover{
-	background-color: #E53935;
+.card{
+	height: 420px;
 	color: #fff;
+	width: 250px;
+	position: relative;
+	margin-bottom: -30px;
+	z-index: 2;
+	overflow: hidden;
+	cursor: default;
 }
-
+.card .overlay{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 0%;
+	transition: 0.30s ease-in-out;
+	background-color: rgba(0,0,0,0.6);
+}
+.card:hover .overlay{
+	height: 400px;
+}
+.card .overlay .movie{
+	position: absolute;
+	bottom:0;
+	left: 0;
+}
+.card .overlay .movie a{
+	display: flex;
+	position: relative;
+	bottom:0;
+	left: 0;
+	justify-content: center;
+	align-items: center;
+    padding: 3px;
+    width: 70px;
+    height: 30px;
+    border: none;
+    background-color: #fff;
+    color: #333;
+    font-family: "Montserrat SemiBold";
+    margin: 10px 15px;
+    cursor: pointer;
+	transition: 0.2s ease;
+	outline: none !important;
+}
+.card .overlay .movie a:hover{
+    background-color: #e1302a;
+    color: #fff;
+}
+.movie p {
+    font-family: "Montserrat Medium";
+    color: #fff;
+    font-size: 14px;
+	margin-left: 5px;
+	text-align: left;
+}
+.card .overlay .movie h2{
+    font-family: "Montserrat Black";
+    width: auto;
+    font-size: 32px;
+    color: #fff;
+    text-transform: uppercase;
+	padding: 5px;
+	text-align: left;
+}
+.card .card_img img{
+	width: 100%;
+	height: 400px;
+	z-index: 2;
+	overflow: hidden;
+}
+.card .card_img{
+	height: 400px;
+	overflow: hidden;
+	z-index: 2;
+}
 .notification{
 	background-color: #00C853;
 	padding: 10px;
@@ -239,9 +296,9 @@ li:hover{
 	width: 190px;
 	font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
 	color: #fff;
-	position: absolute;
+	position: fixed;
 	left: 30px;
-	bottom: -50px;
+	bottom: 20px;
 	opacity: 0;
 	box-shadow: 0 5px 5px rgba(0,0,0,0.35);
 }
@@ -275,9 +332,33 @@ li:hover{
 @media (max-width: 1207px){
 	.notification{
 		position: fixed;
-		left: 30px;
-		bottom: 50px;
+		left: 10px;
+		bottom: -50px;
 	}
+}
+/* Media querie for tablets and phones */
+@media (max-width: 1024px){
+	.card .overlay{
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 400px;
+		transition: 0.30s ease-in-out;
+		background-color: rgba(0,0,0,0.6);
+	}
+	#recommended{
+		overflow-x: scroll;
+		overflow-y: hidden;
+	}
+	#recommended::-webkit-scrollbar {
+        width: 10px;
+        height: 5px;
+    }
+	#recommended::-webkit-scrollbar-thumb {
+        background: #e1302a;
+        border-radius: 1px;
+    }
 }
 /* Max-width 854 px. */
 @media(max-width: 854px){
@@ -305,6 +386,9 @@ li:hover{
 		display: flex;
 		flex-direction: column;
 		align-items: center
+	}
+	.buttons .twitter{
+		width: 65%;
 	}
 	.buttons > *{
 		margin: 5px 0;

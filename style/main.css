@@ -10,17 +10,55 @@ That includes (index.html,popular-movies.html,search-movies.html,top-rated.html,
 	padding: 0;
 	box-sizing: border-box;
 }
+select {
+	outline: none !important;
+	cursor: pointer;
+}
 /* Global parameters. */
 body{
-	color: #E53935;
-	background-color: #111;
-	font-family: 'Roboto', Arial, Helvetica, sans-serif;
+	background-color: #f5f5f5;
+	color: #e1302a;
+	font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+}
+.homer{
+	position: absolute;
+	left: 0;
+	bottom: -5px;
+}
+/* SCROLL TO TOP BUTTON */
+#scrollToTop{
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	z-index: 9999;
+	width: 40px;
+	height: 40px;
+	border: none;
+	border-radius: 2px;
+	padding: 3px;
+	transition: all 0.35s ease;
+	opacity: 0;
+	box-shadow: 4px 4px rgba(0,0,0,0.2);
+	background-color: #e1302a;;
+	cursor: pointer;
+	outline: none !important;
+}
+#scrollToTop:hover{
+	background-color: #fff;
+}
+#scrollToTop:hover i {
+	color: #e1302a;;
+}
+#scrollToTop i {
+	font-size: 20px;
+	color: #f5f5f5;
+}
+#scrollToTop.scrollButtonActive{
+	transition: all 0.35s ease;
+	opacity: 1;
 }
 li{
-	color: #E53935;
-}
-li:hover{
-	color: #fff;
+	color: #e1302a;
 }
 a{
 	text-decoration: none;
@@ -32,14 +70,6 @@ ul{
 .change{
 	position: absolute;
 	margin-left: 35px;
-}
-
-#white{
-	display: none;
-}
-#dark:hover{
-	color: #333;
-	cursor:pointer;
 }
 /* Button for small screens. */
 .burger{
@@ -64,8 +94,9 @@ ul{
 	width: 40px;
 	border-radius: 50%;
 	margin-top: -20px;
-	border: 3px solid #fff;
-	border-top-color: #E53935;
+	border: 3px solid transparent;
+	border-top-color: #e1302a;
+	border-bottom-color: #555;
 	animation: spinner 0.5s ease infinite;
 }
 @keyframes spinner{
@@ -76,6 +107,31 @@ ul{
 		transform:translate(-50%,-50%) rotate(360deg);
 	}
 }
+/* MATERIAL DESIGN ICONS CSS */
+.material-icons {
+	font-family: 'Material Icons';
+	font-weight: normal;
+	font-style: normal;
+	font-size: 24px;  /* Preferred icon size */
+	display: inline-block;
+	line-height: 1;
+	text-transform: none;
+	letter-spacing: normal;
+	word-wrap: normal;
+	white-space: nowrap;
+	direction: ltr;
+  
+	/* Support for all WebKit browsers. */
+	-webkit-font-smoothing: antialiased;
+	/* Support for Safari and Chrome. */
+	text-rendering: optimizeLegibility;
+  
+	/* Support for Firefox. */
+	-moz-osx-font-smoothing: grayscale;
+  
+	/* Support for IE. */
+	font-feature-settings: 'liga';
+  }
 /* Global parameters end. */
 
 /* Navigation bar - START. */
@@ -117,11 +173,40 @@ nav a{
 	margin: 0 5px;
 	transition: 0.25s;
 }
+.menu ul li a::before{
+    content: '';
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	width: 1px;
+	border: 2px solid #e1302a;
+	border-width: 0 0 2px 0;
+	transition: 0.25s ease-out;
+	opacity: 0;
+}
+.menu ul li a::after{
+    content: '';
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 1px;
+	border: 2px solid #e1302a;
+	border-width: 0 0 2px 0;
+	transition: 0.25s ease-out;
+	opacity: 0;
+}
+.menu ul li a:hover::before{
+    width: 50%;
+    opacity: 1;
+    right: 0px;
+}
+.menu ul li a:hover::after{
+    width: 50%;
+    opacity: 1;
+    left: 0px;
+}
 .menu ul .list a:hover {
 	color: #E53935;
-}
-.menu ul .list:hover .firstUnordered .search{
-	color: #333;
 }
 .menu ul .list a{
 	padding: 5px;
@@ -129,9 +214,6 @@ nav a{
 }
 .menu ul .list a:nth-child(1){
 	transition: 0.25s;
-}
-.menu ul .list a:hover:nth-child(1){
-	color: #fff;
 }
 .menu ul .list span{
 	display: inline-block;
@@ -146,9 +228,9 @@ nav a{
 	position: absolute;
 	top: 90%;
 	left: 0;
-	background-color: #222;
+	background-color: #f5f5f5;
 	width: 184px;
-	box-shadow: 0 3px 5px rgba(0,0,0,0.35);
+	box-shadow: 8px 8px rgba(0,0,0,0.35);
 	animation: dropdown 0.5s ease-out forwards;
 	z-index: 9;
 }
@@ -161,37 +243,19 @@ nav a{
 	z-index: 9;
 	background-color: transparent;
 }
-.menu ul .list .firstUnordered .search{
-	position: relative;
-	color: #E53935 !important;
+.menu ul .list .firstUnordered li:hover{
+	background-color: rgba(0,0,0,0.1);
 }
-.menu ul .list .firstUnordered .search:hover{
-	color: #fff !important;
+.menu ul li ul li a:hover::before{
+	content: "";
+	width: 0;
 }
-.menu ul .list .firstUnordered li:nth-last-child(1){
-	padding-left: 15px;
-	/* color: #E53935 !important; */
-}
-.menu ul .list .firstUnordered .secondUnordered{
-	display: none;
-	position: absolute;
-	left: -190px;
-	top: 0;
-	z-index: -1;
-}
-.menu ul .list .firstUnordered .search:hover .secondUnordered{
-	display: block;
-	background-color: #222;
-	box-shadow: 0px 2px 5px rgba(0,0,0,0.15);
-	animation: sideway 0.5s ease-out forwards;
-}
-.menu ul .list .firstUnordered .search:hover .secondUnordered li{
-	padding: 5px;
-	color: #E53935;
-	width: 190px;
+.menu ul li ul li a:hover::after{
+	content: "";
+	width: 0;
 }
 .menu ul li ul li:hover{
-	background-color:#eee;
+	background-color:red;
 	padding-left: 5px;
 }
 .menu ul li ul li a{
@@ -200,29 +264,103 @@ nav a{
 	padding: 5px;
 	transition: all 0.3s;
 }
-.menu ul .list .firstUnordered .search .secondUnordered a{
-	color: #E53935;
-}
-.menu ul .list .firstUnordered .search .secondUnordered a:hover{
-	color: #fff;
-}
+
 .menu ul li ul li:hover a{
-	color:#E53935;
+	color:#e1302a;
 }
+/* SUBMENU */
+.submenu{
+	position: relative;
+	top: 20px;
+	z-index: 2;
+	list-style-type: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 40px;
+	background-color: #e1302a;
+	color: #e1302a;
+	margin-top: 35px;
+	font-family: "Montserrat SemiBold";
+	font-size: 16px;
+	text-transform: lowercase;
+	transition: all 0.25s ease;
+}
+.submenu li{
+	margin: 0px 15px;
+	padding: 5px;
+	transition: all 0.25s ease;
+	text-align: center;
+}
+.submenu a{
+	display: block;
+	text-align: center;
+	transition: all 0.15s ease;
+	color: #f5f5f5;
+}
+.submenu a:hover{
+	animation: link 0.5s ease forwards infinite;
+}
+@keyframes link{
+	0%{
+		transform: translateY(0px);
+	}
+	50%{
+		transform: translateY(2px);
+	}
+	100%{
+		transform: translateY(0px);
+	}
+}
+
 /* Navigation bar - END. */
 
 /* Page Title */
 .container{
-	margin-top: 20px;
+	margin-top: 60px;
+	width: 100%;
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
 	align-items: center;
+	position: relative;
+}
+/* Page title on lists page and upcoming movies page. */
+.title{
+	margin-top: 30px;
+	margin-bottom: 0;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+.title > * {
+	margin: 0 10px;
+}
+.title h1 {
+	font-family: "Montserrat Black";
+}
+.title_upcoming{
+	margin-top: 40px;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+.title_upcoming h1 {
+	font-family: "Montserrat Black";
+	font-size: 50px;
 }
 .container h1{
 	font-family: "Montserrat Black", Arial, Helvetica, sans-serif;
 	text-align: center;
-	margin: 25px 0;
-	font-size:50px;
+	margin: 5px 0;
+	font-size: 50px;
+	text-transform: uppercase;
 }
 #byYear{
 	color: #fff;
@@ -230,60 +368,234 @@ nav a{
 	font-weight: bold;
 }
 #upcomingDate{
-	color: #fff;
+	color: #333;
 	font-size: 50px;
 	font-weight: bold;
 }
 /* Movies/Tvshows output - START. */
 .showcase{
+	margin-top: 35px;
 	position: relative;
 	display: flex;
+	flex-direction: column;
+	align-items: center;
 	justify-content: center;
 }
-#movies{
+.showcase h1{
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 50px;
+	text-transform: uppercase;
+	font-family: "Montserrat Black";
+}
+.showcase h2{
+	color: #444;
+	font-size: 35px;
+	font-family: "Montserrat Black";
+}
+.showcase h1 span{
+	font-family: "Montserrat Black";
+}
+#movies, #tvShows{
 	display: grid;
 	grid-template-columns: repeat(4,1fr);
 	grid-gap: 15px;
+	margin: 15px 0;
+}
+.moviesRows p{
+	font-family: "Montserrat SemiBold";
+	width: 500px;
 	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 5px;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+}
+.moviesRows p a {
+	font-family: "Montserrat SemiBold";
+	color: #444;
+}
+.recommendedBox {
+	display: block;
+	width: 85%;
+	min-height: 500px;
+	background-color: #fff;
+	border: 2px solid #999999;
+	position: absolute;
+	padding: 0px 10px;
+	top: 80%;
+	left: 50%;
+	transform: translate(-50%,-80%) scale(0);
+	opacity: 0;
+	border-radius: 1px;
+	box-shadow: 10px 10px rgba(0,0,0,0.10);
+	z-index: 9999;
+	transition: 0.3s;
+}
+.recommendedBox.recommendedBoxActive{
+	transform: translate(-50%, -80%) scale(1);
+	opacity: 1;
+}
+.infoText{
+	color: #55555570;
+}
+.infoText a:hover{
+	color: #e1302a;
+}
+.recommendedBox #recommendedTitle{
+	color: #e1302a;
+	font-family: "Montserrat Regular";
+	padding: 5px;
+}
+.recommendedBox hr{
+	border: 1px solid #ddd;
+}
+.recommendedBox .recommendedOutput {
+	width: 100%;
+	min-height: 420px;
+	padding: 5px;
+	display: grid;
+	grid-template-columns: repeat(15, 1fr);
+	grid-gap: 0px;
+	overflow:hidden;
+	cursor: grabbing;
+	cursor: -webkit-grabbing;
+}
+.recommendedBox .recommendedOutput .card{
+	cursor: grabbing;
+    cursor: -webkit-grabbing;
+}
+.recommendedOutput > *{
+	margin: 0 3px;
+}
+/* MOVIE / TV SHOW OUTPUT CARDS */
+
+/* RECOMMENDED OUTPUT */
+.recommendedBox .recommendedOutput .card{
+	width:250px;
+	height: 400px;
+}
+.recommendedBox .recommendedOutput .card_img{
+	width: 100%;
+	height: 400px;
+}
+.recommendedBox .recommendedOutput .card_img img{
+	width: 100%;
+	height: 400px;
+}
+.recommendedBox .recommendedOutput .card:hover .overlay{
+	height: 400px;
+}
+.recommendedBox .recommendedOutput .card .movie h2{
+	font-size: 28px;
+	width: 240px;
+}
+.recommendedBox .recommendedOutput .card .movie p {
+	margin-left: 5px;
+}
+.recommendedBox .recommendedOutput .card .overlay .movie a:hover{
+	background-color: #e1302a;
+}
+.recommendedBox #closeRecommended{
+	position: absolute;
+	right: 5px;
+	bottom: 5px;
+	padding: 5px;
+	border: none;
+	background-color: #e1302a;
+	color: #fff;
+	font-family: "Montserrat Medium";
+	font-size: 17px;
+	cursor: pointer;
+	transition: 0.15s ease;
+}
+#closeRecommended:hover {
+	background-color: #333;
 }
 @media (min-width: 650px){
 	.card{
-	height: 570px; /* smeneto */
+	height: 570px;
 	color: #fff;
 	width: 300px;
 	position: relative;
-	margin-bottom: 10px;
-	/* transition: 0.35s; */
+	margin-bottom: -30px;
 	z-index: 2;
 	overflow: hidden;
+	cursor: default;
+}
+.card .overlay{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 0%;
+	transition: 0.30s ease-in-out;
+	background-color: rgba(0,0,0,0.6);
+}
+.card:hover .overlay{
+	height: 500px;
+}
+.card .overlay .movie{
+	position: absolute;
+	bottom:0;
+	left: 0;
+}
+.card .overlay .movie a{
+	display: flex;
+	position: relative;
+	bottom:0;
+	left: 0;
+	justify-content: center;
+	align-items: center;
+    padding: 3px;
+    width: 70px;
+    height: 30px;
+    border: none;
+    background-color: #fff;
+    color: #333;
+    font-family: "Montserrat SemiBold";
+    margin: 10px 15px;
+    cursor: pointer;
+	transition: 0.2s ease;
+	outline: none !important;
+}
+.card .overlay .movie a:hover{
+    background-color: #e1302a;
+    color: #fff;
+}
+.movie p {
+    font-family: "Montserrat Medium";
+    color: #fff;
+    font-size: 16px;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+}
+.card .overlay .movie h2{
+    font-family: "Montserrat Black";
+    width: 290px;
+    font-size: 35px;
+    color: #fff;
+    text-transform: uppercase;
+	padding: 5px;
+	text-align: left;
 }
 .card .card_img img{
 	width: 100%;
-	height: 450px;
+	height: 500px;
 	z-index: 2;
 	overflow: hidden;
 }
 .card .card_img{
-	height: 450px;
+	height: 500px;
 	overflow: hidden;
 	z-index: 2;
-	/* transition: 0.35s ease-out; */
-}
-
-.card .card_text{
-	position: relative;
-	color: #E53935;
-	font-family: "Montserrat",Arial, Helvetica, sans-serif;
-	background-color: #fff;
-	height:120px;
-	/* transform:translateY(-300px); */
-	z-index: -1;
-	/* transition: 0.5s ease-in-out; */
-	overflow: hidden;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	padding: 10px 0;
 }
 .upcoming{
 	height: 550px;
@@ -292,28 +604,7 @@ nav a{
 	width: 100%;
 	height: 450px;
 }
-.card:hover .card_text{
-	/* transform:translateY(0px); */
-	box-shadow: 0 3px 5px rgba(0,0,0,0.25),
-				inset 0 0 5px rgba(0,0,0,0.10);
-}
-/* .card:hover .card_img{
-	height: 330px;
-} */
 
-}
-.card a{
-	display: block;
-	width: 100%;
-	background-color: #E53935;
-	color: #fff;
-	font-weight: bold;
-	padding: 6px;
-	transition: 0.2s;
-	font-family: "montserrat";
-	font-weight: bold;
-	position: absolute;
-	bottom: 0;
 }
 .card .addBtn{
 	position: absolute;
@@ -332,20 +623,49 @@ nav a{
 	color: #fff;
 	display: block;
 	transform:scale(0);
-	text-shadow: 0 0 5px rgba(0,0,0,0.45);
 }
 .card:hover .addBtn i{
 	opacity: 1;
 	transform: scale(0.9);
 }
-.addBtn i:hover{
-	color: #e53935;
-	transform: scale(1.25);
-	text-shadow: 0 0 5px rgba(0,0,0,0.25);
+.addBtn .queue:hover{
+	color: #fff;
+	animation: queue 0.8s ease forwards infinite;
 }
-.addBtn .heart:hover{
-	color: #E53935;
+@keyframes queue {
+	0%{
+		transform: translateY(0px);
+	}
+	50%{
+		transform: translateY(-2px)
+	}
+	100%{
+		transform: translateY(2px);
+	}
 }
+.addBtn .favorite:hover{
+	color: #e1302a;
+	animation: heart 0.65s ease forwards infinite;
+}
+.addBtn .favoriteMarked{
+	color: #e1302a;
+}
+@keyframes heart {
+	0%{
+		transform:scale(1) rotate(0deg);
+	}
+	50%{
+		transform: scale(1.2) rotate(15deg);
+	}
+	55%{
+		transform: scale(1.2) rotate(15deg);
+	}
+	100%{
+		transform: scale(1) rotate(0deg);
+	}
+}
+/* MOVIE / TV SHOW OUTPUT CARDS END*/
+
 /* Buttons for pages */
 .pages{
 	width: 100%;
@@ -354,50 +674,77 @@ nav a{
 	align-items: center;
 	margin-top: 20px;
 }
-.pages > *{
-	width: 30px;
-	height: 30px;
+#prev, #next {
+	margin: 20px 25px;
+	font-size: 18px;
+	font-weight: bold;
+	font-family: "Montserrat Black", Arial, Helvetica, sans-serif;
+	border:none;
+	border-radius: 3px;
+	background-color: #fff;
+	box-shadow: 0 3px rgba(0,0,0,0.1);
+	color: #e1302a;
+	width: auto;
+	padding: 0 5px;
+	height: 35px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: #E53935;
-	color: #fff;
-	font-family: "Poppins", Arial, Helvetica, sans-serif;
-	font-weight: bold;
-	font-size: 22px;
-	margin: 0 10px 10px 10px;
-	border-radius: 50%;
-	transition: 0.2s ease-out;
-	box-shadow: 0 1px 5px rgba(0,0,0,0.35);
 	cursor: pointer;
+	transition: 0.3s ease;
 }
-.pages > *:hover{
-	color: #E53935;
-	background-color: #fff;
+#prev:hover, #next:hover{
+	color: #333;
+	box-shadow: 4px 4px rgba(0,0,0,0.15);
 }
 /* Movies/Tvshows output - END. */
-
+#searchedFor{
+	font-family: "Montserrat Black";
+}
+#searchedFor span{
+	font-family: "Montserrat Black";
+	margin-left: 10px;
+	color: #333;
+	text-transform: capitalize;
+}
 /* Form - search-movies/search-series */
-#form{
+.container_search #form{
 	display: flex;
 	justify-content: center;
-	margin-bottom: 10px;
-	z-index: 7;
+	margin: 20px 0px;
+	z-index: -10;
+	opacity: 0;
 	position: relative;
+	height: 0px;
+	transform:translateY(-30px);
+	animation: test 0.5s ease-in-out forwards;
 }
-#form input{
-	padding: 10px;
-	padding-left:23px;
+@keyframes test {
+	0%{
+		transform: translateY(-30px);
+		height: 0px;
+		opacity: 0;
+		z-index: -10;
+	}
+	100%{
+		transform: translateY(10px);
+		height: 40px;
+		opacity: 1;
+		z-index: 7;
+	}
+}
+.container_search #form input{
+	padding: 5px;
 	border-radius: 3px;
 	border: none;
 	background-color: #fff;
-	box-shadow: 0 1px 5px rgba(0,0,0,0.25);
+	box-shadow: 0 5px 5px rgba(0,0,0,0.10);
 	color: #e53935;
-	width: 250px;
+	width: 300px;
 	font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
 	position: relative;
 }
-#searchImg i{
+.container_search #searchImg i{
 	display: inline-block;
 	font-size: 20px;
 	position: absolute;
@@ -423,13 +770,15 @@ nav a{
 	padding: 5px 10px;
 	background-color: #fff;
 	font-weight: bold;
-	font-family: "Poppins",Arial, Helvetica, sans-serif;
+	font-family: "Times New Roman", Arial, Helvetica, sans-serif;
+	font-style: italic;
+	font-size: 30px;
 	color: #333;
 	cursor: pointer;
 	margin-left: 5px;
 	border: none;
 	border-radius: 3px;
-	box-shadow: 0 2px 5px rgba(0,0,0,0.20);
+	box-shadow: 0 5px 5px rgba(0,0,0,0.1);
 	transition: 0.3s;
 	display: flex;
 	justify-content: center;
@@ -440,51 +789,77 @@ nav a{
 	color: #fff;
 }
 .modal{
+	display: block;
 	font-family: "Montserrat", Arial, Helvetica, sans-serif;
 	font-weight: 500;
 	width: 450px;
 	background-color: #fff;
 	color: #e53935;
 	border-radius: 3px;
-	padding: 5px;
 	text-align: center;
 	position: absolute;
-	min-height: 130px;
-	z-index: 99;
+	z-index: -2;
+	top:50%;
 	left: 50%;
-	transform:translateX(-50%);
-	animation:modal 0.5s ease-in-out forwards;
-	box-shadow: 0 3px 5px rgba(0,0,0,0.35);
+	opacity: 0;
+	box-shadow: 8px 8px rgba(0,0,0,0.10);
+	transform:translate(-50%, -50%);
+	transition: 0.35s ease;
 }
-.modal h3{
+.modal_container{
+	position: relative;
+	width: 100%;
+	min-height:180px;
+	padding: 20px;
+}
+.modalActive{
+	z-index: 99;
+	opacity: 1;
+	transform: translate(-50%, -50%);
+}
+.modal_container h3{
+	position: absolute;
+	left: 15px;
+	top: 0;
 	color: #E53935;
+	font-family: "Montserrat Black";
+	font-size: 22px;
+}
+.modal hr{
+	position: absolute;
+	top: 25px;
+	left: 0px;
+	width: 100%;
+	border: none;
+	height: 1px;
+	background-color: rgba(0,0,0,0.2);
+	display: block;
+}
+.modal_container p{
+	position: absolute;
+	top: 30px;
+	left: 15px;
+	text-align: left;
+	color: #333;
+	font-family: "Montserrat Regular";
+}
+.modal_container #modalGotIt{
+	display: block;
+	border: none;
+	border-radius: 2px;
+	width: 70px;
+	height: 30px;
+	position:absolute;
+	bottom: 0;
+	right: 5px;
+	cursor: pointer;
+	font-family: "Montserrat SemiBold";
+	background-color: #333;
+	color: #fff;
+	outline: none !important;
 }
 .modal > *{
 	margin: 5px 0;
-}
-@keyframes modal{
-	0%{
-		opacity: 0;
-		transform: translateX(-50%) scale(0.7);
-	}
-	100%{
-		opacity: 1;
-		transform:translateX(-50%) scale(1);
-	}
-}
-.modal #close{
-	position: absolute;
-	left: 5px;
-	bottom: -5px;
-	font-family: "Poppins", Arial, Helvetica, sans-serif;
-	text-align: left;
-	font-weight: bold;
-	font-size: 25px;
-	cursor: pointer;
-	transition: 0.2s;
-}
-#close:hover{
-	color: #222;
 }
 /* Select */
 .wrap{
@@ -497,12 +872,11 @@ nav a{
 .wrap > *{
 	margin: 0 -25px;
 }
-#selected{
+#selectedGenres{
 	width: 250px;
-	margin-bottom: 18px;
-	margin-right: 60px;
+	margin: 15px auto;
 	padding: 3px 7px;
-	font-family: "Montserrat", Arial, Helvetica, sans-serif;
+	font-family: "Montserrat SemiBold", Arial, Helvetica, sans-serif;
 	font-weight: bold;
 	border: none;
 	border-radius: 3px;
@@ -512,20 +886,7 @@ nav a{
 	position: relative;
 	box-shadow: 0 2px 5px rgba(0,0,0,0.15);
 	animation: select 0.35s ease-in-out 1 forwards;
-}
-#rating{
-	width: 100px;
-	margin-bottom: 25px;
-	padding: 3px 7px;
-	font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
-	border: none;
-	border-radius: 3px;
-	transition: 0.25s;
-	opacity: 0;
-	display: none;
-	position: relative;
-	box-shadow: 0 2px 5px rgba(0,0,0,0.15);
-	animation: select 0.35s ease-in-out 1 forwards;
+	outline: none;
 }
 #dates{
 	width: 130px;
@@ -556,35 +917,37 @@ nav a{
 	position: absolute;
 	margin-left: -25px;
 }
-#removeAll{
+.remove{
+	outline: none !important;
 	display: none;
 	padding: 5px;
 	border-radius: 3px;
 	border: none;
-	background-color: #E53935;
+	background-color: #e1302a;
 	color: #fff;
 	font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
 	font-size: 14px;
 	transition: 0.25s;
 	cursor: pointer;
-	box-shadow: 0 3px 5px rgba(0,0,0,0.10);
-	margin-bottom: 25px;
+	box-shadow: 0 3px rgba(0,0,0,0.1);
 }
-#removeAll:hover{
+.remove:hover{
 	background-color: #fff;
-	color: #E53935;
+	color: #e1302a;
+	box-shadow: 4px 4px rgba(0,0,0,0.15);
 }
 #smallSpinner{
 	display: none;
 	content: '';
 	box-sizing: border-box;
-	position: relative;
+	position: absolute;
+	left: 0;
 	margin-left: 140px;
 	height:15px;
 	width: 15px;
 	border-radius: 50%;
 	margin-top: -39px;
-	border: 3px solid #eee;
+	border: 3px solid #e1302a;
 	border-top-color: #E53935;
 	animation: spinner 0.5s ease infinite;
 }
@@ -631,22 +994,12 @@ nav a{
 #reset:focus, #resetUpcoming:focus{
 	outline: none !important;
 }
-
-#selected:hover{
-	background-color: #E53935;
-	color: #fff;
-}
-#selected:focus{
-	outline: none !important;
-	background-color: #E53935;
-	color: #fff;
-}
 .notification{
 	z-index: 999;
 	background-color: #00C853;
 	padding: 10px;
 	border-radius: 3px;
-	width: 190px;
+	width: auto;
 	font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
 	color: #fff;
 	position: fixed;
@@ -656,7 +1009,7 @@ nav a{
 	box-shadow: 0 5px 5px rgba(0,0,0,0.35);
 }
 #alreadyStored{
-	background-color: #E53935;
+	background-color: #e1302a;
 }
 .notification.added{
 	animation: notification 2s forwards;
@@ -685,17 +1038,62 @@ nav a{
 
 /* 				Media Queries 			*/
 
+/* 4k screens */
+@media (min-width:3840px){
+	#movies, #tvShows{
+		grid-template-columns: repeat(10,1fr);
+	}
+}
+@media (max-width: 3840px){
+	#movies, #tvShows{
+		grid-template-columns: repeat(7,1fr);
+	}
+}
+/* 1440p screens */
+@media (max-width:2560px){
+	#movies, #tvShows{
+		grid-template-columns: repeat(5,1fr);
+	}
+}
+@media (max-width: 1600px){
+	#movies, #tvShows{
+		grid-template-columns: repeat(4,1fr);
+	}
+}
 /* Max-width 1300 px. */
 @media(max-width: 1300px){
-	#movies{
+	#movies, #tvShows{
 		grid-template-columns: repeat(3,1fr);
 	}
 }
-/* Max-width 970 px. */
-@media (max-width: 970px){
-	#movies{
-		grid-template-columns: repeat(2,1fr);
+@media (max-width: 1024px){
+	.card .overlay{
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 500px;
+		transform: translateY(0px);
+		transition: 0.30s ease-in-out;
+		background-color: rgba(0,0,0,0.4);
 	}
+	.recommendedBox{
+		min-height: 500px;
+	}
+	.recommendedBox .recommendedOutput {
+		overflow-x: scroll;
+	}
+	.recommendedBox .recommendedOutput .overlay{
+		height: 400px;
+	}
+	.recommendedBox .recommendedOutput::-webkit-scrollbar {
+        width: 10px;
+        height: 5px;
+    }
+    .recommendedBox .recommendedOutput::-webkit-scrollbar-thumb {
+        background: #e1302a;
+        border-radius: 1px;
+    }
 	.card:hover .addBtn i{
 		opacity: 1;
 		transform: scale(1);
@@ -706,10 +1104,33 @@ nav a{
 		font-size: 30px;
 	}
 }
+/* Max-width 970 px. */
+@media (max-width: 970px){
+	#movies, #tvShows{
+		grid-template-columns: repeat(2,1fr);
+	}
+}
 /* Max-width 684 px. */
 @media (max-width: 684px){
+	.title{
+		margin-top: 45px;
+		flex-direction: column;
+	}
+	.container_search{
+		margin-top: 40px;
+	}
+	#searchedFor{
+		text-align: center;
+		flex-direction: column;
+	}
 	.menu{
 		display: none;
+	}
+	.submenu{
+		display: none;
+	}
+	#form{
+		margin-top: 30px;
 	}
 	.burger{
 		height: 30px;
@@ -728,7 +1149,7 @@ nav a{
 		background-color: #E53935;
 		display: block;
 		position: absolute;
-		transition: all 0.5s;
+		transition: all 0.35s ease;
 	}
 	nav{
 		padding: 5px 0;
@@ -738,9 +1159,14 @@ nav a{
 	}
 	.burger span:nth-child(1){
 		top: 0px;
+		left: 0px;
 	}
 	.burger span:nth-child(2){
 		top: 11px;
+		left: -15px;
+	}
+	.burger:hover span:nth-child(2){
+		left: 0px;
 	}
 	.burger span:nth-child(3){
 		top: 22px;
@@ -751,7 +1177,7 @@ nav a{
 		z-index: 9;
 	}
 	.burger.active span:nth-child(2){
-		left: -30px;
+		left: 30px;
 		opacity: 0;
 	}
 	.burger.active span:nth-child(3){
@@ -760,25 +1186,24 @@ nav a{
 		z-index: 9;
 	}
 	.burger.active span{
-		background-color: #EF5350;
+		background-color: #e1302a;
 	}
 	.burger.active:hover span{
-		background-color: #EF5350;
-		box-shadow: 0 1px 5px rgba(0,0,0,0.3);
+		background-color: #333;
 	}
 	.slide{
 		display: block;
 		position: absolute;
 		top: 0px;
-		color: #E53935;
+		color: #e1302a;
 		width: 100%;
 		min-height: 100vh;
-		background-color: #111;
+		background-color: #f5f5f5;
 		transition: all 0.35s;
 		font-weight: bold;
 		z-index: 8;
 		transform: translateX(-700px);
-		font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
+		font-family: "Montserrat SemiBold", Arial, Helvetica, sans-serif;
 	}
 	.slide.slideIn{
 		transform: translateX(0px);
@@ -789,7 +1214,7 @@ nav a{
 		display: block;
 	}
 	.slide a:hover{
-		color: #fff;
+		color: #444;
 	}
 	.slide ul{
 		margin-top: 25px;
@@ -814,7 +1239,7 @@ nav a{
 		animation: upNdown 0.4s ease-in-out forwards;
 	}
 	.slide ul li:hover{
-		color: #fff;
+		color: #444;
 	}
 	.slide ul li #moviesDropdown{
 		display: none;
@@ -845,52 +1270,108 @@ nav a{
 		width: 100%;
 		text-align: left;
 	}
-	.slide ul li ul li:hover{
-		color: #fff;
-	}
 	.slide ul li ul li a{
-		color: #E53935;
+		color: #e1302a;
+	}
+	.slide ul li ul li:hover{
+		color: #444;
 	}
 }
 /* Max-width 650 px. */
 @media(max-width: 650px){
-	#movies{
+	.recommendedBox{
+		height: 510px;
+	}
+	#searchedFor{
+		top: -25px;
+		left: 15px;
+	}
+	#movies, #tvShows{
+		margin-top: 30px;
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
 	}
 	.card{
-		height: 470px;
+		height: 400px;
 		color: #E53935;
-		width: 300px;
+		width: 280px;
 		position: relative;
 		transition: 0.2s;
 		z-index: 2;
+		overflow: hidden;
+		cursor: default;
+	}
+	#movies .card:first-of-type, #tvShows .card:first-of-type{
+		margin-top: 25px;
+	}
+	#movies > *, #tvShows > *{
+		margin: 20px 0;
+	}
+	.card .overlay{
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 400px;
+		transition: 0.30s ease-in-out;
+		background-color: rgba(0,0,0,0.4);
+	}
+	.card .overlay .movie{
+		position: absolute;
+		bottom:0;
+		left: 0;
+	}
+	.card .overlay .movie a{
+		display: flex;
+		position: relative;
+		bottom:0;
+		left: 0;
+		justify-content: center;
+		align-items: center;
+		padding: 3px;
+		width: 70px;
+		height: 30px;
+		border: none;
+		background-color: #fff;
+		color: #333;
+		font-family: "Montserrat SemiBold";
+		margin: 10px 15px;
+		cursor: pointer;
+		transition: 0.2s ease;
+		outline: none !important;
+	}
+	.card .overlay .movie a:hover{
+		background-color: #222;
+		color: #fff;
+	}
+	.movie p {
+		font-family: "Montserrat Medium";
+		color: #fff;
+		font-size: 16px;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: flex-start;
+	}
+	.card .overlay .movie h2{
+		font-family: "Montserrat Black";
+		width: auto;
+		font-size: 30px;
+		color: #fff;
+		text-transform: uppercase;
+		padding: 5px;
+		text-align: left;
 	}
 	.card .card_img img{
 		width: 100%;
-		height: 330px;
+		height: 400px;
 		z-index: 2;
 	}
 	.card .card_img{
-		height: 330px;
+		height: 400px;
 		z-index: 2;
 		transition: 0.2s ease-out;
-	}
-	
-	.card .card_text{
-		position: relative;
-		color: #E53935;
-		font-family: "Montserrat",Arial, Helvetica, sans-serif;
-		background-color: #fff;
-		height:130px;
-		transform:translateY(0px);
-		z-index: -1;
-		transition: 0.4s ease-out;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		padding: 10px 0;
 	}
 	.upcoming{
 		height: 550px;
@@ -899,31 +1380,90 @@ nav a{
 		width: 100%;
 		height: 450px;
 	}
-	.card:hover .card_text{
-		transform:translateY(0px);
-		box-shadow: 0 3px 5px rgba(0,0,0,0.25),
-					inset 0 0 5px rgba(0,0,0,0.10);
-	}
-	/* .card:hover .card_img{
-		height: 330px;
-	} */
 }
 /* Max-width 530px. */
 @media (max-width:530px){
+	.recommendedBox{
+		height: 530px;
+	}
 	.modal{
 		width: 85%;
+	}
+	.modal_container{
+		position: relative;
+		width: 100%;
+		min-height:190px;
+	}
+	#movies .card:first-of-type, #tvShows .card:first-of-type{
+		margin-top: 25px;
 	}
 	.card{
 		margin: 10px 0;
 	}
 }
+@media (max-width: 455px){
+	.moviesRows p{
+		font-family: "Montserrat SemiBold";
+		width: 100%;
+		margin: 0 auto;
+		text-align: center;
+		display: flex;
+		justify-content: center;
+		padding: 5px;
+		position: relative;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+}
+@media (max-width: 435px){
+	.modal_container{
+		position: relative;
+		width: 100%;
+		min-height:250px;
+	}
+	#movies .card:first-of-type, #tvShows .card:first-of-type{
+		margin-top: 25px;
+	}
+}
+@media (max-width: 400px){
+	.recommendedBox {
+		width: 100%;
+	}
+}
+@media( max-width: 384px){
+	.recommendedBox{
+		height: 560px;
+	}
+}
+@media (max-width:356px){
+	.modal_container{
+		position: relative;
+		width: 100%;
+		min-height:260px;
+	}
+	.container_search #form input {
+		width: 80%;
+	}
+	.container h1 {
+		font-size: 45px;
+	}
+}
 /* Max-width 320 px. */
 @media (max-width: 320px){
+	.recommendedBox{
+		height: 580px;
+	}
+	.title_upcoming h1{
+		font-size: 45px;
+	}
 	.card{
 		margin: 20px 0;
 		width: 260px;
 		height: 470px;
 		transition: all 0.35s;
+	}
+	#movies .card:first-of-type, #tvShows .card:first-of-type{
+		margin-top: 25px;
 	}
 	.card .card_text{
 		height: 130px;
@@ -936,7 +1476,11 @@ nav a{
 		transition: all 0.35s;
 	}
 }
-
+@media (max-width: 305px){
+	.container h1 {
+		font-size: 42px;
+	}
+}
 /* ANIMATIONS  */
 
 /* Animation for dropdown menu on small screens. */
@@ -989,6 +1533,6 @@ nav a{
 	}
 	100%{
 		opacity: 1;
-		transform:translateY(0px);
+		transform:translateY(4px);
 	}
 }
