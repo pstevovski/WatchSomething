@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Search Movies | WhatToWatch</title>
+	<link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon/favicon-16x16.png">
+    <link rel="manifest" href="../favicon/site.webmanifest">
+    <link rel="mask-icon" href="../favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+	<link rel="stylesheet" type="text/css" href="../style/main.css">
+	<link rel="stylesheet" href="../style/fonts.css">
+</head>
+<body>
+<!-- Navigation Bar -->
+<nav>
+	 <!-- The Menu -->
+	 <div class="menu">
+		<ul>
+			<ul>
+				<li class="list"><a href="../index.html">Home</a></li>
+				<li class="list"><a href="latest-movies.html">Movies</a></li>
+				<li class="list"><a href="../series/series-latest.html">TV Shows</a></li>
+				<li class="list">My Lists<span class="drop"><i class="ion-chevron-down"></i></span></a>
+					<ul class="firstUnordered">
+					   <li><a href="../watchlist.html">Watchlist</a>
+					   <li><a href="../favorites.html">Favorites</a>
+					</ul>
+				</li>
+				<li class="list"><a href="../about.html">About</a></li>
+			</ul>
+		</div>
+<!-- The burger menu for small screens -->
+<div class="burger">
+	<span></span>
+	<span></span>
+	<span></span>
+</div>
+<!-- Slide menu for small screens -->
+<div class="slide">
+	<ul>
+		<li><a href="../index.html">Home</a></li>
+		<li id="smallScreenMovies">Movies<span><i class="ion-chevron-down"></i></span>
+			<ul id="moviesDropdown">
+				<li><a href="search-movies.html">Search movies</a></li>
+				<li><a href="top-rated.html">Top rated</a></li>
+				<li><a href="popular-movies.html">Popular movies</a></li>
+				<li><a href="latest-movies.html">Latest movies</a></li>
+				<li><a href="upcoming-movies.html">Upcoming movies</a></li>
+			</ul>
+		</li>
+		<li id="smallScreenSeries">Series<span><i class="ion-chevron-down"></i></span>
+			<ul id="seriesDropdown">
+				<li><a href="../series/search-series.html">Search tv shows</a></li>
+				<li><a href="../series/series-popular.html">Popular tv shows</a></li>
+				<li><a href="../series/series-toprated.html">Top rated</a></li>
+				<li><a href="../series/series-latest.html">On air</a></li>
+			</ul>
+		</li>
+		<li class="list" id="smallScreenList">My Lists<span class="drop"><i class="ion-chevron-down"></i></span></a>
+			<ul id="myListsDropdown">
+			   <li><a href="../watchlist.html">Watchlist</a>
+			   <li><a href="../favorites.html">Favorites</a>
+			</ul>
+		</li>
+		<li><a href="../about.html">About</a></li>
+	</ul>
+</div>
+</nav>
+<!-- Submenu -->
+<div class="submenu">
+	★
+	<li><a href="top-rated.html">Top rated movies</a></li>
+	<li><a href="popular-movies.html">Popular movies</a></li>
+    <li><a href="latest-movies.html">Latest movies</a></li>
+    <li><a href="upcoming-movies.html">Upcoming movies</a></li>
+	★
+</div>
+<!-- Container -->
+	<div class="container_search">
+			<form id="form" autocomplete="off">
+                    <input type="text" id="inputField" placeholder="Actor, title, genre, year...">
+                    <span id="questionMark"><i class="material-icons">info</i></span>
+			 </form>
+			 
+			 <div class="wrap">
+				<select id="selectedGenres">
+					<option>SELECT GENRE </option>
+					<option id="28" class="tag">Action</option>
+					<option id="12" class="tag">Adventure</option>
+					<option id="16" class="tag">Animation</option>
+					<option id="35" class="tag">Comedy</option>
+					<option id="80" class="tag">Crime</option>
+					<option id="99" class="tag">Documentary</option>
+					<option id="18" class="tag">Drama</option>
+					<option id="10751" class="tag">Family</option>
+					<option id="14" class="tag">Fantasy</option>
+					<option id="36" class="tag">History</option>
+					<option id="27" class="tag">Horror</option>
+					<option id="10402" class="tag">Music</option>
+					<option id="9648" class="tag">Mystery</option>
+					<option id="10749" class="tag">Romance</option>
+					<option id="10752" class="tag">Sci-Fi</option>
+					<option id="878" class="tag">Thriller</option>
+					<option id="10770" class="tag">War</option>
+					<option id="53" class="tag">Western</option>
+					<option id="37" class="tag">TV Movie</option>
+				</select>
+		   </div>
+	</div>
+	    <!-- Notifications -->
+		<div class="notification" id="added"></div>
+		<div class="notification" id="alreadyStored"></div>
+
+		<!-- Modal box -->
+		<div class="modal">
+			<div class="modal_container">
+				<h3>INFO !</h3>
+				<hr>
+				<p>In the input field you can type in the title, year or genre, and it will list you all the movies corresponding to the searched query. Genres: Action, Adventure,Animation, Comedy, Crime, Documentary, Drama, Family, Fantasy, History, Horror, Music, Mystery, Romance, Sci-Fi, Thriller, War, Western, TV Movie</p>
+				<button id="modalGotIt">I get it!</button>
+			</div>
+		</div>
+	
+		<!-- Smooth scroll to top button -->
+		<button id="scrollToTop"><i class="ion-chevron-up"></i></button>
+
+<!-- Showcase - area where tv shows will be listed -->
+	<div class="showcase">
+		<h1 id="searchedFor"></h1>
+		<div id="movies" class="moviesRows"></div>
+	</div>
+	<!-- Buttons for Pages -->
+	<div class="pages">
+        <button id="prev" title="Previous page">PREVIOUS</button>
+		<button id="next" title="Next page">NEXT</button>
+    </div>
+<!-- Script links -->
+<script src="../scripts/config.js"></script>
+<script src="../scripts/movies/search-movies.js"></script>
+<script src="../scripts/global.js"></script>
+<!-- Axios link -->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</body>
+</html>
