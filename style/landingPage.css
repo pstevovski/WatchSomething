@@ -135,6 +135,7 @@ h1{
     margin-top: 20px;
     margin-bottom: 100px;
     width: 550px;
+    height: auto;
     background-color: #aaaaaa20;
     box-shadow: 8px 8px rgba(0,0,0,0.15);
     border-radius: 1px;
@@ -310,19 +311,40 @@ footer .poweredBy{
     .text #quote{
         width: 80%;
         margin: 10px auto 10px auto;
+        height:auto;
     }
     .topRated{
         margin-top: 80px;
     }
 }
-@media (max-width:595px){
+@media (max-width: 670px){
     .text h1{
-        font-size: 60px;
+        font-size: 65px;
+    }
+}
+@media (max-width:625px){
+    .text h1{
+        font-size: 55px;
+    }
+}
+@media (max-width:581px){
+    .text h1{
+        font-size: 50px;
     }
 }
 @media (max-width:575px){
     .text h1{
         font-size: 50px;
+    }
+}
+@media (max-width: 491px){
+    .text h1{
+        font-size: 45px;
+    }
+}
+@media (max-width: 448px){
+    .text h1{
+        font-size: 40px;
     }
 }
 @media (max-width: 455px){
@@ -340,7 +362,7 @@ footer .poweredBy{
 }
 @media (max-width:420px){
     .text h1{
-        font-size: 42px;
+        font-size: 38px;
         margin-bottom: 20px;
         text-align: center;
     }
@@ -374,9 +396,24 @@ footer .poweredBy{
         color: #fff;
     }
 }
+@media (max-width:385px){
+    .text h1{
+        font-size: 35px;
+    }
+}
+@media (max-width:358px){
+    .text h1{
+        font-size: 32px;
+    }
+}
+@media (max-width:345px){
+    .text h1{
+        font-size: 30px;
+    }
+}
 @media (max-width: 325px){
     .text h1{
-        font-size: 28px;
+        font-size: 26px;
     }
 }
 @media (max-width: 310px){
@@ -384,7 +421,7 @@ footer .poweredBy{
         font-size: 14px;
     }
     .text h1{
-        font-size: 28px;
+        font-size: 24px;
         text-align: center;
     }
 }
