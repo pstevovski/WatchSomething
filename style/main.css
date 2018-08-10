@@ -627,6 +627,23 @@ nav a{
 	opacity: 1;
 	transform: scale(0.9);
 }
+.addBtn .trash:hover{
+	animation: trash 0.5s ease forwards infinite;
+}
+@keyframes trash{
+	0%{
+		transform: rotate(0deg)
+	}
+	33%{
+		transform:rotate(15deg) 
+	}
+	66%{
+		transform:rotate(-15deg)
+	}
+	100%{
+		transform: rotate(0deg)
+	}
+}
 .addBtn .queue:hover{
 	color: #fff;
 	animation: queue 0.8s ease forwards infinite;
