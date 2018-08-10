@@ -1,4 +1,4 @@
-# WhatToWatch - Find a movie or tv show to watch !
+# WatchSomething - Find a movie or tv show to watch !
 <p align="center">
     <img src="images/repoImage.png" width="500px"/>
     <img src="images/repoImage2.png" width="500px"/>
@@ -7,7 +7,7 @@
 </p>
 
 ### About
-Ever found yourself in a situation where you want to watch some movie or tv show, but simply can't find one to watch? Worry no more. WhatToWatch uses https://www.themoviedb.org API to help you out. With this website you can:
+Ever found yourself in a situation where you want to watch some movie or tv show, but simply can't find one to watch? Worry no more. WatchSomething uses https://www.themoviedb.org API to help you out. With this website you can:
 * Search for movies and tv shows (by title, actor, year or genre).
 * List the top rated movies and tv shows of all times.
 * List the latest movies and tv shows that are on air currently.
