@@ -343,6 +343,6 @@ function addToList(id){
 // Share on Twitter.
 function tweet(title) {
 	var strWindowFeatures = "location=yes,height=255,width=520,scrollbars=yes,status=yes";
-	var URL = "https://twitter.com/intent/tweet?text=Going to watch "+ title +' . Find something to watch @ https://pecko95.github.io/What-to-Watch';
+	var URL = "https://twitter.com/intent/tweet?text=Going to watch "+ title +' . Find something to watch @ https://pecko95.github.io/WatchSomething/&hashtags=watchSomething, whatToWatch';
 	var win = window.open(URL, "_blank", strWindowFeatures);
 }
