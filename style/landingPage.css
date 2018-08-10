@@ -340,8 +340,9 @@ footer .poweredBy{
 }
 @media (max-width:420px){
     .text h1{
-        font-size: 35px;
+        font-size: 42px;
         margin-bottom: 20px;
+        text-align: center;
     }
     nav ul{
         justify-content: center;
