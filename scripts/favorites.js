@@ -19,7 +19,7 @@ window.onload = function displayWatchlist(){
             movieOutput.innerHTML +=
              `<div class="card">
              <div class="overlay">
-             <div class="addBtn"><span><i class="ion-trash-a" onclick="movieSplice('${movie.id}')"></i></span></div>
+             <div class="addBtn"><span><i class="material-icons trash" onclick="movieSplice('${movie.id}')">delete_forever</i></span></div>
              <div class="movie">
                  <h2>${movie.title}</h2>
                      <p><strong>Rating:</strong> ${movie.vote_average}</p>
@@ -49,7 +49,7 @@ window.onload = function displayWatchlist(){
                 tvShowsOutput.innerHTML +=
                 `<div class="card">
                 <div class="overlay">
-                <div class="addBtn"><span><i class="ion-trash-a" onclick="seriesSplice('${series.id}')"></i></span></div>
+                <div class="addBtn"><span><i class="material-icons trash" onclick="seriesSplice('${series.id}')">delete_forever</i></span></div>
                 <div class="movie">
                     <h2>${series.name}</h2>
                         <p><strong>Rating:</strong> ${series.vote_average}</p>
@@ -212,13 +212,13 @@ function seriesSplice(id){
 //Takes you to detailed movie info page.
 function movieSelected(id){
     sessionStorage.setItem("movieId",id);
-    location.replace("../movie-page.html");
+    location.replace("movie-page.html");
     return false;
 }
 // Takes you to detailed tv show info page.
 function showSelected(id){
     sessionStorage.setItem("showId", id);
-    location.replace("../shows-page.html");
+    location.replace("shows-page.html");
     return false;
 }
 
