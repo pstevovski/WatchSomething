@@ -56,10 +56,12 @@ form.addEventListener("submit", (e)=>{
 
 function genres(id){
     selectedGenres.style.display = "none";
+
     // Hide the genre select drop down menu.
     selectedGenres.style.display = "none";
     pageNum = 1;
     sessionStorage.setItem("tvShowGenre", id);
+
     //API request.
     axios.get("https://api.themoviedb.org/3/discover/tv?api_key="+API_KEY+'&language=en-US&sort_by=popularity.desc&page=1&timezone=America%2FNew_York&with_genres='+id+'&include_null_first_air_dates=false')
         .then((response)=>{
@@ -73,12 +75,12 @@ function genres(id){
 					output += `
 					<div class="card">
 						<div class="overlay">
-						<div class="addBtn"><span><i class="material-icons queue" onclick="addToList('${series[i].id}')">add_to_queue</i></span>
+						<div class="addBtn"><span><i class="material-icons watch" onclick="addToList('${series[i].id}')">visibility</i></span>
 						<span><i class="material-icons favorite" onclick="favorite('${series[i].id}')">favorite</i></span></div>
 						<div class="movie">
 							<h2>${series[i].name}</h2>
-								<p><strong>Rating:</strong> ${series[i].vote_average}</p>
-								<p><strong>First air date:</strong> ${series[i].first_air_date}</p>
+                                <p id="p_rating"><strong>Rating:</strong> <span>${series[i].vote_average} / 10  <i class="material-icons star">star_rate</i></span> </p>
+								<p><strong>First air date:</strong> <span>${series[i].first_air_date} <i class="material-icons date">date_range</i> </span></p>
 								<a onclick="showSelected('${series[i].id}')" href="#">Details</a>
 						</div>
 						</div>
@@ -89,29 +91,31 @@ function genres(id){
 					`;
 				} else {
 					output += `
-                <div class="card">
+                    <div class="card">
                     <div class="overlay">
-					<div class="addBtn"><span><i class="material-icons queue" onclick="addToList('${series[i].id}')">add_to_queue</i></span>
-					<span><i id="heart" class="material-icons favoriteMarked" onclick="favorite('${series[i].id}')">favorite</i></span></div>
-					<div class="movie">
-						<h2>${series[i].name}</h2>
-                            <p><strong>Rating:</strong> ${series[i].vote_average}</p>
-                            <p><strong>First air date:</strong> ${series[i].first_air_date}</p>
+                    <div class="addBtn"><span><i class="material-icons watch" onclick="addToList('${series[i].id}')">visibility</i></span>
+                    <span><i class="material-icons favorite" onclick="favorite('${series[i].id}')">favorite</i></span></div>
+                    <div class="movie">
+                        <h2>${series[i].name}</h2>
+                            <p id="p_rating"><strong>Rating:</strong> <span>${series[i].vote_average} / 10  <i class="material-icons star">star_rate</i></span> </p>
+                            <p><strong>First air date:</strong> <span>${series[i].first_air_date} <i class="material-icons date">date_range</i> </span></p>
                             <a onclick="showSelected('${series[i].id}')" href="#">Details</a>
-                     </div>
+                    </div>
                     </div>
                     <div class="card_img">
-						<img src="http://image.tmdb.org/t/p/w400/${series[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
-					</div>
-				</div>
+                        <img src="http://image.tmdb.org/t/p/w400/${series[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
+                    </div>
+                </div>
 				`;
 				}
             }
             let shows = document.getElementById("movies");
             shows.innerHTML = output;
+
             //Display the pages buttons.
             let pages = document.querySelector(".pages");
             let totalPages = response.data.total_pages;
+
             if(totalPages < 2){
                 pages.style.display = "none"
             } else {
@@ -123,6 +127,7 @@ function showByTitle(input){
     selectedGenres.style.display = "none";
     sessionStorage.setItem("tvShowsTitle", input);
     pageNum = 1;
+
     axios.get("https://api.themoviedb.org/3/search/tv?query="+input+'&api_key='+API_KEY+'&language=en-US&page='+pageNum)
         .then((response)=>{
             let series = response.data.results;
@@ -135,12 +140,12 @@ function showByTitle(input){
 					output += `
 					<div class="card">
 						<div class="overlay">
-						<div class="addBtn"><span><i class="material-icons queue" onclick="addToList('${series[i].id}')">add_to_queue</i></span>
+						<div class="addBtn"><span><i class="material-icons watch" onclick="addToList('${series[i].id}')">visibility</i></span>
 						<span><i class="material-icons favorite" onclick="favorite('${series[i].id}')">favorite</i></span></div>
 						<div class="movie">
 							<h2>${series[i].name}</h2>
-								<p><strong>Rating:</strong> ${series[i].vote_average}</p>
-								<p><strong>First air date:</strong> ${series[i].first_air_date}</p>
+                                <p id="p_rating"><strong>Rating:</strong> <span>${series[i].vote_average} / 10  <i class="material-icons star">star_rate</i></span> </p>
+								<p><strong>First air date:</strong> <span>${series[i].first_air_date} <i class="material-icons date">date_range</i> </span></p>
 								<a onclick="showSelected('${series[i].id}')" href="#">Details</a>
 						</div>
 						</div>
@@ -151,29 +156,31 @@ function showByTitle(input){
 					`;
 				} else {
 					output += `
-                <div class="card">
+                    <div class="card">
                     <div class="overlay">
-					<div class="addBtn"><span><i class="material-icons queue" onclick="addToList('${series[i].id}')">add_to_queue</i></span>
-					<span><i id="heart" class="material-icons favoriteMarked" onclick="favorite('${series[i].id}')">favorite</i></span></div>
-					<div class="movie">
-						<h2>${series[i].name}</h2>
-                            <p><strong>Rating:</strong> ${series[i].vote_average}</p>
-                            <p><strong>First air date:</strong> ${series[i].first_air_date}</p>
+                    <div class="addBtn"><span><i class="material-icons watch" onclick="addToList('${series[i].id}')">visibility</i></span>
+                    <span><i class="material-icons favorite" onclick="favorite('${series[i].id}')">favorite</i></span></div>
+                    <div class="movie">
+                        <h2>${series[i].name}</h2>
+                            <p id="p_rating"><strong>Rating:</strong> <span>${series[i].vote_average} / 10  <i class="material-icons star">star_rate</i></span> </p>
+                            <p><strong>First air date:</strong> <span>${series[i].first_air_date} <i class="material-icons date">date_range</i> </span></p>
                             <a onclick="showSelected('${series[i].id}')" href="#">Details</a>
-                     </div>
+                    </div>
                     </div>
                     <div class="card_img">
-						<img src="http://image.tmdb.org/t/p/w400/${series[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
-					</div>
-				</div>
+                        <img src="http://image.tmdb.org/t/p/w400/${series[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
+                    </div>
+                </div>
 				`;
 				}
             }
             let shows = document.getElementById("movies");
             shows.innerHTML = output;
+
             //Display the pages buttons.
             let pages = document.querySelector(".pages");
             let totalPages = response.data.total_pages;
+
             if(totalPages < 2){
                 pages.style.display = "none"
             } else {
@@ -188,6 +195,7 @@ function showsByYear(year){
     sessionStorage.removeItem("tvShowByYearGenre");
     selectedGenres.selectedIndex = 0;
     pageNum = 1;
+
     axios.get("https://api.themoviedb.org/3/discover/tv?api_key="+API_KEY+'&language=en-US&sort_by=popularity.desc&first_air_date_year='+year+'&page=1&include_null_first_air_dates=false')
         .then((response)=>{
             let series = response.data.results;
@@ -200,12 +208,12 @@ function showsByYear(year){
 					output += `
 					<div class="card">
 						<div class="overlay">
-						<div class="addBtn"><span><i class="material-icons queue" onclick="addToList('${series[i].id}')">add_to_queue</i></span>
+						<div class="addBtn"><span><i class="material-icons watch" onclick="addToList('${series[i].id}')">visibility</i></span>
 						<span><i class="material-icons favorite" onclick="favorite('${series[i].id}')">favorite</i></span></div>
 						<div class="movie">
 							<h2>${series[i].name}</h2>
-								<p><strong>Rating:</strong> ${series[i].vote_average}</p>
-								<p><strong>First air date:</strong> ${series[i].first_air_date}</p>
+                                <p id="p_rating"><strong>Rating:</strong> <span>${series[i].vote_average} / 10  <i class="material-icons star">star_rate</i></span> </p>
+								<p><strong>First air date:</strong> <span>${series[i].first_air_date} <i class="material-icons date">date_range</i> </span></p>
 								<a onclick="showSelected('${series[i].id}')" href="#">Details</a>
 						</div>
 						</div>
@@ -216,29 +224,31 @@ function showsByYear(year){
 					`;
 				} else {
 					output += `
-                <div class="card">
+                    <div class="card">
                     <div class="overlay">
-					<div class="addBtn"><span><i class="material-icons queue" onclick="addToList('${series[i].id}')">add_to_queue</i></span>
-					<span><i id="heart" class="material-icons favoriteMarked" onclick="favorite('${series[i].id}')">favorite</i></span></div>
-					<div class="movie">
-						<h2>${series[i].name}</h2>
-                            <p><strong>Rating:</strong> ${series[i].vote_average}</p>
-                            <p><strong>First air date:</strong> ${series[i].first_air_date}</p>
+                    <div class="addBtn"><span><i class="material-icons watch" onclick="addToList('${series[i].id}')">visibility</i></span>
+                    <span><i class="material-icons favorite" onclick="favorite('${series[i].id}')">favorite</i></span></div>
+                    <div class="movie">
+                        <h2>${series[i].name}</h2>
+                            <p id="p_rating"><strong>Rating:</strong> <span>${series[i].vote_average} / 10  <i class="material-icons star">star_rate</i></span> </p>
+                            <p><strong>First air date:</strong> <span>${series[i].first_air_date} <i class="material-icons date">date_range</i> </span></p>
                             <a onclick="showSelected('${series[i].id}')" href="#">Details</a>
-                     </div>
+                    </div>
                     </div>
                     <div class="card_img">
-						<img src="http://image.tmdb.org/t/p/w400/${series[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
-					</div>
-				</div>
+                        <img src="http://image.tmdb.org/t/p/w400/${series[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
+                    </div>
+                </div>
 				`;
 				}
             }
             let shows = document.getElementById("movies");
             shows.innerHTML = output;
+
             //Display the pages buttons.
             let pages = document.querySelector(".pages");
             let totalPages = response.data.total_pages;
+
             if(totalPages < 2){
                 pages.style.display = "none"
             } else {
@@ -255,7 +265,6 @@ function showsByYear(year){
                     .then((response)=>{
                         let series = response.data.results;
                         let output = "";
-                        console.log(response)
                         for(let i = 0; i < series.length; i++){
                             let id = response.data.results[i].id;
                             id = JSON.stringify(id);
@@ -263,31 +272,31 @@ function showsByYear(year){
                             if(favoriteSeries.indexOf(id) === -1){
                                 output += `
                                 <div class="card">
-                                    <div class="overlay">
-                                    <div class="addBtn"><span><i class="material-icons queue" onclick="addToList('${series[i].id}')">add_to_queue</i></span>
-                                    <span><i class="material-icons favorite" onclick="favorite('${series[i].id}')">favorite</i></span></div>
-                                    <div class="movie">
-                                        <h2>${series[i].name}</h2>
-                                            <p><strong>Rating:</strong> ${series[i].vote_average}</p>
-                                            <p><strong>First air date:</strong> ${series[i].first_air_date}</p>
-                                            <a onclick="showSelected('${series[i].id}')" href="#">Details</a>
-                                    </div>
-                                    </div>
-                                    <div class="card_img">
-                                        <img src="http://image.tmdb.org/t/p/w400/${series[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
-                                    </div>
-                                </div>
+						<div class="overlay">
+						<div class="addBtn"><span><i class="material-icons watch" onclick="addToList('${series[i].id}')">visibility</i></span>
+						<span><i class="material-icons favorite" onclick="favorite('${series[i].id}')">favorite</i></span></div>
+						<div class="movie">
+							<h2>${series[i].name}</h2>
+                                <p id="p_rating"><strong>Rating:</strong> <span>${series[i].vote_average} / 10  <i class="material-icons star">star_rate</i></span> </p>
+								<p><strong>First air date:</strong> <span>${series[i].first_air_date} <i class="material-icons date">date_range</i> </span></p>
+								<a onclick="showSelected('${series[i].id}')" href="#">Details</a>
+						</div>
+						</div>
+						<div class="card_img">
+							<img src="http://image.tmdb.org/t/p/w400/${series[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
+						</div>
+					</div>
                                 `;
                             } else {
                                 output += `
-                            <div class="card">
+                                <div class="card">
                                 <div class="overlay">
-                                <div class="addBtn"><span><i class="material-icons queue" onclick="addToList('${series[i].id}')">add_to_queue</i></span>
-                                <span><i id="heart" class="material-icons favoriteMarked" onclick="favorite('${series[i].id}')">favorite</i></span></div>
+                                <div class="addBtn"><span><i class="material-icons watch" onclick="addToList('${series[i].id}')">visibility</i></span>
+                                <span><i class="material-icons favorite" onclick="favorite('${series[i].id}')">favorite</i></span></div>
                                 <div class="movie">
                                     <h2>${series[i].name}</h2>
-                                        <p><strong>Rating:</strong> ${series[i].vote_average}</p>
-                                        <p><strong>First air date:</strong> ${series[i].first_air_date}</p>
+                                        <p id="p_rating"><strong>Rating:</strong> <span>${series[i].vote_average} / 10  <i class="material-icons star">star_rate</i></span> </p>
+                                        <p><strong>First air date:</strong> <span>${series[i].first_air_date} <i class="material-icons date">date_range</i> </span></p>
                                         <a onclick="showSelected('${series[i].id}')" href="#">Details</a>
                                 </div>
                                 </div>
@@ -300,9 +309,11 @@ function showsByYear(year){
                     }
                     let shows = document.getElementById("movies");
                     shows.innerHTML = output;
+
                     //Display the pages buttons.
                     let pages = document.querySelector(".pages");
                     let totalPages = response.data.total_pages;
+
                     if(totalPages < 2){
                         pages.style.display = "none"
                     } else {
@@ -312,6 +323,7 @@ function showsByYear(year){
         })
     })
 }
+
 let pageNum = 1;
 // PREVIOUS PAGE
 document.getElementById("prev").addEventListener("click", ()=>{
@@ -354,6 +366,7 @@ document.getElementById("next").addEventListener("click", ()=>{
 
 function showsByGenrePage(pageNum){
     let id = sessionStorage.getItem("tvShowGenre");
+
     //API request.
     axios.get("https://api.themoviedb.org/3/discover/tv?api_key="+API_KEY+'&language=en-US&sort_by=popularity.desc&page='+pageNum+'&timezone=America%2FNew_York&with_genres='+id+'&include_null_first_air_dates=false')
         .then((response)=>{
@@ -367,12 +380,12 @@ function showsByGenrePage(pageNum){
 					output += `
 					<div class="card">
 						<div class="overlay">
-						<div class="addBtn"><span><i class="material-icons queue" onclick="addToList('${series[i].id}')">add_to_queue</i></span>
+						<div class="addBtn"><span><i class="material-icons watch" onclick="addToList('${series[i].id}')">visibility</i></span>
 						<span><i class="material-icons favorite" onclick="favorite('${series[i].id}')">favorite</i></span></div>
 						<div class="movie">
 							<h2>${series[i].name}</h2>
-								<p><strong>Rating:</strong> ${series[i].vote_average}</p>
-								<p><strong>First air date:</strong> ${series[i].first_air_date}</p>
+                                <p id="p_rating"><strong>Rating:</strong> <span>${series[i].vote_average} / 10  <i class="material-icons star">star_rate</i></span> </p>
+								<p><strong>First air date:</strong> <span>${series[i].first_air_date} <i class="material-icons date">date_range</i> </span></p>
 								<a onclick="showSelected('${series[i].id}')" href="#">Details</a>
 						</div>
 						</div>
@@ -383,29 +396,31 @@ function showsByGenrePage(pageNum){
 					`;
 				} else {
 					output += `
-                <div class="card">
+                    <div class="card">
                     <div class="overlay">
-					<div class="addBtn"><span><i class="material-icons queue" onclick="addToList('${series[i].id}')">add_to_queue</i></span>
-					<span><i id="heart" class="material-icons favoriteMarked" onclick="favorite('${series[i].id}')">favorite</i></span></div>
-					<div class="movie">
-						<h2>${series[i].name}</h2>
-                            <p><strong>Rating:</strong> ${series[i].vote_average}</p>
-                            <p><strong>First air date:</strong> ${series[i].first_air_date}</p>
+                    <div class="addBtn"><span><i class="material-icons watch" onclick="addToList('${series[i].id}')">visibility</i></span>
+                    <span><i class="material-icons favorite" onclick="favorite('${series[i].id}')">favorite</i></span></div>
+                    <div class="movie">
+                        <h2>${series[i].name}</h2>
+                            <p id="p_rating"><strong>Rating:</strong> <span>${series[i].vote_average} / 10  <i class="material-icons star">star_rate</i></span> </p>
+                            <p><strong>First air date:</strong> <span>${series[i].first_air_date} <i class="material-icons date">date_range</i> </span></p>
                             <a onclick="showSelected('${series[i].id}')" href="#">Details</a>
-                     </div>
+                    </div>
                     </div>
                     <div class="card_img">
-						<img src="http://image.tmdb.org/t/p/w400/${series[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
-					</div>
-				</div>
+                        <img src="http://image.tmdb.org/t/p/w400/${series[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
+                    </div>
+                </div>
 				`;
 				}
             }
             let shows = document.getElementById("movies");
             shows.innerHTML = output;
+
             //Display the pages buttons.
             let pages = document.querySelector(".pages");
             let totalPages = response.data.total_pages;
+
             if(pageNum === totalPages){
                 pages.style.display = "none"
             } else {
@@ -415,6 +430,7 @@ function showsByGenrePage(pageNum){
 }
 function showsByTitlePage(pageNum){
     let title = sessionStorage.getItem("tvShowsTitle");
+
     axios.get("https://api.themoviedb.org/3/search/tv?query="+title+'&api_key='+API_KEY+'&language=en-US&page='+pageNum)
         .then((response)=>{
             let series = response.data.results;
@@ -427,12 +443,12 @@ function showsByTitlePage(pageNum){
 					output += `
 					<div class="card">
 						<div class="overlay">
-						<div class="addBtn"><span><i class="material-icons queue" onclick="addToList('${series[i].id}')">add_to_queue</i></span>
+						<div class="addBtn"><span><i class="material-icons watch" onclick="addToList('${series[i].id}')">visibility</i></span>
 						<span><i class="material-icons favorite" onclick="favorite('${series[i].id}')">favorite</i></span></div>
 						<div class="movie">
 							<h2>${series[i].name}</h2>
-								<p><strong>Rating:</strong> ${series[i].vote_average}</p>
-								<p><strong>First air date:</strong> ${series[i].first_air_date}</p>
+                                <p id="p_rating"><strong>Rating:</strong> <span>${series[i].vote_average} / 10  <i class="material-icons star">star_rate</i></span> </p>
+								<p><strong>First air date:</strong> <span>${series[i].first_air_date} <i class="material-icons date">date_range</i> </span></p>
 								<a onclick="showSelected('${series[i].id}')" href="#">Details</a>
 						</div>
 						</div>
@@ -443,29 +459,31 @@ function showsByTitlePage(pageNum){
 					`;
 				} else {
 					output += `
-                <div class="card">
+                    <div class="card">
                     <div class="overlay">
-					<div class="addBtn"><span><i class="material-icons queue" onclick="addToList('${series[i].id}')">add_to_queue</i></span>
-					<span><i id="heart" class="material-icons favoriteMarked" onclick="favorite('${series[i].id}')">favorite</i></span></div>
-					<div class="movie">
-						<h2>${series[i].name}</h2>
-                            <p><strong>Rating:</strong> ${series[i].vote_average}</p>
-                            <p><strong>First air date:</strong> ${series[i].first_air_date}</p>
+                    <div class="addBtn"><span><i class="material-icons watch" onclick="addToList('${series[i].id}')">visibility</i></span>
+                    <span><i class="material-icons favorite" onclick="favorite('${series[i].id}')">favorite</i></span></div>
+                    <div class="movie">
+                        <h2>${series[i].name}</h2>
+                            <p id="p_rating"><strong>Rating:</strong> <span>${series[i].vote_average} / 10  <i class="material-icons star">star_rate</i></span> </p>
+                            <p><strong>First air date:</strong> <span>${series[i].first_air_date} <i class="material-icons date">date_range</i> </span></p>
                             <a onclick="showSelected('${series[i].id}')" href="#">Details</a>
-                     </div>
+                    </div>
                     </div>
                     <div class="card_img">
-						<img src="http://image.tmdb.org/t/p/w400/${series[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
-					</div>
-				</div>
+                        <img src="http://image.tmdb.org/t/p/w400/${series[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
+                    </div>
+                </div>
 				`;
 				}
             }
             let shows = document.getElementById("movies");
             shows.innerHTML = output;
+
             //Display the pages buttons.
             let pages = document.querySelector(".pages");
             let totalPages = response.data.total_pages;
+
             if(pageNum === totalPages){
                 pages.style.display = "none"
             } else {
@@ -479,6 +497,7 @@ function showsByYearPage(pageNum){
     if(!genre || !genre.length){
         genre = "";
     }
+
     axios.get("https://api.themoviedb.org/3/discover/tv?api_key="+API_KEY+'&language=en-US&sort_by=popularity.desc&first_air_date_year='+year+'&page='+pageNum+'&include_null_first_air_dates=false&with_genres='+genre)
         .then((response)=>{
             let series = response.data.results;
@@ -491,12 +510,12 @@ function showsByYearPage(pageNum){
 					output += `
 					<div class="card">
 						<div class="overlay">
-						<div class="addBtn"><span><i class="material-icons queue" onclick="addToList('${series[i].id}')">add_to_queue</i></span>
+						<div class="addBtn"><span><i class="material-icons watch" onclick="addToList('${series[i].id}')">visibility</i></span>
 						<span><i class="material-icons favorite" onclick="favorite('${series[i].id}')">favorite</i></span></div>
 						<div class="movie">
 							<h2>${series[i].name}</h2>
-								<p><strong>Rating:</strong> ${series[i].vote_average}</p>
-								<p><strong>First air date:</strong> ${series[i].first_air_date}</p>
+                                <p id="p_rating"><strong>Rating:</strong> <span>${series[i].vote_average} / 10  <i class="material-icons star">star_rate</i></span> </p>
+								<p><strong>First air date:</strong> <span>${series[i].first_air_date} <i class="material-icons date">date_range</i> </span></p>
 								<a onclick="showSelected('${series[i].id}')" href="#">Details</a>
 						</div>
 						</div>
@@ -507,29 +526,31 @@ function showsByYearPage(pageNum){
 					`;
 				} else {
 					output += `
-                <div class="card">
+                    <div class="card">
                     <div class="overlay">
-					<div class="addBtn"><span><i class="material-icons queue" onclick="addToList('${series[i].id}')">add_to_queue</i></span>
-					<span><i id="heart" class="material-icons favoriteMarked" onclick="favorite('${series[i].id}')">favorite</i></span></div>
-					<div class="movie">
-						<h2>${series[i].name}</h2>
-                            <p><strong>Rating:</strong> ${series[i].vote_average}</p>
-                            <p><strong>First air date:</strong> ${series[i].first_air_date}</p>
+                    <div class="addBtn"><span><i class="material-icons watch" onclick="addToList('${series[i].id}')">visibility</i></span>
+                    <span><i class="material-icons favorite" onclick="favorite('${series[i].id}')">favorite</i></span></div>
+                    <div class="movie">
+                        <h2>${series[i].name}</h2>
+                            <p id="p_rating"><strong>Rating:</strong> <span>${series[i].vote_average} / 10  <i class="material-icons star">star_rate</i></span> </p>
+                            <p><strong>First air date:</strong> <span>${series[i].first_air_date} <i class="material-icons date">date_range</i> </span></p>
                             <a onclick="showSelected('${series[i].id}')" href="#">Details</a>
-                     </div>
+                    </div>
                     </div>
                     <div class="card_img">
-						<img src="http://image.tmdb.org/t/p/w400/${series[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
-					</div>
-				</div>
+                        <img src="http://image.tmdb.org/t/p/w400/${series[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
+                    </div>
+                </div>
 				`;
 				}
             }
             let shows = document.getElementById("movies");
             shows.innerHTML = output;
+
             //Display the pages buttons.
             let pages = document.querySelector(".pages");
             let totalPages = response.data.total_pages;
+
             if(pageNum === totalPages){
                 pages.style.display = "none"
             } else {
@@ -537,18 +558,21 @@ function showsByYearPage(pageNum){
             }
         })
 }
+
 //Takes the user to detailed tv show info page.
 function showSelected(id){
     sessionStorage.setItem("showId", id);
     location.replace("../shows-page.html");
     return false;
 }
+
 //Add series to watch list.
 function addToList(id){
     let storedId = JSON.parse(localStorage.getItem("series")) || [];
 	if(storedId.indexOf(id) === -1){
 		storedId.push(id);
-		localStorage.setItem("series", JSON.stringify(storedId));
+        localStorage.setItem("series", JSON.stringify(storedId));
+        
 		//Notification that it will be added to Watchlist.
         const added = document.getElementById("added");
         added.innerHTML = "Added to watchlist !"
@@ -566,6 +590,7 @@ function addToList(id){
         }, 1500);
 	}
 }
+
 //Add tv show to favorite tv shows.
 function favorite(id){
     let storedId = JSON.parse(localStorage.getItem("favoriteSeries")) || [];
@@ -591,6 +616,7 @@ function favorite(id){
 	}
 }
 
+// Clear genres.
 window.onload = function clearSessionStorage(){
     sessionStorage.removeItem("tvShowByYearGenre");
 }

@@ -22,9 +22,9 @@ window.onload = function displayWatchlist(){
              <div class="addBtn"><span><i class="material-icons trash" onclick="movieSplice('${movie.id}')">delete_forever</i></span></div>
              <div class="movie">
                  <h2>${movie.title}</h2>
-                     <p><strong>Rating:</strong> ${movie.vote_average}</p>
-                     <p><strong>Release date:</strong> ${movie.release_date}</p>
-                     <a onclick="movieSelected('${movie.id}')" href="#">Details</a>
+                 <p id="p_rating"><strong>Rating:</strong> <span>${movie.vote_average} / 10  <i class="material-icons star">star_rate</i></span> </p>
+                 <p><strong>First air date:</strong> <span>${movie.release_date} <i class="material-icons date">date_range</i> </span></p>
+                 <a onclick="movieSelected('${movie.id}')" href="#">Details</a>
               </div>
              </div>
              <div class="card_img">
@@ -52,9 +52,9 @@ window.onload = function displayWatchlist(){
                 <div class="addBtn"><span><i class="material-icons trash" onclick="seriesSplice('${series.id}')">delete_forever</i></span></div>
                 <div class="movie">
                     <h2>${series.name}</h2>
-                        <p><strong>Rating:</strong> ${series.vote_average}</p>
-                        <p><strong>First air date:</strong> ${series.first_air_date}</p>
-                        <a onclick="showSelected('${series.id}')" href="#">Details</a>
+                    <p id="p_rating"><strong>Rating:</strong> <span>${series.vote_average} / 10  <i class="material-icons star">star_rate</i></span> </p>
+                    <p><strong>First air date:</strong> <span>${series.first_air_date} <i class="material-icons date">date_range</i> </span></p>
+                    <a onclick="showSelected('${series.id}')" href="#">Details</a>
                  </div>
                 </div>
                 <div class="card_img">
@@ -97,7 +97,7 @@ function recommendMovies(){
     axios.get("https://api.themoviedb.org/3/discover/movie?api_key="+API_KEY+'&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page='+recommendedPage+'&primary_release_year='+recommendedYear)
         .then((response)=>{
             console.log(response)
-            let movies = response.data.results;
+            let movie = response.data.results;
             movies.length = 15;
             let output = "";
             for(let i = 0; i < movies.length; i++) {
@@ -105,14 +105,14 @@ function recommendMovies(){
                 `<div class="card">
                 <div class="overlay">
                 <div class="movie">
-                    <h2>${movies[i].title}</h2>
-                        <p><strong>Rating:</strong> ${movies[i].vote_average}</p>
-                        <p><strong>Release date:</strong> ${movies[i].release_date}</p>
-                        <a onclick="movieSelected('${movies[i].id}')" href="#">Details</a>
+                    <h2>${movie[i].title}</h2>
+                    <p id="p_rating"><strong>Rating:</strong> <span>${movie[i].vote_average} / 10  <i class="material-icons star">star_rate</i></span> </p>
+                    <p><strong>First air date:</strong> <span>${movie[i].release_date} <i class="material-icons date">date_range</i> </span></p>
+                    <a onclick="movieSelected('${movie[i].id}')" href="#">Details</a>
                  </div>
                 </div>
                 <div class="card_img">
-                    <img src="http://image.tmdb.org/t/p/w300/${movies[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
+                    <img src="http://image.tmdb.org/t/p/w300/${movie[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
                 </div>
                 </div>`;
             }
@@ -153,9 +153,9 @@ function recommendTvShows(){
                 <div class="overlay">
                 <div class="movie">
                     <h2>${series[i].name}</h2>
-                        <p><strong>Rating:</strong> ${series[i].vote_average}</p>
-                        <p><strong>First air date:</strong> ${series[i].first_air_date}</p>
-                        <a onclick="showSelected('${series[i].id}')" href="#">Details</a>
+                    <p id="p_rating"><strong>Rating:</strong> <span>${series[i].vote_average} / 10  <i class="material-icons star">star_rate</i></span> </p>
+                    <p><strong>First air date:</strong> <span>${series[i].first_air_date} <i class="material-icons date">date_range</i> </span></p>
+                    <a onclick="showSelected('${series[i].id}')" href="#">Details</a>
                 </div>
                 </div>
                 <div class="card_img">

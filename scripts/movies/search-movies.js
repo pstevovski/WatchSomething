@@ -1,6 +1,7 @@
 // API KEY.
 const API_KEY = config.API_KEY;
-//Hide the select  genres.
+
+// Hide genres menu.
 let selectedGenres = document.getElementById("selectedGenres");
 selectedGenres.style.display = "none";
 
@@ -8,6 +9,7 @@ selectedGenres.style.display = "none";
 const form = document.getElementById("form");
 
 // Object.freeze makes the object read-only, defending it from "hacky" activities. 
+// Object containing the genres for the movies.
 const genresObject = Object.freeze({
     "ACTION": 28,
     "ADVENTURE": 12,
@@ -29,9 +31,9 @@ const genresObject = Object.freeze({
     "SCIFI": 10752,
     "TV MOVIE": 37
 })
+
 form.addEventListener("submit", (e)=>{
     let input = document.getElementById("inputField").value;
-    console.log(input.trim().toUpperCase(input));
     let searchedFor = document.getElementById("searchedFor");
     
     // Clear the actor Id.
@@ -65,12 +67,12 @@ form.addEventListener("submit", (e)=>{
 function searchMovies(searchText){
     selectedGenres.style.display = "none";
     pageNum = 1;
+
 	axios.get("https://api.themoviedb.org/3/search/movie?query="+searchText+'&api_key='+API_KEY+'&language=en-US&page='+pageNum+'&include_adult=false')
 		.then( (response) =>{
-			//Fetches the data - > results from the API.
             let movie = response.data.results;
-            console.log(response);
-			let output = "";
+            let output = "";
+            
 			//Appends to the output the info for each fetched result.
 			for(let i = 0; i < movie.length; i++){
 				let id = response.data.results[i].id;
@@ -80,12 +82,12 @@ function searchMovies(searchText){
 					output += `
 					<div class="card">
 						<div class="overlay">
-						<div class="addBtn"><span><i class="material-icons queue" onclick="addToList('${movie[i].id}')">add_to_queue</i></span>
+						<div class="addBtn"><span><i class="material-icons watch" onclick="addToList('${movie[i].id}')">visibility</i></span>
 						<span><i class="material-icons favorite" onclick="favorite('${movie[i].id}')">favorite</i></span></div>
 						<div class="movie">
 							<h2>${movie[i].title}</h2>
-								<p><strong>Rating:</strong> ${movie[i].vote_average}</p>
-								<p><strong>First air date:</strong> ${movie[i].release_date}</p>
+								<p id="p_rating"><strong>Rating:</strong> <span>${movie[i].vote_average} / 10  <i class="material-icons star">star_rate</i></span> </p>
+								<p><strong>Release date:</strong> <span>${movie[i].release_date} <i class="material-icons date">date_range</i> </span></p>
 								<a onclick="movieSelected('${movie[i].id}')" href="#">Details</a>
 						</div>
 						</div>
@@ -96,30 +98,32 @@ function searchMovies(searchText){
 					`;
 				} else {
 					output += `
-                <div class="card">
+                    <div class="card">
                     <div class="overlay">
-					<div class="addBtn"><span><i class="material-icons queue" onclick="addToList('${movie[i].id}')">add_to_queue</i></span>
-					<span><i id="heart" class="material-icons favoriteMarked" onclick="favorite('${movie[i].id}')">favorite</i></span></div>
-					<div class="movie">
-						<h2>${movie[i].title}</h2>
-                            <p><strong>Rating:</strong> ${movie[i].vote_average}</p>
-                            <p><strong>First air date:</strong> ${movie[i].release_date}</p>
+                    <div class="addBtn"><span><i class="material-icons watch" onclick="addToList('${movie[i].id}')">visibility</i></span>
+                    <span><i class="material-icons favoriteMarked" onclick="favorite('${movie[i].id}')">favorite</i></span></div>
+                    <div class="movie">
+                        <h2>${movie[i].title}</h2>
+                            <p id="p_rating"><strong>Rating:</strong> <span>${movie[i].vote_average} / 10  <i class="material-icons star">star_rate</i></span> </p>
+                            <p><strong>Release date:</strong> <span>${movie[i].release_date} <i class="material-icons date">date_range</i> </span></p>
                             <a onclick="movieSelected('${movie[i].id}')" href="#">Details</a>
-                     </div>
+                    </div>
                     </div>
                     <div class="card_img">
-						<img src="http://image.tmdb.org/t/p/w400/${movie[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
-					</div>
-				</div>
+                        <img src="http://image.tmdb.org/t/p/w400/${movie[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
+                    </div>
+                </div>
 				`;
 				}
             }
 			let moviesInfo = document.getElementById("movies");
             moviesInfo.innerHTML = output;
+
             //Display pages buttons.
             let totalPages = response.data.total_pages;
 			let pages = document.querySelector(".pages");
-			pages.style.display = "flex";
+            pages.style.display = "flex";
+            
             if(totalPages < 2){
 				pages.style.display = "none";
 			} else if (pageNum === 1){
@@ -133,32 +137,34 @@ function searchMovies(searchText){
 		})
 }
 // ******************
+
+
 // MOVIES BY ACTOR / ACTRESS title.
 
-//Get actor`s ID.
+// Get actor`s ID.
 function discoverByActor(actor){
-    console.log("test")
     return axios.get("https://api.themoviedb.org/3/search/person?api_key="+API_KEY+'&language=en-US&query='+actor+'&page=1&include_adult=false')
         .then((response)=>{
             let actorId = response.data.results[0].id;
             sessionStorage.setItem("theActorId", actorId);
         })
-};
-//List movies by set actor.
+}
+
+// List movies by set actor.
 function moviesByActor(){
     //Show the select genres.
     selectedGenres.style.display = "block";
+
     //Reset the "selected" option on form submit.
     selectedGenres.selectedIndex = 0;
     sessionStorage.removeItem("movieByTitleGenre");
 
-    console.log('test')
     let actorId = sessionStorage.getItem("theActorId");
+
     axios.get("https://api.themoviedb.org/3/discover/movie?api_key="+API_KEY+'&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_people='+actorId)
         .then((response)=>{
             let movie = response.data.results;
             let output = "";
-            console.log(response);
             for(let i = 0; i < movie.length; i++){
                 let id = response.data.results[i].id;
 				id = JSON.stringify(id);
@@ -167,12 +173,12 @@ function moviesByActor(){
 					output += `
 					<div class="card">
 						<div class="overlay">
-						<div class="addBtn"><span><i class="material-icons queue" onclick="addToList('${movie[i].id}')">add_to_queue</i></span>
+						<div class="addBtn"><span><i class="material-icons watch" onclick="addToList('${movie[i].id}')">visibility</i></span>
 						<span><i class="material-icons favorite" onclick="favorite('${movie[i].id}')">favorite</i></span></div>
 						<div class="movie">
 							<h2>${movie[i].title}</h2>
-								<p><strong>Rating:</strong> ${movie[i].vote_average}</p>
-								<p><strong>First air date:</strong> ${movie[i].release_date}</p>
+								<p id="p_rating"><strong>Rating:</strong> <span>${movie[i].vote_average} / 10  <i class="material-icons star">star_rate</i></span> </p>
+								<p><strong>Release date:</strong> <span>${movie[i].release_date} <i class="material-icons date">date_range</i> </span></p>
 								<a onclick="movieSelected('${movie[i].id}')" href="#">Details</a>
 						</div>
 						</div>
@@ -183,30 +189,32 @@ function moviesByActor(){
 					`;
 				} else {
 					output += `
-                <div class="card">
+                    <div class="card">
                     <div class="overlay">
-					<div class="addBtn"><span><i class="material-icons queue" onclick="addToList('${movie[i].id}')">add_to_queue</i></span>
-					<span><i id="heart" class="material-icons favoriteMarked" onclick="favorite('${movie[i].id}')">favorite</i></span></div>
-					<div class="movie">
-						<h2>${movie[i].title}</h2>
-                            <p><strong>Rating:</strong> ${movie[i].vote_average}</p>
-                            <p><strong>First air date:</strong> ${movie[i].release_date}</p>
+                    <div class="addBtn"><span><i class="material-icons watch" onclick="addToList('${movie[i].id}')">visibility</i></span>
+                    <span><i class="material-icons favoriteMarked" onclick="favorite('${movie[i].id}')">favorite</i></span></div>
+                    <div class="movie">
+                        <h2>${movie[i].title}</h2>
+                            <p id="p_rating"><strong>Rating:</strong> <span>${movie[i].vote_average} / 10  <i class="material-icons star">star_rate</i></span> </p>
+                            <p><strong>Release date:</strong> <span>${movie[i].release_date} <i class="material-icons date">date_range</i> </span></p>
                             <a onclick="movieSelected('${movie[i].id}')" href="#">Details</a>
-                     </div>
+                    </div>
                     </div>
                     <div class="card_img">
-						<img src="http://image.tmdb.org/t/p/w400/${movie[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
-					</div>
-				</div>
+                        <img src="http://image.tmdb.org/t/p/w400/${movie[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
+                    </div>
+                </div>
 				`;
 				}
             }
             let moviesInfo = document.getElementById("movies");
             moviesInfo.innerHTML = output;
+
             //Display pages buttons.
             let totalPages = response.data.total_pages;
 			let pages = document.querySelector(".pages");
-			pages.style.display = "flex";
+            pages.style.display = "flex";
+            
             if(totalPages < 2){
 				pages.style.display = "none";
 			} else if (pageNum === 1){
@@ -223,7 +231,6 @@ function moviesByActor(){
                 .then((response)=>{
                     let movie = response.data.results;
                     let output = "";
-                    console.log(response);
                     for(let i = 0; i < movie.length; i++){
                         let id = response.data.results[i].id;
 				id = JSON.stringify(id);
@@ -232,12 +239,12 @@ function moviesByActor(){
 					output += `
 					<div class="card">
 						<div class="overlay">
-						<div class="addBtn"><span><i class="material-icons queue" onclick="addToList('${movie[i].id}')">add_to_queue</i></span>
+						<div class="addBtn"><span><i class="material-icons watch" onclick="addToList('${movie[i].id}')">visibility</i></span>
 						<span><i class="material-icons favorite" onclick="favorite('${movie[i].id}')">favorite</i></span></div>
 						<div class="movie">
 							<h2>${movie[i].title}</h2>
-								<p><strong>Rating:</strong> ${movie[i].vote_average}</p>
-								<p><strong>First air date:</strong> ${movie[i].release_date}</p>
+								<p id="p_rating"><strong>Rating:</strong> <span>${movie[i].vote_average} / 10  <i class="material-icons star">star_rate</i></span> </p>
+								<p><strong>Release date:</strong> <span>${movie[i].release_date} <i class="material-icons date">date_range</i> </span></p>
 								<a onclick="movieSelected('${movie[i].id}')" href="#">Details</a>
 						</div>
 						</div>
@@ -249,29 +256,31 @@ function moviesByActor(){
 				} else {
 					output += `
                     <div class="card">
-                        <div class="overlay">
-                        <div class="addBtn"><span><i class="material-icons queue" onclick="addToList('${movie[i].id}')">add_to_queue</i></span>
-                        <span><i id="heart" class="material-icons favoriteMarked" onclick="favorite('${movie[i].id}')">favorite</i></span></div>
-                        <div class="movie">
-                            <h2>${movie[i].title}</h2>
-                                <p><strong>Rating:</strong> ${movie[i].vote_average}</p>
-                                <p><strong>First air date:</strong> ${movie[i].release_date}</p>
-                                <a onclick="movieSelected('${movie[i].id}')" href="#">Details</a>
-                        </div>
-                        </div>
-                        <div class="card_img">
-                            <img src="http://image.tmdb.org/t/p/w400/${movie[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
-                        </div>
-                    </div>
+						<div class="overlay">
+						<div class="addBtn"><span><i class="material-icons watch" onclick="addToList('${movie[i].id}')">visibility</i></span>
+						<span><i class="material-icons favoriteMarked" onclick="favorite('${movie[i].id}')">favorite</i></span></div>
+						<div class="movie">
+							<h2>${movie[i].title}</h2>
+								<p id="p_rating"><strong>Rating:</strong> <span>${movie[i].vote_average} / 10  <i class="material-icons star">star_rate</i></span> </p>
+								<p><strong>Release date:</strong> <span>${movie[i].release_date} <i class="material-icons date">date_range</i> </span></p>
+								<a onclick="movieSelected('${movie[i].id}')" href="#">Details</a>
+						</div>
+						</div>
+						<div class="card_img">
+							<img src="http://image.tmdb.org/t/p/w400/${movie[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
+						</div>
+					</div>
                     `;
                     }
                     }
                     let moviesInfo = document.getElementById("movies");
                     moviesInfo.innerHTML = output;
+
                     //Display pages buttons.
                     let totalPages = response.data.total_pages;
                     let pages = document.querySelector(".pages");
                     pages.style.display = "flex";
+
                     if(totalPages < 2){
                         pages.style.display = "none";
                     } else if (pageNum === 1){
@@ -281,15 +290,17 @@ function moviesByActor(){
                 })
         })
 }
+
 // MOVIES BY YEAR
 function discoverMovies(year){
     //Show the select genres.
     selectedGenres.style.display = "block";
+
     //Reset the "selected" option on form submit.
     selectedGenres.selectedIndex = 0;
     sessionStorage.removeItem("movieByYearGenre");
     sessionStorage.setItem("year", year)
-    console.log(year);
+
     axios.get("https://api.themoviedb.org/3/discover/movie?api_key="+API_KEY+'&language=en-US&sort_by=popularity.desc&page=1&primary_release_year='+year)
         .then((response)=>{
             let movie = response.data.results;
@@ -302,12 +313,12 @@ function discoverMovies(year){
 					output += `
 					<div class="card">
 						<div class="overlay">
-						<div class="addBtn"><span><i class="material-icons queue" onclick="addToList('${movie[i].id}')">add_to_queue</i></span>
+						<div class="addBtn"><span><i class="material-icons watch" onclick="addToList('${movie[i].id}')">visibility</i></span>
 						<span><i class="material-icons favorite" onclick="favorite('${movie[i].id}')">favorite</i></span></div>
 						<div class="movie">
 							<h2>${movie[i].title}</h2>
-								<p><strong>Rating:</strong> ${movie[i].vote_average}</p>
-								<p><strong>First air date:</strong> ${movie[i].release_date}</p>
+								<p id="p_rating"><strong>Rating:</strong> <span>${movie[i].vote_average} / 10  <i class="material-icons star">star_rate</i></span> </p>
+								<p><strong>Release date:</strong> <span>${movie[i].release_date} <i class="material-icons date">date_range</i> </span></p>
 								<a onclick="movieSelected('${movie[i].id}')" href="#">Details</a>
 						</div>
 						</div>
@@ -318,30 +329,33 @@ function discoverMovies(year){
 					`;
 				} else {
 					output += `
-                <div class="card">
+                    <div class="card">
                     <div class="overlay">
-					<div class="addBtn"><span><i class="material-icons queue" onclick="addToList('${movie[i].id}')">add_to_queue</i></span>
-					<span><i id="heart" class="material-icons favoriteMarked" onclick="favorite('${movie[i].id}')">favorite</i></span></div>
-					<div class="movie">
-						<h2>${movie[i].title}</h2>
-                            <p><strong>Rating:</strong> ${movie[i].vote_average}</p>
-                            <p><strong>First air date:</strong> ${movie[i].release_date}</p>
+                    <div class="addBtn"><span><i class="material-icons watch" onclick="addToList('${movie[i].id}')">visibility</i></span>
+                    <span><i class="material-icons favoriteMarked" onclick="favorite('${movie[i].id}')">favorite</i></span></div>
+                    <div class="movie">
+                        <h2>${movie[i].title}</h2>
+                            <p id="p_rating"><strong>Rating:</strong> <span>${movie[i].vote_average} / 10  <i class="material-icons star">star_rate</i></span> </p>
+                            <p><strong>Release date:</strong> <span>${movie[i].release_date} <i class="material-icons date">date_range</i> </span></p>
                             <a onclick="movieSelected('${movie[i].id}')" href="#">Details</a>
-                     </div>
+                    </div>
                     </div>
                     <div class="card_img">
-						<img src="http://image.tmdb.org/t/p/w400/${movie[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
-					</div>
-				</div>
+                        <img src="http://image.tmdb.org/t/p/w400/${movie[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
+                    </div>
+                </div>
 				`;
 				}
             }
+
             let moviesInfo = document.getElementById("movies");
             moviesInfo.innerHTML = output;
+
             //Display pages buttons.
             let totalPages = response.data.total_pages;
 			let pages = document.querySelector(".pages");
-			pages.style.display = "flex";
+            pages.style.display = "flex";
+            
             if(totalPages < 2){
 				pages.style.display = "none";
 			} else if (pageNum === 1){
@@ -355,24 +369,23 @@ function discoverMovies(year){
                 const selectedGenre = e.target.options[e.target.selectedIndex].id;
                 sessionStorage.setItem("movieByYearGenre", selectedGenre);
                 axios.get("https://api.themoviedb.org/3/discover/movie?api_key="+API_KEY+'&language=en-US&sort_by=popularity.desc&page=1&primary_release_year='+year+'&with_genres='+selectedGenre)
-                    .then((response)=>{
-                        let movie = response.data.results;
-                        let output = "";
-                        console.log(response);
-                        for(let i = 0; i < movie.length; i++){
-                            let id = response.data.results[i].id;
+                .then((response)=>{
+                let movie = response.data.results;
+                let output = "";
+                for(let i = 0; i < movie.length; i++){
+                let id = response.data.results[i].id;
 				id = JSON.stringify(id);
 				let favoriteMovies = JSON.parse(localStorage.getItem("favoriteMovies")) || [];
 				if(favoriteMovies.indexOf(id) === -1){
 					output += `
 					<div class="card">
 						<div class="overlay">
-						<div class="addBtn"><span><i class="material-icons queue" onclick="addToList('${movie[i].id}')">add_to_queue</i></span>
+						<div class="addBtn"><span><i class="material-icons watch" onclick="addToList('${movie[i].id}')">visibility</i></span>
 						<span><i class="material-icons favorite" onclick="favorite('${movie[i].id}')">favorite</i></span></div>
 						<div class="movie">
 							<h2>${movie[i].title}</h2>
-								<p><strong>Rating:</strong> ${movie[i].vote_average}</p>
-								<p><strong>First air date:</strong> ${movie[i].release_date}</p>
+								<p id="p_rating"><strong>Rating:</strong> <span>${movie[i].vote_average} / 10  <i class="material-icons star">star_rate</i></span> </p>
+								<p><strong>Release date:</strong> <span>${movie[i].release_date} <i class="material-icons date">date_range</i> </span></p>
 								<a onclick="movieSelected('${movie[i].id}')" href="#">Details</a>
 						</div>
 						</div>
@@ -383,30 +396,32 @@ function discoverMovies(year){
 					`;
 				} else {
 					output += `
-                        <div class="card">
-                            <div class="overlay">
-                            <div class="addBtn"><span><i class="material-icons queue" onclick="addToList('${movie[i].id}')">add_to_queue</i></span>
-                            <span><i id="heart" class="material-icons favoriteMarked" onclick="favorite('${movie[i].id}')">favorite</i></span></div>
-                            <div class="movie">
-                                <h2>${movie[i].title}</h2>
-                                    <p><strong>Rating:</strong> ${movie[i].vote_average}</p>
-                                    <p><strong>First air date:</strong> ${movie[i].release_date}</p>
-                                    <a onclick="movieSelected('${movie[i].id}')" href="#">Details</a>
-                            </div>
-                            </div>
-                            <div class="card_img">
-                                <img src="http://image.tmdb.org/t/p/w400/${movie[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
-                            </div>
-                        </div>
+                    <div class="card">
+                    <div class="overlay">
+                    <div class="addBtn"><span><i class="material-icons watch" onclick="addToList('${movie[i].id}')">visibility</i></span>
+                    <span><i class="material-icons favoriteMarked" onclick="favorite('${movie[i].id}')">favorite</i></span></div>
+                    <div class="movie">
+                        <h2>${movie[i].title}</h2>
+                            <p id="p_rating"><strong>Rating:</strong> <span>${movie[i].vote_average} / 10  <i class="material-icons star">star_rate</i></span> </p>
+                            <p><strong>Release date:</strong> <span>${movie[i].release_date} <i class="material-icons date">date_range</i> </span></p>
+                            <a onclick="movieSelected('${movie[i].id}')" href="#">Details</a>
+                    </div>
+                    </div>
+                    <div class="card_img">
+                        <img src="http://image.tmdb.org/t/p/w400/${movie[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
+                    </div>
+                </div>
                         `;
                         }
                         }
                         let moviesInfo = document.getElementById("movies");
                         moviesInfo.innerHTML = output;
+
                         //Display pages buttons.
                         let totalPages = response.data.total_pages;
                         let pages = document.querySelector(".pages");
                         pages.style.display = "flex";
+
                         if(totalPages < 2){
                             pages.style.display = "none";
                         } else if (pageNum === 1){
@@ -424,14 +439,15 @@ function discoverMovies(year){
 function genres(id){
         pageNum = 1;
         selectedGenres.style.display = "none";
+
         //Send the ID of the selected element into sessionStorage.
         sessionStorage.setItem("genre", id)
+
         //API request.
         axios.get("https://api.themoviedb.org/3/discover/movie?api_key="+API_KEY+'&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres='+id)
             .then((response)=>{
                 let movie = response.data.results;
                 let output = "";
-                console.log(movie);
                 for(let i = 0; i < movie.length; i++){
                     let id = response.data.results[i].id;
 				id = JSON.stringify(id);
@@ -440,12 +456,12 @@ function genres(id){
 					output += `
 					<div class="card">
 						<div class="overlay">
-						<div class="addBtn"><span><i class="material-icons queue" onclick="addToList('${movie[i].id}')">add_to_queue</i></span>
+						<div class="addBtn"><span><i class="material-icons watch" onclick="addToList('${movie[i].id}')">visibility</i></span>
 						<span><i class="material-icons favorite" onclick="favorite('${movie[i].id}')">favorite</i></span></div>
 						<div class="movie">
 							<h2>${movie[i].title}</h2>
-								<p><strong>Rating:</strong> ${movie[i].vote_average}</p>
-								<p><strong>First air date:</strong> ${movie[i].release_date}</p>
+								<p id="p_rating"><strong>Rating:</strong> <span>${movie[i].vote_average} / 10  <i class="material-icons star">star_rate</i></span> </p>
+								<p><strong>Release date:</strong> <span>${movie[i].release_date} <i class="material-icons date">date_range</i> </span></p>
 								<a onclick="movieSelected('${movie[i].id}')" href="#">Details</a>
 						</div>
 						</div>
@@ -456,30 +472,32 @@ function genres(id){
 					`;
 				} else {
 					output += `
-                <div class="card">
+                    <div class="card">
                     <div class="overlay">
-					<div class="addBtn"><span><i class="material-icons queue" onclick="addToList('${movie[i].id}')">add_to_queue</i></span>
-					<span><i id="heart" class="material-icons favoriteMarked" onclick="favorite('${movie[i].id}')">favorite</i></span></div>
-					<div class="movie">
-						<h2>${movie[i].title}</h2>
-                            <p><strong>Rating:</strong> ${movie[i].vote_average}</p>
-                            <p><strong>First air date:</strong> ${movie[i].release_date}</p>
+                    <div class="addBtn"><span><i class="material-icons watch" onclick="addToList('${movie[i].id}')">visibility</i></span>
+                    <span><i class="material-icons favoriteMarked" onclick="favorite('${movie[i].id}')">favorite</i></span></div>
+                    <div class="movie">
+                        <h2>${movie[i].title}</h2>
+                            <p id="p_rating"><strong>Rating:</strong> <span>${movie[i].vote_average} / 10  <i class="material-icons star">star_rate</i></span> </p>
+                            <p><strong>Release date:</strong> <span>${movie[i].release_date} <i class="material-icons date">date_range</i> </span></p>
                             <a onclick="movieSelected('${movie[i].id}')" href="#">Details</a>
-                     </div>
+                    </div>
                     </div>
                     <div class="card_img">
-						<img src="http://image.tmdb.org/t/p/w400/${movie[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
-					</div>
-				</div>
+                        <img src="http://image.tmdb.org/t/p/w400/${movie[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
+                    </div>
+                </div>
 				`;
 				}
                 }
                 let moviesInfo = document.getElementById("movies");
                 moviesInfo.innerHTML = output;
+
                 //Display pages buttons.
                 let totalPages = response.data.total_pages;
                 let pages = document.querySelector(".pages");
                 pages.style.display = "flex";
+
                 if(totalPages < 2){
                     pages.style.display = "none";
                 } else if (pageNum === 1){
@@ -496,13 +514,14 @@ function movieSelected(id){
     location.replace("../movie-page.html");
     return false;
 }
+
 //Define page number.
 let pageNum = 1;
+
 //Click on "NEXT" to go forwards one page (increment pageNum)
 const next = document.getElementById("next");
 next.addEventListener("click", ()=>{
     let input = document.getElementById("inputField").value;
-
     pageNum++;
     window.scrollTo(0,0);
     if(genresObject[input.trim().toUpperCase(input)]){
@@ -515,7 +534,8 @@ next.addEventListener("click", ()=>{
         movieByYearPage(pageNum);
     }
 })
-// Click on "LEFT" arrow to go to previous page.
+
+// Click on "PREVIOUS" arrow to go to previous page.
 const prev = document.getElementById("prev");
 prev.addEventListener("click", ()=>{
     let input = document.getElementById("inputField").value;
@@ -530,6 +550,7 @@ prev.addEventListener("click", ()=>{
         movieByYearPage(pageNum);
     }
 })
+
 function movieByActorPage(pageNum){
     let actorId = sessionStorage.getItem("theActorId");
     let genre = sessionStorage.getItem("movieByTitleGenre");
@@ -540,7 +561,6 @@ function movieByActorPage(pageNum){
     .then((response) => {
         let movie = response.data.results;
         let output = "";
-        console.log(response);
         for(let i = 0; i < movie.length; i++){
             let id = response.data.results[i].id;
 				id = JSON.stringify(id);
@@ -549,12 +569,12 @@ function movieByActorPage(pageNum){
 					output += `
 					<div class="card">
 						<div class="overlay">
-						<div class="addBtn"><span><i class="material-icons queue" onclick="addToList('${movie[i].id}')">add_to_queue</i></span>
+						<div class="addBtn"><span><i class="material-icons watch" onclick="addToList('${movie[i].id}')">visibility</i></span>
 						<span><i class="material-icons favorite" onclick="favorite('${movie[i].id}')">favorite</i></span></div>
 						<div class="movie">
 							<h2>${movie[i].title}</h2>
-								<p><strong>Rating:</strong> ${movie[i].vote_average}</p>
-								<p><strong>First air date:</strong> ${movie[i].release_date}</p>
+								<p id="p_rating"><strong>Rating:</strong> <span>${movie[i].vote_average} / 10  <i class="material-icons star">star_rate</i></span> </p>
+								<p><strong>Release date:</strong> <span>${movie[i].release_date} <i class="material-icons date">date_range</i> </span></p>
 								<a onclick="movieSelected('${movie[i].id}')" href="#">Details</a>
 						</div>
 						</div>
@@ -565,30 +585,32 @@ function movieByActorPage(pageNum){
 					`;
 				} else {
 					output += `
-                <div class="card">
+                    <div class="card">
                     <div class="overlay">
-					<div class="addBtn"><span><i class="material-icons queue" onclick="addToList('${movie[i].id}')">add_to_queue</i></span>
-					<span><i id="heart" class="material-icons favoriteMarked" onclick="favorite('${movie[i].id}')">favorite</i></span></div>
-					<div class="movie">
-						<h2>${movie[i].title}</h2>
-                            <p><strong>Rating:</strong> ${movie[i].vote_average}</p>
-                            <p><strong>First air date:</strong> ${movie[i].release_date}</p>
+                    <div class="addBtn"><span><i class="material-icons watch" onclick="addToList('${movie[i].id}')">visibility</i></span>
+                    <span><i class="material-icons favoriteMarked" onclick="favorite('${movie[i].id}')">favorite</i></span></div>
+                    <div class="movie">
+                        <h2>${movie[i].title}</h2>
+                            <p id="p_rating"><strong>Rating:</strong> <span>${movie[i].vote_average} / 10  <i class="material-icons star">star_rate</i></span> </p>
+                            <p><strong>Release date:</strong> <span>${movie[i].release_date} <i class="material-icons date">date_range</i> </span></p>
                             <a onclick="movieSelected('${movie[i].id}')" href="#">Details</a>
-                     </div>
+                    </div>
                     </div>
                     <div class="card_img">
-						<img src="http://image.tmdb.org/t/p/w400/${movie[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
-					</div>
-				</div>
+                        <img src="http://image.tmdb.org/t/p/w400/${movie[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
+                    </div>
+                </div>
 				`;
 				}
         }
         let moviesInfo = document.getElementById("movies");
         moviesInfo.innerHTML = output;
+
         //Show the pages buttons after movies are listed.
         let totalPages = response.data.total_pages;
         let pages = document.querySelector(".pages");
         pages.style.display = "flex";
+
         if(pageNum >= 2){
             prev.style.display = "block";
         } else if ( totalPages === pageNum ){
@@ -598,6 +620,7 @@ function movieByActorPage(pageNum){
         }
     })
 }
+
 function movieByYearPage(pageNum){
     let year = sessionStorage.getItem("year");
     let genre = sessionStorage.getItem("movieByYearGenre")
@@ -608,7 +631,6 @@ function movieByYearPage(pageNum){
     .then((response)=>{
         let movie = response.data.results;
         let output = "";
-        console.log(response);
         for(let i = 0; i < movie.length; i++){
             let id = response.data.results[i].id;
 				id = JSON.stringify(id);
@@ -617,12 +639,12 @@ function movieByYearPage(pageNum){
 					output += `
 					<div class="card">
 						<div class="overlay">
-						<div class="addBtn"><span><i class="material-icons queue" onclick="addToList('${movie[i].id}')">add_to_queue</i></span>
+						<div class="addBtn"><span><i class="material-icons watch" onclick="addToList('${movie[i].id}')">visibility</i></span>
 						<span><i class="material-icons favorite" onclick="favorite('${movie[i].id}')">favorite</i></span></div>
 						<div class="movie">
 							<h2>${movie[i].title}</h2>
-								<p><strong>Rating:</strong> ${movie[i].vote_average}</p>
-								<p><strong>First air date:</strong> ${movie[i].release_date}</p>
+								<p id="p_rating"><strong>Rating:</strong> <span>${movie[i].vote_average} / 10  <i class="material-icons star">star_rate</i></span> </p>
+								<p><strong>Release date:</strong> <span>${movie[i].release_date} <i class="material-icons date">date_range</i> </span></p>
 								<a onclick="movieSelected('${movie[i].id}')" href="#">Details</a>
 						</div>
 						</div>
@@ -633,30 +655,32 @@ function movieByYearPage(pageNum){
 					`;
 				} else {
 					output += `
-                <div class="card">
+                    <div class="card">
                     <div class="overlay">
-					<div class="addBtn"><span><i class="material-icons queue" onclick="addToList('${movie[i].id}')">add_to_queue</i></span>
-					<span><i id="heart" class="material-icons favoriteMarked" onclick="favorite('${movie[i].id}')">favorite</i></span></div>
-					<div class="movie">
-						<h2>${movie[i].title}</h2>
-                            <p><strong>Rating:</strong> ${movie[i].vote_average}</p>
-                            <p><strong>First air date:</strong> ${movie[i].release_date}</p>
+                    <div class="addBtn"><span><i class="material-icons watch" onclick="addToList('${movie[i].id}')">visibility</i></span>
+                    <span><i class="material-icons favoriteMarked" onclick="favorite('${movie[i].id}')">favorite</i></span></div>
+                    <div class="movie">
+                        <h2>${movie[i].title}</h2>
+                            <p id="p_rating"><strong>Rating:</strong> <span>${movie[i].vote_average} / 10  <i class="material-icons star">star_rate</i></span> </p>
+                            <p><strong>Release date:</strong> <span>${movie[i].release_date} <i class="material-icons date">date_range</i> </span></p>
                             <a onclick="movieSelected('${movie[i].id}')" href="#">Details</a>
-                     </div>
+                    </div>
                     </div>
                     <div class="card_img">
-						<img src="http://image.tmdb.org/t/p/w400/${movie[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
-					</div>
-				</div>
+                        <img src="http://image.tmdb.org/t/p/w400/${movie[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
+                    </div>
+                </div>
 				`;
 				}
         }
         let moviesInfo = document.getElementById("movies");
         moviesInfo.innerHTML = output;
+
         //Show the pages buttons after movies are listed.
         let totalPages = response.data.total_pages;
         let pages = document.querySelector(".pages");
         pages.style.display = "flex";
+
         if(pageNum >= 2){
             prev.style.display = "block";
         } else if ( pageNum === totalPages){
@@ -667,13 +691,12 @@ function movieByYearPage(pageNum){
     })
 }
 function movieByGenrePage(pageNum){
-    //Get the selected element ID from the sessionStorage.
+        //Get the selected element ID from the sessionStorage.
         let genre = sessionStorage.getItem("genre");
         axios.get("https://api.themoviedb.org/3/discover/movie?api_key="+API_KEY+'&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page='+pageNum+'&with_genres='+genre)
             .then((response)=>{
                 let movie = response.data.results;
                 let output = "";
-                console.log(response)
                 for(let i = 0; i < movie.length; i++){
                     let id = response.data.results[i].id;
 				id = JSON.stringify(id);
@@ -682,12 +705,12 @@ function movieByGenrePage(pageNum){
 					output += `
 					<div class="card">
 						<div class="overlay">
-						<div class="addBtn"><span><i class="material-icons queue" onclick="addToList('${movie[i].id}')">add_to_queue</i></span>
+						<div class="addBtn"><span><i class="material-icons watch" onclick="addToList('${movie[i].id}')">visibility</i></span>
 						<span><i class="material-icons favorite" onclick="favorite('${movie[i].id}')">favorite</i></span></div>
 						<div class="movie">
 							<h2>${movie[i].title}</h2>
-								<p><strong>Rating:</strong> ${movie[i].vote_average}</p>
-								<p><strong>First air date:</strong> ${movie[i].release_date}</p>
+								<p id="p_rating"><strong>Rating:</strong> <span>${movie[i].vote_average} / 10  <i class="material-icons star">star_rate</i></span> </p>
+								<p><strong>Release date:</strong> <span>${movie[i].release_date} <i class="material-icons date">date_range</i> </span></p>
 								<a onclick="movieSelected('${movie[i].id}')" href="#">Details</a>
 						</div>
 						</div>
@@ -698,30 +721,32 @@ function movieByGenrePage(pageNum){
 					`;
 				} else {
 					output += `
-                <div class="card">
+                    <div class="card">
                     <div class="overlay">
-					<div class="addBtn"><span><i class="material-icons queue" onclick="addToList('${movie[i].id}')">add_to_queue</i></span>
-					<span><i id="heart" class="material-icons favoriteMarked" onclick="favorite('${movie[i].id}')">favorite</i></span></div>
-					<div class="movie">
-						<h2>${movie[i].title}</h2>
-                            <p><strong>Rating:</strong> ${movie[i].vote_average}</p>
-                            <p><strong>First air date:</strong> ${movie[i].release_date}</p>
+                    <div class="addBtn"><span><i class="material-icons watch" onclick="addToList('${movie[i].id}')">visibility</i></span>
+                    <span><i class="material-icons favoriteMarked" onclick="favorite('${movie[i].id}')">favorite</i></span></div>
+                    <div class="movie">
+                        <h2>${movie[i].title}</h2>
+                            <p id="p_rating"><strong>Rating:</strong> <span>${movie[i].vote_average} / 10  <i class="material-icons star">star_rate</i></span> </p>
+                            <p><strong>Release date:</strong> <span>${movie[i].release_date} <i class="material-icons date">date_range</i> </span></p>
                             <a onclick="movieSelected('${movie[i].id}')" href="#">Details</a>
-                     </div>
+                    </div>
                     </div>
                     <div class="card_img">
-						<img src="http://image.tmdb.org/t/p/w400/${movie[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
-					</div>
-				</div>
+                        <img src="http://image.tmdb.org/t/p/w400/${movie[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
+                    </div>
+                </div>
 				`;
 				}
                 }
                 let moviesInfo = document.getElementById("movies");
                 moviesInfo.innerHTML = output;
+                
                 //Show the pages buttons after movies are listed.
                 let totalPages = response.data.total_pages;
                 let pages = document.querySelector(".pages");
                 pages.style.display = "flex";
+
                 if(pageNum >= 2){
                     prev.style.display = "block";
                 } else if ( pageNum === totalPages){
@@ -732,6 +757,7 @@ function movieByGenrePage(pageNum){
          })
 }
 function movieByTitlePage(pageNum){
+
     let searchText = document.getElementById("inputField").value;
 		axios.get("https://api.themoviedb.org/3/search/movie?query="+searchText+'&api_key='+API_KEY+'&language=en-US&page='+pageNum+'&include_adult=false')
 		.then( (response) =>{
@@ -746,12 +772,12 @@ function movieByTitlePage(pageNum){
 					output += `
 					<div class="card">
 						<div class="overlay">
-						<div class="addBtn"><span><i class="material-icons queue" onclick="addToList('${movie[i].id}')">add_to_queue</i></span>
+						<div class="addBtn"><span><i class="material-icons watch" onclick="addToList('${movie[i].id}')">visibility</i></span>
 						<span><i class="material-icons favorite" onclick="favorite('${movie[i].id}')">favorite</i></span></div>
 						<div class="movie">
 							<h2>${movie[i].title}</h2>
-								<p><strong>Rating:</strong> ${movie[i].vote_average}</p>
-								<p><strong>First air date:</strong> ${movie[i].release_date}</p>
+								<p id="p_rating"><strong>Rating:</strong> <span>${movie[i].vote_average} / 10  <i class="material-icons star">star_rate</i></span> </p>
+								<p><strong>Release date:</strong> <span>${movie[i].release_date} <i class="material-icons date">date_range</i> </span></p>
 								<a onclick="movieSelected('${movie[i].id}')" href="#">Details</a>
 						</div>
 						</div>
@@ -762,30 +788,32 @@ function movieByTitlePage(pageNum){
 					`;
 				} else {
 					output += `
-                <div class="card">
+                    <div class="card">
                     <div class="overlay">
-					<div class="addBtn"><span><i class="material-icons queue" onclick="addToList('${movie[i].id}')">add_to_queue</i></span>
-					<span><i id="heart" class="material-icons favoriteMarked" onclick="favorite('${movie[i].id}')">favorite</i></span></div>
-					<div class="movie">
-						<h2>${movie[i].title}</h2>
-                            <p><strong>Rating:</strong> ${movie[i].vote_average}</p>
-                            <p><strong>First air date:</strong> ${movie[i].release_date}</p>
+                    <div class="addBtn"><span><i class="material-icons watch" onclick="addToList('${movie[i].id}')">visibility</i></span>
+                    <span><i class="material-icons favoriteMarked" onclick="favorite('${movie[i].id}')">favorite</i></span></div>
+                    <div class="movie">
+                        <h2>${movie[i].title}</h2>
+                            <p id="p_rating"><strong>Rating:</strong> <span>${movie[i].vote_average} / 10  <i class="material-icons star">star_rate</i></span> </p>
+                            <p><strong>Release date:</strong> <span>${movie[i].release_date} <i class="material-icons date">date_range</i> </span></p>
                             <a onclick="movieSelected('${movie[i].id}')" href="#">Details</a>
-                     </div>
+                    </div>
                     </div>
                     <div class="card_img">
-						<img src="http://image.tmdb.org/t/p/w400/${movie[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
-					</div>
-				</div>
+                        <img src="http://image.tmdb.org/t/p/w400/${movie[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
+                    </div>
+                </div>
 				`;
 				}
 			}
 			let movieInfo = document.getElementById("movies");
             movieInfo.innerHTML = output;
+
             //Show the pages buttons after movies are listed.
             let totalPages = response.data.total_pages;
             let pages = document.querySelector(".pages");
             pages.style.display = "flex";
+
             if(pageNum >= 2){
                 prev.style.display = "block";
             } else if ( pageNum === totalPages){
@@ -821,6 +849,7 @@ function addToList(id){
         }, 1500);
 	}
 }
+
 //Add movie to favorite movies.
 function favorite(id){
     let storedId = JSON.parse(localStorage.getItem("favoriteMovies")) || [];
@@ -844,6 +873,7 @@ function favorite(id){
         }, 1500);
 	}
 }
+
 // ON PAGE RELOAD, CLEAR SESSION STORAGE.
 window.onload = function clearStorage(){
     sessionStorage.removeItem("movieByYearGenre");

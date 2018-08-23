@@ -1,56 +1,55 @@
-//API KEY variable.
+// API KEY variable.
 const API_KEY = config.API_KEY;
-//Todays date.
-let today = new Date().toJSON().slice(0,10);
-//Setting the maximum(end) date. This is not dynamic. Looking for solution.
-let endDate = new Date(2019, 4, 17 + 1).toJSON().slice(0,10);
-window.onload = function featuredMovies(){
-    // Random page number generator for top rated movies and tv shows.
-    let min = 1;
-    let max = 30;
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    let topRated = Math.floor(Math.random() * (max-min +1)) + min;
 
+// Todays date.
+let today = new Date().toJSON().slice(0,10);
+// Setting the maximum(end) date. This is not dynamic. Looking for solution.
+let endDate = new Date(2019, 4, 17 + 1).toJSON().slice(0,10);
+
+
+// Array for random quotes.
+let randomQuote = new Array();
+randomQuote[0] = " 'I'm going on an adventure!' - Bilbo Baggins, The Hobbit";
+randomQuote[1] = " 'I'm going to make him an offer he can't refuse.' - Vito Corleone, The Godfather";
+randomQuote[2] = " 'You talkin' to me?' - Travis Bickle, Taxi Driver";
+randomQuote[3] = " 'Bond. James Bond.' - James Bond";
+randomQuote[4] = " 'I'll be back.' - Terminator, The Terminator";
+randomQuote[5] = " 'My mama always said, 'Life is (was) like a box of chocolates. You never know what you're gonna get.' - Forrest Gump, Forrest Gump";
+randomQuote[6] = " 'I see dead people.' - Cole Sear, The Sixth Sense";
+randomQuote[7] = " 'Keep your friends close, but your enemies closer.' - Michael Corleone, The Godfather part II";
+randomQuote[8] = " 'Say 'hello' to my little friend!' -Tony Montana, Scarface";
+randomQuote[9] = " 'Hasta la vista, baby.' - The Terminator, Terminator 2: Judgement Day";
+randomQuote[10] = " 'Bye Felicia !' - Ice Cube, Friday";
+randomQuote[11] = " 'My precious.' - Gollum, The Lord of the rings: The Two Towers";
+randomQuote[12] = " 'Houston, we have a problem.' - Jim Lovell, Apollo 13";
+randomQuote[13] = " 'Yippie-Ki-Yay, Motherfucker!' - John McClane, Die Hard";
+randomQuote[14] = " 'May the Force be with you' - Obi-Wan Kenobi, Star Wars";
+randomQuote[15] = " 'A wizard is never late, Frodo Baggins. Nor is he early. He arrives precisely when he means to.' - Gandalf, The Lord of the Rings: Fellowship of the";
+let quote = document.getElementById("quote");
+
+// Change quote(with fade in/out animation) at the set interval.
+setInterval(() => {
+    quote.classList.remove("quoteFade");
+        setTimeout(() => {
+        document.getElementById("quote").innerHTML = randomQuote[Math.round(Math.random()*16)];
+        quote.classList.add("quoteFade");
+        }, 2500); 
+    }, 5000);
+
+window.onload = function featuredMovies(){
     // Random page number generator for popular movies and tv shows.
     let minPopular = 1;
-    let maxPopular = 15;
+    let maxPopular = 7;
     minPopular = Math.ceil(minPopular);
     maxPopular = Math.floor(maxPopular);
     let popular = Math.floor(Math.random() * (maxPopular - minPopular +1)) + minPopular;
-
-    // TOP RATED MOVIES.
-    axios.get("https://api.themoviedb.org/3/movie/top_rated?api_key="+API_KEY+'&language=en-US&page='+topRated)
-        .then ((response)=>{
-            let featured = response.data.results;
-            let output = ""
-            console.log(response)
-           	for(let i = 0; i < featured.length; i++){
-				output += `
-				<div class="card">
-                    <div class="overlay">
-                        <div class="movie">
-                            <h2>${featured[i].title}</h2>
-                            <p><strong>Rating:</strong> ${featured[i].vote_average}</p>
-                            <p><strong>Release date:</strong> ${featured[i].release_date}</p>
-                            <a onclick="movieSelected('${featured[i].id}')" href="#">Details</a>
-                        </div>
-                    </div>
-                <img src="http://image.tmdb.org/t/p/w400/${featured[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
-                </div>
-            `;
-            }
-            //Append the output to "movies" element.
-			let topRatedMovies= document.getElementById("topRated");
-            topRatedMovies.innerHTML = output;
-        })
 
     // POPULAR MOVIES.
     axios.get("https://api.themoviedb.org/3/discover/movie?api_key="+API_KEY+'&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page='+popular+'&primary_release_date.gte=2017-12-01&primary_release_date.lte='+today+'&vote_average.gte=6&vote_average.lte=10&with_original_language=en')
         .then((response)=>{
             const featured = response.data.results;
             console.log(featured)
-            //featured.length = 7;
+            featured.length = 8;
             let output = "";
             for(let i = 0; i < featured.length; i++){
                 output += `
@@ -58,8 +57,8 @@ window.onload = function featuredMovies(){
                     <div class="overlay">
                         <div class="movie">
                             <h2>${featured[i].title}</h2>
-                            <p><strong>Rating:</strong> ${featured[i].vote_average}</p>
-                            <p><strong>Release date:</strong> ${featured[i].release_date}</p>
+                            <p id="p_rating"><strong>Rating:</strong> <span>${featured[i].vote_average} / 10  <i class="material-icons star">star_rate</i></span> </p>
+                            <p><strong>Release date:</strong> <span>${featured[i].release_date} <i class="material-icons date">date_range</i> </span></p>
                             <a onclick="movieSelected('${featured[i].id}')" href="#">Details</a>
                         </div>
                     </div>
@@ -70,51 +69,24 @@ window.onload = function featuredMovies(){
                 featuredOutput.innerHTML = output;
             }
         });
-
-        // TOP RATED TV SHOWS.
-        axios.get("https://api.themoviedb.org/3/tv/top_rated?api_key="+API_KEY+'&language=en-US&page='+topRated)
-		.then ((response)=>{
-			//Fetches the data - > results from the API.
-			console.log(response);
-			let shows = response.data.results;
-			let output = "";
-			//Appends to the output the info for each fetched result.
-			for(let i = 0; i < shows.length; i++){
-				output += `
-				<div class="card">
-                        <div class="overlay">
-                            <div class="movie">
-                                <h2>${shows[i].original_name}</h2>
-                                <p><strong>Rating:</strong> ${shows[i].vote_average}</p>
-                                <p><strong>Release date:</strong> ${shows[i].first_air_date}</p>
-                                <a onclick="showSelected('${shows[i].id}')" href="#">Details</a>
-                            </div>
-                        </div>
-                        <img src="http://image.tmdb.org/t/p/w400/${shows[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
-                    </div>`;
-			}
-			//Appends the "output" to the movies element.
-			let topRatedShows = document.getElementById("topRatedShows");
-			topRatedShows.innerHTML = output;
-        })
         
         // POPULAR TV SHOWS.
         axios.get("https://api.themoviedb.org/3/tv/popular?api_key="+API_KEY+'&language=en-US&page='+popular)
             .then((response)=>{
                 const shows = response.data.results;
-                shows.length = 20;
+                shows.length = 8;
                 console.log(shows)
                 let output = "";
                 for(let i = 0; i < shows.length; i++){
                     output +=`
                     <div class="card">
                         <div class="overlay">
-                            <div class="movie">
-                                <h2>${shows[i].original_name}</h2>
-                                <p><strong>Rating:</strong> ${shows[i].vote_average}</p>
-                                <p><strong>Release date:</strong> ${shows[i].first_air_date}</p>
-                                <a onclick="showSelected('${shows[i].id}')"  href="#">Details</a>
-                            </div>
+                        <div class="movie">
+                                <h2>${shows[i].name}</h2>
+                                <p id="p_rating"><strong>Rating:</strong> <span>${shows[i].vote_average} / 10  <i class="material-icons star">star_rate</i></span> </p>
+                                <p><strong>First air date:</strong> <span>${shows[i].first_air_date} <i class="material-icons date">date_range</i> </span></p>
+                                <a onclick="showSelected('${shows[i].id}')" href="#">Details</a>
+                        </div>
                         </div>
                         <img src="http://image.tmdb.org/t/p/w400/${shows[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
                     </div>`;
@@ -122,57 +94,35 @@ window.onload = function featuredMovies(){
                     const popularShows = document.getElementById("tvShows");
                     popularShows.innerHTML = output;
                 })
+
+        // NOW PLAYING MOVIES
+        axios.get("https://api.themoviedb.org/3/movie/now_playing?api_key="+API_KEY+'&language=en-US&page=1&region=US')
+            .then((response)=>{
+                let nowPlaying = response.data.results;
+                nowPlaying.length = 8;
+                let output = "";
+                for(let i = 0; i < nowPlaying.length; i++){
+                    output +=`
+                    <div class="card">
+                        <div class="overlay">
+                            <div class="movie">
+                                <h2>${nowPlaying[i].title}</h2>
+                                <p id="p_rating"><strong>Rating:</strong> <span>${nowPlaying[i].vote_average} / 10  <i class="material-icons star">star_rate</i></span> </p>
+                                <p><strong>Release date:</strong> <span>${nowPlaying[i].release_date} <i class="material-icons date">date_range</i> </span></p>
+                                <a onclick="movieSelected('${nowPlaying[i].id}')" href="#">Details</a>
+                            </div>
+                        </div>
+                        <img src="http://image.tmdb.org/t/p/w400/${nowPlaying[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
+                    </div>`;
+                    }
+                    const nowPlayingOutput = document.getElementById("nowPlaying");
+                    nowPlayingOutput.innerHTML = output;
+                })
         //Random quote on page load.
-         document.getElementById("quote").innerHTML = randomQuote[Math.round(Math.random()*16)];
+        document.getElementById("quote").innerHTML = randomQuote[Math.round(Math.random()*16)];
         quote.style.display = "block";
         quote.classList.remove("quoteFade");  
 }
-// TOP RATED MOVIES SLIDER
-const topRated = document.getElementById("topRated");
-topRated.addEventListener("mousedown", (e)=>{
-    isDown = true;
-    startX = e.pageX - topRated.offsetLeft;
-    scrollLeft = topRated.scrollLeft;
-    e.preventDefault();
-    console.log(startX);
-})
-topRated.addEventListener("mouseup", ()=>{
-    isDown = false;
-})
-topRated.addEventListener("mouseleave", (e)=>{
-    topRated.classList.remove("active");
-    isDown = false;
-})
-topRated.addEventListener("mousemove", (e)=>{
-    if(!isDown) return;
-    e.preventDefault();
-    const x = e.pageX - topRated.offsetLeft;
-    const walk = x - startX;
-    topRated.scrollLeft = scrollLeft - walk;
-})
-// TOP RATED TV SHOWS SLIDER
-const topRatedShows = document.getElementById("topRatedShows");
-topRatedShows.addEventListener("mousedown", (e)=>{
-    isDown = true;
-    startX = e.pageX - topRatedShows.offsetLeft;
-    scrollLeft = topRatedShows.scrollLeft;
-    e.preventDefault();
-    console.log(startX);
-})
-topRatedShows.addEventListener("mouseup", ()=>{
-    isDown = false;
-})
-topRatedShows.addEventListener("mouseleave", (e)=>{
-    topRatedShows.classList.remove("active");
-    isDown = false;
-})
-topRatedShows.addEventListener("mousemove", (e)=>{
-    if(!isDown) return;
-    e.preventDefault();
-    const x = e.pageX - topRatedShows.offsetLeft;
-    const walk = x - startX;
-    topRatedShows.scrollLeft = scrollLeft - walk;
-})
 // Popular movies slider
 const popularMoviesSlider = document.getElementById("movies");
 let isDown = false;
@@ -226,6 +176,31 @@ popularTvShowsSlider.addEventListener("mousemove", (e)=>{
     const walk = x - startX;
     popularTvShowsSlider.scrollLeft = scrollLeft - walk;
 })
+
+// Slide for now playing
+const nowPlaying = document.getElementById("nowPlaying");
+nowPlaying.addEventListener("mousedown", (e)=>{
+    isDown = true;
+    startX = e.pageX - nowPlaying.offsetLeft;
+    scrollLeft = nowPlaying.scrollLeft;
+    e.preventDefault();
+    console.log(startX);
+})
+nowPlaying.addEventListener("mouseup", ()=>{
+    isDown = false;
+})
+nowPlaying.addEventListener("mouseleave", (e)=>{
+    popularMoviesSlider.classList.remove("active");
+    isDown = false;
+})
+nowPlaying.addEventListener("mousemove", (e)=>{
+    if(!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - nowPlaying.offsetLeft;
+    const walk = x - startX;
+    nowPlaying.scrollLeft = scrollLeft - walk;
+})
+
 //Takes you to detailed info page.
 function movieSelected(id){
     sessionStorage.setItem("movieId", id);
@@ -237,31 +212,9 @@ function showSelected(id){
     location.replace("shows-page.html");
     return false;
 }
-//Array for random quotes.
-let randomQuote = new Array();
-randomQuote[0] = " 'I'm going on an adventure!' - Bilbo Baggins, The Hobbit";
-randomQuote[1] = " 'I'm going to make him an offer he can't refuse.' - Vito Corleone, The Godfather";
-randomQuote[2] = " 'You talkin' to me?' - Travis Bickle, Taxi Driver";
-randomQuote[3] = " 'Bond. James Bond.' - James Bond";
-randomQuote[4] = " 'I'll be back.' - Terminator, The Terminator";
-randomQuote[5] = " 'My mama always said, 'Life is (was) like a box of chocolates. You never know what you're gonna get.' - Forrest Gump, Forrest Gump";
-randomQuote[6] = " 'I see dead people.' - Cole Sear, The Sixth Sense";
-randomQuote[7] = " 'Keep your friends close, but your enemies closer.' - Michael Corleone, The Godfather part II";
-randomQuote[8] = " 'Say 'hello' to my little friend!' -Tony Montana, Scarface";
-randomQuote[9] = " 'Hasta la vista, baby.' - The Terminator, Terminator 2: Judgement Day";
-randomQuote[10] = " 'Bye Felicia !' - Ice Cube, Friday";
-randomQuote[11] = " 'My precious.' - Gollum, The Lord of the rings: The Two Towers";
-randomQuote[12] = " 'Houston, we have a problem.' - Jim Lovell, Apollo 13";
-randomQuote[13] = " 'Yippie-Ki-Yay, Motherfucker!' - John McClane, Die Hard";
-randomQuote[14] = " 'May the Force be with you' - Obi-Wan Kenobi, Star Wars";
-randomQuote[15] = " 'A wizard is never late, Frodo Baggins. Nor is he early. He arrives precisely when he means to.' - Gandalf, The Lord of the Rings: Fellowship of the";
-let quote = document.getElementById("quote");
-//quote.style.display = "none";
-//Change quote(with fade in/out animation) at the set interval.
-setInterval(() => {
-    quote.classList.remove("quoteFade");
-        setTimeout(() => {
-        document.getElementById("quote").innerHTML = randomQuote[Math.round(Math.random()*16)];
-        quote.classList.add("quoteFade");
-        }, 2500); 
-    }, 5000);
+// Smooth scroll to about section
+document.getElementById("aboutLink").addEventListener("click", ()=>{
+    document.getElementById("aboutSection").scrollIntoView({
+        behavior: 'smooth'
+      });
+})
