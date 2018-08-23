@@ -12,6 +12,8 @@ Ever found yourself in a situation where you want to watch some movie or tv show
 
 ##### I do not hold any ownership of the images used in this project. For now, this project is for non-commercial use.
 
+##### Glasses icon in the logo made by: https://www.flaticon.com/authors/pixel-perfect from https://www.flaticon.com/
+
 ###### To-Do in a future update:
 * Add an option which will help the user to choose whether he wants to watch some movie, or a tv show, with specific genre or actor, which will narrow the choices the user needs to make.
 
