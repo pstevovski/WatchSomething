@@ -17,20 +17,17 @@
 </head>
 <body>
 <!-- Navigation Bar -->
-	<nav>
+	<nav class="shadowMenu">
+			<div class="logo">
+					<a href="index.html"><h3>Watch<span><img src="images/glasses.svg" width="25px" alt="Glasses"></span>Something</h3></a>
+			</div>
             <!-- The Menu -->
             <div class="menu">
 					<ul>
-							<li class="list"><a href="index.html">Home</a></li>
-							<li class="list"><a href="movies/latest-movies.html">Movies</a></li>
-							<li class="list"><a href="series/series-latest.html">TV Shows</a></li>
-							<li class="list">My Lists<span class="drop"><i class="ion-chevron-down"></i></span></a>
-								<ul class="firstUnordered">
-								   <li><a href="watchlist.html">Watchlist</a>
-								   <li><a href="favorites.html">Favorites</a>
-								</ul>
-							</li>
-							<li class="list"><a href="about.html">About</a></li>
+						<li class="list"><a href="movies/latest-movies.html">Movies</a></li>
+						<li class="list"><a href="series/series-latest.html">TV Shows</a></li>
+						<li class="list"><a href="watchlist.html">Watchlist</a></li>
+						<li class="list"><a href="favorites.html">Favorites</a></li>
 						</ul>
 				</div>
 		<!-- The burger menu for small screens -->
@@ -65,7 +62,6 @@
 					   <li><a href="favorites.html">Favorites</a>
 					</ul>
 					</li>
-				<li><a href="about.html">About</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -77,9 +73,12 @@
 	<div class="notification" id="added"> Added to Watchlist !</div>
 	<div class="notification" id="alreadyStored"> Already in watchlist !</div>
 	<div id="movie"></div>
-	<h2 id="trailer_title">Trailer: </h2>
+	<h2 id="trailer_title">Trailer</h2>
 	<div id="trailer"></div>
-	<h2 id="rec_title">Similar TV Shows: </h2>
+	<div id="rec_title">
+		<h1>Recommendations</h1>
+		<p>Here are some similar movies to this one:</p>
+	</div>
 	<div id="recommended"></div>
 	<div class="page">
 		<button id="prev" title="Previous page">PREVIOUS</button>
