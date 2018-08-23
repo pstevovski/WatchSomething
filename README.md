@@ -1,10 +1,4 @@
 # WatchSomething - Find a movie or tv show to watch !
-<p align="center">
-    <img src="images/repoImage.png" width="500px"/>
-    <img src="images/repoImage2.png" width="500px"/>
-    <img src="images/repoImage3.png" width="500px"/>
-    <img src="images/repoImage4.png" width="500px">
-</p>
 
 ### About
 Ever found yourself in a situation where you want to watch some movie or tv show, but simply can't find one to watch? Worry no more. WatchSomething uses https://www.themoviedb.org API to help you out. With this website you can:
@@ -21,6 +15,13 @@ Ever found yourself in a situation where you want to watch some movie or tv show
 ###### To-Do in a future update:
 * Add an option which will help the user to choose whether he wants to watch some movie, or a tv show, with specific genre or actor, which will narrow the choices the user needs to make.
 
+#### Update #5 (2018-08-23)
+###### DONE:
+* Re-designed homepage.
+* Re-designed navigation bar.
+* Minor changes to cards design.
+* Fixed random number issues for trailers for movies and tv shows details page.
+* Cut out about & upcoming movies pages.
 
 #### Update #4 (2018-08-09) - TOTAL OVERHAUL
 ###### DONE:
