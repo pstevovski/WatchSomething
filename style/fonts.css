@@ -23,14 +23,6 @@
 	font-family: "Paytone One";
 	src: url("../fonts/PaytoneOne-Regular.ttf");
 }
-/* Ionicons */
-@font-face{
-	font-family: "ionicons";
-	src: url("../fonts/ionicons.eot"),
-		 url("../fonts/ionicons.ttf"),
-		 url("../fonts/ionicons.woff"),
-		 url("../fonts/ionicons.svg");
-}
 /* Material Design Icons */
 @font-face {
 	font-family: 'Material Icons';
