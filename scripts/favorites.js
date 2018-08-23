@@ -180,7 +180,7 @@ document.getElementById("closeRecommended").addEventListener("click", ()=>{
     let storedId = JSON.parse(localStorage.getItem("favoriteMovies")) ||  [];
     let index = storedId.indexOf(id);
     storedId.splice(index, 1);
-    localStorage.setItem("movies", JSON.stringify(storedId));
+    localStorage.setItem("favoriteMovies", JSON.stringify(storedId));
 
     //Notification that a movie was removed from watchlist.
     const removedWatchlist = document.getElementById("alreadyStored");
