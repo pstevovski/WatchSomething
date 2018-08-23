@@ -5,78 +5,148 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>WatchSomething</title>
-    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
-    <link rel="manifest" href="favicon/site.webmanifest">
-    <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="theme-color" content="#ffffff">
-    <link rel="stylesheet" href="style/landingPage.css">
+    <link rel="stylesheet" href="style/homepage.css">
     <link rel="stylesheet" href="style/fonts.css">
 </head>
 <body>
-<!-- Navigation bar -->
+    <!-- Navigation links -->
     <nav>
-        <!-- Links -->
         <ul>
             <li><a href="movies/latest-movies.html">Movies</a></li>
-            <li><a href="series/series-latest.html">Tv Shows</a></li>
-            <li><a href="about.html">About</a></li>
+            <li><a href="series/series-latest.html">TV Shows</a></li>
+            <li><a id="aboutLink">About</a></li>
         </ul>
     </nav>
-<!-- Text -->
-    <section class="text">
-        <h1>WatchSomething</h1>
-        <h4>Find movies & tv shows to watch instantly or store them in lists for later. If you don't have any idea what to watch, you're at the right place.</h4>
-        <!-- Quote -->
-        <div id="quote"></div>
+
+    <!-- Title section -->
+    <section class="title">
+        <h1>WatchS<span><img src="images/glasses.svg" width="45px" height="45px" alt="Eye"></span>mething</h1>
+        <p>No idea what to watch ? Find movies or tv shows to watch instantly, or store them in lists for later !</p>
+        <p id="quote"></p>
     </section>
-<!-- Top Rated movies -->
-    <section class="topRated">
-        <h2 class="title">TOP RATED MOVIES <span><i class="material-icons star">stars</i></span></h2>
-        <a href="movies/top-rated.html">show more..</a>
-        <div id="topRated" class="scroll"></div>
-    </section>
-<!-- Search movies -->
-    <section class="search_movies">
-        <h2 class="title">POPULAR MOVIES <span><i class="material-icons hot">whatshot</i></span></h2>
-        <a href="movies/popular-movies.html">show more..</a>
+
+    <!-- Popular movies section -->
+    <section class="popularMovies popular">
+        <h2 class="popularTitle">POPULAR MOVIES <span><i class="material-icons hot">whatshot</i></span></h2>
+        <a href="movies/popular-movies.html">see more...</a>
         <!-- Movies output -->
         <div id="movies" class="scroll"></div>
     </section>
-    <!-- Top Rated tv shows -->
-    <section class="topRatedShows">
-        <h2 class="title">TOP RATED TV SHOWS <span><i class="material-icons star">stars</i></span></h2>
-        <a href="series/series-toprated.html">show more..</a>
-        <div id="topRatedShows" class="scroll"></div>
-    </section>
-<!-- Search Tv Shows -->
-    <section class="search_tvshows">
-        <h2 class="title">POPULAR TV SHOWS <span><i class="material-icons hot">whatshot</i></span></h2>
-        <a href="series/series-popular.html">show more..</a>
-        <!-- Tv Shows output -->
+
+    <!-- Popular TV Shows section -->
+    <section class="popularTvShows popular">
+        <h2 class="popularTitle">POPULAR  TV SHOWS <span><i class="material-icons hot">whatshot</i></span></h2>
+        <a href="series/series-popular.html">see more...</a>
+        <!-- TV Shows output -->
         <div id="tvShows" class="scroll"></div>
     </section>
-<!-- Footer -->
-<footer>
-    <!-- Powered by -->
-    <div class="poweredBy">
-        <a href="https://www.themoviedb.org"><img src="images/tmdb.svg" alt="TMDB" title="TMDB" width="90px"></a>
+
+    <!-- See more section -->
+    <section class="seeMore">
+        <h2>For more options, click on one of the buttons below:</h2>
+        <div class="seeMore_buttons">
+            <!-- Movies -->
+            <a href="movies/top-rated.html">MOVIES</a>
+            <!-- TV Shows -->
+            <a href="series/series-toprated.html">TV SHOWS</a>
+        </div>
+    </section>
+
+    <!-- Now Playing section -->
+    <section class="nowPlaying">
+        <h1>NOW PLAYING</h1>
+        <p id="nowPlayingText">Movies that are playing in theaters now. Find more of the latest movies <a href="movies/latest-movies.html">here</a>.</p>
+        <!-- Now Playing output -->
+        <div id="nowPlaying" class="scroll"></div>
+    </section>
+
+    <!-- About section -->
+    <section class="about" id="aboutSection">
+        <h1>ABOUT</h1>
+        <p>This website uses <a href="https://themoviedb.org">themoviedb.org</a> API to help you find movies & tv shows to watch, with ease. You can: </p>
+        <div class="about_boxes">
+            <!-- Movies box -->
+            <div class="moviesBox box">
+                <h3>MOVIES</h3>
+                <p>Look trough our lists of top rated, popular, latest & upcoming movies, to find something good to watch. Search by year, title, actor or genre.</p>
+                <div class="boxImg">
+                    <i class="material-icons boxIcon">theaters</i>
+                </div>
+            </div>
+            <!-- TV SHOWS box -->
+            <div class="tvShowsBox box">
+                    <h3>TV SHOWS</h3>
+                    <p>Top rated, popular, on air... whatever you need. You can also search for tv shows by year, title or genre.</p>
+                    <div class="boxImg">
+                        <i class="material-icons boxIcon">tv</i>
+                    </div>
+            </div>
+            <!-- Lists box -->
+            <div class="listsBox box">
+                    <h3>LISTS</h3>
+                    <p>Add movies & tv shows to a watchlist and favorites list, so you can keep track of what you need to watch or what you loved ! Or maybe get help with some recommendations.</p>
+                    <div class="boxImg">
+                        <i class="material-icons boxIcon">visibility</i>
+                    </div>
+            </div>
+            <!-- Details box -->
+            <div class="detailsBox box">
+                    <h3>DETAILS</h3>
+                    <p>Get detailed informations about every movie or tv show, including trailers & recommendations for similar movies / tv shows.</p>
+                    <div class="boxImg">
+                        <i class="material-icons boxIcon">description</i>
+                    </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Site name & popcorn -->
+    <div class="popcorn">
+        <a href="index.html">WatchSomething.com <span><img src="images/popcorn.svg" width="32px" alt="Popcorn"></span></a>
     </div>
-    <!-- 2018 Copyright -->
-    <div class="copy">
-        <p>2018 &copy;</p>
-    </div>
-    <!-- Deadpool image -->
-    <div class="deadpool">
-        <img src="images/deadpool.png" alt="deadpool">
-    </div>
-</footer>
+
+    <!-- Footer -->
+    <footer>
+        <!-- Links -->
+        <div class="links">
+            <div class="moviesLinks">
+                <h3>MOVIES</h3>
+                <ul>
+                    <li><a href="movies/top-rated.html">Top Rated</a></li>
+                    <li><a href="movies/popular-movies.html">Popular</a></li>
+                    <li><a href="movies/latest-movies.html">Latest</a></li>
+                    <li><a href="movies/search-movies.html">Search</a></li>
+                </ul>
+            </div>
+            <!-- Tv Shows page links -->
+            <div class="tvShowsLinks">
+                <h3>TV SHOWS</h3>
+                <ul>
+                    <li><a href="series/series-toprated.html">Top Rated</a></li>
+                    <li><a href="series/series-popular.html">Popular</a></li>
+                    <li><a href="series/series-latest.html">On Air</a></li>
+                    <li><a href="series/search-series.html">Search</a></li>
+                </ul>
+            </div>
+            <!-- GitHub link -->
+            <div class="githubLink">
+                <h3>&copy; 2018</h3>
+                <p>GitHub link: </p>
+                <a href="https://github.com/pecko95/WatchSomething/" target="somethingUnique"><img src="images/github.svg" width="32px" alt="GitHub"></a>
+            </div>
+        </div>
+        <!-- Deadpool image -->
+        <div class="deadpool">
+            <img src="images/deadpool.png" width="330px" alt="Deadpool...">
+        </div>
+        <!-- Credits -->
+        <div class="credits">
+            <a href="https://themoviedb.org" target="somethingUnique"><img src="images/tmdb2.svg" width="150px" alt="TMDB - The movie database."></a>
+        </div>
+    </footer>
 </body>
 <script src="scripts/config.js"></script>
 <script src="scripts/homePage.js"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <!-- Axios link -->
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </html>
