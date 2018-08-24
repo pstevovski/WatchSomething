@@ -35,3 +35,12 @@
 	  url("../fonts/MaterialIcons-Regular.woff") format('woff'),
 	  url("../fonts/MaterialIcons-Regular.ttf") format('truetype');
   }
+  /* Ionicons font support */
+  @font-face {
+	  font-family: "Ionicons";
+	  font-style: normal;
+	  src: url("../fonts/ionicons.eot"); /* For IE6-8 */;
+	  src: local("Ionicons"),
+		  url("../fonts/ionicons.ttf") format("truetype"),
+		  url("../fonts/ionicons.woff") format("woff");
+  }
