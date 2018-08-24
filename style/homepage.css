@@ -339,6 +339,7 @@ nav ul li a:hover::after{
 }
 .box:hover{
     transform: translateY(-10px);
+    box-shadow: 0px 4px 30px rgba(0,0,0,0.2);
 }
 .box h3{
     font-family: "Paytone One";
