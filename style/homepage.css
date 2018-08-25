@@ -559,6 +559,9 @@ footer .credits{
     }
 }
 @media (max-width: 350px){
+    .title{
+        margin: 0;
+    }
     footer .deadpool img{
         margin-bottom: -10px;
         width: 250px;

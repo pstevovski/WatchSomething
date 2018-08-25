@@ -150,7 +150,7 @@ nav a{
 	color: #fff;
 }
 .logo{
-	font-family: "Paytone One";
+	font-family: "Paytone one";
 	color: #f5f5f5;
 	font-size: 16px;
 	letter-spacing: 1px;
@@ -174,8 +174,9 @@ nav a{
 	margin: 0 2px;
 }
 .menu{
-	font-weight: bold;
-	font-family: "Montserrat Medium", Arial, Helvetica, sans-serif;
+	/* font-weight: bold; */
+	font-family: "Montserrat Regular", Arial, Helvetica, sans-serif;
+	font-size: 15px;
 }
 .menu ul{
 	display: flex;
@@ -501,7 +502,7 @@ nav a{
 }
 .card:hover{
 	transform: translateY(-15px);
-	box-shadow: 5px 5px rgba(0,0,0,0.35);
+	box-shadow: 5px 5px rgba(0,0,0,0.25);
 }
 .card:hover .overlay{
 	height: 500px;
