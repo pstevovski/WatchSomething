@@ -94,7 +94,7 @@ window.onload = function getMovies(){
 // Takes you to detailed info page.
 function movieSelected(id){
 	sessionStorage.setItem("movieId", id);
-	location.replace("../movie-page.html");
+	window.open("../movie-page.html");
 	return false;
 }
 

@@ -511,7 +511,7 @@ function genres(id){
 //Get the movie ID, set it to storageSession and then re-direct the user to movie details page.
 function movieSelected(id){
     sessionStorage.setItem("movieId", id);
-    location.replace("../movie-page.html");
+    window.open("../movie-page.html");
     return false;
 }
 

@@ -92,7 +92,7 @@ window.onload = function getSeries(){
 //Take the user to detailed tv show info page.
 function showSelected(id){
 	sessionStorage.setItem("showId", id);
-	location.replace("../shows-page.html");
+	window.open("../shows-page.html");
 	return false;
 }
 
