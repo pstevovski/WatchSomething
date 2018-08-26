@@ -95,15 +95,19 @@ function getShowInfo(){
 			document.getElementById("trailer_title").style.display = "none";
 			document.getElementById("rec_title").style.display = "none";
 		});
+
 		// Another API call, if there's cast info about the tv show.
 		Promise.all([seriesPromise, imdbPromise, seriesCast])
 		.then( ([seriesResponse, imdbResponse, seriesCastResponse]) =>{
 			const series = seriesResponse.data;
 			const imdb_id = imdbResponse.data.imdb_id;
-			const cast = seriesCastResponse.data.cast;
 			const genres = seriesResponse.data.genres;
-			cast.length = 5;
-			
+			let cast = seriesCastResponse.data.cast;
+			// If the cast length is greater than 5, set it to 5, otherwise show if its < 5.
+			if( cast.length > 5 ) {
+				cast.length = 5;
+			}
+
 			homepage = seriesResponse.data.homepage;
 			let i = 0;
 			let output = `
@@ -160,6 +164,7 @@ function getShowInfo(){
 			info.innerHTML = output;
 		})
 		.catch ((err)=>{
+			console.log(err);
 			let output = "";
 			output += `<h1 id="errorTitle">SORRY !</h1>
 			<p id="errorText">We could not provide informations about this tv show at this particular moment. Be sure to come back again. Thank you for your understanding. </p>
