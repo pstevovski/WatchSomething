@@ -91,7 +91,7 @@ function getMovie(){
 			output += `<h1 id="errorTitle">SORRY !</h1>
 			<p id="errorText">We could not provide informations about this movie at this particular moment. Be sure to come back again. Thank you for your understanding. </p>
 			<div class="buttons errorBack">
-				<a href="javascript:history.back()"> Go back </a>
+				<a onclick="goBack()"> Go back </a>
 			</div>`;
 			// Hide elements if theres an error.
 			let info = document.getElementById("movie");
@@ -185,7 +185,7 @@ function getMovie(){
 
 //Go back button function.
 function goBack(){
-	history.go(-1);
+	window.close();
 }
 
 // Take user to details page.

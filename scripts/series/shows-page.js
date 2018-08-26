@@ -84,7 +84,7 @@ function getShowInfo(){
 			output += `<h1 id="errorTitle">SORRY !</h1>
 			<p id="errorText">We could not provide informations about this tv show at this particular moment. Be sure to come back again. Thank you for your understanding. </p>
 			<div class="buttons errorBack">
-				<a href="javascript:history.back()"> Go back </a>
+				<a onclick="goBack()"> Go back </a>
 			</div>`;
 			let info = document.getElementById("movie");
 			info.innerHTML = output;
@@ -150,7 +150,7 @@ function getShowInfo(){
 							<a href="https://www.imdb.com/title/${imdb_id}"target="_blank"> IMDB Link </a>
 							<a id="addToWatchList" onclick="addToList('${series.id}')"> Add to watchlist </a>
 							<a class="twitter-share-button twitter" onclick="tweet('${series.name}')"></a>
-							<a href="javascript:history.back()"> Go back </a>
+							<a onclick="goBack()"> Go back </a>
 						</div>
 					</div>
 				</div>
@@ -169,7 +169,7 @@ function getShowInfo(){
 			output += `<h1 id="errorTitle">SORRY !</h1>
 			<p id="errorText">We could not provide informations about this tv show at this particular moment. Be sure to come back again. Thank you for your understanding. </p>
 			<div class="buttons errorBack">
-				<a href="javascript:history.back()"> Go back </a>
+				<a onclick="goBack()"> Go back </a>
 			</div>`;
 			let info = document.getElementById("movie");
 			info.innerHTML = output;
@@ -258,7 +258,7 @@ function getShowInfo(){
 
 //Go back button function.
 function goBack(){
-	history.go(-1);
+	window.close();
 }
 
 // Detailed tv shows page.
