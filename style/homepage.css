@@ -115,8 +115,9 @@ nav ul li a:hover::after{
     margin: 15px 0;
     transition: all 0.2s;
     color: #e1302a;
-    font-family: "Montserrat SemiBold";
-    font-size: 16px;
+    font-family: "Montserrat Regular";
+    font-weight: bold;
+    font-size: 14px;
     font-style: italic;
 }
 
