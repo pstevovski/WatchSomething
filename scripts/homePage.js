@@ -124,83 +124,34 @@ window.onload = function featuredMovies(){
         quote.classList.remove("quoteFade");  
 }
 // Popular movies slider
-const popularMoviesSlider = document.getElementById("movies");
+const testScroll = document.querySelectorAll(".scroll");
 let isDown = false;
 let startX;
 let scrollLeft;
 
-popularMoviesSlider.addEventListener("mousedown", (e)=>{
-    isDown = true;
-    startX = e.pageX - popularMoviesSlider.offsetLeft;
-    scrollLeft = popularMoviesSlider.scrollLeft;
-    e.preventDefault();
-    console.log(startX);
-})
-popularMoviesSlider.addEventListener("mouseup", ()=>{
-    isDown = false;
-})
-popularMoviesSlider.addEventListener("mouseleave", (e)=>{
-    popularMoviesSlider.classList.remove("active");
-    isDown = false;
-})
-popularMoviesSlider.addEventListener("mousemove", (e)=>{
-    if(!isDown) return;
-    e.preventDefault();
-    const x = e.pageX - popularMoviesSlider.offsetLeft;
-    const walk = x - startX;
-    popularMoviesSlider.scrollLeft = scrollLeft - walk;
-})
+testScroll.forEach(scroll => scroll.addEventListener("mousedown", e=>{
+        isDown = true;
+        startX = e.pageX - scroll.offsetLeft;
+        scrollLeft = scroll.scrollLeft;
+        e.preventDefault();
+}));
 
-//Slider for tv shows.
-const popularTvShowsSlider = document.getElementById("tvShows");
-popularTvShowsSlider.addEventListener("mousedown", (e)=>{
-    popularTvShowsSlider.classList.add("active");
-    isDown = true;
-    startX = e.pageX - popularTvShowsSlider.offsetLeft;
-    scrollLeft = popularTvShowsSlider.scrollLeft;
-    e.preventDefault();
-    console.log(startX);
-})
-popularTvShowsSlider.addEventListener("mouseup", ()=>{
-    popularTvShowsSlider.classList.remove("active");
-    isDown = false;
-})
-popularTvShowsSlider.addEventListener("mouseleave", (e)=>{
-    popularTvShowsSlider.classList.remove("active");
-    isDown = false;
-})
-popularTvShowsSlider.addEventListener("mousemove", (e)=>{
-    if(!isDown) return;
-    e.preventDefault();
-    const x = e.pageX - popularTvShowsSlider.offsetLeft;
-    const walk = x - startX;
-    popularTvShowsSlider.scrollLeft = scrollLeft - walk;
-})
+testScroll.forEach(scroll => scroll.addEventListener("mouseup", ()=>{
+        isDown = false;
+}));
 
-// Slide for now playing
-const nowPlaying = document.getElementById("nowPlaying");
-nowPlaying.addEventListener("mousedown", (e)=>{
-    isDown = true;
-    startX = e.pageX - nowPlaying.offsetLeft;
-    scrollLeft = nowPlaying.scrollLeft;
-    e.preventDefault();
-    console.log(startX);
-})
-nowPlaying.addEventListener("mouseup", ()=>{
-    isDown = false;
-})
-nowPlaying.addEventListener("mouseleave", (e)=>{
-    popularMoviesSlider.classList.remove("active");
-    isDown = false;
-})
-nowPlaying.addEventListener("mousemove", (e)=>{
-    if(!isDown) return;
-    e.preventDefault();
-    const x = e.pageX - nowPlaying.offsetLeft;
-    const walk = x - startX;
-    nowPlaying.scrollLeft = scrollLeft - walk;
-})
+testScroll.forEach(scroll => scroll.addEventListener("mouseleave", (e)=>{
+        scroll.classList.remove("active");
+        isDown = false;
+}));
 
+testScroll.forEach(scroll => scroll.addEventListener("mousemove", (e)=>{
+        if(!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - scroll.offsetLeft;
+        const walk = x - startX;
+        scroll.scrollLeft = scrollLeft - walk;
+}));
 //Takes you to detailed info page.
 function movieSelected(id){
     sessionStorage.setItem("movieId", id);
