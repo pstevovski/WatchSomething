@@ -34,7 +34,7 @@ setInterval(() => {
         document.getElementById("quote").innerHTML = randomQuote[Math.round(Math.random()*16)];
         quote.classList.add("quoteFade");
         }, 2500); 
-    }, 5000);
+}, 5000);
 
 window.onload = function featuredMovies(){
     // Random page number generator for popular movies and tv shows.
@@ -124,28 +124,28 @@ window.onload = function featuredMovies(){
         quote.classList.remove("quoteFade");  
 }
 // Popular movies slider
-const testScroll = document.querySelectorAll(".scroll");
+const slider = document.querySelectorAll(".scroll");
 let isDown = false;
 let startX;
 let scrollLeft;
 
-testScroll.forEach(scroll => scroll.addEventListener("mousedown", e=>{
+slider.forEach(scroll => scroll.addEventListener("mousedown", e=>{
         isDown = true;
         startX = e.pageX - scroll.offsetLeft;
         scrollLeft = scroll.scrollLeft;
         e.preventDefault();
 }));
 
-testScroll.forEach(scroll => scroll.addEventListener("mouseup", ()=>{
+slider.forEach(scroll => scroll.addEventListener("mouseup", ()=>{
         isDown = false;
 }));
 
-testScroll.forEach(scroll => scroll.addEventListener("mouseleave", (e)=>{
+slider.forEach(scroll => scroll.addEventListener("mouseleave", (e)=>{
         scroll.classList.remove("active");
         isDown = false;
 }));
 
-testScroll.forEach(scroll => scroll.addEventListener("mousemove", (e)=>{
+slider.forEach(scroll => scroll.addEventListener("mousemove", (e)=>{
         if(!isDown) return;
         e.preventDefault();
         const x = e.pageX - scroll.offsetLeft;
