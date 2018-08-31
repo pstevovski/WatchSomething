@@ -25,11 +25,11 @@ const genresObject = Object.freeze({
     "MUSIC": 10402,
     "MYSTERY":9648,
     "ROMANCE": 10749,
-    "THRILLER": 878,
-    "WAR": 10770,
-    "WESTERN": 53,
-    "SCIFI": 10752,
-    "TV MOVIE": 37
+    "THRILLER": 53,
+    "WAR": 10752,
+    "WESTERN": 37,
+    "SCIFI": 878,
+    "TV MOVIE": 10770
 })
 
 form.addEventListener("submit", (e)=>{
