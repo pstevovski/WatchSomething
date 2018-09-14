@@ -171,7 +171,9 @@ nav a{
 	z-index: 3;
 }
 .logo span{
+	display: block;
 	margin: 0 2px;
+	margin-top: 5px;
 }
 .menu{
 	/* font-weight: bold; */
@@ -189,41 +191,16 @@ nav a{
 	padding: 15px;
 	cursor: pointer;
 	position: relative;
-	transition: all 0.3s;
-	margin: 0 5px;
+	transition: all 0.1s;
 	transition: 0.25s;
+	font-family: "Montserrat Medium";
+	text-transform: lowercase;
 }
-.menu ul li a::before{
-    content: '';
-	position: absolute;
-	bottom: 0;
-	right: 0;
-	width: 1px;
-	border: 2px solid #fff;
-	border-width: 0 0 2px 0;
-	transition: 0.25s ease-out;
-	opacity: 0;
+.menu ul .list:hover{
+	background-color: #f9f9f9;
 }
-.menu ul li a::after{
-    content: '';
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	width: 1px;
-	border: 2px solid #fff;
-	border-width: 0 0 2px 0;
-	transition: 0.25s ease-out;
-	opacity: 0;
-}
-.menu ul li a:hover::before{
-    width: 50%;
-    opacity: 1;
-    right: 0px;
-}
-.menu ul li a:hover::after{
-    width: 50%;
-    opacity: 1;
-    left: 0px;
+.menu ul .list:hover a{
+	color: #e1302a;
 }
 .menu ul .list a{
 	padding: 5px;
@@ -248,19 +225,16 @@ nav a{
 	width: 100%;
 	height: 55px;
 	background-color: #f9f9f9;
-	/* box-shadow: 0px 7px 0px rgba(0,0,0,0.1); */
 	margin-top: 35px;
 	font-family: "Montserrat Regular";
 	font-size: 15px;
 	text-transform: lowercase;
 	transition: all 0.25s ease;
 }
-
 .submenu li{
 	transition: all 0.25s ease;
 	color: #444;
 }
-
 .submenu a{
 	text-transform: uppercase;
 	font-family: "Montserrat Medium";
@@ -272,9 +246,9 @@ nav a{
 	border-bottom: 0px solid #f0f0f0;
 }
 .submenu a:hover{
-	background-color: #e1302a;
-	color: #f5f5f5;
-	border-top: 5px solid #d3140d;
+	/* background-color: #e1302a; */
+	color: #e1302a;
+	border-bottom: 5px solid #e1302a;
 }
 /* Navigation bar - END. */
 

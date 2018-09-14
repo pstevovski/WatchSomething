@@ -45,6 +45,7 @@ li{
 /* Navigation menu */
 nav{
     width: 100%;
+    text-align: center;
 }
 nav ul{
     display: flex;
@@ -218,7 +219,11 @@ nav ul li a:hover::after{
     cursor: -webkit-grabbing;
     transition: 0.5s ease;
 }
+.scroll .card:first-child{
+    margin-left: 0px;
+}
 .scroll .card{
+    margin: 0px 3px;
     position: relative;
     height: 450px;
     transition: 0.5s ease;
