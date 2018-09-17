@@ -10,12 +10,20 @@ Ever found yourself in a situation where you want to watch some movie or tv show
 * Get recommendations that are similar to a movie or a tv show on the detailed informations page.
 * Get recommendations for movies or tv shows if there are none in your watchlist or favorites list.
 
+Check it out here: https://www.pecko95.github.io/WatchSomething
+
 ##### I do not hold any ownership of the images used in this project. For now, this project is for non-commercial use.
 
 ##### Glasses icon in the logo made by: https://www.flaticon.com/authors/pixel-perfect from https://www.flaticon.com/
 
 ###### To-Do in a future update:
 * Add an option which will help the user to choose whether he wants to watch some movie, or a tv show, with specific genre or actor, which will narrow the choices the user needs to make.
+
+#### Update #6 - minor - (2018-08-23)
+* Added an option to get a random movie or tv show straight away.
+* Redesigned recommendations for movies and tv shows on watchlist / favorites list.
+* Changed color scheme (again...).
+* Minor fixes.
 
 #### Update #5 (2018-08-23)
 ###### DONE:
