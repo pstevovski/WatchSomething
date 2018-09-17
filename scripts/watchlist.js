@@ -74,7 +74,7 @@ window.onload = function displayWatchlist(){
 // Recommend movies
 const recommendedBox = document.querySelector(".recommendedBox");
 function openRecommendMoviesBox(){
-    document.getElementById("recommendedTitle").innerHTML = "Recommended Movies: "
+    document.getElementById("recommendedTitle").innerHTML = `Recommended Movies: <span class="reload"><i class="material-icons refresh" onclick="reloadRecommendedMovies()">autorenew</i></span>`;
     recommendedBox.classList.add("recommendedBoxActive");    
     recommendMovies();
 }
@@ -98,21 +98,20 @@ function recommendMovies(){
         .then((response)=>{
             console.log(response)
             let movie = response.data.results;
-            movies.length = 15;
+            movies.length = 4;
             let output = "";
             for(let i = 0; i < movies.length; i++) {
                 output +=
-                `<div class="card">
-                <div class="overlay">
-                <div class="movie">
-                    <h2>${movie[i].title}</h2>
-                    <p id="p_rating"><strong>Rating:</strong> <span>${movie[i].vote_average} / 10  <i class="material-icons star">star_rate</i></span> </p>
-                    <p><strong>First air date:</strong> <span>${movie[i].release_date} <i class="material-icons date">date_range</i> </span></p>
-                    <a onclick="movieSelected('${movie[i].id}')" href="#">Details</a>
-                 </div>
+                `<div class="recommended_card" onclick="movieSelected(${movie[i].id})">
+                <div class="recommendedOverlay">
+                    <div class="recommendedInfo">
+                        <h2>${movie[i].title}</h2>
+                        <p>Rating: ${movie[i].vote_average} / 10 </p>
+                        <p>Release date: ${movie[i].release_date}</p>
+                    </div>
                 </div>
-                <div class="card_img">
-                    <img src="http://image.tmdb.org/t/p/w300/${movie[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
+                <div class="recommended_cardImg">
+                    <img src="http://image.tmdb.org/t/p/w154/${movie[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
                 </div>
                 </div>`;
             }
@@ -122,7 +121,7 @@ function recommendMovies(){
 }
 // Recommend tv shows.
 function openRecommendTvShowsBox(){
-    document.getElementById("recommendedTitle").innerHTML = "Recommended TV Shows: "
+    document.getElementById("recommendedTitle").innerHTML = `Recommended TV Shows: <span class="reload"><i class="material-icons refresh" onclick="reloadRecommendedTvShows()">autorenew</i></span>`;
     recommendedBox.classList.add("recommendedBoxActive");
     recommendTvShows();
 }
@@ -145,21 +144,20 @@ function recommendTvShows(){
         .then((response)=>{
             console.log(response)
             let series = response.data.results;
-            series.length = 15;
+            series.length = 4;
             let output = "";
             for(let i = 0; i < series.length; i++) {
                 output +=
-                `<div class="card">
-                <div class="overlay">
-                <div class="movie">
-                    <h2>${series[i].name}</h2>
-                    <p id="p_rating"><strong>Rating:</strong> <span>${series[i].vote_average} / 10  <i class="material-icons star">star_rate</i></span> </p>
-                    <p><strong>First air date:</strong> <span>${series[i].first_air_date} <i class="material-icons date">date_range</i> </span></p>
-                    <a onclick="showSelected('${series[i].id}')" href="#">Details</a>
+                `<div class="recommended_card" onclick="movieSelected(${series[i].id})">
+                <div class="recommendedOverlay">
+                    <div class="recommendedInfo">
+                        <h2>${series[i].name}</h2>
+                        <p>Rating: ${series[i].vote_average} / 10 </p>
+                        <p>Release date: ${series[i].first_air_date}</p>
+                    </div>
                 </div>
-                </div>
-                <div class="card_img">
-                    <img src="http://image.tmdb.org/t/p/w300/${series[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
+                <div class="recommended_cardImg">
+                    <img src="http://image.tmdb.org/t/p/w154/${series[i].poster_path}" onerror="this.onerror=null;this.src='../images/imageNotFound.png';">
                 </div>
                 </div>`;
             }
@@ -278,8 +276,19 @@ removeAllTvShows.addEventListener("click", ()=>{
         location.reload();
     }, 1500);
 })
+
+// Escape key closes down the recommended movies / tv shows box.
 document.body.addEventListener("keydown", (e)=>{
     if ( e.code === "Escape") {
         recommendedBox.classList.remove("recommendedBoxActive");
     }
 })
+
+// Reload recommended movies
+function reloadRecommendedMovies(){
+    recommendMovies();
+}
+// Reload recommended TV Shows
+function reloadRecommendedTvShows(){
+    recommendTvShows();
+}
