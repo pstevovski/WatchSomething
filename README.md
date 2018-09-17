@@ -19,7 +19,7 @@ Check it out here: https://www.pecko95.github.io/WatchSomething
 ###### To-Do in a future update:
 * Add an option which will help the user to choose whether he wants to watch some movie, or a tv show, with specific genre or actor, which will narrow the choices the user needs to make.
 
-#### Update #6 - minor - (2018-08-23)
+#### Update #6 - minor - (2018-09-17)
 * Added an option to get a random movie or tv show straight away.
 * Redesigned recommendations for movies and tv shows on watchlist / favorites list.
 * Changed color scheme (again...).
