@@ -1,0 +1,122 @@
+.recommendedBox{
+    display: none;
+    padding: 5px;
+    width: 330px;
+    min-height: 360px;
+    overflow: hidden;
+    background-color: #f5f5f5;
+    box-shadow: 0px 3px 5px rgba(0,0,0,0.2);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.recommendedBoxActive{
+    display: block;
+}
+#recommendedTitle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    font-family: "Montserrat Black";
+    font-size: 30px;
+}
+.recommendedOutput{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.recommendedOutput > * {
+    margin: 5px;
+}
+.recommended_card{
+    width: 130px;
+    height: 130px;
+    transition: 0.15s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+.recommended_card .recommended_movie{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+.recommended_card .recommended_movie h2{
+    font-size: 16px;
+}
+.recommendedOverlay{
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    transform: translateY(150px);
+    background-color: rgba(0,0,0,0.8);
+    transition: 0.3s ease;
+}
+.recommended_card:hover .recommendedOverlay{
+    transform: translateY(0px)
+}
+.recommendedInfo{
+    font-size: 12px;
+    font-family: "Montserrat Regular";
+    color: #f5f5f5;
+    position: absolute;
+    bottom: 0;
+    padding: 5px;
+    word-break: break-all;
+}
+.recommendedOutput .recommended_card .recommended_cardImg {
+    width: 130px;
+    height:130px;
+}
+.recommendedOutput .recommended_card .recommended_cardImg img{
+    width: 100%;
+    height: 100%;
+}
+.recommended_card:hover{
+    box-shadow: 0px 3px 5px rgba(0,0,0,0.3);
+}
+#closeRecommended{
+    padding: 5px;
+    border: none;
+    background-color: #2f3640;
+    color: #f5f5f5;
+    font-family: "Montserrat Regular";
+    cursor: pointer;
+    transition: 0.1s ease;
+    margin: 10px 0;
+    margin-left: 25px;
+}
+#closeRecommended:hover{
+    background-color: #e1302a;
+}
+.reload{
+    display: block;
+    background-color: #e1302a;
+    padding: 2px;
+    font-size: 22px;
+    border-radius: 3px;
+    color: #f5f5f5;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+.reload i {
+    display: block;
+}
+.refresh{
+    transition: 0.3s ease;
+}
+.reload:hover .refresh{
+    animation: refresh 0.6s ease forwards infinite;
+}
+@keyframes refresh{
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(180deg);
+    }
+}

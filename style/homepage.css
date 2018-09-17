@@ -61,41 +61,12 @@ nav ul li {
 nav ul li a{
     text-decoration: none;
     font-family: "Montserrat SemiBold";
-    color: #e1302a;
+    color: #2f3640;
     font-size: 16px;
     position: relative;
 }
-nav ul li a::before{
-    content: '';
-	position: absolute;
-	bottom: 0;
-	right: 0;
-	width: 1px;
-	border: 2px solid #e1302a;
-	border-width: 0 0 2px 0;
-	transition: 0.25s ease-out;
-	opacity: 0;
-}
-nav ul li a::after{
-    content: '';
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	width: 1px;
-	border: 2px solid #e1302a;
-	border-width: 0 0 2px 0;
-	transition: 0.25s ease-out;
-	opacity: 0;
-}
-nav ul li a:hover::before{
-    width: 50%;
-    opacity: 1;
-    right: 0px;
-}
-nav ul li a:hover::after{
-    width: 50%;
-    opacity: 1;
-    left: 0px;
+nav ul li a:hover{
+    color: #e1302a;
 }
 /* Title Section */
 .title{
@@ -104,7 +75,7 @@ nav ul li a:hover::after{
 .title h1{
     font-size: 80px;
     font-family: "Paytone One";
-    color: #e1302a;
+    color: #2f3640;
 }
 .title p{
     font-size: 18px;
@@ -152,16 +123,16 @@ nav ul li a:hover::after{
     transition: 0.2s ease;
 }
 .popular a:hover{
-    color: #e1302a;
+    color: #2f3640
 }
 /* See more section */
 .seeMore{
     text-align: center;
 }
 .seeMore h2{
-    font-size: 20px;
-    font-family: "Paytone One";
-    color: #e1302a;
+    font-size: 16px;
+    font-family: "Montserrat Thin";
+    color: #2f3640;
 }
 .seeMore_buttons{
     display: flex;
@@ -175,14 +146,14 @@ nav ul li a:hover::after{
     align-items: center;
     font-family: "Paytone One";
     color: #555;
-    font-size: 20px;
+    font-size: 17px;
     margin: 0 10px;
     text-decoration: none;
     padding: 10px;
     background-color: #fff;
     box-shadow: 0px 3px 5px rgba(0,0,0,0.20);
-    width: 170px;
-    height: 42px;
+    width: 110px;
+    height: 35px;
     transition: 0.2s ease;
 }
 .seeMore_buttons a:hover{
@@ -265,7 +236,7 @@ nav ul li a:hover::after{
 	outline: none !important;
 }
 .scroll .card .overlay .movie a:hover{
-    background-color: #e1302a;
+    background-color: #2f3640;
     color: #fff;
 }
 .scroll .movie p {
@@ -350,7 +321,7 @@ nav ul li a:hover::after{
 .box h3{
     font-family: "Paytone One";
     font-size: 20px;
-    color: #e1302a;
+    color: #2f3640;
 }
 .box p{
     font-family: "Montserrat Regular";
@@ -359,7 +330,7 @@ nav ul li a:hover::after{
 }
 .boxImg i{
     font-size: 45px;
-    color: #777;
+    color: #e1302a;
 }
 /* Popcorn section */
 .popcorn{
@@ -371,7 +342,7 @@ nav ul li a:hover::after{
 .popcorn a{
     font-family: "Paytone One";
     font-size: 20px;
-    color: #e1302a;
+    color: #2f3640;
     text-decoration: none;
     animation: wS 4s ease forwards infinite;
     animation-delay: 0.7s;
@@ -398,7 +369,8 @@ nav ul li a:hover::after{
 }
 /* Footer */
 footer{
-    background-color: #e5e5e5;
+    border-top: 3px solid #2f364020;
+    background-color: #eee;
     padding: 10px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -417,23 +389,23 @@ footer .links h3{
     font-family: "Paytone One";
     letter-spacing: 2px;
     font-size: 16px;
-    color: #e1302a;
+    color: #2f3640;
 }
 footer .links a{
     text-decoration: none;
     padding: 5px 0px;
     font-family: "Montserrat Regular";
     font-size: 16px;
-    color: #e1302a;
+    color: #2f3640;
 }
 footer .links a:hover{
-    color: #444;
+    color: #e1302a;
 }
 footer .links .githubLink{
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: #e1302a;
+    color: #2f3640;
     font-family: "Montserrat Regular";
 }
 footer .links .githubLink img{
