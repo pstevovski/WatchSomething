@@ -264,7 +264,7 @@ function goBack(){
 // Detailed tv shows page.
 function showSelected(id){
 	sessionStorage.setItem("showId", id);
-	location.replace("WatchSomething/shows-page.html");
+	location.replace("shows-page.html");
 	return false;
 }
 
