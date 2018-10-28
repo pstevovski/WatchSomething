@@ -209,13 +209,13 @@ function seriesSplice(id){
 //Takes you to detailed movie info page.
 function movieSelected(id){
     sessionStorage.setItem("movieId",id);
-    window.open("movie-page.html");
+    window.open("WatchSomething/movie-page.html");
     return false;
 }
 // Takes you to detailed tv show info page.
 function showSelected(id){
     sessionStorage.setItem("showId", id);
-    window.open("shows-page.html");
+    window.open("WatchSomething/shows-page.html");
     return false;
 }
 
