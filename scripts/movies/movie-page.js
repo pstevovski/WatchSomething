@@ -191,7 +191,7 @@ function goBack(){
 // Take user to details page.
 function movieSelected(id){
 	sessionStorage.setItem("movieId", id);
-	location.replace("WatchSomething/movie-page.html");
+	location.replace("/WatchSomething/movie-page.html");
 	return false;
 }
 
