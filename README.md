@@ -10,7 +10,7 @@ Ever found yourself in a situation where you want to watch some movie or tv show
 * Get recommendations that are similar to a movie or a tv show on the detailed informations page.
 * Get recommendations for movies or tv shows if there are none in your watchlist or favorites list.
 
-Check it out here: https://pecko95.github.io/WatchSomething/
+Check it out here: https://pstevovski.github.io/WatchSomething/
 
 ##### I do not hold any ownership of the images used in this project. For now, this project is for non-commercial use.
 
