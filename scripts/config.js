@@ -1,4 +1,4 @@
 //MY API KEY.
 const config = {
-    API_KEY : "07be10560c3c4cf68794acc1da83356b"
+    API_KEY : "f88c3e4ce43953a3c8ea1af76ee7b195"
 }
